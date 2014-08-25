@@ -31,7 +31,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  *
  * @author aryner
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser"})
+@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest"})
 public class Controller extends HttpServlet {
 
 	/**
@@ -49,8 +49,6 @@ public class Controller extends HttpServlet {
 		String userPath = request.getServletPath(); 
 		HttpSession session = request.getSession(); 
 
-		String url = "/WEB-INF/view" + userPath + ".jsp";
-
 		//The user is not logged in so is redirected to the index/login page
 		if(session.getAttribute("userName") == null && !userPath.equals("/register")) {
 			response.sendRedirect("/Glaucoma/index.jsp");
@@ -58,8 +56,10 @@ public class Controller extends HttpServlet {
 		}
 
 		else  if(userPath.equals("/home")) {
-			
+
 		}
+
+		String url = "/WEB-INF/view" + userPath + ".jsp";
 
 		try {
 			request.getRequestDispatcher(url).forward(request, response);
