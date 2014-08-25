@@ -6,16 +6,25 @@
 
 <h2>Home</h2>
 <div class='wideContainer'>
-	<div class="column">
+	<div class="thinColumn">
 		<a href="/Glaucoma/FDTtest" class="btn menuBtn">FDT test</a>
 	</div>
-	<div class="column">
+	<div class="thinColumn">
 		<a href="/Glaucoma/HVFtest" class="btn menuBtn">HVF test</a> 
 	</div>
-	<div class="column">
+	<div class="thinColumn">
 		<a href="/Glaucoma/MDTtest" class="btn menuBtn">MDT test</a> 
 	</div>
-	<div class="column">
+	<div class="thinColumn">
 		<a href="/Glaucoma/OCTtest" class="btn menuBtn">OCT test</a> 
+	</div>
+</div>
+<br>
+<div class="wideContainer">
+	<div class="column">
+		<a href="/Glaucoma/stereo" class="btn menuBtn">Stereo</a>
+	</div>
+	<div class="column">
+		<a href="/Glaucoma/nethra" class="btn menuBtn">3Nethra</a>
 	</div>
 </div>

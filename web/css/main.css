@@ -136,6 +136,11 @@ a {
 	float: left; 
 	text-align:center;
 }
+.thinColumn {
+	width: 08%;
+	float: left; 
+	text-align:center;
+}
 
 .wide-column {
 	width: 18%;
