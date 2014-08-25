@@ -1,0 +1,33 @@
+<%-- any content can be specified here e.g.: --%>
+<%@page import="javax.naming.Context"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="javax.sql.DataSource"%>
+<%@page import="javax.naming.InitialContext"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<title>Glaucoma Grader</title>
+	</head>
+	<body>
+		<div id="header">
+			<div class="spacer"></div>
+			<a class="title" href="home">Glaucoma Grader</a>
+			<span class="welcome">
+				<%
+					if(session.getAttribute("userName") != null) {
+						out.print("Welcome " + session.getAttribute("userName"));
+					}
+				%>
+			</span>
+			<form action="logout" method="POST">
+				<input type="submit" value="log out" class="btn logOut">
+			</form>
+		</div>
+		<div id="content">
+
