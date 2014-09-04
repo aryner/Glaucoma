@@ -31,19 +31,19 @@ public class FDTtest {
 	private String va_num;
 	private String va_den;
 	private int mdsign;
-	private double mddb;
-	private double mdp;
+	private String mddb;
+	private String mdp;
 	private int psdisgn;
-	private double psbd;
-	private double psdp;
-	private double lu_one;
-	private double lu_five;
-	private double ru_one;
-	private double ru_five;
-	private double ll_one;
-	private double ll_five;
-	private double rl_one;
-	private double rl_five;
+	private String psbd;
+	private String psdp;
+	private String lu_one;
+	private String lu_five;
+	private String ru_one;
+	private String ru_five;
+	private String ll_one;
+	private String ll_five;
+	private String rl_one;
+	private String rl_five;
 
 	/**
 	 * @return the id
@@ -328,28 +328,28 @@ public class FDTtest {
 	/**
 	 * @return the mddb
 	 */
-	public double getMddb() {
+	public String getMddb() {
 		return mddb;
 	}
 
 	/**
 	 * @param mddb the mddb to set
 	 */
-	public void setMddb(double mddb) {
+	public void setMddb(String mddb) {
 		this.mddb = mddb;
 	}
 
 	/**
 	 * @return the mdp
 	 */
-	public double getMdp() {
+	public String getMdp() {
 		return mdp;
 	}
 
 	/**
 	 * @param mdp the mdp to set
 	 */
-	public void setMdp(double mdp) {
+	public void setMdp(String mdp) {
 		this.mdp = mdp;
 	}
 
@@ -370,140 +370,140 @@ public class FDTtest {
 	/**
 	 * @return the psbd
 	 */
-	public double getPsbd() {
+	public String getPsbd() {
 		return psbd;
 	}
 
 	/**
 	 * @param psbd the psbd to set
 	 */
-	public void setPsbd(double psbd) {
+	public void setPsbd(String psbd) {
 		this.psbd = psbd;
 	}
 
 	/**
 	 * @return the psdp
 	 */
-	public double getPsdp() {
+	public String getPsdp() {
 		return psdp;
 	}
 
 	/**
 	 * @param psdp the psdp to set
 	 */
-	public void setPsdp(double psdp) {
+	public void setPsdp(String psdp) {
 		this.psdp = psdp;
 	}
 
 	/**
 	 * @return the lu_one
 	 */
-	public double getLu_one() {
+	public String getLu_one() {
 		return lu_one;
 	}
 
 	/**
 	 * @param lu_one the lu_one to set
 	 */
-	public void setLu_one(double lu_one) {
+	public void setLu_one(String lu_one) {
 		this.lu_one = lu_one;
 	}
 
 	/**
 	 * @return the lu_five
 	 */
-	public double getLu_five() {
+	public String getLu_five() {
 		return lu_five;
 	}
 
 	/**
 	 * @param lu_five the lu_five to set
 	 */
-	public void setLu_five(double lu_five) {
+	public void setLu_five(String lu_five) {
 		this.lu_five = lu_five;
 	}
 
 	/**
 	 * @return the ru_one
 	 */
-	public double getRu_one() {
+	public String getRu_one() {
 		return ru_one;
 	}
 
 	/**
 	 * @param ru_one the ru_one to set
 	 */
-	public void setRu_one(double ru_one) {
+	public void setRu_one(String ru_one) {
 		this.ru_one = ru_one;
 	}
 
 	/**
 	 * @return the ru_five
 	 */
-	public double getRu_five() {
+	public String getRu_five() {
 		return ru_five;
 	}
 
 	/**
 	 * @param ru_five the ru_five to set
 	 */
-	public void setRu_five(double ru_five) {
+	public void setRu_five(String ru_five) {
 		this.ru_five = ru_five;
 	}
 
 	/**
 	 * @return the ll_one
 	 */
-	public double getLl_one() {
+	public String getLl_one() {
 		return ll_one;
 	}
 
 	/**
 	 * @param ll_one the ll_one to set
 	 */
-	public void setLl_one(double ll_one) {
+	public void setLl_one(String ll_one) {
 		this.ll_one = ll_one;
 	}
 
 	/**
 	 * @return the ll_five
 	 */
-	public double getLl_five() {
+	public String getLl_five() {
 		return ll_five;
 	}
 
 	/**
 	 * @param ll_five the ll_five to set
 	 */
-	public void setLl_five(double ll_five) {
+	public void setLl_five(String ll_five) {
 		this.ll_five = ll_five;
 	}
 
 	/**
 	 * @return the rl_one
 	 */
-	public double getRl_one() {
+	public String getRl_one() {
 		return rl_one;
 	}
 
 	/**
 	 * @param rl_one the rl_one to set
 	 */
-	public void setRl_one(double rl_one) {
+	public void setRl_one(String rl_one) {
 		this.rl_one = rl_one;
 	}
 
 	/**
 	 * @return the rl_five
 	 */
-	public double getRl_five() {
+	public String getRl_five() {
 		return rl_five;
 	}
 
 	/**
 	 * @param rl_five the rl_five to set
 	 */
-	public void setRl_five(double rl_five) {
+	public void setRl_five(String rl_five) {
 		this.rl_five = rl_five;
 	}
 	
