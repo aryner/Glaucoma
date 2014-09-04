@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package model;
+package utilities;
 
 import java.sql.*;
 import java.util.*; 
@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 import javax.naming.InitialContext; 
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import model.User;
 /**
  *
  * @author aryner

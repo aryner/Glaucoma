@@ -87,7 +87,7 @@ public class Controller extends HttpServlet {
 			String name = request.getParameter("userName");
 			String password = request.getParameter("password");
 			User user = new User(name, password);
-System.out.println(user.getUserName());
+
 			if(user.getUserName() != null) {
 				session.setAttribute("userName", user.getUserName());
 				session.setAttribute("userID", user.getID());
