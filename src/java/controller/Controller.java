@@ -31,7 +31,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  *
  * @author aryner
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo"})
+@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload"})
 public class Controller extends HttpServlet {
 
 	/**
@@ -101,6 +101,10 @@ public class Controller extends HttpServlet {
 			} 
 		}
 
+		else if(userPath.equals("upload")) {
+			
+		}
+
 		else if(userPath.equals("/logout")) {
 			session.removeAttribute("userName");
 			session.removeAttribute("userID");
@@ -135,7 +139,6 @@ public class Controller extends HttpServlet {
 				return;
 			}
 		}
-
 
 		else {
 			String url = "/WEB-INF/view" + userPath + ".jsp";

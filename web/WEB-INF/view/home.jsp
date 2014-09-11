@@ -17,14 +17,17 @@
 	</div>
 	<div class="thinColumn">
 		<a href="/Glaucoma/OCTtest" class="btn menuBtn">OCT test</a> 
+	</div> 
+	<div class="thinColumn">
+		<a href="/Glaucoma/stereo" class="btn menuBtn">Stereo</a>
+	</div>
+	<div class="thinColumn">
+		<a href="/Glaucoma/nethra" class="btn menuBtn">3Nethra</a>
 	</div>
 </div>
 <br>
-<div class="wideContainer">
-	<div class="column">
-		<a href="/Glaucoma/stereo" class="btn menuBtn">Stereo</a>
-	</div>
-	<div class="column">
-		<a href="/Glaucoma/nethra" class="btn menuBtn">3Nethra</a>
+<div class='container'>
+	<div class='column'>
+		<a href='/Glaucoma/upload' class='btn menuBtn'>Upload Pictures</a>
 	</div>
 </div>
