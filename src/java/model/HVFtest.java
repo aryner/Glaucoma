@@ -18,26 +18,26 @@ public class HVFtest {
 	private int mon;
 	private String mon_oth2_c74; 
 	private int tar;
-	private String tar_oth;
-	private String lossnum;
-	private String lossden;
-	private String fp;
-	private String fn;
+	private int tar_oth;
+	private int lossnum;
+	private int lossden;
+	private int fp;
+	private int fn;
 	private String dur;
-	private String fov;
+	private int fov;
 	private int stimintens;
 	private int stimcol;
 	private String stimcol_oth;
 	private String back;
 	private int strategy;
 	private String pup;
-	private String vanum;
-	private String vaden;
+	private int vanum;
+	private int vaden;
 	private int sph_sign;
 	private String sph_num;
 	private int cyl_sign;
 	private String cyl_num;
- 	private String axis;
+ 	private int axis;
 	private int ght;
 	private String vfi;
 	private int mdsign;
@@ -46,12 +46,15 @@ public class HVFtest {
 	private int psdsign;
 	private String psddb;
 	private int psdp;
-	private String pts2;
-	private String sup_hem;
-	private String inf_hem;
-	private String pts_five;
-	private String ptx_contig;
-	private String pts_one;
+	private int pts2;
+	private int sup_hem;
+	private int inf_hem;
+	private int pts_five;
+	private int ptx_contig;
+	private int pts_one;
+	private int cluster;
+	private int flau;
+	private int severe;
 
 	/**
 	 * @return the id
@@ -154,70 +157,70 @@ public class HVFtest {
 	/**
 	 * @return the tar_oth
 	 */
-	public String getTar_oth() {
+	public int getTar_oth() {
 		return tar_oth;
 	}
 
 	/**
 	 * @param tar_oth the tar_oth to set
 	 */
-	public void setTar_oth(String tar_oth) {
+	public void setTar_oth(int tar_oth) {
 		this.tar_oth = tar_oth;
 	}
 
 	/**
 	 * @return the lossnum
 	 */
-	public String getLossnum() {
+	public int getLossnum() {
 		return lossnum;
 	}
 
 	/**
 	 * @param lossnum the lossnum to set
 	 */
-	public void setLossnum(String lossnum) {
+	public void setLossnum(int lossnum) {
 		this.lossnum = lossnum;
 	}
 
 	/**
 	 * @return the lossden
 	 */
-	public String getLossden() {
+	public int getLossden() {
 		return lossden;
 	}
 
 	/**
 	 * @param lossden the lossden to set
 	 */
-	public void setLossden(String lossden) {
+	public void setLossden(int lossden) {
 		this.lossden = lossden;
 	}
 
 	/**
 	 * @return the fp
 	 */
-	public String getFp() {
+	public int getFp() {
 		return fp;
 	}
 
 	/**
 	 * @param fp the fp to set
 	 */
-	public void setFp(String fp) {
+	public void setFp(int fp) {
 		this.fp = fp;
 	}
 
 	/**
 	 * @return the fn
 	 */
-	public String getFn() {
+	public int getFn() {
 		return fn;
 	}
 
 	/**
 	 * @param fn the fn to set
 	 */
-	public void setFn(String fn) {
+	public void setFn(int fn) {
 		this.fn = fn;
 	}
 
@@ -238,14 +241,14 @@ public class HVFtest {
 	/**
 	 * @return the fov
 	 */
-	public String getFov() {
+	public int getFov() {
 		return fov;
 	}
 
 	/**
 	 * @param fov the fov to set
 	 */
-	public void setFov(String fov) {
+	public void setFov(int fov) {
 		this.fov = fov;
 	}
 
@@ -336,28 +339,28 @@ public class HVFtest {
 	/**
 	 * @return the vanum
 	 */
-	public String getVanum() {
+	public int getVanum() {
 		return vanum;
 	}
 
 	/**
 	 * @param vanum the vanum to set
 	 */
-	public void setVanum(String vanum) {
+	public void setVanum(int vanum) {
 		this.vanum = vanum;
 	}
 
 	/**
 	 * @return the vaden
 	 */
-	public String getVaden() {
+	public int getVaden() {
 		return vaden;
 	}
 
 	/**
 	 * @param vaden the vaden to set
 	 */
-	public void setVaden(String vaden) {
+	public void setVaden(int vaden) {
 		this.vaden = vaden;
 	}
 
@@ -420,14 +423,14 @@ public class HVFtest {
 	/**
 	 * @return the axis
 	 */
-	public String getAxis() {
+	public int getAxis() {
 		return axis;
 	}
 
 	/**
 	 * @param axis the axis to set
 	 */
-	public void setAxis(String axis) {
+	public void setAxis(int axis) {
 		this.axis = axis;
 	}
 
@@ -546,84 +549,127 @@ public class HVFtest {
 	/**
 	 * @return the pts2
 	 */
-	public String getPts2() {
+	public int getPts2() {
 		return pts2;
 	}
 
 	/**
 	 * @param pts2 the pts2 to set
 	 */
-	public void setPts2(String pts2) {
+	public void setPts2(int pts2) {
 		this.pts2 = pts2;
 	}
 
 	/**
 	 * @return the sup_hem
 	 */
-	public String getSup_hem() {
+	public int getSup_hem() {
 		return sup_hem;
 	}
 
 	/**
 	 * @param sup_hem the sup_hem to set
 	 */
-	public void setSup_hem(String sup_hem) {
+	public void setSup_hem(int sup_hem) {
 		this.sup_hem = sup_hem;
 	}
 
 	/**
 	 * @return the inf_hem
 	 */
-	public String getInf_hem() {
+	public int getInf_hem() {
 		return inf_hem;
 	}
 
 	/**
 	 * @param inf_hem the inf_hem to set
 	 */
-	public void setInf_hem(String inf_hem) {
+	public void setInf_hem(int inf_hem) {
 		this.inf_hem = inf_hem;
 	}
 
 	/**
 	 * @return the pts_five
 	 */
-	public String getPts_five() {
+	public int getPts_five() {
 		return pts_five;
 	}
 
 	/**
 	 * @param pts_five the pts_five to set
 	 */
-	public void setPts_five(String pts_five) {
+	public void setPts_five(int pts_five) {
 		this.pts_five = pts_five;
 	}
 
 	/**
 	 * @return the ptx_contig
 	 */
-	public String getPtx_contig() {
+	public int getPtx_contig() {
 		return ptx_contig;
 	}
 
 	/**
 	 * @param ptx_contig the ptx_contig to set
 	 */
-	public void setPtx_contig(String ptx_contig) {
+	public void setPtx_contig(int ptx_contig) {
 		this.ptx_contig = ptx_contig;
 	}
 
 	/**
 	 * @return the pts_one
 	 */
-	public String getPts_one() {
+	public int getPts_one() {
 		return pts_one;
 	}
 
 	/**
 	 * @param pts_one the pts_one to set
 	 */
-	public void setPts_one(String pts_one) {
+	public void setPts_one(int pts_one) {
 		this.pts_one = pts_one;
 	}
+
+	/**
+	 * @return the cluster
+	 */
+	public int getCluster() {
+		return cluster;
+	}
+
+	/**
+	 * @param cluster the cluster to set
+	 */
+	public void setCluster(int cluster) {
+		this.cluster = cluster;
+	}
+
+	/**
+	 * @return the flau
+	 */
+	public int getFlau() {
+		return flau;
+	}
+
+	/**
+	 * @param flau the flau to set
+	 */
+	public void setFlau(int flau) {
+		this.flau = flau;
+	}
+
+	/**
+	 * @return the severe
+	 */
+	public int getSevere() {
+		return severe;
+	}
+
+	/**
+	 * @param severe the severe to set
+	 */
+	public void setSevere(int severe) {
+		this.severe = severe;
+	}
+
 }
