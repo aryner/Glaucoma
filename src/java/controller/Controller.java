@@ -6,7 +6,7 @@
 
 package controller;
 
-import model.User;
+import model.*;
 import java.io.*; 
 import java.util.*; 
 import java.awt.image.*;
@@ -102,7 +102,10 @@ public class Controller extends HttpServlet {
 		}
 
 		else if(userPath.equals("upload")) {
-			
+			Picture.createPictures(request);
+
+			response.sendRedirect("/Glaucoma/index.jsp"); 
+			return;
 		}
 
 		else if(userPath.equals("/logout")) {

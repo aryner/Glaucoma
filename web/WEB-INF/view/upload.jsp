@@ -16,6 +16,6 @@
 		<option value="3Nethra">3Nethra</option> 
 	</select>
 	<p>Select which pictures to upload</p>
-	<input type="file" multiple="multiple" value="pictures">
+	<input type="file" multiple="multiple" name="pictures">
 	<input type="submit" value="Submit" class="btn bigBtn">
 </form>

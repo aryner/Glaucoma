@@ -132,12 +132,12 @@ a {
 }
 
 .column {
-	width: 13%;
+	width: 16dp;
 	float: left; 
 	text-align:center;
 }
 .thinColumn {
-	width: 08%;
+	width: 16dp;
 	float: left; 
 	text-align:center;
 }

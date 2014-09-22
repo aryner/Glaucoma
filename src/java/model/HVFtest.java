@@ -56,6 +56,11 @@ public class HVFtest {
 	private int flau;
 	private int severe;
 
+	public HVFtest(int nid, int npictureID) {
+		id = nid;
+		pictureID = npictureID;
+	}
+
 	/**
 	 * @return the id
 	 */
