@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import org.apache.commons.fileupload.FileItem; 
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload; 
+import utilities.SQLCommands;
 
 /**
  *
@@ -43,7 +44,8 @@ public class Picture {
 
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setSizeThreshold(100 * 1024);
-		factory.setRepository(new File("../temp;"));
+		new File("../temp").mkdirs();
+		factory.setRepository(new File("../temp"));
 
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		upload.setSizeMax(4000000 * 1024);
@@ -81,7 +83,12 @@ public class Picture {
 			Logger.getLogger(Picture.class.getName()).log(Level.SEVERE,null,ex);
 		}
 
-
+		String query = "INSERT INTO picture (name, type) VALUES ";
+		for(int i=0; i<names.size(); i++) {
+			if (i>0) { query += ", "; }
+			query += "('"+names.get(i)+"', '"+path+"')";
+		}
+		SQLCommands.update(query);
 	}
 
 	/**

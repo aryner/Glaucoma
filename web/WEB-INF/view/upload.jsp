@@ -6,7 +6,7 @@
 
 <h3>Upload pictures to be graded</h3>
 
-<form action='upload' method="POST" enctype="multipart/form-data">
+<form action='uploadPictures' method="POST" enctype="multipart/form-data">
 	Choose which section to add to
 	<select name="type" class="btn bigBtn">
 		<option value="FDT">FDT</option>

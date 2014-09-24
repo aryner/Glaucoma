@@ -31,7 +31,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  *
  * @author aryner
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload"})
+@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload", "/uploadPictures"})
 public class Controller extends HttpServlet {
 
 	/**
@@ -101,7 +101,7 @@ public class Controller extends HttpServlet {
 			} 
 		}
 
-		else if(userPath.equals("upload")) {
+		else if(userPath.equals("/uploadPictures")) {
 			Picture.createPictures(request);
 
 			response.sendRedirect("/Glaucoma/index.jsp"); 
@@ -138,7 +138,7 @@ public class Controller extends HttpServlet {
 			}
 			else {
 				session.setAttribute("error", "Passwords do not match");
-				response.sendRedirect("/photoGrader/register"); 
+				response.sendRedirect("/Glaucoma/register"); 
 				return;
 			}
 		}

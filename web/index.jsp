@@ -16,7 +16,7 @@
 		session.removeAttribute("error");
 	}
 	if(session.getAttribute("userName") != null) {
-		response.sendRedirect("/GlaucomGrader/home"); 
+		response.sendRedirect("/Glaucoma/home"); 
 	}
 %>
 
