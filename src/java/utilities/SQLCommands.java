@@ -19,6 +19,7 @@ import model.*;
  * @author aryner
  */
 public class SQLCommands {
+	private static final String slash = System.getProperty("file.separator");
 	public static Vector<User> queryUsers(String query){
 		Vector<User> result = new Vector<User>();
 		Connection con = null;
@@ -27,7 +28,7 @@ public class SQLCommands {
 
 		try{
 			InitialContext initialContext = new InitialContext();
-			Context context = (Context)initialContext.lookup("java:comp/env");
+			Context context = (Context)initialContext.lookup("java:comp"+slash+"env");
 			DataSource dataSource = (DataSource)context.lookup("glaucoma_grader");
 			con = dataSource.getConnection();
 
@@ -50,6 +51,39 @@ public class SQLCommands {
 		return result;
 	}
 
+	public static Vector<Integer> queryNewGrade(String query){
+		Vector<Integer> result = new Vector<Integer>();
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet resultSet = null;
+
+		try{
+			InitialContext initialContext = new InitialContext();
+			Context context = (Context)initialContext.lookup("java:comp"+slash+"env");
+			DataSource dataSource = (DataSource)context.lookup("glaucoma_grader");
+			con = dataSource.getConnection();
+
+			stmt = con.createStatement();
+
+			resultSet = stmt.executeQuery(query); 
+
+			while(resultSet.next()) {
+				result.add(resultSet.getInt("pictureID"));
+				result.add(resultSet.getInt("userID"));
+				result.add(resultSet.getInt("id"));
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(SQLCommands.class.getName()).log(Level.SEVERE,null,ex); 
+		} catch (Exception e) { e.printStackTrace(); } 
+		finally { 
+			if(resultSet != null) try {resultSet.close();} catch(SQLException ignore) {}
+			if(con != null) try {con.close();} catch(SQLException ignore) {}
+			if(stmt != null) try {stmt.close();} catch(SQLException ignore) {}
+		}
+
+		return result;
+	}
+
 	public static Vector<Picture> queryPictures(String query){
 		Vector<Picture> result = new Vector<Picture>();
 		Connection con = null;
@@ -58,7 +92,7 @@ public class SQLCommands {
 
 		try{
 			InitialContext initialContext = new InitialContext();
-			Context context = (Context)initialContext.lookup("java:comp/env");
+			Context context = (Context)initialContext.lookup("java:comp"+slash+"env");
 			DataSource dataSource = (DataSource)context.lookup("glaucoma_grader");
 			con = dataSource.getConnection();
 
@@ -87,7 +121,7 @@ public class SQLCommands {
 		int result = 0;
 		try{
 			InitialContext initialContext = new InitialContext();
-			Context context = (Context)initialContext.lookup("java:comp/env");
+			Context context = (Context)initialContext.lookup("java:comp"+slash+"env");
 			DataSource dataSource = (DataSource)context.lookup("glaucoma_grader");
 			con = dataSource.getConnection();
 

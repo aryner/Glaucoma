@@ -530,7 +530,7 @@ and scalar of: 0.29411764705882354*/
 
 .HVFimage {
 	width : 700px; 
-	height : 700px;
+	height : 575px;
 	postion : fixed;
 	float : left;
 }
@@ -542,6 +542,6 @@ and scalar of: 0.29411764705882354*/
 .questions {
 	margin : 10px;
 	float : left; 
-	height : 700px;
+	height : 550px;
 	overflow: scroll;
 }

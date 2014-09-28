@@ -23,6 +23,9 @@ if(pic == null) {
 
 <!--Questions-->
 <div class="questions">
+<form action="assignHVF" method="POST">
+<input type="hidden" name="pictureID" value="<%out.print(pic.getId());%>">
+	
 Fixation Monitor: <br>
 <input type="radio" name="mon" value="1">Blind Spot<br>
 <input type="radio" name="mon" value="2">Gaze/Blind Spot<br>
@@ -73,10 +76,10 @@ Pupil Diameter (mm) <input type="text" name="pup"><br><br>
 Visual Acuity - Numerator <input type="text" name="vanum" class="numBox"> 
 Denominator <input type="text" name="vaden" class="numBox"><br><br>
 
-RX Sphere - Sign <input type="radio" name="sph_sign" value="+">+ <input type="radio" name="sph_sign" value="-">-<br>
+RX Sphere - Sign <input type="radio" name="sph_sign" value="1">+ <input type="radio" name="sph_sign" value="0">-<br>
 RX Sphere - Number <input type="text" name="sph_num"><br><br>
 
-RX Cylinder - Sign <input type="radio" name="cyl_sign" value="+">+ <input type="radio" name="cyl_sign" value="-">-<br>
+RX Cylinder - Sign <input type="radio" name="cyl_sign" value="1">+ <input type="radio" name="cyl_sign" value="0">-<br>
 RX Cylinder - Number <input type="text" name="cyl_num"><br>
 RX Axis <input type="text" name="axis"><br><br>
 
@@ -89,7 +92,7 @@ GHT: <br>
 
 VFI (%) <input type="text" name="vfi"><br><br>
 
-MD - Sign <input type="radio" name="mdsign" value="+">+ <input type="radio" name="mdsign_sign" value="-">-<br>
+MD - Sign <input type="radio" name="mdsign" value="1">+ <input type="radio" name="mdsign" value="0">-<br>
 MD - dB <input type="text" name="mddb"><br>
 MD - P-value: <br>
 <input type="radio" name="mdp" value="1"><0.5%<br>
@@ -99,7 +102,7 @@ MD - P-value: <br>
 <input type="radio" name="mdp" value="5"><10%<br>
 <input type="radio" name="mdp" value="6">Blank<br><br>
 
-PSD - Sign <input type="radio" name="psdsign" value="+">+ <input type="radio" name="psdsign_sign" value="-">-<br>
+PSD - Sign <input type="radio" name="psdsign" value="1">+ <input type="radio" name="psdsign" value="0">-<br>
 PSD - dB <input type="text" name="psddb"><br>
 PSD - P-value: <br>
 <input type="radio" name="psdp" value="1"><0.5%<br>
@@ -126,7 +129,12 @@ being significant at p < 1%<br>
 <input type="radio" name="cluster" value="1">Yes 
 <input type="radio" name="cluster" value="2">No <br><br> 
 
+<input type="submit" value="Submit" class="btn">
+</form>
 </div>
 <%
 }
 %>
+
+<script src="javascripts/jquery-1.11.1.min.js" type="text/javascript"></script>
+<script src="javascripts/HVFChecks.js" type="text/javascript"></script>

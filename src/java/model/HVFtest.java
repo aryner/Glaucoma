@@ -40,6 +40,7 @@ import java.nio.ByteBuffer;
 import com.sun.pdfview.*;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -53,7 +54,7 @@ public class HVFtest {
 	private int mon;
 	private String mon_oth2_c74; 
 	private int tar;
-	private int tar_oth;
+	private String tar_oth;
 	private int lossnum;
 	private int lossden;
 	private int fp;
@@ -65,6 +66,7 @@ public class HVFtest {
 	private String stimcol_oth;
 	private String back;
 	private int strategy;
+	private String strategy_oth;
 	private String pup;
 	private int vanum;
 	private int vaden;
@@ -84,17 +86,26 @@ public class HVFtest {
 	private int pts2;
 	private int sup_hem;
 	private int inf_hem;
+	private int sup_hem2;
+	private int inf_hem2;
 	private int pts_five;
-	private int ptx_contig;
+	private int pts_contig;
 	private int pts_one;
 	private int cluster;
 	private int flau;
 	private int severe;
 	private static final String slash = System.getProperty("file.separator");
 
-	public HVFtest(int nid, int npictureID) {
-		id = nid;
-		pictureID = npictureID;
+	public HVFtest(int npictureID, int nuserID) {
+		String query = "INSERT INTO HVFtest (pictureID, userID) VALUES ('"+npictureID+"', '"+nuserID+"')";
+		SQLCommands.update(query);
+
+		query = "SELECT * FROM HVFtest WHERE pictureID="+npictureID+" AND userID="+nuserID;
+		Vector<Integer> data = SQLCommands.queryNewGrade(query);
+
+		pictureID = data.get(0);
+		userID = data.get(1);
+		id = data.get(2);	
 	}
 
 	public static void createPictures(Vector<String> fileNames) {
@@ -157,6 +168,95 @@ public class HVFtest {
 			} catch (Exception e) { e.printStackTrace(); }
 		}
 		SQLCommands.update(query);
+	}
+
+	public static void assignHVF(HttpServletRequest request, int uID) {
+		String picID = request.getParameter("pictureID");
+		HVFtest hvf = new HVFtest(Integer.parseInt(picID), uID);
+
+		//Set attributes
+		String attr = request.getParameter("mon");
+		hvf.setMon(Integer.parseInt(attr));
+		attr = request.getParameter("mon_oth2_c74");
+		hvf.setMon_oth2_c74(attr);
+		attr = request.getParameter("tar");
+		hvf.setTar(Integer.parseInt(attr));
+		attr = request.getParameter("tar_oth");
+		hvf.setTar_oth(attr);
+		attr = request.getParameter("lossnum");
+		hvf.setLossnum(Integer.parseInt(attr));
+		attr = request.getParameter("lossden");
+		hvf.setLossden(Integer.parseInt(attr));
+		attr = request.getParameter("fp");
+		hvf.setFp(Integer.parseInt(attr));
+		attr = request.getParameter("fn");
+		hvf.setFn(Integer.parseInt(attr));
+		attr = request.getParameter("dur");
+		hvf.setDur(attr);
+		attr = request.getParameter("fov");
+		hvf.setFov(Integer.parseInt(attr));
+		attr = request.getParameter("stimintens");
+		hvf.setStimintens(Integer.parseInt(attr));
+		attr = request.getParameter("stimcol");
+		hvf.setStimcol(Integer.parseInt(attr));
+		attr = request.getParameter("stimcol_oth");
+		hvf.setStimcol_oth(attr);
+		attr = request.getParameter("back");
+		hvf.setBack(attr);
+		attr = request.getParameter("strategy");
+		hvf.setStrategy(Integer.parseInt(attr));
+		attr = request.getParameter("strategy_oth");
+		hvf.setStrategy_oth(attr);
+		attr = request.getParameter("pup");
+		hvf.setPup(attr);
+		attr = request.getParameter("vanum");
+		hvf.setVanum(Integer.parseInt(attr));
+		attr = request.getParameter("vaden");
+		hvf.setVaden(Integer.parseInt(attr));
+		attr = request.getParameter("sph_sign");
+		hvf.setSph_sign(Integer.parseInt(attr));
+		attr = request.getParameter("sph_num");
+		hvf.setSph_num(attr);
+		attr = request.getParameter("cyl_sign");
+		hvf.setCyl_sign(Integer.parseInt(attr));
+		attr = request.getParameter("cyl_num");
+		hvf.setCyl_num(attr);
+		attr = request.getParameter("axis");
+		hvf.setAxis(Integer.parseInt(attr));
+		attr = request.getParameter("ght");
+		hvf.setGht(Integer.parseInt(attr));
+		attr = request.getParameter("vfi");
+		hvf.setVfi(attr);
+		attr = request.getParameter("mdsign");
+		hvf.setMdsign(Integer.parseInt(attr));
+		attr = request.getParameter("mddb");
+		hvf.setMddb(attr);
+		attr = request.getParameter("mdp");
+		hvf.setMdp(Integer.parseInt(attr));
+		attr = request.getParameter("psdsign");
+		hvf.setPsdsign(Integer.parseInt(attr));
+		attr = request.getParameter("psddb");
+		hvf.setPsddb(attr);
+		attr = request.getParameter("psdp");
+		hvf.setPsdp(Integer.parseInt(attr));
+		attr = request.getParameter("pts2");
+		hvf.setPts2(Integer.parseInt(attr));
+		attr = request.getParameter("sup_hem");
+		hvf.setSup_hem(Integer.parseInt(attr));
+		attr = request.getParameter("inf_hem");
+		hvf.setInf_hem(Integer.parseInt(attr));
+		attr = request.getParameter("sup_hem2");
+		hvf.setSup_hem2(Integer.parseInt(attr));
+		attr = request.getParameter("inf_hem2");
+		hvf.setInf_hem2(Integer.parseInt(attr));
+		attr = request.getParameter("pts_five");
+		hvf.setPts_five(Integer.parseInt(attr));
+		attr = request.getParameter("pts_contig");
+		hvf.setPts_contig(Integer.parseInt(attr));
+		attr = request.getParameter("pts_one");
+		hvf.setPts_one(Integer.parseInt(attr));
+		attr = request.getParameter("cluster");
+		hvf.setCluster(Integer.parseInt(attr));
 	}
 
 	public static Picture getNext(User user) {
@@ -278,14 +378,14 @@ public class HVFtest {
 	/**
 	 * @return the tar_oth
 	 */
-	public int getTar_oth() {
+	public String getTar_oth() {
 		return tar_oth;
 	}
 
 	/**
 	 * @param tar_oth the tar_oth to set
 	 */
-	public void setTar_oth(int tar_oth) {
+	public void setTar_oth(String tar_oth) {
 		this.tar_oth = tar_oth;
 	}
 
@@ -726,15 +826,15 @@ public class HVFtest {
 	/**
 	 * @return the ptx_contig
 	 */
-	public int getPtx_contig() {
-		return ptx_contig;
+	public int getPts_contig() {
+		return pts_contig;
 	}
 
 	/**
 	 * @param ptx_contig the ptx_contig to set
 	 */
-	public void setPtx_contig(int ptx_contig) {
-		this.ptx_contig = ptx_contig;
+	public void setPts_contig(int pts_contig) {
+		this.pts_contig = pts_contig;
 	}
 
 	/**
@@ -791,6 +891,48 @@ public class HVFtest {
 	 */
 	public void setSevere(int severe) {
 		this.severe = severe;
+	}
+
+	/**
+	 * @return the sup_hem2
+	 */
+	public int getSup_hem2() {
+		return sup_hem2;
+	}
+
+	/**
+	 * @param sup_hem2 the sup_hem2 to set
+	 */
+	public void setSup_hem2(int sup_hem2) {
+		this.sup_hem2 = sup_hem2;
+	}
+
+	/**
+	 * @return the inf_hem2
+	 */
+	public int getInf_hem2() {
+		return inf_hem2;
+	}
+
+	/**
+	 * @param inf_hem2 the inf_hem2 to set
+	 */
+	public void setInf_hem2(int inf_hem2) {
+		this.inf_hem2 = inf_hem2;
+	}
+
+	/**
+	 * @return the strategy_oth
+	 */
+	public String getStrategy_oth() {
+		return strategy_oth;
+	}
+
+	/**
+	 * @param strategy_oth the strategy_oth to set
+	 */
+	public void setStrategy_oth(String strategy_oth) {
+		this.strategy_oth = strategy_oth;
 	}
 
 }
