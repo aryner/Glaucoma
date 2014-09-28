@@ -1,4 +1,5 @@
 <%-- any content can be specified here e.g.: --%>
+<%@page import="model.User"%>
 <%@page import="javax.naming.Context"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -20,8 +21,8 @@
 			<a class="title" href="home">Glaucoma Grader</a>
 			<span class="welcome">
 				<%
-					if(session.getAttribute("userName") != null) {
-						out.print("Welcome " + session.getAttribute("userName"));
+					if(session.getAttribute("user") != null) {
+						out.print("Welcome " + ((User)session.getAttribute("user")).getUserName());
 					}
 				%>
 			</span>

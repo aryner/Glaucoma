@@ -15,7 +15,7 @@
 		out.print("<p style='color:red;'>Incorrect password or user name");
 		session.removeAttribute("error");
 	}
-	if(session.getAttribute("userName") != null) {
+	if(session.getAttribute("user") != null) {
 		response.sendRedirect("/Glaucoma/home"); 
 	}
 %>

@@ -22,6 +22,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload; 
 import utilities.SQLCommands;
+import model.*;
 
 /**
  *
@@ -31,6 +32,7 @@ public class Picture {
 	private final int id;
 	private final String name;
 	private final String type;
+	private static final String slash = System.getProperty("file.separator");
 
 	public Picture(int nid, String nname, String ntype) {
 		id = nid;
@@ -38,14 +40,15 @@ public class Picture {
 		type = ntype;
 	}
 
-	public static void createPictures(HttpServletRequest request) {
+	public static void uploadDocs(HttpServletRequest request) {
 		Vector<String> names = new Vector<String>();
+		Vector<FileItem> files= new Vector<FileItem>();
 		String path = null;
 
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setSizeThreshold(100 * 1024);
-		new File("../temp").mkdirs();
-		factory.setRepository(new File("../temp"));
+		new File(".."+slash+"temp").mkdirs();
+		factory.setRepository(new File(".."+slash+"temp"));
 
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		upload.setSizeMax(4000000 * 1024);
@@ -58,16 +61,14 @@ public class Picture {
 			while(i.hasNext()) {
 				FileItem fileItem = (FileItem)i.next();
 
-				if(!fileItem.isFormField()) {
-					String fieldName = fileItem.getFieldName();
+				if(!fileItem.isFormField()) { 
 					String fileName = fileItem.getName();
 					extension = fileName.substring(fileName.lastIndexOf(".")+1, fileName.length());
 
-					names.add(fileName);
-					String filePath = "../webapps/Glaucoma/" + path + "/";
-					new File(filePath).mkdirs();
-					File file = new File(filePath + fileName);
-					fileItem.write(file);
+					if(extension.equals("pdf") || extension.equals("PDF")) {
+						names.add(fileName);
+						files.add(fileItem);
+					}
 				}
 				else {
 					String field = fileItem.getString();
@@ -78,17 +79,33 @@ public class Picture {
 					}
 				}
 			}
+
+			for(int j=0; j< names.size(); j++) {
+				FileItem fileItem = files.get(j);
+				String fileName = names.get(j);
+
+				String filePath = ".."+slash+"webapps"+slash+"Glaucoma"+slash + path + slash;
+				new File(filePath).mkdirs();
+				File file = new File(filePath + fileName);
+				fileItem.write(file); 
+			}
 		
 		} catch (Exception ex) {
 			Logger.getLogger(Picture.class.getName()).log(Level.SEVERE,null,ex);
 		}
+/*
+		if(path.equals("HVF")) {
+			HVFtest.createPictures(names);
+		}
+*/
 
 		String query = "INSERT INTO picture (name, type) VALUES ";
 		for(int i=0; i<names.size(); i++) {
 			if (i>0) { query += ", "; }
 			query += "('"+names.get(i)+"', '"+path+"')";
 		}
-		SQLCommands.update(query);
+		SQLCommands.update(query); 
+
 	}
 
 	/**

@@ -6,6 +6,41 @@
 
 package model;
 
+import java.util.*; 
+/*
+import java.io.FileOutputStream;
+import org.apache.poi.hwpf.model.PicturesTable;
+import org.apache.poi.xwpf.usermodel.XWPFPicture;
+import org.apache.poi.xwpf.usermodel.*;
+import javax.imageio.ImageIO;
+import java.awt.image.*;
+
+import javax.imageio.stream.*;
+*/
+import java.io.*;
+import javax.imageio.*;
+/*
+import javax.media.jai.*;
+
+import java.awt.image.renderable.ParameterBlock; 
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.converter.xhtml.XHTMLConverter;
+import org.apache.poi.xwpf.converter.xhtml.XHTMLOptions;
+
+import com.sun.media.jai.codec.*;
+import com.sun.media.jai.codec.TIFFDecodeParam;
+import org.ghost4j.document.PDFDocument;
+import org.ghost4j.renderer.SimpleRenderer;
+*/
+import utilities.SQLCommands;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.nio.channels.FileChannel;
+import java.nio.ByteBuffer; 
+import com.sun.pdfview.*;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+
 /**
  *
  * @author aryner
@@ -55,10 +90,91 @@ public class HVFtest {
 	private int cluster;
 	private int flau;
 	private int severe;
+	private static final String slash = System.getProperty("file.separator");
 
 	public HVFtest(int nid, int npictureID) {
 		id = nid;
 		pictureID = npictureID;
+	}
+
+	public static void createPictures(Vector<String> fileNames) {
+		String query = "INSERT INTO picture (name, type) VALUES ";
+		ArrayList<String> firstPics = new ArrayList<String>();
+		ArrayList<String> secondPics = new ArrayList<String>();
+
+		for(int i=0; i<fileNames.size(); i++) {
+			try {
+
+				//convert pdf to img
+				String name = fileNames.get(i).substring(0,fileNames.get(i).indexOf("."));
+				File file = new File(".."+slash+"webapps"+slash+"Glaucoma"+slash + "HVF" + slash+fileNames.get(i));
+				RandomAccessFile raf = new RandomAccessFile(file, "r");
+				FileChannel channel = raf.getChannel();
+				ByteBuffer buff = channel.map(FileChannel.MapMode.READ_ONLY, 0, channel.size());
+				PDFFile pdf = new PDFFile(buff);
+				PDFPage page = pdf.getPage(0);
+
+				Rectangle rect = new Rectangle(0, 0, (int)page.getWidth(),
+								(int)page.getHeight());
+				BufferedImage bufferedImage = new BufferedImage(rect.width,rect.height, BufferedImage.TYPE_INT_RGB);
+				Image image = page.getImage(rect.width, rect.height, rect, null, true, true);
+				Graphics2D bufImageGraphics = bufferedImage.createGraphics();
+				bufImageGraphics.drawImage(image, 0,0, null);
+				ImageIO.write(bufferedImage, "png", new File(".."+slash+"webapps"+slash+"Glaucoma"+slash + "HVF" + slash+name+".png"));
+				if (i>0) { query += ", "; }
+				query += "('"+name+".png', 'HVF')";
+				
+//				file.delete(); 
+/*
+				PDFDocument document = new PDFDocument();
+				document.load(file);
+
+				SimpleRenderer render = new SimpleRenderer();
+				render.setResolution(300);
+
+				List<Image> images = render.render(document);
+
+				ImageIO.write((RenderedImage)images.get(0), "png", new File(".."+slash+"webapps"+slash+"Glaucoma"+slash + "HVF" + slash+name+".png"));
+*/
+/*
+				XWPFDocument doc = new XWPFDocument(file);
+				List picList = doc.getAllPictures();
+
+				ByteArraySeekableStream stream = new ByteArraySeekableStream(((XWPFPictureData)picList.get(0)).getData());
+				TIFFDecodeParam decodeParam = new TIFFDecodeParam();
+//				decodeParam.setDecodePaletteAsShorts(true);
+				RenderedOp image1 = JAI.create("tiff", stream);
+				BufferedImage img = image1.getAsBufferedImage();
+*/
+/*
+				XWPFDocument doc = new XWPFDocument(file); 
+				XHTMLOptions options = XHTMLOptions.create();
+				
+				FileOutputStream fileOut = new FileOutputStream(".."+slash+"webapps"+slash+"Glaucoma"+slash + "HVF" + slash+name+".html");
+				XHTMLConverter.getInstance().convert(doc, fileOut, options);
+*/
+//				file.close();
+			} catch (Exception e) { e.printStackTrace(); }
+		}
+		SQLCommands.update(query);
+	}
+
+	public static Picture getNext(User user) {
+		Picture result = null;
+		String query = "";
+		if (user.getAccess() == 0) {
+			query = "SELECT * FROM picture WHERE id NOT IN (SELECT "+
+				" pictureID FROM HVFtest WHERE userID="+user.getID()+")";
+		}
+
+		Vector<Picture> pictures = SQLCommands.queryPictures(query);
+		
+		if(pictures.size() > 0) {
+			Random rand = new Random(System.currentTimeMillis());
+			result = pictures.get(rand.nextInt(pictures.size()));
+		}
+
+		return result;
 	}
 
 	/**

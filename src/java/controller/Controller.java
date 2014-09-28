@@ -31,9 +31,9 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  *
  * @author aryner
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload", "/uploadPictures"})
+@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload", "/uploadPictures", "/img", "/pdf"})
 public class Controller extends HttpServlet {
-
+	private final String slash = System.getProperty("file.separator");
 	/**
 	 * Handles the HTTP <code>GET</code> method.
 	 *
@@ -45,13 +45,65 @@ public class Controller extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
+//		PrintWriter out = response.getWriter();
 		String userPath = request.getServletPath(); 
 		HttpSession session = request.getSession(); 
 
 		//The user is not logged in so is redirected to the index/login page
-		if(session.getAttribute("userName") == null && !userPath.equals("/register")) {
+		if(session.getAttribute("user") == null && !userPath.equals("/register")) {
 			response.sendRedirect("/Glaucoma/index.jsp");
+			return;
+		}
+
+		else if(userPath.equals("/HVFtest")) {
+			Picture picture = HVFtest.getNext(((User)session.getAttribute("user")));
+
+			request.setAttribute("slash",slash);
+			request.setAttribute("picture",picture);
+		}
+
+		else if (userPath.equals("/pdf")) {
+			String name = request.getParameter("name");
+			String type = request.getParameter("type");
+			response.setContentType("application/pdf");
+			ServletOutputStream outPut = response.getOutputStream(); 
+			FileInputStream imgStream = new FileInputStream(".."+slash+"webapps"+slash+"Glaucoma"+slash+type+slash+name);
+
+			BufferedInputStream bufferedIn = new BufferedInputStream(imgStream);
+			BufferedOutputStream bufferedOut = new BufferedOutputStream(outPut);
+
+			int nextByte = 0; 
+			while((nextByte = bufferedIn.read()) != -1) {
+				bufferedOut.write(nextByte);
+			}
+
+			bufferedIn.close();
+			imgStream.close();
+			bufferedOut.close();
+			outPut.close();
+			return;
+		
+		}
+		
+		else if (userPath.equals("/img")) {
+			String name = request.getParameter("name");
+			String type = request.getParameter("type");
+			response.setContentType("image/jpeg");
+			ServletOutputStream outPut = response.getOutputStream(); 
+			FileInputStream imgStream = new FileInputStream(".."+slash+"webapps"+slash+"Glaucoma"+slash+type+slash+name);
+
+			BufferedInputStream bufferedIn = new BufferedInputStream(imgStream);
+			BufferedOutputStream bufferedOut = new BufferedOutputStream(outPut);
+
+			int nextByte = 0; 
+			while((nextByte = bufferedIn.read()) != -1) {
+				bufferedOut.write(nextByte);
+			}
+
+			bufferedIn.close();
+			imgStream.close();
+			bufferedOut.close();
+			outPut.close();
 			return;
 		}
 
@@ -89,8 +141,7 @@ public class Controller extends HttpServlet {
 			User user = new User(name, password);
 
 			if(user.getUserName() != null) {
-				session.setAttribute("userName", user.getUserName());
-				session.setAttribute("userID", user.getID());
+				session.setAttribute("user", user); 
 				response.sendRedirect("/Glaucoma/home"); 
 				return;
 			}
@@ -102,15 +153,14 @@ public class Controller extends HttpServlet {
 		}
 
 		else if(userPath.equals("/uploadPictures")) {
-			Picture.createPictures(request);
+			Picture.uploadDocs(request);
 
 			response.sendRedirect("/Glaucoma/index.jsp"); 
 			return;
 		}
 
-		else if(userPath.equals("/logout")) {
-			session.removeAttribute("userName");
-			session.removeAttribute("userID");
+		else if(userPath.equals("/logout")) { 
+			session.removeAttribute("user");
 			session.removeAttribute("categoryID");
 			response.sendRedirect("/Glaucoma/index.jsp"); 
 			return;
@@ -130,8 +180,7 @@ public class Controller extends HttpServlet {
 					return;
 				}
 				else { 
-					session.setAttribute("userName", user.getUserName());
-					session.setAttribute("userID", user.getID());
+					session.setAttribute("user", user); 
 					response.sendRedirect("/Glaucoma/home"); 
 					return;
 				} 

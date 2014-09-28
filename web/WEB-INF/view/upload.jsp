@@ -8,9 +8,9 @@
 
 <form action='uploadPictures' method="POST" enctype="multipart/form-data">
 	Choose which section to add to
-	<select name="type" class="btn bigBtn">
-		<option value="FDT">FDT</option>
+	<select name="type" class="btn bigBtn"> 
 		<option value="HVF">HVF</option>
+		<option value="FDT">FDT</option>
 		<option value="OCT">OCT</option>
 		<option value="stereo">Stereo</option>
 		<option value="3Nethra">3Nethra</option> 
