@@ -49,6 +49,7 @@ import javax.servlet.http.HttpServletRequest;
 public class HVFtest {
 	private int id;
 	private int confirmed;
+	private int opth_check;
 	private int pictureID;
 	private int userID;
 	private int mon;
@@ -257,6 +258,23 @@ public class HVFtest {
 		hvf.setPts_one(Integer.parseInt(attr));
 		attr = request.getParameter("cluster");
 		hvf.setCluster(Integer.parseInt(attr));
+
+		String query = "UPDATE HVFtest SET mon='"+hvf.getMon()+"', mon_oth2_c47='"+hvf.getMon_oth2_c74()+"', "+
+			"tar='"+hvf.getTar()+"', tar_oth='"+hvf.getTar_oth()+"', lossnum='"+hvf.getLossnum()+"', "+
+			"lossden='"+hvf.getLossden()+"', fp='"+hvf.getFp()+"', fn='"+hvf.getFn()+"', "+
+			"dur='"+hvf.getDur()+"', fov='"+hvf.getFov()+"', stimintens='"+hvf.getStimintens()+"', "+
+			"stimcol='"+hvf.getStimcol()+"', stimcol_oth='"+hvf.getStimcol_oth()+"', back='"+hvf.getBack()+"', "+
+			"strategy='"+hvf.getStrategy()+"', stragegy_oth='"+hvf.getStrategy_oth()+"', pup='"+hvf.getPup()+"', "+
+			"vanum='"+hvf.getVanum()+"', vaden='"+hvf.getVaden()+"', shp_sign='"+hvf.getSph_sign()+"', "+
+			"sph_num='"+hvf.getSph_num()+"', cyl_sign='"+hvf.getCyl_sign()+"', cyl_num='"+hvf.getCyl_sign()+"', "+
+			"axis='"+hvf.getAxis()+"', ght='"+hvf.getGht()+"', vfi='"+hvf.getVfi()+"', "+
+			"mdsign='"+hvf.getMdsign()+"', mddb='"+hvf.getMddb()+"', mdp='"+hvf.getMdp()+"', "+
+			"psdsign='"+hvf.getPsdsign()+"', psddb='"+hvf.getPsddb()+"', psdp='"+hvf.getPsdp()+"', "+
+			"pts2='"+hvf.getPts2()+"', sup_hem='"+hvf.getSup_hem()+"', inf_hem='"+hvf.getInf_hem()+"', "+
+			"sup_hem2='"+hvf.getSup_hem2()+"', inf_hem2='"+hvf.getInf_hem2()+"', pts_five='"+hvf.getPts_five()+"', "+
+			"pts_contig='"+hvf.getPts_contig()+"', pts_one='"+hvf.getPts_one()+"', cluster='"+hvf.getCluster()+"' " +
+			"WHERE id="+hvf.getId();
+		SQLCommands.update(query);
 	}
 
 	public static Picture getNext(User user) {
@@ -933,6 +951,20 @@ public class HVFtest {
 	 */
 	public void setStrategy_oth(String strategy_oth) {
 		this.strategy_oth = strategy_oth;
+	}
+
+	/**
+	 * @return the opth_check
+	 */
+	public int getOpth_check() {
+		return opth_check;
+	}
+
+	/**
+	 * @param opth_check the opth_check to set
+	 */
+	public void setOpth_check(int opth_check) {
+		this.opth_check = opth_check;
 	}
 
 }
