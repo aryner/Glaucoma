@@ -69,17 +69,17 @@ Strategy: <br>
 <input type="radio" name="strategy" value="2">SITA - Fast<br>
 <input type="radio" name="strategy" value="3">Full Threshold<br>
 <input type="radio" name="strategy" value="4">FastPac<br>
-<input type="radio" name="strategy" value="5">Other: <input type="text" name="strategry_oth"><br><br>
+<input type="radio" name="strategy" value="5">Other: <input type="text" name="strategy_oth"><br><br>
 
 Pupil Diameter (mm) <input type="text" name="pup"><br><br>
 
 Visual Acuity - Numerator <input type="text" name="vanum" class="numBox"> 
 Denominator <input type="text" name="vaden" class="numBox"><br><br>
 
-RX Sphere - Sign <input type="radio" name="sph_sign" value="1">+ <input type="radio" name="sph_sign" value="0">-<br>
+RX Sphere - Sign <input type="radio" name="sph_sign" value="2">+ <input type="radio" name="sph_sign" value="1">-<br>
 RX Sphere - Number <input type="text" name="sph_num"><br><br>
 
-RX Cylinder - Sign <input type="radio" name="cyl_sign" value="1">+ <input type="radio" name="cyl_sign" value="0">-<br>
+RX Cylinder - Sign <input type="radio" name="cyl_sign" value="2">+ <input type="radio" name="cyl_sign" value="1">-<br>
 RX Cylinder - Number <input type="text" name="cyl_num"><br>
 RX Axis <input type="text" name="axis"><br><br>
 
@@ -92,7 +92,7 @@ GHT: <br>
 
 VFI (%) <input type="text" name="vfi"><br><br>
 
-MD - Sign <input type="radio" name="mdsign" value="1">+ <input type="radio" name="mdsign" value="0">-<br>
+MD - Sign <input type="radio" name="mdsign" value="2">+ <input type="radio" name="mdsign" value="1">-<br>
 MD - dB <input type="text" name="mddb"><br>
 MD - P-value: <br>
 <input type="radio" name="mdp" value="1"><0.5%<br>
@@ -102,7 +102,7 @@ MD - P-value: <br>
 <input type="radio" name="mdp" value="5"><10%<br>
 <input type="radio" name="mdp" value="6">Blank<br><br>
 
-PSD - Sign <input type="radio" name="psdsign" value="1">+ <input type="radio" name="psdsign" value="0">-<br>
+PSD - Sign <input type="radio" name="psdsign" value="2">+ <input type="radio" name="psdsign" value="1">-<br>
 PSD - dB <input type="text" name="psddb"><br>
 PSD - P-value: <br>
 <input type="radio" name="psdp" value="1"><0.5%<br>
