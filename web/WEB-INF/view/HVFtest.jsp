@@ -39,8 +39,8 @@ Fixation Target: <br>
 <input type="radio" name="tar" value="4">Bottom LED<br>
 <input type="radio" name="tar" value="5">Other : <input type="text" name="tar_oth"><br><br>
 <!--ints only -->
-Fixation Losses - Numerator <input type="text" name="lossnum" class="numBox"> 
-Denominator <input type="text" name="lossden" class="numBox"><br><br>
+Fixation Losses <input type="text" name="lossnum" class="numBox"> 
+/ <input type="text" name="lossden" class="numBox"><br><br>
 
 False POS Errors (%) <input type="text" name="fp" class="numBox"><br>
 False NEG Errors (%) <input type="text" name="fn" class="numBox"><br><br>
@@ -73,8 +73,8 @@ Strategy: <br>
 
 Pupil Diameter (mm) <input type="text" name="pup"><br><br>
 
-Visual Acuity - Numerator <input type="text" name="vanum" class="numBox"> 
-Denominator <input type="text" name="vaden" class="numBox"><br><br>
+Visual Acuity <input type="text" name="vanum" class="numBox"> 
+/ <input type="text" name="vaden" class="numBox"><br><br>
 
 RX Sphere - Sign <input type="radio" name="sph_sign" value="2">+ <input type="radio" name="sph_sign" value="1">-<br>
 RX Sphere - Number <input type="text" name="sph_num"><br><br>

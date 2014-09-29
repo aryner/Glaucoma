@@ -5,7 +5,170 @@
  */
 
 
-$(document).ready(function(){
+$(document).ready(function(){ 
+	$('input[type=text][name=lossnum]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=lossden]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=fp]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=fn]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=dur]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
+			this.value = this.value.replace(/[^0-9^:]/g, '');
+		} 
+		if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
+			var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
+			if(second.indexOf(":") >= 0) {
+				this.value = this.value.substring(0,this.value.length-1);
+			}
+		}
+	});
+	$('input[type=text][name=fov]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=back]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9^\.]/g, '')) {
+			this.value = this.value.replace(/[^0-9^\.]/g, '');
+		}
+		if(this.value.indexOf(".") >= 0 && this.value.indexOf(".") < this.value.length) { 
+			var second = this.value.substring(this.value.indexOf(".")+1, this.value.length); 
+			if(second.indexOf(".") >= 0) {
+				this.value = this.value.substring(0,this.value.length-1);
+			}
+		}
+	});
+	$('input[type=text][name=pup]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9^\.]/g, '')) {
+			this.value = this.value.replace(/[^0-9^\.]/g, '');
+		}
+		if(this.value.indexOf(".") >= 0 && this.value.indexOf(".") < this.value.length) { 
+			var second = this.value.substring(this.value.indexOf(".")+1, this.value.length); 
+			if(second.indexOf(".") >= 0) {
+				this.value = this.value.substring(0,this.value.length-1);
+			}
+		}
+	});
+	$('input[type=text][name=vanum]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=vaden]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=sph_num]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9^\.]/g, '')) {
+			this.value = this.value.replace(/[^0-9^\.]/g, '');
+		}
+		if(this.value.indexOf(".") >= 0 && this.value.indexOf(".") < this.value.length) { 
+			var second = this.value.substring(this.value.indexOf(".")+1, this.value.length); 
+			if(second.indexOf(".") >= 0) {
+				this.value = this.value.substring(0,this.value.length-1);
+			}
+		}
+	});
+	$('input[type=text][name=cyl_num]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9^\.]/g, '')) {
+			this.value = this.value.replace(/[^0-9^\.]/g, '');
+		}
+		if(this.value.indexOf(".") >= 0 && this.value.indexOf(".") < this.value.length) { 
+			var second = this.value.substring(this.value.indexOf(".")+1, this.value.length); 
+			if(second.indexOf(".") >= 0) {
+				this.value = this.value.substring(0,this.value.length-1);
+			}
+		}
+	});
+	$('input[type=text][name=axis]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=vfi]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=mddb]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9^\.]/g, '')) {
+			this.value = this.value.replace(/[^0-9^\.]/g, '');
+		}
+		if(this.value.indexOf(".") >= 0 && this.value.indexOf(".") < this.value.length) { 
+			var second = this.value.substring(this.value.indexOf(".")+1, this.value.length); 
+			if(second.indexOf(".") >= 0) {
+				this.value = this.value.substring(0,this.value.length-1);
+			}
+		}
+	});
+	$('input[type=text][name=psddb]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9^\.]/g, '')) {
+			this.value = this.value.replace(/[^0-9^\.]/g, '');
+		}
+		if(this.value.indexOf(".") >= 0 && this.value.indexOf(".") < this.value.length) { 
+			var second = this.value.substring(this.value.indexOf(".")+1, this.value.length); 
+			if(second.indexOf(".") >= 0) {
+				this.value = this.value.substring(0,this.value.length-1);
+			}
+		}
+	});
+	$('input[type=text][name=pts2]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=sup_hem]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=inf_hem]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=sup_hem2]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=inf_hem2]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=pts_five]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=pts_contig]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=pts_one]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+
 	$(':submit').click(function(e){ 
 		var mon = $('input[type=radio][name=mon][value=1]').prop('checked')
 			|| $('input[type=radio][name=mon][value=2]').prop('checked') 
