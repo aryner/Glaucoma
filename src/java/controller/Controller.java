@@ -153,9 +153,12 @@ public class Controller extends HttpServlet {
 		}
 
 		else if(userPath.equals("/uploadPictures")) {
-			Picture.uploadDocs(request);
+			Vector<String> errors = Picture.uploadDocs(request);
 
-			response.sendRedirect("/Glaucoma/index.jsp"); 
+			if(errors.size()>0) {
+				session.setAttribute("errors", errors);
+			}
+			response.sendRedirect("/Glaucoma/home"); 
 			return;
 		}
 

@@ -40,8 +40,9 @@ public class Picture {
 		type = ntype;
 	}
 
-	public static void uploadDocs(HttpServletRequest request) {
+	public static Vector<String> uploadDocs(HttpServletRequest request) {
 		Vector<String> names = new Vector<String>();
+		Vector<String> errors = new Vector<String>();
 		Vector<FileItem> files= new Vector<FileItem>();
 		String path = null;
 
@@ -68,6 +69,9 @@ public class Picture {
 					if(extension.equals("pdf") || extension.equals("PDF")) {
 						names.add(fileName);
 						files.add(fileItem);
+					}
+					else {
+						errors.add(fileName);
 					}
 				}
 				else {
@@ -104,8 +108,10 @@ public class Picture {
 			if (i>0) { query += ", "; }
 			query += "('"+names.get(i)+"', '"+path+"')";
 		}
-		SQLCommands.update(query); 
-
+		if(names.size() > 0) {
+			SQLCommands.update(query); 
+		}
+		return errors;
 	}
 
 	/**
