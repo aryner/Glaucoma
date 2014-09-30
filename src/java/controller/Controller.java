@@ -64,16 +64,20 @@ public class Controller extends HttpServlet {
 		}
 
 		else if(userPath.equals("/HVFtest")) {
-			Picture picture = HVFtest.getNext(((User)session.getAttribute("user")));
+			User user = (User)session.getAttribute("user");
+			Picture picture = HVFtest.getNext(user);
 
 			if(picture == null) {
-				Integer needToPairCount = HVFtest.getNeedToPairCount(); 
-				request.setAttribute("needToPairCount", needToPairCount);
-				if(needToPairCount == 0) {
-					HVFtest.setForAdjudication();
+				if(user.getAccess() == 0) {
+					Integer needToPairCount = HVFtest.getNeedToPairCount(); 
+					request.setAttribute("needToPairCount", needToPairCount);
+					if(needToPairCount == 0) {
+						HVFtest.setForAdjudication();
+					}
 				}
 			}
 
+			request.setAttribute("access", user.getAccess());
 			request.setAttribute("slash",slash);
 			request.setAttribute("picture",picture);
 		}
@@ -179,7 +183,8 @@ public class Controller extends HttpServlet {
 		}
 
 		else if(userPath.equals("/assignHVF")) {
-			HVFtest.assignHVF(request, ((User)session.getAttribute("user")).getID());
+			User user = (User)session.getAttribute("user");
+			HVFtest.assignHVF(request, user);
 		
 			response.sendRedirect("/Glaucoma/HVFtest"); 
 			return;

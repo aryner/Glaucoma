@@ -175,9 +175,16 @@ public class HVFtest {
 		SQLCommands.update(query);
 	}
 
-	public static void assignHVF(HttpServletRequest request, int uID) {
+	public static void assignHVF(HttpServletRequest request, User user) {
+		int uID = user.getID();
 		String picID = request.getParameter("pictureID");
-		HVFtest hvf = new HVFtest(Integer.parseInt(picID), uID);
+		HVFtest hvf = null;
+		if(user.getAccess() == 0) {
+			hvf = new HVFtest(Integer.parseInt(picID), uID);
+		}
+		else if (user.getAccess() == 1) {
+			hvf = new HVFtest(Integer.parseInt(picID));
+		}
 
 		//Set attributes
 		String attr = request.getParameter("mon");
@@ -276,8 +283,14 @@ public class HVFtest {
 			"hvf_psdsign='"+hvf.getPsdsign()+"', hvf_psddb='"+hvf.getPsddb()+"', hvf_psdp='"+hvf.getPsdp()+"', "+
 			"hvf_pts2='"+hvf.getPts2()+"', hvf_sup_hem='"+hvf.getSup_hem()+"', hvf_inf_hem='"+hvf.getInf_hem()+"', "+
 			"hvf_sup_hem2='"+hvf.getSup_hem2()+"', hvf_inf_hem2='"+hvf.getInf_hem2()+"', hvf_pts_five='"+hvf.getPts_five()+"', "+
-			"hvf_pts_contig='"+hvf.getPts_contig()+"', hvf_pts_one='"+hvf.getPts_one()+"', hvf_cluster='"+hvf.getCluster()+"' " +
-			"WHERE id="+hvf.getId();
+			"hvf_pts_contig='"+hvf.getPts_contig()+"', hvf_pts_one='"+hvf.getPts_one()+"', hvf_cluster='"+hvf.getCluster()+"' ";
+
+		if(user.getAccess() == 0) {
+			query += "WHERE id="+hvf.getId();
+		} else if(user.getAccess() ==1) {
+			query += ", confirmed=2 WHERE pictureID="+request.getParameter("pictureID");
+		}
+		
 		SQLCommands.update(query);
 	}
 
@@ -287,6 +300,10 @@ public class HVFtest {
 		if (user.getAccess() == 0) {
 			query = "SELECT * FROM picture WHERE id NOT IN (SELECT "+
 				" pictureID FROM HVFtest WHERE userID="+user.getID()+")";
+		}
+		else if (user.getAccess() == 1) {
+			query = "SELECT * FROM picture WHERE id IN (SELECT pictureID FROM "+
+				"HVFtest WHERE CONFIRMED=1)";
 		}
 
 		Vector<Picture> pictures = SQLCommands.queryPictures(query);

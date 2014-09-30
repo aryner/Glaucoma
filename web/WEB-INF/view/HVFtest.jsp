@@ -10,15 +10,20 @@
 <%
 Picture pic = (Picture)request.getAttribute("picture");
 
-if(pic == null) {
-	int needToPairCount = (Integer)request.getAttribute("needToPairCount");
+if(pic == null) { 
+
 %>
 <h3>You have finished all uploaded HVF files!</h3>
 <%
-	if(needToPairCount > 0) {
-		out.print(needToPairCount+" still need to be graded by someone else before adjudication");
-	} else {
-		out.print("HVF is ready for adjudication!");
+	int access = (Integer)request.getAttribute("access");
+
+	if(access == 0) {
+		int needToPairCount = (Integer)request.getAttribute("needToPairCount");
+		if(needToPairCount > 0) {
+			out.print(needToPairCount+" still need to be graded by someone else before adjudication");
+		} else {
+			out.print("HVF is ready for adjudication!");
+		}
 	}
 } else {
 	String slash = ""+request.getAttribute("slash");
