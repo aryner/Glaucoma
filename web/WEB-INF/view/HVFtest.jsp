@@ -11,9 +11,15 @@
 Picture pic = (Picture)request.getAttribute("picture");
 
 if(pic == null) {
+	int needToPairCount = (Integer)request.getAttribute("needToPairCount");
 %>
 <h3>You have finished all uploaded HVF files!</h3>
 <%
+	if(needToPairCount > 0) {
+		out.print(needToPairCount+" still need to be graded by someone else before adjudication");
+	} else {
+		out.print("HVF is ready for adjudication!");
+	}
 } else {
 	String slash = ""+request.getAttribute("slash");
 	String src = "http://localhost:8080/Glaucoma/pdf?type=HVF&name="+pic.getName();
