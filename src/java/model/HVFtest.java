@@ -259,20 +259,20 @@ public class HVFtest {
 		attr = request.getParameter("cluster");
 		hvf.setCluster(Integer.parseInt(attr));
 
-		String query = "UPDATE HVFtest SET mon='"+hvf.getMon()+"', mon_oth2_c47='"+hvf.getMon_oth2_c74()+"', "+
-			"tar='"+hvf.getTar()+"', tar_oth='"+hvf.getTar_oth()+"', lossnum='"+hvf.getLossnum()+"', "+
-			"lossden='"+hvf.getLossden()+"', fp='"+hvf.getFp()+"', fn='"+hvf.getFn()+"', "+
-			"dur='"+hvf.getDur()+"', fov='"+hvf.getFov()+"', stimintens='"+hvf.getStimintens()+"', "+
-			"stimcol='"+hvf.getStimcol()+"', stimcol_oth='"+hvf.getStimcol_oth()+"', back='"+hvf.getBack()+"', "+
-			"strategy='"+hvf.getStrategy()+"', stragegy_oth='"+hvf.getStrategy_oth()+"', pup='"+hvf.getPup()+"', "+
-			"vanum='"+hvf.getVanum()+"', vaden='"+hvf.getVaden()+"', shp_sign='"+hvf.getSph_sign()+"', "+
-			"sph_num='"+hvf.getSph_num()+"', cyl_sign='"+hvf.getCyl_sign()+"', cyl_num='"+hvf.getCyl_sign()+"', "+
-			"axis='"+hvf.getAxis()+"', ght='"+hvf.getGht()+"', vfi='"+hvf.getVfi()+"', "+
-			"mdsign='"+hvf.getMdsign()+"', mddb='"+hvf.getMddb()+"', mdp='"+hvf.getMdp()+"', "+
-			"psdsign='"+hvf.getPsdsign()+"', psddb='"+hvf.getPsddb()+"', psdp='"+hvf.getPsdp()+"', "+
-			"pts2='"+hvf.getPts2()+"', sup_hem='"+hvf.getSup_hem()+"', inf_hem='"+hvf.getInf_hem()+"', "+
-			"sup_hem2='"+hvf.getSup_hem2()+"', inf_hem2='"+hvf.getInf_hem2()+"', pts_five='"+hvf.getPts_five()+"', "+
-			"pts_contig='"+hvf.getPts_contig()+"', pts_one='"+hvf.getPts_one()+"', cluster='"+hvf.getCluster()+"' " +
+		String query = "UPDATE HVFtest SET hvf_mon='"+hvf.getMon()+"', hvf_mon_oth2_c47='"+hvf.getMon_oth2_c74()+"', "+
+			"hvf_tar='"+hvf.getTar()+"', hvf_tar_oth='"+hvf.getTar_oth()+"', hvf_lossnum='"+hvf.getLossnum()+"', "+
+			"hvf_lossden='"+hvf.getLossden()+"', hvf_fp='"+hvf.getFp()+"', hvf_fn='"+hvf.getFn()+"', "+
+			"hvf_dur='"+hvf.getDur()+"', hvf_fov='"+hvf.getFov()+"', hvf_stimintens='"+hvf.getStimintens()+"', "+
+			"hvf_stimcol='"+hvf.getStimcol()+"', hvf_stimcol_oth='"+hvf.getStimcol_oth()+"', hvf_back='"+hvf.getBack()+"', "+
+			"hvf_strategy='"+hvf.getStrategy()+"', hvf_strategy_oth='"+hvf.getStrategy_oth()+"', hvf_pup='"+hvf.getPup()+"', "+
+			"hvf_vanum='"+hvf.getVanum()+"', hvf_vaden='"+hvf.getVaden()+"', hvf_sph_sign='"+hvf.getSph_sign()+"', "+
+			"hvf_sph_num='"+hvf.getSph_num()+"', hvf_cyl_sign='"+hvf.getCyl_sign()+"', hvf_cyl_num='"+hvf.getCyl_num()+"', "+
+			"hvf_axis='"+hvf.getAxis()+"', hvf_ght='"+hvf.getGht()+"', hvf_vfi='"+hvf.getVfi()+"', "+
+			"hvf_mdsign='"+hvf.getMdsign()+"', hvf_mddb='"+hvf.getMddb()+"', hvf_mdp='"+hvf.getMdp()+"', "+
+			"hvf_psdsign='"+hvf.getPsdsign()+"', hvf_psddb='"+hvf.getPsddb()+"', hvf_psdp='"+hvf.getPsdp()+"', "+
+			"hvf_pts2='"+hvf.getPts2()+"', hvf_sup_hem='"+hvf.getSup_hem()+"', hvf_inf_hem='"+hvf.getInf_hem()+"', "+
+			"hvf_sup_hem2='"+hvf.getSup_hem2()+"', hvf_inf_hem2='"+hvf.getInf_hem2()+"', hvf_pts_five='"+hvf.getPts_five()+"', "+
+			"hvf_pts_contig='"+hvf.getPts_contig()+"', hvf_pts_one='"+hvf.getPts_one()+"', hvf_cluster='"+hvf.getCluster()+"' " +
 			"WHERE id="+hvf.getId();
 		SQLCommands.update(query);
 	}
