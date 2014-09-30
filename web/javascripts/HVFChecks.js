@@ -169,7 +169,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$(':submit').click(function(e){ 
+	$(':submit[value=Submit]').click(function(e){ 
 		var mon = $('input[type=radio][name=mon][value=1]').prop('checked')
 			|| $('input[type=radio][name=mon][value=2]').prop('checked') 
 			|| $('input[type=radio][name=mon][value=3]').prop('checked') 

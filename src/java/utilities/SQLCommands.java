@@ -20,6 +20,68 @@ import model.*;
  */
 public class SQLCommands {
 	private static final String slash = System.getProperty("file.separator");
+	public static int getCount(String query){ 
+		int count = 0;
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet resultSet = null;
+
+		try{
+			InitialContext initialContext = new InitialContext();
+			Context context = (Context)initialContext.lookup("java:comp"+slash+"env");
+			DataSource dataSource = (DataSource)context.lookup("glaucoma_grader");
+			con = dataSource.getConnection();
+
+			stmt = con.createStatement();
+
+			resultSet = stmt.executeQuery(query); 
+
+			while(resultSet.next()) {
+				count++;
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(SQLCommands.class.getName()).log(Level.SEVERE,null,ex); 
+		} catch (Exception e) { e.printStackTrace(); } 
+		finally { 
+			if(resultSet != null) try {resultSet.close();} catch(SQLException ignore) {}
+			if(con != null) try {con.close();} catch(SQLException ignore) {}
+			if(stmt != null) try {stmt.close();} catch(SQLException ignore) {}
+		}
+
+		return count;
+	}
+
+	public static Vector<HVFtest> queryHVFtest(String query){
+		Vector<HVFtest> result = new Vector<HVFtest>();
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet resultSet = null;
+
+		try{
+			InitialContext initialContext = new InitialContext();
+			Context context = (Context)initialContext.lookup("java:comp"+slash+"env");
+			DataSource dataSource = (DataSource)context.lookup("glaucoma_grader");
+			con = dataSource.getConnection();
+
+			stmt = con.createStatement();
+
+			resultSet = stmt.executeQuery(query); 
+
+			while(resultSet.next()) {
+				result.add(new HVFtest(resultSet.getInt("pictureID")));
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(SQLCommands.class.getName()).log(Level.SEVERE,null,ex); 
+		} catch (Exception e) { e.printStackTrace(); } 
+		finally { 
+			if(resultSet != null) try {resultSet.close();} catch(SQLException ignore) {}
+			if(con != null) try {con.close();} catch(SQLException ignore) {}
+			if(stmt != null) try {stmt.close();} catch(SQLException ignore) {}
+		}
+
+		return result;
+	}
+
 	public static Vector<User> queryUsers(String query){
 		Vector<User> result = new Vector<User>();
 		Connection con = null;

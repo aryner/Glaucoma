@@ -58,6 +58,14 @@ public class Controller extends HttpServlet {
 		else if(userPath.equals("/HVFtest")) {
 			Picture picture = HVFtest.getNext(((User)session.getAttribute("user")));
 
+			if(picture == null) {
+				Integer needToPairCount = HVFtest.getNeedToPairCount(); 
+				request.setAttribute("needToPairCount", needToPairCount);
+				if(needToPairCount == 0) {
+					HVFtest.setForAdjudication();
+				}
+			}
+
 			request.setAttribute("slash",slash);
 			request.setAttribute("picture",picture);
 		}

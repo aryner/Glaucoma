@@ -97,6 +97,10 @@ public class HVFtest {
 	private int severe;
 	private static final String slash = System.getProperty("file.separator");
 
+	public HVFtest(int npictureID) {
+		pictureID = npictureID;
+	}
+
 	public HVFtest(int npictureID, int nuserID) {
 		String query = "INSERT INTO HVFtest (pictureID, userID) VALUES ('"+npictureID+"', '"+nuserID+"')";
 		SQLCommands.update(query);
@@ -293,6 +297,54 @@ public class HVFtest {
 		}
 
 		return result;
+	}
+
+	public static int getNeedToPairCount() {
+		String query = "SELECT * FROM HVFtest GROUP BY pictureID HAVING COUNT(*)=1";
+		return SQLCommands.getCount(query);
+	}
+
+	public static void setForAdjudication() {
+		//get the ones that don't need adjudication
+		String query = "SELECT * FROM HVFtest GROUP BY pictureID, "+
+			"hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, hvf_lossnum, hvf_lossden, "+
+			"hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, "+
+			"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
+			"hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
+			"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_pts2, hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, "+
+			"hvf_inf_hem2, hvf_pts_five, hvf_pts_contig, hvf_pts_one, hvf_cluster "+
+			"HAVING COUNT(*)=2";
+		Vector<HVFtest> set = SQLCommands.queryHVFtest(query);
+		//get the ones that need adjudication
+		query = "SELECT * FROM HVFtest GROUP BY pictureID, "+
+			"hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, hvf_lossnum, hvf_lossden, "+
+			"hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, "+
+			"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
+			"hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
+			"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_pts2, hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, "+
+			"hvf_inf_hem2, hvf_pts_five, hvf_pts_contig, hvf_pts_one, hvf_cluster "+
+			"HAVING COUNT(*)=1";
+		Vector<HVFtest> notSet = SQLCommands.queryHVFtest(query);
+		
+		//update the confirmed ones
+		query = "UPDATE HVFtest SET confirmed=2 WHERE ";
+		for(int i=0; i<set.size(); i++) {
+			if(i>0) { query += " OR "; }
+			query += "pictureID="+set.get(i).getPictureID();
+		}
+		if(set.size() > 0) {
+			SQLCommands.update(query);
+		}
+
+		//update the ones that need confirming
+		query = "UPDATE HVFtest SET confirmed=1 WHERE ";
+		for(int i=0; i<notSet.size(); i++) {
+			if(i>0) { query += " OR "; }
+			query += "pictureID="+notSet.get(i).getPictureID();
+		}
+		if(notSet.size() > 0) {
+			SQLCommands.update(query);
+		}
 	}
 
 	/**
