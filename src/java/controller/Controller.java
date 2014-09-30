@@ -55,6 +55,14 @@ public class Controller extends HttpServlet {
 			return;
 		}
 
+		else if(userPath.equals("/home")) {
+			User user = (User)session.getAttribute("user");
+			request.setAttribute("access",user.getAccess());
+			if(user.getAccess() == 1) {
+				request.setAttribute("HVFACount", HVFtest.needAdjudicationCount());
+			}
+		}
+
 		else if(userPath.equals("/HVFtest")) {
 			Picture picture = HVFtest.getNext(((User)session.getAttribute("user")));
 

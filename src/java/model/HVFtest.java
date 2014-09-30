@@ -347,6 +347,11 @@ public class HVFtest {
 		}
 	}
 
+	public static int needAdjudicationCount() {
+		String query = "SELECT * FROM HVFtest WHERE confirmed=1";
+		return SQLCommands.getCount(query);
+	}
+
 	/**
 	 * @return the id
 	 */

@@ -42,6 +42,7 @@ public class User {
 		if(users.size() > 0) {
 			id = users.get(0).getID();
 			userName = users.get(0).getUserName();
+			access = users.get(0).getAccess();
 		}
 		else {
 			userName = null;

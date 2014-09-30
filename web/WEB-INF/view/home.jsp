@@ -16,30 +16,63 @@ if(session.getAttribute("errors") != null) {
 		if (i>0) {out.print(", ");}
 		out.print(errors.get(i)+"\n");
 	}
-	out.print("</div>");
-}
+	out.print("</div>"); 
+} 
+	int HVFACount= 0;
+	int access = (Integer)request.getAttribute("access");
+	System.out.println("access = " + access);
+	if(access == 1) {
+		HVFACount = (Integer)request.getAttribute("HVFACount");
+	}
 %> 
 
 <h2>Home</h2>
 <div class='wideContainer'>
+<%
+	if(access == 0 ){
+%>
 	<div class="thinColumn">
 		<a href="/Glaucoma/FDTtest" class="btn menuBtn">FDT test</a>
 	</div>
+
+<%
+	}
+	if (access == 0 || HVFACount > 0) {
+%>
 	<div class="thinColumn">
 		<a href="/Glaucoma/HVFtest" class="btn menuBtn">HVF test</a> 
 	</div>
+<%
+	}
+	if (access == 0) {
+%>
 	<div class="thinColumn">
 		<a href="/Glaucoma/MDTtest" class="btn menuBtn">MDT test</a> 
 	</div>
+<%
+	}
+	if (access == 0) {
+%>
 	<div class="thinColumn">
 		<a href="/Glaucoma/OCTtest" class="btn menuBtn">OCT test</a> 
 	</div> 
+<%
+	}
+	if (access == 0) {
+%>
 	<div class="thinColumn">
 		<a href="/Glaucoma/stereo" class="btn menuBtn">Stereo</a>
 	</div>
+<%
+	}
+	if (access == 0) {
+%>
 	<div class="thinColumn">
 		<a href="/Glaucoma/nethra" class="btn menuBtn">3Nethra</a>
 	</div>
+<%
+	} 
+%>
 </div>
 <br>
 <div class='container'>
