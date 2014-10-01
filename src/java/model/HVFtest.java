@@ -178,6 +178,9 @@ public class HVFtest {
 
 	public static void assignHVF(HttpServletRequest request, User user) {
 		boolean glaucoma = false;
+		int mildCount = 0;
+		int moderateCount = 0;
+		int severeCount = 0;
 		int uID = user.getID();
 		String picID = request.getParameter("pictureID");
 		HVFtest hvf = null;
@@ -280,6 +283,33 @@ public class HVFtest {
 		if(hvf.getCluster() == 1) {
 			glaucoma = true;
 		}
+		
+		//check for severity if glaucoma
+		if(glaucoma) {
+			if(hvf.getMdsign() == 1) {
+				float mddb = Float.parseFloat(hvf.getMddb());
+				if(mddb >= 12.) { severeCount++; }
+				else if(mddb >= 6.) { moderateCount++; }
+				else { mildCount++; }
+			}
+
+			int ptsFive = hvf.getPts_five();
+			int ptsOne = hvf.getPts_one();
+			if(ptsFive >= 37 || ptsOne > 20) { severeCount++; }
+			else if(ptsFive >= 18 && ptsOne > 10) { moderateCount++; }
+			else if(ptsFive < 18 && ptsOne <= 10){ mildCount++; }
+
+			if(hvf.getPts2() > 0) { severeCount++; }
+
+			int hem = hvf.getSup_hem() + hvf.getInf_hem();
+			if(hem == 1) { moderateCount++; }
+			else if(hem > 1) { severeCount++; } 
+
+			int hem2 = hvf.getSup_hem2() + hvf.getInf_hem2();
+			if(hem2 == 4) { mildCount++; }
+			else if (hem2 > 0) { moderateCount++; }
+			else if(hem2 == 0) { severeCount++; }
+		}
 
 		String query = "UPDATE HVFtest SET hvf_mon='"+hvf.getMon()+"', hvf_mon_oth2_c47='"+hvf.getMon_oth2_c74()+"', "+
 			"hvf_tar='"+hvf.getTar()+"', hvf_tar_oth='"+hvf.getTar_oth()+"', hvf_lossnum='"+hvf.getLossnum()+"', "+
@@ -297,13 +327,29 @@ public class HVFtest {
 			"hvf_pts_contig='"+hvf.getPts_contig()+"', hvf_pts_one='"+hvf.getPts_one()+"', hvf_cluster='"+hvf.getCluster()+"' ";
 
 		if(glaucoma) {
-			query += ", hvf_glau=1";
+			query += ", hvf_glau='1'";
+
+			if(severeCount > 0 && moderateCount > 0 && mildCount > 0) {
+				query += ", hvf_severe='2'";
+			}
+			else if(severeCount > 1 || (severeCount == 1 && moderateCount > 0)) {
+				query += ", hvf_severe='3'";
+			}
+			else if(moderateCount > 1 || (moderateCount == 1 && mildCount > 0)) {
+				query += ", hvf_severe='2'";
+			}
+			else if(mildCount > 0) {
+				query += ", hvf_severe='1'";
+			}
+			else {
+				query += ", hvf_severe='4'";
+			}
 		} else {
-			query += ", hvf_glau=2";
+			query += ", hvf_glau='2', hvf_severe='4'";
 		}
 
 		if(user.getAccess() == 0) {
-			query += "WHERE id="+hvf.getId();
+			query += " WHERE id="+hvf.getId();
 		} else if(user.getAccess() ==1) { 
 			query += ", confirmed=2 WHERE pictureID="+request.getParameter("pictureID");
 		}
