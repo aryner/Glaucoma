@@ -19,6 +19,44 @@ import model.*;
  * @author aryner
  */
 public class SQLCommands {
+
+	public static Vector<HVFtest> queryHVFtestForOp(String query){
+		Vector<HVFtest> result = new Vector<HVFtest>();
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet resultSet = null;
+
+		try{
+			InitialContext initialContext = new InitialContext();
+			Context context = (Context)initialContext.lookup("java:comp"+slash+"env");
+			DataSource dataSource = (DataSource)context.lookup("glaucoma_grader");
+			con = dataSource.getConnection();
+
+			stmt = con.createStatement();
+
+			resultSet = stmt.executeQuery(query); 
+
+			while(resultSet.next()) {
+				result.add(new HVFtest(resultSet.getInt("hvf_fp"), resultSet.getInt("hvf_fn"),resultSet.getInt("hvf_ght"),
+					resultSet.getInt("hvf_psdp"),resultSet.getInt("hvf_cluster"), resultSet.getInt("hvf_glau"), 
+					resultSet.getInt("hvf_mdsign"),resultSet.getString("hvf_mddb"),resultSet.getInt("hvf_mdp"),
+					resultSet.getInt("hvf_pts2"), resultSet.getInt("hvf_sup_hem"),resultSet.getInt("hvf_inf_hem"),
+					resultSet.getInt("hvf_sup_hem2"),resultSet.getInt("hvf_inf_hem2"),resultSet.getInt("hvf_pts_five"),
+					resultSet.getInt("hvf_pts_contig"),resultSet.getInt("hvf_pts_one"),resultSet.getInt("hvf_severe")
+				));
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(SQLCommands.class.getName()).log(Level.SEVERE,null,ex); 
+		} catch (Exception e) { e.printStackTrace(); } 
+		finally { 
+			if(resultSet != null) try {resultSet.close();} catch(SQLException ignore) {}
+			if(con != null) try {con.close();} catch(SQLException ignore) {}
+			if(stmt != null) try {stmt.close();} catch(SQLException ignore) {}
+		}
+
+		return result;
+	}
+
 	private static final String slash = System.getProperty("file.separator");
 	public static int getCount(String query){ 
 		int count = 0;

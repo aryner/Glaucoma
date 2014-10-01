@@ -31,7 +31,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  *
  * @author aryner
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload", "/uploadPictures", "/img", "/pdf", "/assignHVF", "/OpHVFtest"})
+@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload", "/uploadPictures", "/img", "/pdf", "/assignHVF", "/OpHVFtest", "/OpReviewHVF"})
 public class Controller extends HttpServlet {
 	private final String slash = System.getProperty("file.separator");
 	/**
@@ -89,6 +89,7 @@ public class Controller extends HttpServlet {
 			User user = (User)session.getAttribute("user");
 			Picture picture = HVFtest.getNext(user);
 
+			request.setAttribute("hvf",HVFtest.getOpHVF(picture.getId()));
 			request.setAttribute("slash",slash);
 			request.setAttribute("picture",picture);
 		}
@@ -198,6 +199,11 @@ public class Controller extends HttpServlet {
 			HVFtest.assignHVF(request, user);
 		
 			response.sendRedirect("/Glaucoma/HVFtest"); 
+			return;
+		}
+
+		else if(userPath.equals("/OpReviewHVF")) {
+			response.sendRedirect("/Glaucoma/OpHVFtest"); 
 			return;
 		}
 

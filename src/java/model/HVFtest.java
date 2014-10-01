@@ -114,6 +114,30 @@ public class HVFtest {
 		id = data.get(2);	
 	}
 
+	public HVFtest(int nfp, int nfn, int nght, int npsdp, int ncluster, int nglau, int nmdsign, String nmddb,
+			int nmdp, int npts2, int nsup_hem, int ninf_hem, int nsup_hem2, int ninf_hem2, int npts_five,
+			int npts_contig, int npts_one, int nsevere) {
+		
+		fp = nfp;
+		fn = nfn;
+		ght = nght;
+		psdp = npsdp;
+		cluster = ncluster;
+		hvf_glau = nglau;
+		mdsign = nmdsign;
+		mddb = nmddb;
+		mdp = nmdp;
+		pts2 = npts2;
+		sup_hem = nsup_hem;
+		inf_hem = ninf_hem;
+		sup_hem2 = nsup_hem2;
+		inf_hem2 = ninf_hem2;
+		pts_five = npts_five;
+		pts_contig = npts_contig;
+		pts_one = npts_one;
+		severe = nsevere;
+	}
+
 	public static void createPictures(Vector<String> fileNames) {
 		String query = "INSERT INTO picture (name, type) VALUES ";
 		ArrayList<String> firstPics = new ArrayList<String>();
@@ -355,6 +379,18 @@ public class HVFtest {
 		}
 		
 		SQLCommands.update(query);
+	}
+
+	public static HVFtest getOpHVF(int picID) {
+		HVFtest result = null;
+		String query = "SELECT * FROM HVFtest WHERE pictureID="+picID;
+
+		Vector<HVFtest> hvf = SQLCommands.queryHVFtestForOp(query);
+		if(hvf.size() > 0) {
+			result = hvf.get(0);
+		}
+
+		return result;
 	}
 
 	public static Picture getNext(User user) {
