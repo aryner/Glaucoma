@@ -31,7 +31,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  *
  * @author aryner
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload", "/uploadPictures", "/img", "/pdf", "/assignHVF"})
+@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload", "/uploadPictures", "/img", "/pdf", "/assignHVF", "/OpHVFtest"})
 public class Controller extends HttpServlet {
 	private final String slash = System.getProperty("file.separator");
 	/**
@@ -61,6 +61,9 @@ public class Controller extends HttpServlet {
 			if(user.getAccess() == 1) {
 				request.setAttribute("HVFACount", HVFtest.needAdjudicationCount());
 			}
+			else if(user.getAccess() == 2) {
+				request.setAttribute("HVFACount", HVFtest.getOpCheckCount());
+			}
 		}
 
 		else if(userPath.equals("/HVFtest")) {
@@ -78,6 +81,14 @@ public class Controller extends HttpServlet {
 			}
 
 			request.setAttribute("access", user.getAccess());
+			request.setAttribute("slash",slash);
+			request.setAttribute("picture",picture);
+		}
+
+		else if (userPath.equals("/OpHVFtest")) {
+			User user = (User)session.getAttribute("user");
+			Picture picture = HVFtest.getNext(user);
+
 			request.setAttribute("slash",slash);
 			request.setAttribute("picture",picture);
 		}

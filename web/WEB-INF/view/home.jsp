@@ -21,7 +21,7 @@ if(session.getAttribute("errors") != null) {
 	int HVFACount= 0;
 	int access = (Integer)request.getAttribute("access");
 	System.out.println("access = " + access);
-	if(access == 1) {
+	if(access > 0) {
 		HVFACount = (Integer)request.getAttribute("HVFACount");
 	}
 %> 
@@ -29,6 +29,13 @@ if(session.getAttribute("errors") != null) {
 <h2>Home</h2>
 <div class='wideContainer'>
 <%
+	if(access == 2 && HVFACount > 0){
+%>
+	<div class="thinColumn">
+		<a href="/Glaucoma/OpHVFtest" class="btn menuBtn">HVF test</a>
+	</div>
+<%
+	}
 	if(access == 0 ){
 %>
 	<div class="thinColumn">
@@ -37,7 +44,7 @@ if(session.getAttribute("errors") != null) {
 
 <%
 	}
-	if (access == 0 || HVFACount > 0) {
+	if (access == 0 || (access == 1 && HVFACount > 0)) {
 %>
 	<div class="thinColumn">
 		<a href="/Glaucoma/HVFtest" class="btn menuBtn">HVF test</a> 

@@ -368,9 +368,12 @@ public class HVFtest {
 			query = "SELECT * FROM picture WHERE id IN (SELECT pictureID FROM "+
 				"HVFtest WHERE CONFIRMED=1)";
 		}
+		else if (user.getAccess() == 2) {
+			query = "SELECT * FROM picture WHERE id IN (SELECT pictureID FROM HVFtest WHERE "+
+				"confirmed=2 && (hvf_severe=1 OR hvf_severe=2 OR hvf_severe=3))";
+		}
 
-		Vector<Picture> pictures = SQLCommands.queryPictures(query);
-		
+		Vector<Picture> pictures = SQLCommands.queryPictures(query); 
 		if(pictures.size() > 0) {
 			Random rand = new Random(System.currentTimeMillis());
 			result = pictures.get(rand.nextInt(pictures.size()));
@@ -382,6 +385,14 @@ public class HVFtest {
 	public static int getNeedToPairCount() {
 		String query = "SELECT * FROM HVFtest GROUP BY pictureID HAVING COUNT(*)=1";
 		return SQLCommands.getCount(query);
+	}
+
+	public static int getOpCheckCount() {
+		String query = "SELECT * FROM HVFtest WHERE confirmed=2 && (hvf_severe=1 "+
+			"OR hvf_severe=2 OR hvf_severe=3)";
+		int count = (SQLCommands.getCount(query) / 2);
+System.out.println(count);
+		return count;
 	}
 
 	public static void setForAdjudication() {
