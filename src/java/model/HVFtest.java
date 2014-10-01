@@ -52,6 +52,7 @@ public class HVFtest {
 	private int opth_check;
 	private int pictureID;
 	private int userID;
+	private int hvf_glau;
 	private int mon;
 	private String mon_oth2_c74; 
 	private int tar;
@@ -176,6 +177,7 @@ public class HVFtest {
 	}
 
 	public static void assignHVF(HttpServletRequest request, User user) {
+		boolean glaucoma = false;
 		int uID = user.getID();
 		String picID = request.getParameter("pictureID");
 		HVFtest hvf = null;
@@ -237,6 +239,9 @@ public class HVFtest {
 		hvf.setAxis(Integer.parseInt(attr));
 		attr = request.getParameter("ght");
 		hvf.setGht(Integer.parseInt(attr));
+		if(attr.equals("2") || attr.equals("3")) {
+			glaucoma = true;
+		}
 		attr = request.getParameter("vfi");
 		hvf.setVfi(attr);
 		attr = request.getParameter("mdsign");
@@ -245,6 +250,9 @@ public class HVFtest {
 		hvf.setMddb(attr);
 		attr = request.getParameter("mdp");
 		hvf.setMdp(Integer.parseInt(attr));
+		if(hvf.getMdp() <= 4) {
+			glaucoma = true;
+		}
 		attr = request.getParameter("psdsign");
 		hvf.setPsdsign(Integer.parseInt(attr));
 		attr = request.getParameter("psddb");
@@ -269,6 +277,9 @@ public class HVFtest {
 		hvf.setPts_one(Integer.parseInt(attr));
 		attr = request.getParameter("cluster");
 		hvf.setCluster(Integer.parseInt(attr));
+		if(hvf.getCluster() == 1) {
+			glaucoma = true;
+		}
 
 		String query = "UPDATE HVFtest SET hvf_mon='"+hvf.getMon()+"', hvf_mon_oth2_c47='"+hvf.getMon_oth2_c74()+"', "+
 			"hvf_tar='"+hvf.getTar()+"', hvf_tar_oth='"+hvf.getTar_oth()+"', hvf_lossnum='"+hvf.getLossnum()+"', "+
@@ -285,9 +296,15 @@ public class HVFtest {
 			"hvf_sup_hem2='"+hvf.getSup_hem2()+"', hvf_inf_hem2='"+hvf.getInf_hem2()+"', hvf_pts_five='"+hvf.getPts_five()+"', "+
 			"hvf_pts_contig='"+hvf.getPts_contig()+"', hvf_pts_one='"+hvf.getPts_one()+"', hvf_cluster='"+hvf.getCluster()+"' ";
 
+		if(glaucoma) {
+			query += ", hvf_glau=1";
+		} else {
+			query += ", hvf_glau=2";
+		}
+
 		if(user.getAccess() == 0) {
 			query += "WHERE id="+hvf.getId();
-		} else if(user.getAccess() ==1) {
+		} else if(user.getAccess() ==1) { 
 			query += ", confirmed=2 WHERE pictureID="+request.getParameter("pictureID");
 		}
 		
@@ -1039,6 +1056,20 @@ public class HVFtest {
 	 */
 	public void setOpth_check(int opth_check) {
 		this.opth_check = opth_check;
+	}
+
+	/**
+	 * @return the hvf_glau
+	 */
+	public int getHvf_glau() {
+		return hvf_glau;
+	}
+
+	/**
+	 * @param hvf_glau the hvf_glau to set
+	 */
+	public void setHvf_glau(int hvf_glau) {
+		this.hvf_glau = hvf_glau;
 	}
 
 }
