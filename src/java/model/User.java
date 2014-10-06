@@ -51,7 +51,7 @@ public class User {
 		} 
 	}
 
-	public static User createUser(String name, String pass) { 
+	public static User createUser(String name, String pass, String access) { 
 		String query = "SELECT * FROM user WHERE userName='" + name + "'";
 		Vector<User> users = SQLCommands.queryUsers(query);
 		User result = null;
@@ -60,8 +60,8 @@ public class User {
 			return result;
 		}
 		else { 
-			query = "INSERT INTO user (userName, password) VALUES('" + name +
-				"', '" + pass + "')";
+			query = "INSERT INTO user (userName, password, access) VALUES('" + name +
+				"', '" + pass + "', '"+access+"')";
 
 			SQLCommands.update(query); 
 		} 

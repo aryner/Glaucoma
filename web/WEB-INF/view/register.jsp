@@ -29,6 +29,14 @@
 		Repeat password: <input type="password" name="rePassword">
 	</p>
 	<p>
+		Select which type of grader you are:
+		<select name="graderType" class="btn bigBtn">
+			<option value="0">Initial Grader</option>
+			<option value="1">Adjudicator</option>
+			<option value="2">Opthamologist</option>
+		</select>
+	</p>
+	<p>
 		<input type="submit" value="submit" class="btn">
 	</p>
 </form>

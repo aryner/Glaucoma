@@ -218,9 +218,10 @@ public class Controller extends HttpServlet {
 			String name = request.getParameter("userName");
 			String password = request.getParameter("password");
 			String rePassword = request.getParameter("rePassword");
+			String type = request.getParameter("graderType");
 
 			if(password.equals(rePassword)){
-				User user = User.createUser(name, password);
+				User user = User.createUser(name, password, type);
 
 				if(user == null) {
 					session.setAttribute("error", "That user name has been taken");
