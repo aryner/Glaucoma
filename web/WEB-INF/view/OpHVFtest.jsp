@@ -68,8 +68,6 @@ MD - P-value: <br>
 <input type="radio" name="mdp" value="5"<%if(hvf.getMdp()==5) {out.print(" checked");}%>><10%<br>
 <input type="radio" name="mdp" value="6"<%if(hvf.getMdp()==6) {out.print(" checked");}%>>Blank<br><br>
 
-# points within central 5 degrees with sensitivity <0dB <input type="text" name="pts2" <%out.print("value='"+hvf.getPts2()+"'");%>><br><br>
-
 Superior hemifield: # points <15dB within 5 degrees of fixations?<br> <input type="text" name="sup_hem" <%out.print("value='"+hvf.getSup_hem()+"'");%>><br>
 Inferior hemfield: # points <15dB within 5 degrees of fixation?<br> <input type="text" name="inf_hem" <%out.print("value='"+hvf.getInf_hem()+"'");%>><br><br>
 

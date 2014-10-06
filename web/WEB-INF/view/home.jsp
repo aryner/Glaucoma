@@ -38,10 +38,11 @@ if(session.getAttribute("errors") != null) {
 	}
 	if(access == 0 ){
 %>
+<!--
 	<div class="thinColumn">
 		<a href="/Glaucoma/FDTtest" class="btn menuBtn">FDT test</a>
 	</div>
-
+-->
 <%
 	}
 	if (access == 0 || (access == 1 && HVFACount > 0)) {
@@ -53,30 +54,38 @@ if(session.getAttribute("errors") != null) {
 	}
 	if (access == 0) {
 %>
+<!--
 	<div class="thinColumn">
 		<a href="/Glaucoma/MDTtest" class="btn menuBtn">MDT test</a> 
 	</div>
+-->
 <%
 	}
 	if (access == 0) {
 %>
+<!--
 	<div class="thinColumn">
 		<a href="/Glaucoma/OCTtest" class="btn menuBtn">OCT test</a> 
 	</div> 
+-->
 <%
 	}
 	if (access == 0) {
 %>
+<!--
 	<div class="thinColumn">
 		<a href="/Glaucoma/stereo" class="btn menuBtn">Stereo</a>
 	</div>
+-->
 <%
 	}
 	if (access == 0) {
 %>
+<!--
 	<div class="thinColumn">
 		<a href="/Glaucoma/nethra" class="btn menuBtn">3Nethra</a>
 	</div>
+-->
 <%
 	} 
 %>

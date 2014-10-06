@@ -10,10 +10,11 @@
 	Choose which section to add to
 	<select name="type" class="btn bigBtn"> 
 		<option value="HVF">HVF</option>
-		<option value="FDT">FDT</option>
+<!--		<option value="FDT">FDT</option>
 		<option value="OCT">OCT</option>
 		<option value="stereo">Stereo</option>
 		<option value="3Nethra">3Nethra</option> 
+-->
 	</select>
 	<p>Select which pictures to upload</p>
 	<input type="file" multiple="multiple" name="pictures">

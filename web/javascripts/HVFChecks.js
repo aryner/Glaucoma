@@ -128,11 +128,7 @@ $(document).ready(function(){
 			}
 		}
 	});
-	$('input[type=text][name=pts2]').on('input', function() {
-		if(this.value != this.value.replace(/[^0-9]/g, '')) {
-			this.value = this.value.replace(/[^0-9]/g, '');
-		}
-	});
+
 	$('input[type=text][name=sup_hem]').on('input', function() {
 		if(this.value != this.value.replace(/[^0-9]/g, '')) {
 			this.value = this.value.replace(/[^0-9]/g, '');
@@ -276,7 +272,18 @@ $(document).ready(function(){
 			|| $('input[type=radio][name=psdp][value=5]').prop('checked')
 			|| $('input[type=radio][name=psdp][value=6]').prop('checked');
 
-		var pts2 = $('input[type=text][name=pts2]').val().length > 0; 
+		var central_15 = $('input[type=radio][name=central_15][value=0]').prop('checked')
+			|| $('input[type=radio][name=central_15][value=1]').prop('checked')
+			|| $('input[type=radio][name=central_15][value=2]').prop('checked')
+			|| $('input[type=radio][name=central_15][value=3]').prop('checked')
+			|| $('input[type=radio][name=central_15][value=4]').prop('checked');
+
+		var central_0 = $('input[type=radio][name=central_0][value=0]').prop('checked')
+			|| $('input[type=radio][name=central_0][value=1]').prop('checked')
+			|| $('input[type=radio][name=central_0][value=2]').prop('checked')
+			|| $('input[type=radio][name=central_0][value=3]').prop('checked')
+			|| $('input[type=radio][name=central_0][value=4]').prop('checked');
+
 		var sup_hem = $('input[type=text][name=sup_hem]').val().length > 0; 
 		var inf_hem = $('input[type=text][name=inf_hem]').val().length > 0; 
 		var sup_hem2 = $('input[type=text][name=sup_hem2]').val().length > 0; 
@@ -384,9 +391,12 @@ $(document).ready(function(){
 		} else if(!psdp){
 			e.preventDefault(); 
 			$('input[type=radio][name=psdp][value=1]').focus(); 
-		} else if(!pts2){
+		} else if(!central_15) {
 			e.preventDefault(); 
-			$('input[type=text][name=pts2]').focus();
+			$('input[type=radio][name=central_15][value=0]').focus();
+		} else if(!central_0) {
+			e.preventDefault(); 
+			$('input[type=radio][name=central_0][value=0]').focus();
 		} else if(!sup_hem){
 			e.preventDefault(); 
 			$('input[type=text][name=sup_hem]').focus();

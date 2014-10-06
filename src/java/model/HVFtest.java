@@ -7,39 +7,7 @@
 package model;
 
 import java.util.*; 
-/*
-import java.io.FileOutputStream;
-import org.apache.poi.hwpf.model.PicturesTable;
-import org.apache.poi.xwpf.usermodel.XWPFPicture;
-import org.apache.poi.xwpf.usermodel.*;
-import javax.imageio.ImageIO;
-import java.awt.image.*;
-
-import javax.imageio.stream.*;
-*/
-import java.io.*;
-import javax.imageio.*;
-/*
-import javax.media.jai.*;
-
-import java.awt.image.renderable.ParameterBlock; 
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.converter.xhtml.XHTMLConverter;
-import org.apache.poi.xwpf.converter.xhtml.XHTMLOptions;
-
-import com.sun.media.jai.codec.*;
-import com.sun.media.jai.codec.TIFFDecodeParam;
-import org.ghost4j.document.PDFDocument;
-import org.ghost4j.renderer.SimpleRenderer;
-*/
 import utilities.SQLCommands;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.nio.channels.FileChannel;
-import java.nio.ByteBuffer; 
-import com.sun.pdfview.*;
-import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -85,7 +53,8 @@ public class HVFtest {
 	private int psdsign;
 	private String psddb;
 	private int psdp;
-	private int pts2;
+	private int central_15;
+	private int central_0;
 	private int sup_hem;
 	private int inf_hem;
 	private int sup_hem2;
@@ -96,6 +65,9 @@ public class HVFtest {
 	private int cluster;
 	private int flau;
 	private int severe;
+	private int reliable_review;
+	private int vf_loss;
+	private int vf_defect;
 	private static final String slash = System.getProperty("file.separator");
 
 	public HVFtest(int npictureID) {
@@ -115,7 +87,7 @@ public class HVFtest {
 	}
 
 	public HVFtest(int nfp, int nfn, int nght, int npsdp, int ncluster, int nglau, int nmdsign, String nmddb,
-			int nmdp, int npts2, int nsup_hem, int ninf_hem, int nsup_hem2, int ninf_hem2, int npts_five,
+			int nmdp, int nsup_hem, int ninf_hem, int nsup_hem2, int ninf_hem2, int npts_five,
 			int npts_contig, int npts_one, int nsevere) {
 		
 		fp = nfp;
@@ -127,7 +99,6 @@ public class HVFtest {
 		mdsign = nmdsign;
 		mddb = nmddb;
 		mdp = nmdp;
-		pts2 = npts2;
 		sup_hem = nsup_hem;
 		inf_hem = ninf_hem;
 		sup_hem2 = nsup_hem2;
@@ -136,68 +107,6 @@ public class HVFtest {
 		pts_contig = npts_contig;
 		pts_one = npts_one;
 		severe = nsevere;
-	}
-
-	public static void createPictures(Vector<String> fileNames) {
-		String query = "INSERT INTO picture (name, type) VALUES ";
-		ArrayList<String> firstPics = new ArrayList<String>();
-		ArrayList<String> secondPics = new ArrayList<String>();
-
-		for(int i=0; i<fileNames.size(); i++) {
-			try {
-
-				//convert pdf to img
-				String name = fileNames.get(i).substring(0,fileNames.get(i).indexOf("."));
-				File file = new File(".."+slash+"webapps"+slash+"Glaucoma"+slash + "HVF" + slash+fileNames.get(i));
-				RandomAccessFile raf = new RandomAccessFile(file, "r");
-				FileChannel channel = raf.getChannel();
-				ByteBuffer buff = channel.map(FileChannel.MapMode.READ_ONLY, 0, channel.size());
-				PDFFile pdf = new PDFFile(buff);
-				PDFPage page = pdf.getPage(0);
-
-				Rectangle rect = new Rectangle(0, 0, (int)page.getWidth(),
-								(int)page.getHeight());
-				BufferedImage bufferedImage = new BufferedImage(rect.width,rect.height, BufferedImage.TYPE_INT_RGB);
-				Image image = page.getImage(rect.width, rect.height, rect, null, true, true);
-				Graphics2D bufImageGraphics = bufferedImage.createGraphics();
-				bufImageGraphics.drawImage(image, 0,0, null);
-				ImageIO.write(bufferedImage, "png", new File(".."+slash+"webapps"+slash+"Glaucoma"+slash + "HVF" + slash+name+".png"));
-				if (i>0) { query += ", "; }
-				query += "('"+name+".png', 'HVF')";
-				
-//				file.delete(); 
-/*
-				PDFDocument document = new PDFDocument();
-				document.load(file);
-
-				SimpleRenderer render = new SimpleRenderer();
-				render.setResolution(300);
-
-				List<Image> images = render.render(document);
-
-				ImageIO.write((RenderedImage)images.get(0), "png", new File(".."+slash+"webapps"+slash+"Glaucoma"+slash + "HVF" + slash+name+".png"));
-*/
-/*
-				XWPFDocument doc = new XWPFDocument(file);
-				List picList = doc.getAllPictures();
-
-				ByteArraySeekableStream stream = new ByteArraySeekableStream(((XWPFPictureData)picList.get(0)).getData());
-				TIFFDecodeParam decodeParam = new TIFFDecodeParam();
-//				decodeParam.setDecodePaletteAsShorts(true);
-				RenderedOp image1 = JAI.create("tiff", stream);
-				BufferedImage img = image1.getAsBufferedImage();
-*/
-/*
-				XWPFDocument doc = new XWPFDocument(file); 
-				XHTMLOptions options = XHTMLOptions.create();
-				
-				FileOutputStream fileOut = new FileOutputStream(".."+slash+"webapps"+slash+"Glaucoma"+slash + "HVF" + slash+name+".html");
-				XHTMLConverter.getInstance().convert(doc, fileOut, options);
-*/
-//				file.close();
-			} catch (Exception e) { e.printStackTrace(); }
-		}
-		SQLCommands.update(query);
 	}
 
 	public static void assignHVF(HttpServletRequest request, User user) {
@@ -286,8 +195,10 @@ public class HVFtest {
 		hvf.setPsddb(attr);
 		attr = request.getParameter("psdp");
 		hvf.setPsdp(Integer.parseInt(attr));
-		attr = request.getParameter("pts2");
-		hvf.setPts2(Integer.parseInt(attr));
+		attr = request.getParameter("central_15");
+		hvf.setCentral_15(Integer.parseInt(attr));
+		attr = request.getParameter("central_0");
+		hvf.setCentral_0(Integer.parseInt(attr));
 		attr = request.getParameter("sup_hem");
 		hvf.setSup_hem(Integer.parseInt(attr));
 		attr = request.getParameter("inf_hem");
@@ -323,8 +234,6 @@ public class HVFtest {
 			else if(ptsFive >= 18 && ptsOne > 10) { moderateCount++; }
 			else if(ptsFive < 18 && ptsOne <= 10){ mildCount++; }
 
-			if(hvf.getPts2() > 0) { severeCount++; }
-
 			int hem = hvf.getSup_hem() + hvf.getInf_hem();
 			if(hem == 1) { moderateCount++; }
 			else if(hem > 1) { severeCount++; } 
@@ -346,9 +255,10 @@ public class HVFtest {
 			"hvf_axis='"+hvf.getAxis()+"', hvf_ght='"+hvf.getGht()+"', hvf_vfi='"+hvf.getVfi()+"', "+
 			"hvf_mdsign='"+hvf.getMdsign()+"', hvf_mddb='"+hvf.getMddb()+"', hvf_mdp='"+hvf.getMdp()+"', "+
 			"hvf_psdsign='"+hvf.getPsdsign()+"', hvf_psddb='"+hvf.getPsddb()+"', hvf_psdp='"+hvf.getPsdp()+"', "+
-			"hvf_pts2='"+hvf.getPts2()+"', hvf_sup_hem='"+hvf.getSup_hem()+"', hvf_inf_hem='"+hvf.getInf_hem()+"', "+
-			"hvf_sup_hem2='"+hvf.getSup_hem2()+"', hvf_inf_hem2='"+hvf.getInf_hem2()+"', hvf_pts_five='"+hvf.getPts_five()+"', "+
-			"hvf_pts_contig='"+hvf.getPts_contig()+"', hvf_pts_one='"+hvf.getPts_one()+"', hvf_cluster='"+hvf.getCluster()+"' ";
+			"hvf_central_15='"+hvf.getCentral_15()+"', hvf_central_0='"+hvf.getCentral_0()+"', hvf_sup_hem='"+hvf.getSup_hem()+"', "+
+			"hvf_inf_hem='"+hvf.getInf_hem()+"', hvf_sup_hem2='"+hvf.getSup_hem2()+"', hvf_inf_hem2='"+hvf.getInf_hem2()+"', "+
+			"hvf_pts_five='"+hvf.getPts_five()+"', "+ "hvf_pts_contig='"+hvf.getPts_contig()+"', hvf_pts_one='"+hvf.getPts_one()+"', "+
+			"hvf_cluster='"+hvf.getCluster()+"' ";
 
 		if(glaucoma) {
 			query += ", hvf_glau='1'";
@@ -438,7 +348,7 @@ System.out.println(count);
 			"hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, "+
 			"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
 			"hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
-			"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_pts2, hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, "+
+			"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, "+
 			"hvf_inf_hem2, hvf_pts_five, hvf_pts_contig, hvf_pts_one, hvf_cluster "+
 			"HAVING COUNT(*)=2";
 		Vector<HVFtest> set = SQLCommands.queryHVFtest(query);
@@ -448,7 +358,7 @@ System.out.println(count);
 			"hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, "+
 			"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
 			"hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
-			"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_pts2, hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, "+
+			"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, "+
 			"hvf_inf_hem2, hvf_pts_five, hvf_pts_contig, hvf_pts_one, hvf_cluster "+
 			"HAVING COUNT(*)=1";
 		Vector<HVFtest> notSet = SQLCommands.queryHVFtest(query);
@@ -970,20 +880,6 @@ System.out.println(count);
 	}
 
 	/**
-	 * @return the pts2
-	 */
-	public int getPts2() {
-		return pts2;
-	}
-
-	/**
-	 * @param pts2 the pts2 to set
-	 */
-	public void setPts2(int pts2) {
-		this.pts2 = pts2;
-	}
-
-	/**
 	 * @return the sup_hem
 	 */
 	public int getSup_hem() {
@@ -1163,6 +1059,76 @@ System.out.println(count);
 	 */
 	public void setHvf_glau(int hvf_glau) {
 		this.hvf_glau = hvf_glau;
+	}
+
+	/**
+	 * @return the central_15
+	 */
+	public int getCentral_15() {
+		return central_15;
+	}
+
+	/**
+	 * @param central_15 the central_15 to set
+	 */
+	public void setCentral_15(int central_15) {
+		this.central_15 = central_15;
+	}
+
+	/**
+	 * @return the central_0
+	 */
+	public int getCentral_0() {
+		return central_0;
+	}
+
+	/**
+	 * @param central_0 the central_0 to set
+	 */
+	public void setCentral_0(int central_0) {
+		this.central_0 = central_0;
+	}
+
+	/**
+	 * @return the reliable_review
+	 */
+	public int getReliable_review() {
+		return reliable_review;
+	}
+
+	/**
+	 * @param reliable_review the reliable_review to set
+	 */
+	public void setReliable_review(int reliable_review) {
+		this.reliable_review = reliable_review;
+	}
+
+	/**
+	 * @return the vf_loss
+	 */
+	public int getVf_loss() {
+		return vf_loss;
+	}
+
+	/**
+	 * @param vf_loss the vf_loss to set
+	 */
+	public void setVf_loss(int vf_loss) {
+		this.vf_loss = vf_loss;
+	}
+
+	/**
+	 * @return the vf_defect
+	 */
+	public int getVf_defect() {
+		return vf_defect;
+	}
+
+	/**
+	 * @param vf_defect the vf_defect to set
+	 */
+	public void setVf_defect(int vf_defect) {
+		this.vf_defect = vf_defect;
 	}
 
 }

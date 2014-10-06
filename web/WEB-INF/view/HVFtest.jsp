@@ -123,7 +123,19 @@ PSD - P-value: <br>
 <input type="radio" name="psdp" value="5"><10%<br>
 <input type="radio" name="psdp" value="6">Blank<br><br>
 
-# points within central 5 degrees with sensitivity <0dB <input type="text" name="pts2"><br><br>
+# of points within central 5 degrees with sensitivity < 15 dB:<br>
+<input type="radio" name="central_15" value="0">0<br>
+<input type="radio" name="central_15" value="1">1<br>
+<input type="radio" name="central_15" value="2">2<br>
+<input type="radio" name="central_15" value="3">3<br>
+<input type="radio" name="central_15" value="4">4<br><br>
+
+# of points within central 5 degrees with sensitivity < 0 dB:<br>
+<input type="radio" name="central_0" value="0">0<br>
+<input type="radio" name="central_0" value="1">1<br>
+<input type="radio" name="central_0" value="2">2<br>
+<input type="radio" name="central_0" value="3">3<br>
+<input type="radio" name="central_0" value="4">4<br><br>
 
 Superior hemifield: # points <15dB within 5 degrees of fixations?<br> <input type="text" name="sup_hem"><br>
 Inferior hemfield: # points <15dB within 5 degrees of fixation?<br> <input type="text" name="inf_hem"><br><br>

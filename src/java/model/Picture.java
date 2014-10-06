@@ -8,13 +8,6 @@ package model;
 
 import java.util.*;
 import java.io.*;
-import java.awt.image.*;
-import java.awt.Image; 
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.logging.Level;
-import javax.servlet.ServletOutputStream; 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.logging.Level;
 import java.util.logging.Logger; 
@@ -22,7 +15,6 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload; 
 import utilities.SQLCommands;
-import model.*;
 
 /**
  *
@@ -97,11 +89,6 @@ public class Picture {
 		} catch (Exception ex) {
 			Logger.getLogger(Picture.class.getName()).log(Level.SEVERE,null,ex);
 		}
-/*
-		if(path.equals("HVF")) {
-			HVFtest.createPictures(names);
-		}
-*/
 
 		String query = "INSERT INTO picture (name, type) VALUES ";
 		for(int i=0; i<names.size(); i++) {

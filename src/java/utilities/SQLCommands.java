@@ -40,7 +40,7 @@ public class SQLCommands {
 				result.add(new HVFtest(resultSet.getInt("hvf_fp"), resultSet.getInt("hvf_fn"),resultSet.getInt("hvf_ght"),
 					resultSet.getInt("hvf_psdp"),resultSet.getInt("hvf_cluster"), resultSet.getInt("hvf_glau"), 
 					resultSet.getInt("hvf_mdsign"),resultSet.getString("hvf_mddb"),resultSet.getInt("hvf_mdp"),
-					resultSet.getInt("hvf_pts2"), resultSet.getInt("hvf_sup_hem"),resultSet.getInt("hvf_inf_hem"),
+					resultSet.getInt("hvf_sup_hem"),resultSet.getInt("hvf_inf_hem"),
 					resultSet.getInt("hvf_sup_hem2"),resultSet.getInt("hvf_inf_hem2"),resultSet.getInt("hvf_pts_five"),
 					resultSet.getInt("hvf_pts_contig"),resultSet.getInt("hvf_pts_one"),resultSet.getInt("hvf_severe")
 				));
