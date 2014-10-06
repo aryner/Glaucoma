@@ -86,6 +86,56 @@ public class HVFtest {
 		id = data.get(2);	
 	}
 
+	public HVFtest(int nmon, String nmon_oth2_c74, int ntar, String ntar_oth, int nlossnum, int nlossden, int nfp, int nfn, String ndur, 
+			int nfov, int nstimintens, int nstimcol, String nstimcol_oth, String nback, int nstrategy, String nstrategy_oth, 
+			String npup, int nvanum, int nvaden, int nsph_sign, String nsph_num, int ncyl_sign, String ncyl_num, 
+			int naxis, int nght, String nvfi, int nmdsign, String nmddb, int nmdp, int npsdisgn, String npsddb, int npsdp,
+			int ncentral_15, int ncentral_0, int nsup_hem, int ninf_hem, int nsup_hem2, int ninf_hem2, int npts_five,
+			int npts_contig, int npts_one, int ncluster) {
+	
+		mon = nmon;
+		mon_oth2_c74 = nmon_oth2_c74;
+		tar = ntar; 
+		tar_oth = ntar_oth;
+		lossnum = nlossnum;
+		lossden = nlossden;
+		fp = nfp;
+		fn = nfn;
+		dur = ndur;
+		fov = nfov;
+		stimintens = nstimintens;
+		stimcol = nstimcol;
+		stimcol_oth = nstimcol_oth;
+		back = nback;
+		strategy = nstrategy;
+		strategy_oth = nstrategy_oth;
+		pup = npup;
+		vanum = nvanum;
+		sph_sign = nsph_sign;
+		sph_num = nsph_num;
+		cyl_sign = ncyl_sign;
+		cyl_num = ncyl_num;
+		axis = naxis; 
+		ght = nght;
+		vfi = nvfi;
+		mdsign = nmdsign;
+		mddb = nmddb;
+		mdp = nmdp;
+		psdsign = npsdisgn;
+		psddb = npsddb;
+		psdp = npsdp;
+		central_15 = ncentral_15;
+		central_0 = ncentral_0;
+		sup_hem = nsup_hem;
+		inf_hem = ninf_hem;
+		sup_hem2 = nsup_hem2;
+		inf_hem2 = ninf_hem2;
+		pts_five = npts_five;
+		pts_contig = npts_contig;
+		pts_one = npts_one;
+		cluster = ncluster;
+	}
+
 	public HVFtest(int nfp, int nfn, int nght, int npsdp, int ncluster, int nglau, int nmdsign, String nmddb,
 			int nmdp, int nsup_hem, int ninf_hem, int nsup_hem2, int ninf_hem2, int npts_five,
 			int npts_contig, int npts_one, int nsevere) {
@@ -301,6 +351,11 @@ public class HVFtest {
 		}
 
 		return result;
+	}
+
+	public static Vector<HVFtest> getPair(int picID) {
+		String query = "SELECT * FROM HVFtest WHERE pictureID="+picID;	
+		return SQLCommands.queryHVFtestForAdjudication(query);
 	}
 
 	public static Picture getNext(User user) {

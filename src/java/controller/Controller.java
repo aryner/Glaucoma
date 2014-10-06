@@ -79,6 +79,10 @@ public class Controller extends HttpServlet {
 					}
 				}
 			}
+			if(user.getAccess() == 1) {
+				Vector<HVFtest> pair = HVFtest.getPair(picture.getId());
+				request.setAttribute("pair",pair);
+			}
 
 			request.setAttribute("access", user.getAccess());
 			request.setAttribute("slash",slash);
