@@ -61,11 +61,11 @@ if(pic == null) {
 	}
 %>
 Fixation Monitor: <br>
-<input type="radio" name="mon" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>Blind Spot<%if((a&&diff)&&((v1==1)||(v2==1))){%>***<%}%><br>
-<input type="radio" name="mon" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Gaze/Blind Spot<%if((a&&diff)&&((v1==2)||(v2==2))){%>***<%}%><br>
-<input type="radio" name="mon" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Gaze Track<%if((a&&diff)&&((v1==3)||(v2==3))){%>***<%}%><br>
+<input type="radio" name="mon" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>Blind Spot<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="mon" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Gaze/Blind Spot<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="mon" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Gaze Track<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
 <input type="radio" name="mon" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>Other : 
-<%if((a&&diff)&&((v1==4)||(v2==4))){%>***<%}%>
+<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%>
 <%
 	String s1 = "";
 	String s2 = "";
@@ -80,7 +80,9 @@ Fixation Monitor: <br>
 		}
 	}
 %>
-<input type="text" name="mon_oth2_c74" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>><br><br>
+<input type="text" name="mon_oth2_c74" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<br><br>
 
 <%
 	v1 = -1;
@@ -97,12 +99,12 @@ Fixation Monitor: <br>
 	}
 %>
 Fixation Target: <br>
-<input type="radio" name="tar" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>Central<%if((a&&diff)&&((v1==1)||(v2==1))){%>***<%}%><br>
-<input type="radio" name="tar" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Small Diamond<%if((a&&diff)&&((v1==2)||(v2==2))){%>***<%}%><br>
-<input type="radio" name="tar" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Large Diamond<%if((a&&diff)&&((v1==3)||(v2==3))){%>***<%}%><br>
-<input type="radio" name="tar" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>Bottom LED<%if((a&&diff)&&((v1==4)||(v2==4))){%>***<%}%><br>
+<input type="radio" name="tar" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>Central<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="tar" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Small Diamond<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="tar" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Large Diamond<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="tar" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>Bottom LED<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%><br>
 <input type="radio" name="tar" value="5"<%if(a && !diff && v1==5){out.print(" checked='true'");}%>>Other : 
-<%if((a&&diff)&&((v1==5)||(v2==5))){%>***<%}%>
+<%if((a&&diff)&&((v1==5)||(v2==5))){%><span class='highlight'>***</span><%}%>
 <%
 	s1 = "";
 	s2 = "";
@@ -117,7 +119,9 @@ Fixation Target: <br>
 		}
 	}
 %>
-<input type="text" name="tar_oth" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>><br><br>
+<input type="text" name="tar_oth" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<br><br>
 <!--ints only -->
 <%
 	s1 = "";
@@ -134,7 +138,9 @@ Fixation Target: <br>
 	}
 %>
 Fixation Losses <input type="text" name="lossnum" class="numBox" autocomplete="off"<%if(a&&!diff){out.print(" value='"+HVF.get(0).getLossnum()+"'");}%>> 
-/ <input type="text" name="lossden" class="numBox" autocomplete="off"<%if(a&&!diff){out.print(" value='"+HVF.get(0).getLossden()+"'");}%>><br><br>
+/ <input type="text" name="lossden" class="numBox" autocomplete="off"<%if(a&&!diff){out.print(" value='"+HVF.get(0).getLossden()+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<br><br>
 
 <%
 	if(a) {
@@ -148,7 +154,9 @@ Fixation Losses <input type="text" name="lossnum" class="numBox" autocomplete="o
 		}
 	}
 %>
-False POS Errors (%) <input type="text" name="fp" class="numBox" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>><br>
+False POS Errors (%) <input type="text" name="fp" class="numBox" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<br>
 <%
 	if(a) {
 		s1 = HVF.get(0).getFn()+"";
@@ -161,7 +169,9 @@ False POS Errors (%) <input type="text" name="fp" class="numBox" autocomplete="o
 		}
 	}
 %>
-False NEG Errors (%) <input type="text" name="fn" class="numBox" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>><br><br>
+False NEG Errors (%) <input type="text" name="fn" class="numBox" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<br><br>
 
 <%
 	if(a) {
@@ -175,7 +185,9 @@ False NEG Errors (%) <input type="text" name="fn" class="numBox" autocomplete="o
 		}
 	}
 %>
-Test Duration <input type="text" name="dur" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>><br><br>
+Test Duration <input type="text" name="dur" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<br><br>
 
 <%
 	if(a) {
@@ -189,7 +201,9 @@ Test Duration <input type="text" name="dur" autocomplete="off"<%if(a&&!diff){out
 		}
 	}
 %>
-Fovea(dB) <input type="text" name="fov" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>><br><br>
+Fovea(dB) <input type="text" name="fov" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<br><br>
 
 <%
 	v1 = -1;
@@ -206,11 +220,11 @@ Fovea(dB) <input type="text" name="fov" autocomplete="off"<%if(a&&!diff){out.pri
 	}
 %>
 Stimulus - Intensity: <br>
-<input type="radio" name="stimintens" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>I<%if((a&&diff)&&((v1==1)||(v2==1))){%>***<%}%><br>
-<input type="radio" name="stimintens" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>II<%if((a&&diff)&&((v1==2)||(v2==2))){%>***<%}%><br>
-<input type="radio" name="stimintens" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>III<%if((a&&diff)&&((v1==3)||(v2==3))){%>***<%}%><br>
-<input type="radio" name="stimintens" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>IV<%if((a&&diff)&&((v1==4)||(v2==4))){%>***<%}%><br>
-<input type="radio" name="stimintens" value="5"<%if(a && !diff && v1==5){out.print(" checked='true'");}%>>V<%if((a&&diff)&&((v1==5)||(v2==5))){%>***<%}%><br><br>
+<input type="radio" name="stimintens" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>I<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="stimintens" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>II<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="stimintens" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>III<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="stimintens" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>IV<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="stimintens" value="5"<%if(a && !diff && v1==5){out.print(" checked='true'");}%>>V<%if((a&&diff)&&((v1==5)||(v2==5))){%><span class='highlight'>***</span><%}%><br><br>
 
 <%
 	v1 = -1;
@@ -227,11 +241,11 @@ Stimulus - Intensity: <br>
 	}
 %>
 Stimulus - Color: <br>
-<input type="radio" name="stimcol" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%>***<%}%><br>
-<input type="radio" name="stimcol" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Red<%if((a&&diff)&&((v1==2)||(v2==2))){%>***<%}%><br>
-<input type="radio" name="stimcol" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Blue<%if((a&&diff)&&((v1==3)||(v2==3))){%>***<%}%><br>
+<input type="radio" name="stimcol" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="stimcol" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Red<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
+	<input type="radio" name="stimcol" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Blue<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
 <input type="radio" name="stimcol" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>
-<%if((a&&diff)&&((v1==4)||(v2==4))){%>***<%}%>
+<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%>
 <%
 	if(a) {
 		s1 = HVF.get(0).getStimcol_oth()+"";
@@ -244,7 +258,9 @@ Stimulus - Color: <br>
 		}
 	}
 %>
-Other: <input type="text" name="stimcol_oth" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>><br><br>
+Other: <input type="text" name="stimcol_oth" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<br><br>
 <!--if color is blue?-->
 <%
 	if(a) {
@@ -258,7 +274,9 @@ Other: <input type="text" name="stimcol_oth" autocomplete="off"<%if(a&&!diff){ou
 		}
 	}
 %>
-Background <input type="text" name="back" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>><br><br>
+Background <input type="text" name="back" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<br><br>
 
 <%
 	v1 = -1;
@@ -275,12 +293,12 @@ Background <input type="text" name="back" autocomplete="off"<%if(a&&!diff){out.p
 	}
 %>
 Strategy: <br>
-<input type="radio" name="strategy" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>SITA - Standard<%if((a&&diff)&&((v1==1)||(v2==1))){%>***<%}%><br>
-<input type="radio" name="strategy" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>SITA - Fast<%if((a&&diff)&&((v1==2)||(v2==2))){%>***<%}%><br>
-<input type="radio" name="strategy" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Full Threshold<%if((a&&diff)&&((v1==3)||(v2==3))){%>***<%}%><br>
-<input type="radio" name="strategy" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>FastPac<%if((a&&diff)&&((v1==4)||(v2==4))){%>***<%}%><br>
+<input type="radio" name="strategy" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>SITA - Standard<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="strategy" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>SITA - Fast<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="strategy" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Full Threshold<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="strategy" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>FastPac<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%><br>
 <input type="radio" name="strategy" value="5"<%if(a && !diff && v1==5){out.print(" checked='true'");}%>>
-<%if((a&&diff)&&((v1==5)||(v2==5))){%>***<%}%>
+<%if((a&&diff)&&((v1==5)||(v2==5))){%><span class='highlight'>***</span><%}%>
 <%
 	if(a) {
 		s1 = HVF.get(0).getStrategy_oth()+"";
@@ -293,7 +311,9 @@ Strategy: <br>
 		}
 	}
 %>
-Other: <input type="text" name="strategy_oth"><br><br>
+Other: <input type="text" name="strategy_oth">
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<br><br>
 
 <%
 	if(a) {
@@ -307,7 +327,9 @@ Other: <input type="text" name="strategy_oth"><br><br>
 		}
 	}
 %>
-Pupil Diameter (mm) <input type="text" name="pup"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>><br><br>
+Pupil Diameter (mm) <input type="text" name="pup"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<br><br>
 
 <%
 	if(a) {
@@ -322,7 +344,9 @@ Pupil Diameter (mm) <input type="text" name="pup"<%if(a&&!diff){out.print(" valu
 	}
 %>
 Visual Acuity <input type="text" name="vanum" class="numBox" autocomplete="off"<%if(a&&!diff){out.print(" value='"+HVF.get(0).getVanum()+"'");}%>> 
-/ <input type="text" name="vaden" class="numBox" autocomplete="off"<%if(a&&!diff){out.print(" value='"+HVF.get(0).getVanum()+"'");}%>><br><br>
+/ <input type="text" name="vaden" class="numBox" autocomplete="off"<%if(a&&!diff){out.print(" value='"+HVF.get(0).getVanum()+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<br><br>
 
 <%
 	v1 = -1;
@@ -338,8 +362,10 @@ Visual Acuity <input type="text" name="vanum" class="numBox" autocomplete="off"<
 		}
 	}
 %>
-RX Sphere - Sign <input type="radio" name="sph_sign" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>+<%if((a&&diff)&&((v1==2)||(v2==2))){%>***<%}%> 
-<input type="radio" name="sph_sign" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>-<%if((a&&diff)&&((v1==1)||(v2==1))){%>***<%}%><br>
+RX Sphere - Sign <input type="radio" name="sph_sign" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>+<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%> 
+	<input type="radio" name="sph_sign" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>-<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<br>
 
 <%
 	if(a) {
@@ -353,7 +379,9 @@ RX Sphere - Sign <input type="radio" name="sph_sign" value="2"<%if(a && !diff &&
 		}
 	}
 %>
-RX Sphere - Number <input type="text" name="sph_num" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>><br><br>
+RX Sphere - Number <input type="text" name="sph_num" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<br><br>
 
 <%
 	v1 = -1;
@@ -369,8 +397,9 @@ RX Sphere - Number <input type="text" name="sph_num" autocomplete="off"<%if(a&&!
 		}
 	}
 %>
-RX Cylinder - Sign <input type="radio" name="cyl_sign" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>+<%if((a&&diff)&&((v1==2)||(v2==2))){%>***<%}%> 
-<input type="radio" name="cyl_sign" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>-<%if((a&&diff)&&((v1==1)||(v2==1))){%>***<%}%><br>
+RX Cylinder - Sign <input type="radio" name="cyl_sign" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>+<%if((a&&diff)&&((v1==2)||(v2==2))){%>***</span><%}%> 
+<input type="radio" name="cyl_sign" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>-<%if((a&&diff)&&((v1==1)||(v2==1))){%>***</span><%}%>
+<br>
 
 <%
 	if(a) {
@@ -384,7 +413,9 @@ RX Cylinder - Sign <input type="radio" name="cyl_sign" value="2"<%if(a && !diff 
 		}
 	}
 %>
-RX Cylinder - Number <input type="text" name="cyl_num" autocomplete="off"<%if(!diff){out.print(" value='"+s1+"'");}%>><br>
+RX Cylinder - Number <input type="text" name="cyl_num" autocomplete="off"<%if(!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<br>
 
 <%
 	if(a) {
@@ -398,7 +429,9 @@ RX Cylinder - Number <input type="text" name="cyl_num" autocomplete="off"<%if(!d
 		}
 	}
 %>
-RX Axis <input type="text" name="axis" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>><br><br>
+RX Axis <input type="text" name="axis" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<br><br>
 
 <%
 	v1 = -1;
@@ -415,11 +448,11 @@ RX Axis <input type="text" name="axis" autocomplete="off"<%if(a&&!diff){out.prin
 	}
 %>
 GHT: <br>
-<input type="radio" name="ght" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>Within Normal Limits<%if((a&&diff)&&((v1==1)||(v2==1))){%>***<%}%><br>
-<input type="radio" name="ght" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Borderline<%if((a&&diff)&&((v1==2)||(v2==2))){%>***<%}%><br>
-<input type="radio" name="ght" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Outside Normal Limits<%if((a&&diff)&&((v1==3)||(v2==3))){%>***<%}%><br>
-<input type="radio" name="ght" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>General Reduction of Sensitivity<%if((a&&diff)&&((v1==4)||(v2==4))){%>***<%}%><br>
-<input type="radio" name="ght" value="5"<%if(a && !diff && v1==5){out.print(" checked='true'");}%>>Abnormally High Sensitivity<%if((a&&diff)&&((v1==5)||(v2==5))){%>***<%}%><br><br>
+<input type="radio" name="ght" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>Within Normal Limits<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="ght" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Borderline<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="ght" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Outside Normal Limits<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="ght" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>General Reduction of Sensitivity<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'> ***</span><%}%><br>
+	<input type="radio" name="ght" value="5"<%if(a && !diff && v1==5){out.print(" checked='true'");}%>>Abnormally High Sensitivity<%if((a&&diff)&&((v1==5)||(v2==5))){%><span class='highlight'>  ***</span><%}%><br><br>
 
 <%
 	if(a) {
@@ -433,7 +466,9 @@ GHT: <br>
 		}
 	}
 %>
-VFI (%) <input type="text" name="vfi" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>><br><br>
+VFI (%) <input type="text" name="vfi" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
+<br><br>
 
 <%
 	v1 = -1;
@@ -449,8 +484,8 @@ VFI (%) <input type="text" name="vfi" autocomplete="off"<%if(a&&!diff){out.print
 		}
 	}
 %>
-MD - Sign <input type="radio" name="mdsign" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>+<%if((a&&diff)&&((v1==2)||(v2==2))){%>***<%}%> 
-<input type="radio" name="mdsign" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>-<%if((a&&diff)&&((v1==1)||(v2==1))){%>***<%}%><br>
+MD - Sign <input type="radio" name="mdsign" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>+<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'> ***</span><%}%> 
+	<input type="radio" name="mdsign" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>-<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'> ***</span><%}%><br>
 
 <%
 	if(a) {
@@ -464,7 +499,9 @@ MD - Sign <input type="radio" name="mdsign" value="2"<%if(a && !diff && v1==2){o
 		}
 	}
 %>
-MD - dB <input type="text" name="mddb" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>><br>
+MD - dB <input type="text" name="mddb" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
+<br>
 
 <%
 	v1 = -1;
@@ -481,12 +518,12 @@ MD - dB <input type="text" name="mddb" autocomplete="off"<%if(a&&!diff){out.prin
 	}
 %>
 MD - P-value: <br>
-<input type="radio" name="mdp" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>><0.5%<%if((a&&diff)&&((v1==1)||(v2==1))){%>***<%}%><br>
-<input type="radio" name="mdp" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>><1%<%if((a&&diff)&&((v1==2)||(v2==2))){%>***<%}%><br>
-<input type="radio" name="mdp" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>><2%<%if((a&&diff)&&((v1==3)||(v2==3))){%>***<%}%><br>
-<input type="radio" name="mdp" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>><5%<%if((a&&diff)&&((v1==4)||(v2==4))){%>***<%}%><br>
-<input type="radio" name="mdp" value="5"<%if(a && !diff && v1==5){out.print(" checked='true'");}%>><10%<%if((a&&diff)&&((v1==5)||(v2==5))){%>***<%}%><br>
-<input type="radio" name="mdp" value="6"<%if(a && !diff && v1==6){out.print(" checked='true'");}%>>Blank<%if((a&&diff)&&((v1==6)||(v2==6))){%>***<%}%><br><br>
+<input type="radio" name="mdp" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>><0.5%<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'> ***<%}%><br>
+<input type="radio" name="mdp" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>><1%<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="mdp" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>><2%<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="mdp" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>><5%<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="mdp" value="5"<%if(a && !diff && v1==5){out.print(" checked='true'");}%>><10%<%if((a&&diff)&&((v1==5)||(v2==5))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="mdp" value="6"<%if(a && !diff && v1==6){out.print(" checked='true'");}%>>Blank<%if((a&&diff)&&((v1==6)||(v2==6))){%><span class='highlight'> ***</span><%}%><br><br>
 
 <%
 	v1 = -1;
@@ -502,8 +539,8 @@ MD - P-value: <br>
 		}
 	}
 %>
-PSD - Sign <input type="radio" name="psdsign" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>+<%if((a&&diff)&&((v1==2)||(v2==2))){%>***<%}%> 
-<input type="radio" name="psdsign" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>-<%if((a&&diff)&&((v1==1)||(v2==1))){%>***<%}%><br>
+PSD - Sign <input type="radio" name="psdsign" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>+<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'> ***</span><%}%> 
+	<input type="radio" name="psdsign" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>-<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'> ***</span><%}%><br>
 
 <%
 	if(a) {
@@ -517,7 +554,9 @@ PSD - Sign <input type="radio" name="psdsign" value="2"<%if(a && !diff && v1==2)
 		}
 	}
 %>
-PSD - dB <input type="text" name="psddb" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>><br>
+PSD - dB <input type="text" name="psddb" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
+<br>
 
 <%
 	v1 = -1;
@@ -534,12 +573,12 @@ PSD - dB <input type="text" name="psddb" autocomplete="off"<%if(a&&!diff){out.pr
 	}
 %>
 PSD - P-value: <br>
-<input type="radio" name="psdp" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>><0.5%<%if((a&&diff)&&((v1==1)||(v2==1))){%>***<%}%><br>
-<input type="radio" name="psdp" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>><1%<%if((a&&diff)&&((v1==2)||(v2==2))){%>***<%}%><br>
-<input type="radio" name="psdp" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>><2%<%if((a&&diff)&&((v1==3)||(v2==3))){%>***<%}%><br>
-<input type="radio" name="psdp" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>><5%<%if((a&&diff)&&((v1==4)||(v2==4))){%>***<%}%><br>
-<input type="radio" name="psdp" value="5"<%if(a && !diff && v1==5){out.print(" checked='true'");}%>><10%<%if((a&&diff)&&((v1==5)||(v2==5))){%>***<%}%><br>
-<input type="radio" name="psdp" value="6"<%if(a && !diff && v1==6){out.print(" checked='true'");}%>>Blank<%if((a&&diff)&&((v1==6)||(v2==6))){%>***<%}%><br><br>
+<input type="radio" name="psdp" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>><0.5%<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="psdp" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>><1%<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="psdp" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>><2%<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="psdp" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>><5%<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="psdp" value="5"<%if(a && !diff && v1==5){out.print(" checked='true'");}%>><10%<%if((a&&diff)&&((v1==5)||(v2==5))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="psdp" value="6"<%if(a && !diff && v1==6){out.print(" checked='true'");}%>>Blank<%if((a&&diff)&&((v1==6)||(v2==6))){%><span class='highlight'> ***</span><%}%><br><br>
 
 <%
 	v1 = -1;
@@ -556,11 +595,11 @@ PSD - P-value: <br>
 	}
 %>
 # of points within central 5 degrees with sensitivity < 15 dB:<br>
-<input type="radio" name="central_15" value="0"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>0<%if((a&&diff)&&((v1==0)||(v2==0))){%>***<%}%><br>
-<input type="radio" name="central_15" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>1<%if((a&&diff)&&((v1==1)||(v2==1))){%>***<%}%><br>
-<input type="radio" name="central_15" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>2<%if((a&&diff)&&((v1==2)||(v2==2))){%>***<%}%><br>
-<input type="radio" name="central_15" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>3<%if((a&&diff)&&((v1==3)||(v2==3))){%>***<%}%><br>
-<input type="radio" name="central_15" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>4<%if((a&&diff)&&((v1==4)||(v2==5))){%>***<%}%><br><br>
+<input type="radio" name="central_15" value="0"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>0<%if((a&&diff)&&((v1==0)||(v2==0))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="central_15" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>1<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="central_15" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>2<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="central_15" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>3<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="central_15" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>4<%if((a&&diff)&&((v1==4)||(v2==5))){%><span class='highlight'> ***</span><%}%><br><br>
 
 <%
 	v1 = -1;
@@ -577,11 +616,11 @@ PSD - P-value: <br>
 	}
 %>
 # of points within central 5 degrees with sensitivity < 0 dB:<br>
-<input type="radio" name="central_0" value="0"<%if(a && !diff && v1==0){out.print(" checked='true'");}%>>0<%if((a&&diff)&&((v1==0)||(v2==0))){%>***<%}%><br>
-<input type="radio" name="central_0" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>1<%if((a&&diff)&&((v1==1)||(v2==1))){%>***<%}%><br>
-<input type="radio" name="central_0" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>2<%if((a&&diff)&&((v1==2)||(v2==2))){%>***<%}%><br>
-<input type="radio" name="central_0" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>3<%if((a&&diff)&&((v1==4)||(v2==4))){%>***<%}%><br>
-<input type="radio" name="central_0" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>4<%if((a&&diff)&&((v1==5)||(v2==5))){%>***<%}%><br><br>
+<input type="radio" name="central_0" value="0"<%if(a && !diff && v1==0){out.print(" checked='true'");}%>>0<%if((a&&diff)&&((v1==0)||(v2==0))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="central_0" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>1<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="central_0" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>2<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="central_0" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>3<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="central_0" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>4<%if((a&&diff)&&((v1==5)||(v2==5))){%><span class='highlight'> ***</span><%}%><br><br>
 
 <%
 	if(a) {
@@ -595,7 +634,9 @@ PSD - P-value: <br>
 		}
 	}
 %>
-Superior hemifield: # points <15dB within 5 degrees of fixations?<br> <input type="text" name="sup_hem" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>><br>
+Superior hemifield: # points <15dB within 5 degrees of fixations?<br> <input type="text" name="sup_hem" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
+<br>
 
 <%
 	if(a) {
@@ -609,7 +650,9 @@ Superior hemifield: # points <15dB within 5 degrees of fixations?<br> <input typ
 		}
 	}
 %>
-Inferior hemfield: # points <15dB within 5 degrees of fixation?<br> <input type="text" name="inf_hem" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>><br><br>
+Inferior hemfield: # points <15dB within 5 degrees of fixation?<br> <input type="text" name="inf_hem" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
+<br><br>
 
 <%
 	if(a) {
@@ -623,7 +666,9 @@ Inferior hemfield: # points <15dB within 5 degrees of fixation?<br> <input type=
 		}
 	}
 %>
-Superiour hemifield: # points with sensitivity >=15dB within 5 degrees of fixation?<br> <input type="text" name="sup_hem2" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>><br>
+Superiour hemifield: # points with sensitivity >=15dB within 5 degrees of fixation?<br> <input type="text" name="sup_hem2" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
+<br>
 
 <%
 	if(a) {
@@ -637,7 +682,9 @@ Superiour hemifield: # points with sensitivity >=15dB within 5 degrees of fixati
 		}
 	}
 %>
-Inferior hemfield: # points with sensitivity >=15dB within 5 degrees of fixation?<br> <input type="text" name="inf_hem2" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>><br><br>
+Inferior hemfield: # points with sensitivity >=15dB within 5 degrees of fixation?<br> <input type="text" name="inf_hem2" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
+<br><br>
 
 <%
 	if(a) {
@@ -651,7 +698,9 @@ Inferior hemfield: # points with sensitivity >=15dB within 5 degrees of fixation
 		}
 	}
 %>
-# points depressed < 5% level on Pattern Deviation Plot <input type="text" name="pts_five" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>><br>
+# points depressed < 5% level on Pattern Deviation Plot <input type="text" name="pts_five" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
+<br>
 
 <%
 	if(a) {
@@ -665,7 +714,9 @@ Inferior hemfield: # points with sensitivity >=15dB within 5 degrees of fixation
 		}
 	}
 %>
-# contiguous points < 5% level on Pattern Deviation Plot <input type="text" name="pts_contig" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>><br>
+# contiguous points < 5% level on Pattern Deviation Plot <input type="text" name="pts_contig" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
+<br>
 
 <%
 	if(a) {
@@ -679,7 +730,9 @@ Inferior hemfield: # points with sensitivity >=15dB within 5 degrees of fixation
 		}
 	}
 %>
-# points depressed < 1% level on Pattern Deviation Plot <input type="text" name="pts_one" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>><br><br>
+# points depressed < 1% level on Pattern Deviation Plot <input type="text" name="pts_one" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
+<br><br>
 
 <%
 	v1 = -1;
@@ -697,8 +750,8 @@ Inferior hemfield: # points with sensitivity >=15dB within 5 degrees of fixation
 %>
 Cluster of >= 3 non-edge points that are all significant<br> at p < 5% with >= 1 point being significant at p < 5% <br>with >= 1 point
 being significant at p < 1%<br>
-<input type="radio" name="cluster" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>Yes<%if((a&&diff)&&((v1==1)||(v2==1))){%>***<%}%> 
-<input type="radio" name="cluster" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>No<%if((a&&diff)&&((v1==2)||(v2==2))){%>***<%}%> <br><br> 
+<input type="radio" name="cluster" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>Yes<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'> ***</span><%}%> 
+<input type="radio" name="cluster" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>No<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'> ***</span><%}%> <br><br> 
 
 <input type="submit" value="Submit" class="btn">
 </form>

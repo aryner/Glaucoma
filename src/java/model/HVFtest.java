@@ -111,6 +111,7 @@ public class HVFtest {
 		strategy_oth = nstrategy_oth;
 		pup = npup;
 		vanum = nvanum;
+		vaden = nvaden;
 		sph_sign = nsph_sign;
 		sph_num = nsph_num;
 		cyl_sign = ncyl_sign;
