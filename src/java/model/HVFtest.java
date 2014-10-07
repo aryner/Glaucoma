@@ -162,9 +162,13 @@ public class HVFtest {
 
 	public static void assignHVF(HttpServletRequest request, User user) {
 		boolean glaucoma = false;
-		int mildCount = 0;
-		int moderateCount = 0;
-		int severeCount = 0;
+
+		int early = 0;
+		int moderate = 0;
+		int advanced = 0;
+		int severe = 0;
+		int md = 0;
+
 		int uID = user.getID();
 		String picID = request.getParameter("pictureID");
 		HVFtest hvf = null;
@@ -272,27 +276,68 @@ public class HVFtest {
 		
 		//check for severity if glaucoma
 		if(glaucoma) {
-			if(hvf.getMdsign() == 1) {
-				float mddb = Float.parseFloat(hvf.getMddb());
-				if(mddb >= 12.) { severeCount++; }
-				else if(mddb >= 6.) { moderateCount++; }
-				else { mildCount++; }
+			int mdSign = hvf.getMdsign();
+			float mddb = Float.parseFloat(hvf.getMddb());
+			if(mdSign == 2 || mddb < 0.001) {
+				md = 0;
+			}
+			else if(mddb <= 6.) {
+				md = 1;
+			}
+			else if(mddb <= 12.) {
+				md = 2;
+			}
+			else if(mddb <= 20.) {
+				md = 3;
+			}
+			else {
+				md = 4;
 			}
 
 			int ptsFive = hvf.getPts_five();
 			int ptsOne = hvf.getPts_one();
-			if(ptsFive >= 37 || ptsOne > 20) { severeCount++; }
-			else if(ptsFive >= 18 && ptsOne > 10) { moderateCount++; }
-			else if(ptsFive < 18 && ptsOne <= 10){ mildCount++; }
+			if((ptsFive >= 19 && ptsFive <=36) && (ptsOne >= 12 && ptsOne <= 36)) {
+				moderate++;
+			}
+			else if((ptsFive >= 37 && ptsFive <= 55) && (ptsOne >= 19 && ptsOne <= 36)) {
+				advanced++;
+			}
+			else if(ptsFive >= 56 || ptsOne >= 37) {
+				severe++;
+			}
+			else {
+				early++;
+			}
 
-			int hem = hvf.getSup_hem() + hvf.getInf_hem();
-			if(hem == 1) { moderateCount++; }
-			else if(hem > 1) { severeCount++; } 
+			int central15 = hvf.getCentral_15();
+			int central0 = hvf.getCentral_0();
+			if (central15 >= 1 && central0 == 0) {
+				moderate++;
+			}
+			else if(central0 == 1) {
+				advanced++;
+			}
+			else if(central0 > 1) {
+				severe++;
+			}
+			else {
+				early++;
+			}
 
-			int hem2 = hvf.getSup_hem2() + hvf.getInf_hem2();
-			if(hem2 == 4) { mildCount++; }
-			else if (hem2 > 0) { moderateCount++; }
-			else if(hem2 == 0) { severeCount++; }
+			int sup = hvf.getSup_hem();
+			int inf = hvf.getInf_hem();
+			if((sup == 0 && inf > 0) || (sup > 0 && inf == 0)) {
+				moderate++;
+			}
+			else if((sup == 1 || sup == 2) && (inf == 1 || inf == 2)) {
+				advanced++;
+			}
+			else if(sup == 2 && inf == 2) {
+				severe++;
+			}
+			else {
+				early++;
+			}
 		}
 
 		String query = "UPDATE HVFtest SET hvf_mon='"+hvf.getMon()+"', hvf_mon_oth2_c47='"+hvf.getMon_oth2_c74()+"', "+
@@ -314,23 +359,50 @@ public class HVFtest {
 		if(glaucoma) {
 			query += ", hvf_glau='1'";
 
-			if(severeCount > 0 && moderateCount > 0 && mildCount > 0) {
-				query += ", hvf_severe='2'";
-			}
-			else if(severeCount > 1 || (severeCount == 1 && moderateCount > 0)) {
-				query += ", hvf_severe='3'";
-			}
-			else if(moderateCount > 1 || (moderateCount == 1 && mildCount > 0)) {
-				query += ", hvf_severe='2'";
-			}
-			else if(mildCount > 0) {
+			if(md == 0) {
 				query += ", hvf_severe='1'";
 			}
-			else {
-				query += ", hvf_severe='4'";
+			else if (md == 1) {
+				if((moderate+advanced+severe) >= 1) {
+					query += ", hvf_severe='2'";
+				}
+				else {
+					query += ", hvf_severe='1'";
+				}
 			}
+			else if (md == 2){
+				if(early == 3) {
+					query += ", hvf_severe='1'";
+				}
+				else if((advanced + severe) >= 1 && early == 0) {
+					query += ", hvf_severe='3'";
+				}
+				else {
+					query += ", hvf_severe='2'";
+				}
+			}
+			else if (md == 3) {
+				if((early + moderate) == 3) {
+					query += ", hvf_severe='2'";
+				}
+				else if(severe >= 1 && (early + moderate) == 0) {
+					query += ", hvf_severe='4'";
+				}
+				else {
+					query += ", hvf_severe='3'";
+				}
+			}
+			else if (md == 4){
+				if ((early + moderate + advanced) == 3) {
+					query += ", hvf_severe='3'";
+				}
+				else {
+					query += ", hvf_severe='4'";
+				}
+			}
+
 		} else {
-			query += ", hvf_glau='2', hvf_severe='4'";
+			query += ", hvf_glau='2', hvf_severe='0'";
 		}
 
 		if(user.getAccess() == 0) {
