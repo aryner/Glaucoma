@@ -543,9 +543,14 @@ and scalar of: 0.29411764705882354*/
 	margin : 10px;
 	float : left; 
 	height : 550px;
+	width: 500px;
 	overflow: scroll;
 }
 
 .highlight {
 	background:yellow;
+}
+
+.textMargin {
+	margin-left: 19px;
 }

@@ -60,19 +60,19 @@ Glaucoma Determination
 <%
 	String severity = "";
 	if(hvf.getMdsign() == 2 || Float.parseFloat(hvf.getMddb()) < 0.001) {
-		severity = " style='background:lightblue;' ";
+		severity = " style='background:lightblue;border-bottom-style:solid;' ";
 	}
 	else if(Float.parseFloat(hvf.getMddb()) <= 6.) {
-		severity = " style='background:lightgreen;' ";
+		severity = " style='background:lightgreen;border-bottom-style:solid;' ";
 	}
 	else if(Float.parseFloat(hvf.getMddb()) <= 12.) {
-		severity = " style='background:yellow;'";
+		severity = " style='background:yellow;border-bottom-style:solid;'";
 	}
 	else if(Float.parseFloat(hvf.getMddb()) <= 20.) {
-		severity = " style='background:orange;'";
+		severity = " style='background:orange;border-bottom-style:solid;'";
 	}
 	else {
-		severity = " style='background:red;'";
+		severity = " style='background:red;border-bottom-style:solid;'";
 	}
 %>
 <div <%out.print(severity);%>>
@@ -91,16 +91,16 @@ MD - P-value: <br>
 <%
 	severity = "";
 	if(hvf.getCentral_0() >= 2) {
-		severity = " style='background:red;' ";
+		severity = " style='background:red;border-bottom-style:solid;' ";
 	}
 	else if(hvf.getCentral_0() == 1) {
-		severity = " style='background:orange;' ";
+		severity = " style='background:orange;border-bottom-style:solid;' ";
 	}
 	else if(hvf.getCentral_15() >= 1) {
-		severity = " style='background:yellow;'";
+		severity = " style='background:yellow;border-bottom-style:solid;'";
 	}
 	else {
-		severity = " style='background:green;'";
+		severity = " style='background:green;border-bottom-style:solid;'";
 	}
 
 %>
@@ -112,16 +112,16 @@ MD - P-value: <br>
 <%
 	severity = "";
 	if(hvf.getPts_five() >= 56 || hvf.getPts_one() >= 37) {
-		severity = " style='background:red;' ";
+		severity = " style='background:red;border-bottom-style:solid;' ";
 	}
 	else if(hvf.getPts_five() >= 37 && hvf.getPts_one() >= 19) {
-		severity = " style='background:orange;' ";
+		severity = " style='background:orange;border-bottom-style:solid;' ";
 	}
 	else if(hvf.getPts_five() >= 19 && hvf.getPts_one() >= 12) {
-		severity = " style='background:yellow;'";
+		severity = " style='background:yellow;border-bottom-style:solid;'";
 	}
 	else {
-		severity = " style='background:green;'";
+		severity = " style='background:green;border-bottom-style:solid;'";
 	}
 
 %>
@@ -136,35 +136,76 @@ MD - P-value: <br>
 	int sup = hvf.getSup_hem();
 	int inf = hvf.getInf_hem();
 	if(sup >= 2 && inf >= 2) {
-		severity = " style='background:red;' ";
+		severity = " style='background:red;border-bottom-style:solid;' ";
 	}
 	else if(sup >= 1 && inf >= 1) {
-		severity = " style='background:orange;' ";
+		severity = " style='background:orange;border-bottom-style:solid;' ";
 	}
 	else if((sup + inf) >= 1) {
-		severity = " style='background:yellow;'";
+		severity = " style='background:yellow;border-bottom-style:solid;'";
 	}
 	else {
-		severity = " style='background:green;'";
+		severity = " style='background:green;border-bottom-style:solid;'";
 	}
 
 %>
 <div <%out.print(severity);%>>
 Superior hemifield: # points <15dB within 5 degrees of fixations?<br> <input type="text" name="sup_hem" <%out.print("value='"+hvf.getSup_hem()+"'");%>><br>
-Inferior hemfield: # points <15dB within 5 degrees of fixation?<br> <input type="text" name="inf_hem" <%out.print("value='"+hvf.getInf_hem()+"'");%>><br><br>
-</div>
+Inferior hemfield: # points <15dB within 5 degrees of fixation?<br> <input type="text" name="inf_hem" <%out.print("value='"+hvf.getInf_hem()+"'");%>>
+</div><br><br>
+
 
 Superiour hemifield: # points with sensitivity >=15dB within 5 degrees of fixation?<br> <input type="text" name="sup_hem2" <%out.print("value='"+hvf.getSup_hem2()+"'");%>><br>
 Inferior hemfield: # points with sensitivity >=15dB within 5 degrees of fixation?<br> <input type="text" name="inf_hem2" <%out.print("value='"+hvf.getInf_hem2()+"'");%>><br><br>
 
+<b>Glaucoma severity grade decision rules</b> <br>
+1.) If a patient meets the MD criteria for a stage, and the 3 other criteria fall into<br>
+<span class="textMargin"> that stage alone, the patient is categorized in that stage.</span><br>
+2.) If a patient meets the MD criteria for a stage, and meets the 3 criteria for the<br>
+<span class="textMargin">preceeding stage, then the patient is categorized in the immediately preceding<br>
+</span><span class="textMargin"> stage</span><br>
+3.) If a patient meets the MD criteria for a stage, meets at least 1 criteria for the<br>
+<span class="textMargin">original stage, but meets 1 or 2 criteria for the preceeding stage(s), then the</span><br>
+<span class="textMargin"> patient is categorized in the original</span><br><span class="textMargin"> stage.</span><br>
+4.) If a patient meets the MD criteria for a stage, meets at least 1 criteria for the<br>
+<span class="textMargin">original stage, but meets 1 or 2 criteria for a succeeding stage(s), then the</span><br>
+<span class="textMargin">patient is categorized in the immediately succeeding stage.</span><br>
+5.) If a patient meets the MD criteria for a stage, and meets 1+ other criteria for a<br>
+<span class="textMargin">preceding stage AND 1+ of the criteria for a succeeding stage, then the patient</span><br>
+<span class="textMargin"> is categorized in the original stage on the basis of MD criteria</span><br>
+>   Mills, 2001, Categorizing the Stage of Glaucoma<br><br>
 Categorization of glaucoma severity:<br>
-<input type="radio" name="severe" value="0"<%if(hvf.getSevere()==0) {out.print(" checked");}%>>no glaucoma / minimal defect<br>
-<input type="radio" name="severe" value="1"<%if(hvf.getSevere()==1) {out.print(" checked");}%>>early<br>
-<input type="radio" name="severe" value="2"<%if(hvf.getSevere()==2) {out.print(" checked");}%>>moderate<br>
-<input type="radio" name="severe" value="3"<%if(hvf.getSevere()==3) {out.print(" checked");}%>>advanced<br>
-<input type="radio" name="severe" value="4"<%if(hvf.getSevere()==4) {out.print(" checked");}%>>severe<br>
-<input type="radio" name="severe" value="4"<%if(hvf.getSevere()==5) {out.print(" checked");}%>>end stage glaucoma<br><br>
+<input type="radio" name="severe" value="0"<%if(hvf.getSevere()==0) {out.print(" checked");}%>>No glaucoma / minimal defect<br>
+<input type="radio" name="severe" value="1"<%if(hvf.getSevere()==1) {out.print(" checked");}%>>Early<br>
+<input type="radio" name="severe" value="2"<%if(hvf.getSevere()==2) {out.print(" checked");}%>>Moderate<br>
+<input type="radio" name="severe" value="3"<%if(hvf.getSevere()==3) {out.print(" checked");}%>>Advanced<br>
+<input type="radio" name="severe" value="4"<%if(hvf.getSevere()==4) {out.print(" checked");}%>>Severe<br>
+<input type="radio" name="severe" value="4"<%if(hvf.getSevere()==5) {out.print(" checked");}%>>End stage glaucoma<br><br>
 
+Test Reliability:<br>
+<input type="radio" name="reliable_review" value="1">Reliable<br>
+<input type="radio" name="reliable_review" value="2">Unreliable<br><br>
+
+Pattern of VF loss:<br>
+<input type="radio" name="vf_loss" value="1">glaucoma<br>
+<input type="radio" name="vf_loss" value="2">neuro<br>
+<input type="radio" name="vf_loss" value="3">nonspecific change<br>
+<input type="radio" name="vf_loss" value="4">could not determine (unreliable field)<br>
+<input type="radio" name="vf_loss" value="5">other:
+<input type="text" name="vf_loss_oth">
+<br><br>
+
+Type of VF defect:<br>
+<input type="radio" name="vf_defect" value="1">superior arcuate scotoma<br>
+<input type="radio" name="vf_defect" value="2">inferior arcuate scotoma<br>
+<input type="radio" name="vf_defect" value="3">superior nasal step<br>
+<input type="radio" name="vf_defect" value="4">inferior nasal step<br>
+<input type="radio" name="vf_defect" value="5">temporal wedge<br>
+<input type="radio" name="vf_defect" value="6">tunnel vision<br>
+<input type="radio" name="vf_defect" value="7">end stage<br>
+<input type="radio" name="vf_defect" value="8">other:
+<input type="text" name="vf_defect_oth">
+<br><br>
 
 <input type="submit" value="Submit" class="btn">
 </form>
@@ -174,4 +215,4 @@ Categorization of glaucoma severity:<br>
 %>
 
 <script src="javascripts/jquery-1.11.1.min.js" type="text/javascript"></script>
-<script src="javascripts/HVFChecks.js" type="text/javascript"></script>
+<script src="javascripts/HVFOpthChecks.js" type="text/javascript"></script>
