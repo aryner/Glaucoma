@@ -101,8 +101,8 @@ public class Picture {
 		return errors;
 	}
 
-	public static Vector<String> getCsvLines() {
-		Vector<String> result = null;
+	public static Vector<String> getCSVLines() {
+		Vector<String> result = new Vector<String>();
 		String query = "SELECT * FROM picture";
 		Vector<Picture> pics = SQLCommands.queryPictures(query);
 

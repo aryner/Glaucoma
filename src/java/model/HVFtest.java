@@ -654,6 +654,43 @@ System.out.println(count);
 		return SQLCommands.getCount(query);
 	}
 
+	public Vector<String> getCSVLines() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM HVFtest";
+		Vector<HVFtest> hvf = SQLCommands.queryHVFtestMaster(query);
+
+		String currLine = "id, confirmed, opthCheck, pictureID, userID, vf_loss, vf_defect, glau, vf_loss_oth, vf_defect_oth, "+
+			"mon, mon_oth2_c47, tar, tar_oth, lossnum, lossden, fp, fn, dur, fov, stimintens, stimcol, stimcol_oth, back, "+
+			"strategy, strategy_oth, pup, vanum, vaden, sph_sign, sph_num, cyl_sign, cyl_num, axis, ght, vfi, mdsign, mddb, "+
+			"mdp, psdsign, psddb, psdp, central_15, central_0, sup_hem, inf_hem, sup_hem2, inf_hem2, pts_five, pts_contig, "+
+			"pts_one, cluster, severe, reliable_review";
+		result.add(currLine);
+		for(int i=0; i<hvf.size(); i++) {
+			currLine = 
+				hvf.get(i).getId()+", "+hvf.get(i).getConfirmed()+", "+hvf.get(i).getOpthCheck()+", "+
+				hvf.get(i).getPictureID()+", "+hvf.get(i).getUserID()+", "+hvf.get(i).getVf_loss()+", "+
+				hvf.get(i).getVf_defect()+", "+hvf.get(i).getHvf_glau()+", "+hvf.get(i).getVf_loss_oth()+", "+
+				hvf.get(i).getVf_defect_oth()+", "+hvf.get(i).getMon()+", "+hvf.get(i).getMon_oth2_c74()+", "+
+				hvf.get(i).getTar()+", "+hvf.get(i).getTar_oth()+", "+hvf.get(i).getLossnum()+", "+
+				hvf.get(i).getLossden()+", "+hvf.get(i).getFp()+", "+hvf.get(i).getFn()+", "+
+				hvf.get(i).getDur()+", "+hvf.get(i).getFov()+", "+hvf.get(i).getStimintens()+", "+
+				hvf.get(i).getStimcol()+", "+hvf.get(i).getStimcol_oth()+", "+hvf.get(i).getBack()+", "+
+				hvf.get(i).getStrategy()+", "+hvf.get(i).getStrategy_oth()+", "+hvf.get(i).getPup()+", "+
+				hvf.get(i).getVanum()+", "+hvf.get(i).getVaden()+", "+hvf.get(i).getSph_sign()+", "+
+				hvf.get(i).getSph_num()+", "+hvf.get(i).getCyl_sign()+", "+hvf.get(i).getCyl_num()+", "+
+				hvf.get(i).getAxis()+", "+hvf.get(i).getGht()+", "+hvf.get(i).getVfi()+", "+
+				hvf.get(i).getMdsign()+", "+hvf.get(i).getMddb()+", "+hvf.get(i).getMdp()+", "+
+				hvf.get(i).getPsdsign()+", "+hvf.get(i).getPsddb()+", "+hvf.get(i).getPsdp()+", "+
+				hvf.get(i).getCentral_15()+", "+hvf.get(i).getCentral_0()+", "+hvf.get(i).getSup_hem()+", "+
+				hvf.get(i).getInf_hem()+", "+hvf.get(i).getSup_hem2()+", "+hvf.get(i).getInf_hem2()+", "+
+				hvf.get(i).getPts_five()+", "+hvf.get(i).getPts_contig()+", "+hvf.get(i).getPts_one()+", "+
+				hvf.get(i).getCluster()+", "+hvf.get(i).getSevere()+", "+hvf.get(i).getReliable_review();
+			result.add(currLine);
+		}
+
+		return result;
+	}
+
 	/**
 	 * @return the id
 	 */
@@ -1288,14 +1325,14 @@ System.out.println(count);
 	 * @return the opth_check
 	 */
 	public int getOpth_check() {
-		return opthCheck;
+		return getOpthCheck();
 	}
 
 	/**
 	 * @param opth_check the opth_check to set
 	 */
 	public void setOpth_check(int opth_check) {
-		this.opthCheck = opth_check;
+		this.setOpthCheck(opth_check);
 	}
 
 	/**
@@ -1408,6 +1445,20 @@ System.out.println(count);
 	 */
 	public void setVf_defect_oth(String vf_defect_oth) {
 		this.vf_defect_oth = vf_defect_oth;
+	}
+
+	/**
+	 * @return the opthCheck
+	 */
+	public int getOpthCheck() {
+		return opthCheck;
+	}
+
+	/**
+	 * @param opthCheck the opthCheck to set
+	 */
+	public void setOpthCheck(int opthCheck) {
+		this.opthCheck = opthCheck;
 	}
 
 }
