@@ -101,6 +101,19 @@ public class Picture {
 		return errors;
 	}
 
+	public static Vector<String> getCsvLines() {
+		Vector<String> result = null;
+		String query = "SELECT * FROM picture";
+		Vector<Picture> pics = SQLCommands.queryPictures(query);
+
+		result.add("id, name, type");
+		for(int i=0; i<pics.size(); i++) {
+			result.add(pics.get(i).getId()+", "+pics.get(i).getName()+", "+pics.get(i).getType());
+		}
+
+		return result;
+	}
+
 	/**
 	 * @return the name
 	 */

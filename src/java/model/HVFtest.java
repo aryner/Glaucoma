@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 public class HVFtest {
 	private int id;
 	private int confirmed;
-	private int opth_check;
+	private int opthCheck;
 	private int pictureID;
 	private int userID;
 	private int hvf_glau;
@@ -65,7 +65,6 @@ public class HVFtest {
 	private int pts_contig;
 	private int pts_one;
 	private int cluster;
-	private int flau;
 	private int severe;
 	private int reliable_review;
 	private int vf_loss;
@@ -162,6 +161,72 @@ public class HVFtest {
 		pts_contig = npts_contig;
 		pts_one = npts_one;
 		severe = nsevere;
+	}
+
+	public HVFtest(int nid, int nconfirmed, int nopthCheck, int npictureID, int nuserID, int nvf_loss, 
+		int nvf_defect, int nglau, String nvf_loss_oth, String nvf_defect_oth, int nmon, String nmon_oth2_c47,
+		int ntar, String ntar_oth, int nlossnum, int nlossden, int nfp, int nfn, String ndur, int nfov, 
+		int nstimintens, int nstimcol, String nstimcol_oth, String nback, int nstrategy, String nstrategy_oth,
+		String npup, int nvanum, int nvaden, int nsph_sign, String nsph_num, int ncyl_sign, String ncyl_num,
+		int naxis, int nght, String nvfi, int nmdsign, String nmddb, int nmdp, int npsdsign, String npsddb,
+		int npsdp, int ncentral_15, int ncentral_0, int nsup_hem, int ninf_hem, int nsup_hem2, 
+		int ninf_hem2, int npts_five, int npts_contig, int npts_one, int ncluster, int nsevere,
+		int nreliable_review
+	){
+		id = nid;
+		confirmed = nconfirmed;
+		opthCheck = nopthCheck;
+		pictureID = npictureID;
+		userID = nuserID;
+		vf_loss = nvf_loss;
+		vf_defect = nvf_defect;
+		hvf_glau = nglau;
+		vf_loss_oth = nvf_loss_oth;
+		vf_defect_oth = nvf_defect_oth;
+		mon = nmon;
+		mon_oth2_c74 = nmon_oth2_c47;
+		tar = ntar;
+		tar_oth = ntar_oth;
+		lossnum = nlossnum;
+		lossden = nlossden;
+		fp = nfp;
+		fn = nfn;
+		dur = ndur;
+		fov = nfov;
+		stimintens = nstimintens;
+		stimcol = nstimcol;
+		stimcol_oth = nstimcol_oth;
+		back = nback;
+		strategy = nstrategy;
+		strategy_oth = nstrategy_oth;
+		pup = npup;
+		vanum = nvanum;
+		vaden = nvaden;
+		sph_sign = nsph_sign;
+		sph_num = nsph_num;
+		cyl_sign = ncyl_sign;
+		cyl_num = ncyl_num;
+		axis = naxis;
+		ght = nght;
+		vfi = nvfi;
+		mdsign = nmdsign;
+		mddb = nmddb;
+		mdp = nmdp;
+		psdsign = npsdsign;
+		psddb = npsddb;
+		psdp = npsdp;
+		central_15 = ncentral_15;
+		central_0 = ncentral_0;
+		sup_hem = nsup_hem;
+		inf_hem = ninf_hem;
+		sup_hem2 = nsup_hem2;
+		inf_hem2 = ninf_hem2;
+		pts_five = npts_five;
+		pts_contig = npts_contig;
+		pts_one = npts_one;
+		cluster = ncluster;
+		severe = nsevere;
+		reliable_review = nreliable_review;
 	}
 
 	public static void assignHVF(HttpServletRequest request, User user) {
@@ -1164,20 +1229,6 @@ System.out.println(count);
 	}
 
 	/**
-	 * @return the flau
-	 */
-	public int getFlau() {
-		return flau;
-	}
-
-	/**
-	 * @param flau the flau to set
-	 */
-	public void setFlau(int flau) {
-		this.flau = flau;
-	}
-
-	/**
 	 * @return the severe
 	 */
 	public int getSevere() {
@@ -1237,14 +1288,14 @@ System.out.println(count);
 	 * @return the opth_check
 	 */
 	public int getOpth_check() {
-		return opth_check;
+		return opthCheck;
 	}
 
 	/**
 	 * @param opth_check the opth_check to set
 	 */
 	public void setOpth_check(int opth_check) {
-		this.opth_check = opth_check;
+		this.opthCheck = opth_check;
 	}
 
 	/**
