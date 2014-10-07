@@ -93,7 +93,9 @@ public class Controller extends HttpServlet {
 			User user = (User)session.getAttribute("user");
 			Picture picture = HVFtest.getNext(user);
 
-			request.setAttribute("hvf",HVFtest.getOpHVF(picture.getId()));
+			if(picture != null) {
+				request.setAttribute("hvf",HVFtest.getOpHVF(picture.getId()));
+			}
 			request.setAttribute("slash",slash);
 			request.setAttribute("picture",picture);
 		}
@@ -207,6 +209,9 @@ public class Controller extends HttpServlet {
 		}
 
 		else if(userPath.equals("/OpReviewHVF")) {
+			User user = (User)session.getAttribute("user");
+			HVFtest.opthAssignHVF(request, user);
+
 			response.sendRedirect("/Glaucoma/OpHVFtest"); 
 			return;
 		}

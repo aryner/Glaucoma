@@ -21,6 +21,8 @@ public class HVFtest {
 	private int pictureID;
 	private int userID;
 	private int hvf_glau;
+	private String vf_loss_oth;
+	private String vf_defect_oth;
 	private int mon;
 	private String mon_oth2_c74; 
 	private int tar;
@@ -419,6 +421,71 @@ public class HVFtest {
 		SQLCommands.update(query);
 	}
 
+	public static void opthAssignHVF(HttpServletRequest request, User user) {
+		String picID = request.getParameter("pictureID");
+		HVFtest hvf = new HVFtest(Integer.parseInt(picID));
+
+		String attr = request.getParameter("fp");
+		hvf.setFp(Integer.parseInt(attr));
+		attr = request.getParameter("fn");
+		hvf.setFn(Integer.parseInt(attr));
+		attr = request.getParameter("ght");
+		hvf.setGht(Integer.parseInt(attr));
+		attr = request.getParameter("psdp");
+		hvf.setPsdp(Integer.parseInt(attr));
+		attr = request.getParameter("cluster");
+		hvf.setCluster(Integer.parseInt(attr));
+		attr = request.getParameter("glau");
+		hvf.setHvf_glau(Integer.parseInt(attr));
+		attr = request.getParameter("mdsign");
+		hvf.setMdsign(Integer.parseInt(attr));
+		attr = request.getParameter("mddb");
+		hvf.setMddb(attr);
+		attr = request.getParameter("mdp");
+		hvf.setMdp(Integer.parseInt(attr));
+		attr = request.getParameter("central_15");
+		hvf.setCentral_15(Integer.parseInt(attr));
+		attr = request.getParameter("central_0");
+		hvf.setCentral_0(Integer.parseInt(attr));
+		attr = request.getParameter("sup_hem");
+		hvf.setSup_hem(Integer.parseInt(attr));
+		attr = request.getParameter("inf_hem");
+		hvf.setInf_hem(Integer.parseInt(attr));
+		attr = request.getParameter("sup_hem2");
+		hvf.setSup_hem2(Integer.parseInt(attr));
+		attr = request.getParameter("inf_hem2");
+		hvf.setInf_hem2(Integer.parseInt(attr));
+		attr = request.getParameter("pts_five");
+		hvf.setPts_five(Integer.parseInt(attr));
+		attr = request.getParameter("pts_contig");
+		hvf.setPts_contig(Integer.parseInt(attr));
+		attr = request.getParameter("pts_one");
+		hvf.setPts_one(Integer.parseInt(attr));
+		attr = request.getParameter("severe");
+		hvf.setSevere(Integer.parseInt(attr));
+		attr = request.getParameter("reliable_review");
+		hvf.setReliable_review(Integer.parseInt(attr));
+		attr = request.getParameter("vf_loss");
+		hvf.setVf_loss(Integer.parseInt(attr));
+		attr = request.getParameter("vf_loss_oth");
+		hvf.setVf_loss_oth(attr);
+		attr = request.getParameter("vf_defect");
+		hvf.setVf_defect(Integer.parseInt(attr));
+		attr = request.getParameter("vf_defect_oth");
+		hvf.setVf_defect_oth(attr);
+
+		String query = "UPDATE HVFtest SET hvf_fp='"+hvf.getFp()+"', hvf_fn='"+hvf.getFn()+"', hvf_ght='"+hvf.getGht()+"', "+
+				"hvf_psdp='"+hvf.getPsdp()+"', hvf_cluster='"+hvf.getCluster()+"', hvf_glau='"+hvf.getHvf_glau()+"', "+
+				"hvf_mdsign='"+hvf.getMdsign()+"', hvf_mddb='"+hvf.getMddb()+"', hvf_mdp='"+hvf.getMdp()+"', "+
+				"hvf_central_15='"+hvf.getCentral_15()+"', hvf_central_0='"+hvf.getCentral_0()+"', hvf_sup_hem='"+hvf.getSup_hem()+"', "+
+				"hvf_inf_hem='"+hvf.getInf_hem()+"', hvf_sup_hem2='"+hvf.getSup_hem2()+"', hvf_inf_hem2='"+hvf.getInf_hem2()+"', "+
+				"hvf_pts_five='"+hvf.getPts_five()+"', hvf_pts_contig='"+hvf.getPts_contig()+"', hvf_pts_one='"+hvf.getPts_one()+"', "+
+				"hvf_severe='"+hvf.getSevere()+"', hvf_reliable_review='"+hvf.getReliable_review()+"', hvf_vf_loss='"+hvf.getVf_loss()+"', "+
+				"hvf_vf_loss_oth='"+hvf.getVf_loss_oth()+"', hvf_vf_defect='"+hvf.getVf_defect()+"', hvf_vf_defect_oth='"+hvf.getVf_defect_oth()+
+				"', opthCheck='"+user.getID()+"' WHERE pictureID='"+picID+"'";
+		SQLCommands.update(query);
+	}
+
 	public static HVFtest getOpHVF(int picID) {
 		HVFtest result = null;
 		String query = "SELECT * FROM HVFtest WHERE pictureID="+picID;
@@ -449,7 +516,7 @@ public class HVFtest {
 		}
 		else if (user.getAccess() == 2) {
 			query = "SELECT * FROM picture WHERE id IN (SELECT pictureID FROM HVFtest WHERE "+
-				"confirmed=2 && (hvf_severe=1 OR hvf_severe=2 OR hvf_severe=3 OR hvf_severe=4))";
+				"confirmed=2 && opthCheck=0 && (hvf_glau=1 OR hvf_severe=1 OR hvf_severe=2 OR hvf_severe=3 OR hvf_severe=4))";
 		}
 
 		Vector<Picture> pictures = SQLCommands.queryPictures(query); 
@@ -467,8 +534,8 @@ public class HVFtest {
 	}
 
 	public static int getOpCheckCount() {
-		String query = "SELECT * FROM HVFtest WHERE confirmed=2 && (hvf_severe=1 "+
-			"OR hvf_severe=2 OR hvf_severe=3)";
+		String query = "SELECT * FROM HVFtest WHERE confirmed=2 && opthCheck=0 && (hvf_severe=1 "+
+			"OR hvf_severe=2 OR hvf_severe=3 OR hvf_severe=4 OR hvf_glau=1)";
 		int count = (SQLCommands.getCount(query) / 2);
 System.out.println(count);
 		return count;
@@ -1262,6 +1329,34 @@ System.out.println(count);
 	 */
 	public void setVf_defect(int vf_defect) {
 		this.vf_defect = vf_defect;
+	}
+
+	/**
+	 * @return the vf_loss_oth
+	 */
+	public String getVf_loss_oth() {
+		return vf_loss_oth;
+	}
+
+	/**
+	 * @param vf_loss_oth the vf_loss_oth to set
+	 */
+	public void setVf_loss_oth(String vf_loss_oth) {
+		this.vf_loss_oth = vf_loss_oth;
+	}
+
+	/**
+	 * @return the vf_defect_oth
+	 */
+	public String getVf_defect_oth() {
+		return vf_defect_oth;
+	}
+
+	/**
+	 * @param vf_defect_oth the vf_defect_oth to set
+	 */
+	public void setVf_defect_oth(String vf_defect_oth) {
+		this.vf_defect_oth = vf_defect_oth;
 	}
 
 }
