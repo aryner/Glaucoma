@@ -79,7 +79,7 @@ public class Controller extends HttpServlet {
 					}
 				}
 			}
-			if(user.getAccess() == 1) {
+			if(user.getAccess() == 1 && picture != null) {
 				Vector<HVFtest> pair = HVFtest.getPair(picture.getId());
 				request.setAttribute("pair",pair);
 			}

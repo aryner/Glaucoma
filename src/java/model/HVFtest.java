@@ -138,8 +138,8 @@ public class HVFtest {
 	}
 
 	public HVFtest(int nfp, int nfn, int nght, int npsdp, int ncluster, int nglau, int nmdsign, String nmddb,
-			int nmdp, int nsup_hem, int ninf_hem, int nsup_hem2, int ninf_hem2, int npts_five,
-			int npts_contig, int npts_one, int nsevere) {
+			int nmdp, int ncentral_15, int ncentral_0, int nsup_hem, int ninf_hem, int nsup_hem2, 
+			int ninf_hem2, int npts_five, int npts_contig, int npts_one, int nsevere) {
 		
 		fp = nfp;
 		fn = nfn;
@@ -150,6 +150,8 @@ public class HVFtest {
 		mdsign = nmdsign;
 		mddb = nmddb;
 		mdp = nmdp;
+		central_15 = ncentral_15;
+		central_0 = ncentral_0;
 		sup_hem = nsup_hem;
 		inf_hem = ninf_hem;
 		sup_hem2 = nsup_hem2;
@@ -305,6 +307,9 @@ public class HVFtest {
 			else if(ptsFive >= 56 || ptsOne >= 37) {
 				severe++;
 			}
+			else if(((ptsFive >= 19 && ptsFive <=36) && (ptsOne >=19)) || (ptsFive >= 37 && (ptsOne >= 12 && ptsOne <= 36))){
+				;//do nothing; it makes not contribution to classifications
+			}
 			else {
 				early++;
 			}
@@ -444,7 +449,7 @@ public class HVFtest {
 		}
 		else if (user.getAccess() == 2) {
 			query = "SELECT * FROM picture WHERE id IN (SELECT pictureID FROM HVFtest WHERE "+
-				"confirmed=2 && (hvf_severe=1 OR hvf_severe=2 OR hvf_severe=3))";
+				"confirmed=2 && (hvf_severe=1 OR hvf_severe=2 OR hvf_severe=3 OR hvf_severe=4))";
 		}
 
 		Vector<Picture> pictures = SQLCommands.queryPictures(query); 
