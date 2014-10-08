@@ -518,7 +518,7 @@ MD - dB <input type="text" name="mddb" autocomplete="off"<%if(a&&!diff){out.prin
 	}
 %>
 MD - P-value: <br>
-<input type="radio" name="mdp" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>><0.5%<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'> ***<%}%><br>
+<input type="radio" name="mdp" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>><0.5%<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="mdp" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>><1%<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="mdp" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>><2%<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="mdp" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>><5%<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'> ***</span><%}%><br>
@@ -595,7 +595,7 @@ PSD - P-value: <br>
 	}
 %>
 # of points within central 5 degrees with sensitivity < 15 dB:<br>
-<input type="radio" name="central_15" value="0"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>0<%if((a&&diff)&&((v1==0)||(v2==0))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="central_15" value="0"<%if(a && !diff && v1==0){out.print(" checked='true'");}%>>0<%if((a&&diff)&&((v1==0)||(v2==0))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="central_15" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>1<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="central_15" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>2<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="central_15" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>3<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'> ***</span><%}%><br>

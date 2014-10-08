@@ -299,7 +299,7 @@ public class HVFtest {
 		hvf.setAxis(Integer.parseInt(attr));
 		attr = request.getParameter("ght");
 		hvf.setGht(Integer.parseInt(attr));
-		if(attr.equals("2") || attr.equals("3")) {
+		if(attr.equals("3")) {
 			glaucoma = true;
 		}
 		attr = request.getParameter("vfi");
@@ -310,15 +310,15 @@ public class HVFtest {
 		hvf.setMddb(attr);
 		attr = request.getParameter("mdp");
 		hvf.setMdp(Integer.parseInt(attr));
-		if(hvf.getMdp() <= 4) {
-			glaucoma = true;
-		}
 		attr = request.getParameter("psdsign");
 		hvf.setPsdsign(Integer.parseInt(attr));
 		attr = request.getParameter("psddb");
 		hvf.setPsddb(attr);
 		attr = request.getParameter("psdp");
 		hvf.setPsdp(Integer.parseInt(attr));
+		if(hvf.getPsdp() <= 4) {
+			glaucoma = true;
+		}
 		attr = request.getParameter("central_15");
 		hvf.setCentral_15(Integer.parseInt(attr));
 		attr = request.getParameter("central_0");
@@ -472,9 +472,8 @@ public class HVFtest {
 					query += ", hvf_severe='4'";
 				}
 			}
-
 		} else {
-			query += ", hvf_glau='2', hvf_severe='0'";
+			query += ", hvf_glau='2', hvf_severe='0', opthCheck=-1";
 		}
 
 		if(user.getAccess() == 0) {
@@ -555,6 +554,31 @@ public class HVFtest {
 		SQLCommands.update(query);
 	}
 
+	public static void addNegatives(double percent) {
+		String query = "SELECT * FROM HVFtest WHERE confirmed=3";
+
+		if(SQLCommands.getCount(query) == 0) {
+			query = "SELECT * FROM HVFtest WHERE opthCheck=-1 && confirmed=2 GROUP BY pictureID HAVING COUNT(*)=2";
+			//just get picID
+			Vector<HVFtest> noGlau = SQLCommands.queryHVFtest(query);
+			Vector<HVFtest> toChange = new Vector<HVFtest>();
+			Random rand = new Random(System.currentTimeMillis());
+			int amountToChange = (int)((double)noGlau.size() * percent);
+
+			for(int i=0; i<amountToChange; i++) {
+				toChange.add(noGlau.remove(rand.nextInt(noGlau.size())));
+			}
+
+			query = "UPDATE HVFtest SET opthCheck=0, confirmed=3 WHERE ";
+			for(int i=0; i<toChange.size(); i++) {
+				if(i > 0) { query += " OR "; }
+				query += " pictureID="+toChange.get(i).getPictureID()+" ";
+			}
+
+			SQLCommands.update(query);
+		}
+	}
+
 	public static HVFtest getOpHVF(int picID) {
 		HVFtest result = null;
 		String query = "SELECT * FROM HVFtest WHERE pictureID="+picID;
@@ -565,6 +589,15 @@ public class HVFtest {
 		}
 
 		return result;
+	}
+
+	public static int needInitialCount() {
+		String query = "SELECT * FROM picture WHERE type='HVF'";
+		int picCount = SQLCommands.getCount(query);
+		query = "SELECT * FROM HVFtest WHERE confirmed=2 GROUP BY pictureID HAVING COUNT(*)=2";
+		int confirmedCount = SQLCommands.getCount(query);
+
+		return picCount - confirmedCount;
 	}
 
 	public static Vector<HVFtest> getPair(int picID) {
@@ -585,7 +618,7 @@ public class HVFtest {
 		}
 		else if (user.getAccess() == 2) {
 			query = "SELECT * FROM picture WHERE id IN (SELECT pictureID FROM HVFtest WHERE "+
-				"confirmed=2 && opthCheck=0 && (hvf_glau=1 OR hvf_severe=1 OR hvf_severe=2 OR hvf_severe=3 OR hvf_severe=4))";
+				"confirmed>=2 && opthCheck=0)";
 		}
 
 		Vector<Picture> pictures = SQLCommands.queryPictures(query); 

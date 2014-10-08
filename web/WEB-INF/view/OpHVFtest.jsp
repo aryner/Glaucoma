@@ -35,22 +35,22 @@ False NEG Errors (%) <input type="text" name="fn" class="numBox" <%out.print("va
 
 GHT: <br>
 <input type="radio" name="ght" value="1"<%if(hvf.getGht()==1) {out.print(" checked");}%>>Within Normal Limits<br>
-<input type="radio" name="ght" value="2"<%if(hvf.getGht()==2) {out.print(" checked");}%>>Borderline<br>
+<input type="radio" name="ght" value="2"<%if(hvf.getGht()==2) {out.print(" checked");}%>><span style='color:darkorange;'>Borderline</span><br>
 <input type="radio" name="ght" value="3"<%if(hvf.getGht()==3) {out.print(" checked");}%>>Outside Normal Limits<br>
 <input type="radio" name="ght" value="4"<%if(hvf.getGht()==4) {out.print(" checked");}%>>General Reduction of Sensitivity<br>
 <input type="radio" name="ght" value="5"<%if(hvf.getGht()==5) {out.print(" checked");}%>>Abnormally High Sensitivity<br><br>
 
 PSD - P-value: <br>
-<input type="radio" name="psdp" value="1"<%if(hvf.getPsdp()==1) {out.print(" checked");}%>><0.5%<br>
+<input type="radio" name="psdp" value="1"<%if(hvf.getPsdp()==1) {out.print(" checked");}%>><span style='color:darkorange'><0.5%<br>
 <input type="radio" name="psdp" value="2"<%if(hvf.getPsdp()==2) {out.print(" checked");}%>><1%<br>
 <input type="radio" name="psdp" value="3"<%if(hvf.getPsdp()==3) {out.print(" checked");}%>><2%<br>
-<input type="radio" name="psdp" value="4"<%if(hvf.getPsdp()==4) {out.print(" checked");}%>><5%<br>
+<input type="radio" name="psdp" value="4"<%if(hvf.getPsdp()==4) {out.print(" checked");}%>><5%</span><br>
 <input type="radio" name="psdp" value="5"<%if(hvf.getPsdp()==5) {out.print(" checked");}%>><10%<br>
 <input type="radio" name="psdp" value="6"<%if(hvf.getPsdp()==6) {out.print(" checked");}%>>Blank<br><br>
 
 Cluster of >= 3 non-edge points that are all significant<br> at p < 5% with >= 1 point being significant at p < 5% <br>with >= 1 point
 being significant at p < 1%<br>
-<input type="radio" name="cluster" value="1"<%if(hvf.getCluster()==1) {out.print(" checked");}%>>Yes 
+<input type="radio" name="cluster" value="1"<%if(hvf.getCluster()==1) {out.print(" checked");}%>><span style='color:darkorange;'>Yes</span>
 <input type="radio" name="cluster" value="2"<%if(hvf.getCluster()==2) {out.print(" checked");}%>>No <br><br> 
 
 Glaucoma Determination  

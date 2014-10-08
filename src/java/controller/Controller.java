@@ -74,11 +74,16 @@ public class Controller extends HttpServlet {
 				if(user.getAccess() == 0) {
 					Integer needToPairCount = HVFtest.getNeedToPairCount(); 
 					request.setAttribute("needToPairCount", needToPairCount);
-					//saftey measure to ensure nothing was missed but shouldn't be needed
 					if(needToPairCount == 0) {
+						//saftey measure to ensure nothing was missed but shouldn't be needed
 						HVFtest.setAllForAdjudication();
 					}
 				}
+				if(user.getAccess() == 1 && HVFtest.needInitialCount() == 0) {
+					//add 10% of no glau to be checked by opth
+					HVFtest.addNegatives(0.1);
+				}
+System.out.println("count = "+HVFtest.needInitialCount());
 			}
 			if(user.getAccess() == 1 && picture != null) {
 				Vector<HVFtest> pair = HVFtest.getPair(picture.getId());
