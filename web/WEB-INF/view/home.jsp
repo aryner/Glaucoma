@@ -34,6 +34,7 @@ if(session.getAttribute("errors") != null) {
 	<div class="thinColumn">
 		<a href="/Glaucoma/OpHVFtest" class="btn menuBtn">HVF test</a>
 	</div>
+
 <%
 	}
 	if(access == 0 ){
@@ -94,5 +95,8 @@ if(session.getAttribute("errors") != null) {
 <div class='container'>
 	<div class='column'>
 		<a href='/Glaucoma/upload' class='btn menuBtn'>Upload Pictures</a>
+	</div>
+	<div class="thinColumn">
+		<a href="/Glaucoma/printCSV" class="btn menuBtn">Get CSV files</a>
 	</div>
 </div>

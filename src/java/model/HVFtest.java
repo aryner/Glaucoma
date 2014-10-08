@@ -654,7 +654,7 @@ System.out.println(count);
 		return SQLCommands.getCount(query);
 	}
 
-	public Vector<String> getCSVLines() {
+	public static Vector<String> getCSVLines() {
 		Vector<String> result = new Vector<String>();
 		String query = "SELECT * FROM HVFtest";
 		Vector<HVFtest> hvf = SQLCommands.queryHVFtestMaster(query);

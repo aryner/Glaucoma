@@ -7,6 +7,7 @@
 package controller;
 
 import model.*;
+import utilities.*;
 import java.io.*; 
 import java.util.*; 
 import java.awt.image.*;
@@ -31,7 +32,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  *
  * @author aryner
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload", "/uploadPictures", "/img", "/pdf", "/assignHVF", "/OpHVFtest", "/OpReviewHVF"})
+@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload", "/uploadPictures", "/img", "/pdf", "/assignHVF", "/OpHVFtest", "/OpReviewHVF", "/printCSV", "/printCSVs"})
 public class Controller extends HttpServlet {
 	private final String slash = System.getProperty("file.separator");
 	/**
@@ -98,6 +99,11 @@ public class Controller extends HttpServlet {
 			}
 			request.setAttribute("slash",slash);
 			request.setAttribute("picture",picture);
+		}
+
+		else if (userPath.equals("/printCSV")){
+			request.setAttribute("pics", Picture.getCSVLines());
+			request.setAttribute("hvf", HVFtest.getCSVLines());
 		}
 
 		else if (userPath.equals("/pdf")) {
@@ -213,6 +219,13 @@ public class Controller extends HttpServlet {
 			HVFtest.opthAssignHVF(request, user);
 
 			response.sendRedirect("/Glaucoma/OpHVFtest"); 
+			return;
+		}
+
+		else if(userPath.equals("/printCSVs")) {
+			Tools.createCSV(Picture.getCSVLines(),"hvf_pictures.csv");
+			Tools.createCSV(HVFtest.getCSVLines(),"hvf_grades.csv");
+			response.sendRedirect("/Glaucoma/home"); 
 			return;
 		}
 
