@@ -70,13 +70,13 @@ public class Controller extends HttpServlet {
 		else if(userPath.equals("/HVFtest")) {
 			User user = (User)session.getAttribute("user");
 			Picture picture = HVFtest.getNext(user);
-
 			if(picture == null) {
 				if(user.getAccess() == 0) {
 					Integer needToPairCount = HVFtest.getNeedToPairCount(); 
 					request.setAttribute("needToPairCount", needToPairCount);
+					//saftey measure to ensure nothing was missed but shouldn't be needed
 					if(needToPairCount == 0) {
-						HVFtest.setForAdjudication();
+						HVFtest.setAllForAdjudication();
 					}
 				}
 			}

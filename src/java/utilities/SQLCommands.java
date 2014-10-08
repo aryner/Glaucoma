@@ -179,9 +179,8 @@ public class SQLCommands {
 			if(resultSet != null) try {resultSet.close();} catch(SQLException ignore) {}
 			if(con != null) try {con.close();} catch(SQLException ignore) {}
 			if(stmt != null) try {stmt.close();} catch(SQLException ignore) {}
+			return count;
 		}
-
-		return count;
 	}
 
 	public static Vector<HVFtest> queryHVFtest(String query){

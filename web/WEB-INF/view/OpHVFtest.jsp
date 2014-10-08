@@ -63,7 +63,7 @@ Glaucoma Determination
 		severity = " style='background:lightblue;border-bottom-style:solid;' ";
 	}
 	else if(Float.parseFloat(hvf.getMddb()) <= 6.) {
-		severity = " style='background:lightgreen;border-bottom-style:solid;' ";
+		severity = " style='background:green;border-bottom-style:solid;' ";
 	}
 	else if(Float.parseFloat(hvf.getMddb()) <= 12.) {
 		severity = " style='background:yellow;border-bottom-style:solid;'";

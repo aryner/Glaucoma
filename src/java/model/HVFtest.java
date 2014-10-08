@@ -375,7 +375,7 @@ public class HVFtest {
 				severe++;
 			}
 			else if(((ptsFive >= 19 && ptsFive <=36) && (ptsOne >=19)) || (ptsFive >= 37 && (ptsOne >= 12 && ptsOne <= 36))){
-				;//do nothing; it makes not contribution to classifications
+				;//do nothing; it makes no contribution to classifications
 			}
 			else {
 				early++;
@@ -404,7 +404,7 @@ public class HVFtest {
 			else if((sup == 1 || sup == 2) && (inf == 1 || inf == 2)) {
 				advanced++;
 			}
-			else if(sup == 2 && inf == 2) {
+			else if(sup >= 2 && inf >= 2) {
 				severe++;
 			}
 			else {
@@ -484,6 +484,10 @@ public class HVFtest {
 		}
 		
 		SQLCommands.update(query);
+
+		if(user.getAccess() == 0) {
+			setForAdjudication(Integer.parseInt(picID));
+		}
 	}
 
 	public static void opthAssignHVF(HttpServletRequest request, User user) {
@@ -606,7 +610,58 @@ System.out.println(count);
 		return count;
 	}
 
-	public static void setForAdjudication() {
+	public static void setForAdjudication(int picID) {
+		String query = "SELECT * FROM HVFtest WHERE pictureID="+picID;
+		Vector<HVFtest> hvf = SQLCommands.queryHVFtest(query);
+
+		if(hvf.size() > 1) {
+			//get the ones that don't need adjudication
+			query = "SELECT * FROM HVFtest GROUP BY pictureID, "+
+				"hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, hvf_lossnum, hvf_lossden, "+
+				"hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, "+
+				"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
+				"hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
+				"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, "+
+				"hvf_inf_hem2, hvf_pts_five, hvf_pts_contig, hvf_pts_one, hvf_cluster "+
+				"HAVING COUNT(*)=2";
+			Vector<HVFtest> set = SQLCommands.queryHVFtest(query);
+			//get the ones that need adjudication
+			query = "SELECT * FROM HVFtest GROUP BY pictureID, "+
+				"hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, hvf_lossnum, hvf_lossden, "+
+				"hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, "+
+				"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
+				"hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
+				"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, "+
+				"hvf_inf_hem2, hvf_pts_five, hvf_pts_contig, hvf_pts_one, hvf_cluster "+
+				"HAVING COUNT(*)=1";
+			Vector<HVFtest> notSet = SQLCommands.queryHVFtest(query);
+
+			for(int i=set.size()-1; i>=0; i--) {
+				if (set.get(i).getPictureID() != picID) {
+					set.remove(i);
+				}
+			}
+			for(int i=notSet.size()-1; i>=0; i--) {
+				if (notSet.get(i).getPictureID() != picID) {
+					notSet.remove(i);
+				}
+			}
+			
+			//update the confirmed ones
+			query = "UPDATE HVFtest SET confirmed=2 WHERE pictureID="+picID;
+			if(set.size() > 0) {
+				SQLCommands.update(query);
+			}
+
+			//update the ones that need confirming
+			query = "UPDATE HVFtest SET confirmed=1 WHERE pictureID="+picID;
+			if(notSet.size() > 0) {
+				SQLCommands.update(query);
+			}
+		}
+	}
+
+	public static void setAllForAdjudication() {
 		//get the ones that don't need adjudication
 		String query = "SELECT * FROM HVFtest GROUP BY pictureID, "+
 			"hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, hvf_lossnum, hvf_lossden, "+
