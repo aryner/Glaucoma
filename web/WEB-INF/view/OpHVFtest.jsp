@@ -28,7 +28,7 @@ if(pic == null) {
 <!--Questions-->
 <div class="questions">
 <form action="OpReviewHVF" method="POST">
-<input type="hidden" name="pictureID" value="<%out.print(pic.getId());%>">
+<input type="hidden" name="pictureName" value="<%out.print(pic.getName());%>">
 
 False POS Errors (%) <input type="text" name="fp" class="numBox" <%out.print("value='"+hvf.getFp()+"'");%>><br>
 False NEG Errors (%) <input type="text" name="fn" class="numBox" <%out.print("value='"+hvf.getFp()+"'");%>><br><br>

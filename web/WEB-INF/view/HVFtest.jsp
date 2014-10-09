@@ -41,7 +41,7 @@ if(pic == null) {
 <!--Questions-->
 <div class="questions">
 <form action="assignHVF" method="POST">
-	<input type="hidden" name="pictureID" value="<%out.print(pic.getId());%>" autocomplete="off">
+	<input type="hidden" name="pictureName" value="<%out.print(pic.getName());%>" autocomplete="off">
 <%
 	int v1 = -1;
 	int v2 = -1;

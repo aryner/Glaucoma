@@ -38,7 +38,7 @@ public class SQLCommands {
 			while(resultSet.next()) {
 				result.add(new HVFtest(
 					resultSet.getInt("id"),resultSet.getInt("confirmed"),resultSet.getInt("opthCheck"),
-					resultSet.getInt("pictureID"),resultSet.getInt("userID"),resultSet.getInt("hvf_vf_loss"),
+					resultSet.getString("pictureName"),resultSet.getInt("userID"),resultSet.getInt("hvf_vf_loss"),
 					resultSet.getInt("hvf_vf_defect"),resultSet.getInt("hvf_glau"),resultSet.getString("hvf_vf_loss_oth"),
 					resultSet.getString("hvf_vf_defect_oth"),resultSet.getInt("hvf_mon"),resultSet.getString("hvf_mon_oth2_c47"),
 					resultSet.getInt("hvf_tar"),resultSet.getString("hvf_tar_oth"),resultSet.getInt("hvf_lossnum"),
@@ -200,7 +200,7 @@ public class SQLCommands {
 			resultSet = stmt.executeQuery(query); 
 
 			while(resultSet.next()) {
-				result.add(new HVFtest(resultSet.getInt("pictureID")));
+				result.add(new HVFtest(resultSet.getString("pictureName")));
 			}
 		} catch (SQLException ex) {
 			Logger.getLogger(SQLCommands.class.getName()).log(Level.SEVERE,null,ex); 
@@ -262,7 +262,6 @@ public class SQLCommands {
 			resultSet = stmt.executeQuery(query); 
 
 			while(resultSet.next()) {
-				result.add(resultSet.getInt("pictureID"));
 				result.add(resultSet.getInt("userID"));
 				result.add(resultSet.getInt("id"));
 			}

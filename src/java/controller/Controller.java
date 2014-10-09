@@ -83,10 +83,9 @@ public class Controller extends HttpServlet {
 					//add 10% of no glau to be checked by opth
 					HVFtest.addNegatives(0.1);
 				}
-System.out.println("count = "+HVFtest.needInitialCount());
 			}
 			if(user.getAccess() == 1 && picture != null) {
-				Vector<HVFtest> pair = HVFtest.getPair(picture.getId());
+				Vector<HVFtest> pair = HVFtest.getPair(picture.getName());
 				request.setAttribute("pair",pair);
 			}
 
@@ -100,7 +99,7 @@ System.out.println("count = "+HVFtest.needInitialCount());
 			Picture picture = HVFtest.getNext(user);
 
 			if(picture != null) {
-				request.setAttribute("hvf",HVFtest.getOpHVF(picture.getId()));
+				request.setAttribute("hvf",HVFtest.getOpHVF(picture.getName()));
 			}
 			request.setAttribute("slash",slash);
 			request.setAttribute("picture",picture);

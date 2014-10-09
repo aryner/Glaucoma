@@ -18,7 +18,7 @@ public class HVFtest {
 	private int id;
 	private int confirmed;
 	private int opthCheck;
-	private int pictureID;
+	private String pictureName;
 	private int userID;
 	private int hvf_glau;
 	private String vf_loss_oth;
@@ -71,18 +71,18 @@ public class HVFtest {
 	private int vf_defect;
 	private static final String slash = System.getProperty("file.separator");
 
-	public HVFtest(int npictureID) {
-		pictureID = npictureID;
+	public HVFtest(String npictureName) {
+		pictureName = npictureName;
 	}
 
-	public HVFtest(int npictureID, int nuserID) {
-		String query = "INSERT INTO HVFtest (pictureID, userID) VALUES ('"+npictureID+"', '"+nuserID+"')";
+	public HVFtest(String npictureName, int nuserID) {
+		String query = "INSERT INTO HVFtest (pictureName, userID) VALUES ('"+npictureName+"', '"+nuserID+"')";
 		SQLCommands.update(query);
 
-		query = "SELECT * FROM HVFtest WHERE pictureID="+npictureID+" AND userID="+nuserID;
+		query = "SELECT * FROM HVFtest WHERE pictureName="+npictureName+" AND userID="+nuserID;
 		Vector<Integer> data = SQLCommands.queryNewGrade(query);
 
-		pictureID = data.get(0);
+		pictureName = npictureName;
 		userID = data.get(1);
 		id = data.get(2);	
 	}
@@ -163,7 +163,7 @@ public class HVFtest {
 		severe = nsevere;
 	}
 
-	public HVFtest(int nid, int nconfirmed, int nopthCheck, int npictureID, int nuserID, int nvf_loss, 
+	public HVFtest(int nid, int nconfirmed, int nopthCheck, String npictureName, int nuserID, int nvf_loss, 
 		int nvf_defect, int nglau, String nvf_loss_oth, String nvf_defect_oth, int nmon, String nmon_oth2_c47,
 		int ntar, String ntar_oth, int nlossnum, int nlossden, int nfp, int nfn, String ndur, int nfov, 
 		int nstimintens, int nstimcol, String nstimcol_oth, String nback, int nstrategy, String nstrategy_oth,
@@ -176,7 +176,7 @@ public class HVFtest {
 		id = nid;
 		confirmed = nconfirmed;
 		opthCheck = nopthCheck;
-		pictureID = npictureID;
+		pictureName = npictureName;
 		userID = nuserID;
 		vf_loss = nvf_loss;
 		vf_defect = nvf_defect;
@@ -239,13 +239,13 @@ public class HVFtest {
 		int md = 0;
 
 		int uID = user.getID();
-		String picID = request.getParameter("pictureID");
+		String picName = request.getParameter("pictureName");
 		HVFtest hvf = null;
 		if(user.getAccess() == 0) {
-			hvf = new HVFtest(Integer.parseInt(picID), uID);
+			hvf = new HVFtest(picName, uID);
 		}
 		else if (user.getAccess() == 1) {
-			hvf = new HVFtest(Integer.parseInt(picID));
+			hvf = new HVFtest(picName);
 		}
 
 		//Set attributes
@@ -479,19 +479,19 @@ public class HVFtest {
 		if(user.getAccess() == 0) {
 			query += " WHERE id="+hvf.getId();
 		} else if(user.getAccess() ==1) { 
-			query += ", confirmed=2 WHERE pictureID="+request.getParameter("pictureID");
+			query += ", confirmed=2 WHERE pictureName="+request.getParameter("pictureName");
 		}
 		
 		SQLCommands.update(query);
 
 		if(user.getAccess() == 0) {
-			setForAdjudication(Integer.parseInt(picID));
+			setForAdjudication(picName);
 		}
 	}
 
 	public static void opthAssignHVF(HttpServletRequest request, User user) {
-		String picID = request.getParameter("pictureID");
-		HVFtest hvf = new HVFtest(Integer.parseInt(picID));
+		String picName = request.getParameter("pictureName");
+		HVFtest hvf = new HVFtest(picName);
 
 		String attr = request.getParameter("fp");
 		hvf.setFp(Integer.parseInt(attr));
@@ -550,7 +550,7 @@ public class HVFtest {
 				"hvf_pts_five='"+hvf.getPts_five()+"', hvf_pts_contig='"+hvf.getPts_contig()+"', hvf_pts_one='"+hvf.getPts_one()+"', "+
 				"hvf_severe='"+hvf.getSevere()+"', hvf_reliable_review='"+hvf.getReliable_review()+"', hvf_vf_loss='"+hvf.getVf_loss()+"', "+
 				"hvf_vf_loss_oth='"+hvf.getVf_loss_oth()+"', hvf_vf_defect='"+hvf.getVf_defect()+"', hvf_vf_defect_oth='"+hvf.getVf_defect_oth()+
-				"', opthCheck='"+user.getID()+"' WHERE pictureID='"+picID+"'";
+				"', opthCheck='"+user.getID()+"' WHERE pictureName='"+picName+"'";
 		SQLCommands.update(query);
 	}
 
@@ -558,8 +558,8 @@ public class HVFtest {
 		String query = "SELECT * FROM HVFtest WHERE confirmed=3";
 
 		if(SQLCommands.getCount(query) == 0) {
-			query = "SELECT * FROM HVFtest WHERE opthCheck=-1 && confirmed=2 GROUP BY pictureID HAVING COUNT(*)=2";
-			//just get picID
+			query = "SELECT * FROM HVFtest WHERE opthCheck=-1 && confirmed=2 GROUP BY pictureName HAVING COUNT(*)=2";
+			//just get picName
 			Vector<HVFtest> noGlau = SQLCommands.queryHVFtest(query);
 			Vector<HVFtest> toChange = new Vector<HVFtest>();
 			Random rand = new Random(System.currentTimeMillis());
@@ -572,16 +572,16 @@ public class HVFtest {
 			query = "UPDATE HVFtest SET opthCheck=0, confirmed=3 WHERE ";
 			for(int i=0; i<toChange.size(); i++) {
 				if(i > 0) { query += " OR "; }
-				query += " pictureID="+toChange.get(i).getPictureID()+" ";
+				query += " pictureName ="+toChange.get(i).getPictureName()+" ";
 			}
 
 			SQLCommands.update(query);
 		}
 	}
 
-	public static HVFtest getOpHVF(int picID) {
+	public static HVFtest getOpHVF(String picName) {
 		HVFtest result = null;
-		String query = "SELECT * FROM HVFtest WHERE pictureID="+picID;
+		String query = "SELECT * FROM HVFtest WHERE pictureName="+picName;
 
 		Vector<HVFtest> hvf = SQLCommands.queryHVFtestForOp(query);
 		if(hvf.size() > 0) {
@@ -594,14 +594,14 @@ public class HVFtest {
 	public static int needInitialCount() {
 		String query = "SELECT * FROM picture WHERE type='HVF'";
 		int picCount = SQLCommands.getCount(query);
-		query = "SELECT * FROM HVFtest WHERE confirmed=2 GROUP BY pictureID HAVING COUNT(*)=2";
+		query = "SELECT * FROM HVFtest WHERE confirmed=2 GROUP BY pictureName HAVING COUNT(*)=2";
 		int confirmedCount = SQLCommands.getCount(query);
 
 		return picCount - confirmedCount;
 	}
 
-	public static Vector<HVFtest> getPair(int picID) {
-		String query = "SELECT * FROM HVFtest WHERE pictureID="+picID;	
+	public static Vector<HVFtest> getPair(String picName) {
+		String query = "SELECT * FROM HVFtest WHERE pictureName="+picName;	
 		return SQLCommands.queryHVFtestForAdjudication(query);
 	}
 
@@ -609,15 +609,15 @@ public class HVFtest {
 		Picture result = null;
 		String query = "";
 		if (user.getAccess() == 0) {
-			query = "SELECT * FROM picture WHERE id NOT IN (SELECT "+
-				" pictureID FROM HVFtest WHERE userID="+user.getID()+")";
+			query = "SELECT * FROM picture WHERE name NOT IN (SELECT "+
+				" pictureName FROM HVFtest WHERE userID="+user.getID()+")";
 		}
 		else if (user.getAccess() == 1) {
-			query = "SELECT * FROM picture WHERE id IN (SELECT pictureID FROM "+
+			query = "SELECT * FROM picture WHERE name IN (SELECT pictureName FROM "+
 				"HVFtest WHERE CONFIRMED=1)";
 		}
 		else if (user.getAccess() == 2) {
-			query = "SELECT * FROM picture WHERE id IN (SELECT pictureID FROM HVFtest WHERE "+
+			query = "SELECT * FROM picture WHERE name IN (SELECT pictureName FROM HVFtest WHERE "+
 				"confirmed>=2 && opthCheck=0)";
 		}
 
@@ -631,7 +631,7 @@ public class HVFtest {
 	}
 
 	public static int getNeedToPairCount() {
-		String query = "SELECT * FROM HVFtest GROUP BY pictureID HAVING COUNT(*)=1";
+		String query = "SELECT * FROM HVFtest GROUP BY pictureName HAVING COUNT(*)=1";
 		return SQLCommands.getCount(query);
 	}
 
@@ -639,17 +639,16 @@ public class HVFtest {
 		String query = "SELECT * FROM HVFtest WHERE confirmed=2 && opthCheck=0 && (hvf_severe=1 "+
 			"OR hvf_severe=2 OR hvf_severe=3 OR hvf_severe=4 OR hvf_glau=1)";
 		int count = (SQLCommands.getCount(query) / 2);
-System.out.println(count);
 		return count;
 	}
 
-	public static void setForAdjudication(int picID) {
-		String query = "SELECT * FROM HVFtest WHERE pictureID="+picID;
+	public static void setForAdjudication(String picName) {
+		String query = "SELECT * FROM HVFtest WHERE pictureName="+picName;
 		Vector<HVFtest> hvf = SQLCommands.queryHVFtest(query);
 
 		if(hvf.size() > 1) {
 			//get the ones that don't need adjudication
-			query = "SELECT * FROM HVFtest GROUP BY pictureID, "+
+			query = "SELECT * FROM HVFtest GROUP BY pictureName, "+
 				"hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, hvf_lossnum, hvf_lossden, "+
 				"hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, "+
 				"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
@@ -659,7 +658,7 @@ System.out.println(count);
 				"HAVING COUNT(*)=2";
 			Vector<HVFtest> set = SQLCommands.queryHVFtest(query);
 			//get the ones that need adjudication
-			query = "SELECT * FROM HVFtest GROUP BY pictureID, "+
+			query = "SELECT * FROM HVFtest GROUP BY pictureName, "+
 				"hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, hvf_lossnum, hvf_lossden, "+
 				"hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, "+
 				"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
@@ -670,24 +669,24 @@ System.out.println(count);
 			Vector<HVFtest> notSet = SQLCommands.queryHVFtest(query);
 
 			for(int i=set.size()-1; i>=0; i--) {
-				if (set.get(i).getPictureID() != picID) {
+				if (set.get(i).getPictureName() != picName) {
 					set.remove(i);
 				}
 			}
 			for(int i=notSet.size()-1; i>=0; i--) {
-				if (notSet.get(i).getPictureID() != picID) {
+				if (notSet.get(i).getPictureName() != picName) {
 					notSet.remove(i);
 				}
 			}
 			
 			//update the confirmed ones
-			query = "UPDATE HVFtest SET confirmed=2 WHERE pictureID="+picID;
+			query = "UPDATE HVFtest SET confirmed=2 WHERE pictureName="+picName;
 			if(set.size() > 0) {
 				SQLCommands.update(query);
 			}
 
 			//update the ones that need confirming
-			query = "UPDATE HVFtest SET confirmed=1 WHERE pictureID="+picID;
+			query = "UPDATE HVFtest SET confirmed=1 WHERE pictureName="+picName;
 			if(notSet.size() > 0) {
 				SQLCommands.update(query);
 			}
@@ -696,7 +695,7 @@ System.out.println(count);
 
 	public static void setAllForAdjudication() {
 		//get the ones that don't need adjudication
-		String query = "SELECT * FROM HVFtest GROUP BY pictureID, "+
+		String query = "SELECT * FROM HVFtest GROUP BY pictureName, "+
 			"hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, hvf_lossnum, hvf_lossden, "+
 			"hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, "+
 			"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
@@ -706,7 +705,7 @@ System.out.println(count);
 			"HAVING COUNT(*)=2";
 		Vector<HVFtest> set = SQLCommands.queryHVFtest(query);
 		//get the ones that need adjudication
-		query = "SELECT * FROM HVFtest GROUP BY pictureID, "+
+		query = "SELECT * FROM HVFtest GROUP BY pictureName, "+
 			"hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, hvf_lossnum, hvf_lossden, "+
 			"hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, "+
 			"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
@@ -720,7 +719,7 @@ System.out.println(count);
 		query = "UPDATE HVFtest SET confirmed=2 WHERE ";
 		for(int i=0; i<set.size(); i++) {
 			if(i>0) { query += " OR "; }
-			query += "pictureID="+set.get(i).getPictureID();
+			query += "pictureName="+set.get(i).getPictureName();
 		}
 		if(set.size() > 0) {
 			SQLCommands.update(query);
@@ -730,7 +729,7 @@ System.out.println(count);
 		query = "UPDATE HVFtest SET confirmed=1 WHERE ";
 		for(int i=0; i<notSet.size(); i++) {
 			if(i>0) { query += " OR "; }
-			query += "pictureID="+notSet.get(i).getPictureID();
+			query += "pictureName="+notSet.get(i).getPictureName();
 		}
 		if(notSet.size() > 0) {
 			SQLCommands.update(query);
@@ -747,7 +746,7 @@ System.out.println(count);
 		String query = "SELECT * FROM HVFtest";
 		Vector<HVFtest> hvf = SQLCommands.queryHVFtestMaster(query);
 
-		String currLine = "id, confirmed, opthCheck, pictureID, userID, vf_loss, vf_defect, glau, vf_loss_oth, vf_defect_oth, "+
+		String currLine = "id, confirmed, opthCheck, pictureName, userID, vf_loss, vf_defect, glau, vf_loss_oth, vf_defect_oth, "+
 			"mon, mon_oth2_c47, tar, tar_oth, lossnum, lossden, fp, fn, dur, fov, stimintens, stimcol, stimcol_oth, back, "+
 			"strategy, strategy_oth, pup, vanum, vaden, sph_sign, sph_num, cyl_sign, cyl_num, axis, ght, vfi, mdsign, mddb, "+
 			"mdp, psdsign, psddb, psdp, central_15, central_0, sup_hem, inf_hem, sup_hem2, inf_hem2, pts_five, pts_contig, "+
@@ -756,7 +755,7 @@ System.out.println(count);
 		for(int i=0; i<hvf.size(); i++) {
 			currLine = 
 				hvf.get(i).getId()+", "+hvf.get(i).getConfirmed()+", "+hvf.get(i).getOpthCheck()+", "+
-				hvf.get(i).getPictureID()+", "+hvf.get(i).getUserID()+", "+hvf.get(i).getVf_loss()+", "+
+				hvf.get(i).getPictureName()+", "+hvf.get(i).getUserID()+", "+hvf.get(i).getVf_loss()+", "+
 				hvf.get(i).getVf_defect()+", "+hvf.get(i).getHvf_glau()+", "+hvf.get(i).getVf_loss_oth()+", "+
 				hvf.get(i).getVf_defect_oth()+", "+hvf.get(i).getMon()+", "+hvf.get(i).getMon_oth2_c74()+", "+
 				hvf.get(i).getTar()+", "+hvf.get(i).getTar_oth()+", "+hvf.get(i).getLossnum()+", "+
@@ -805,20 +804,6 @@ System.out.println(count);
 	 */
 	public void setConfirmed(int confirmed) {
 		this.confirmed = confirmed;
-	}
-
-	/**
-	 * @return the pictureID
-	 */
-	public int getPictureID() {
-		return pictureID;
-	}
-
-	/**
-	 * @param pictureID the pictureID to set
-	 */
-	public void setPictureID(int pictureID) {
-		this.pictureID = pictureID;
 	}
 
 	/**
@@ -1547,6 +1532,20 @@ System.out.println(count);
 	 */
 	public void setOpthCheck(int opthCheck) {
 		this.opthCheck = opthCheck;
+	}
+
+	/**
+	 * @return the pictureName
+	 */
+	public String getPictureName() {
+		return pictureName;
+	}
+
+	/**
+	 * @param pictureName the pictureName to set
+	 */
+	public void setPictureName(String pictureName) {
+		this.pictureName = pictureName;
 	}
 
 }
