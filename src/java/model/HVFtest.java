@@ -79,12 +79,12 @@ public class HVFtest {
 		String query = "INSERT INTO HVFtest (pictureName, userID) VALUES ('"+npictureName+"', '"+nuserID+"')";
 		SQLCommands.update(query);
 
-		query = "SELECT * FROM HVFtest WHERE pictureName="+npictureName+" AND userID="+nuserID;
+		query = "SELECT * FROM HVFtest WHERE pictureName='"+npictureName+"' AND userID="+nuserID;
 		Vector<Integer> data = SQLCommands.queryNewGrade(query);
 
 		pictureName = npictureName;
-		userID = data.get(1);
-		id = data.get(2);	
+		userID = data.get(0);
+		id = data.get(1);	
 	}
 
 	public HVFtest(int nmon, String nmon_oth2_c74, int ntar, String ntar_oth, int nlossnum, int nlossden, int nfp, int nfn, String ndur, 
@@ -479,7 +479,7 @@ public class HVFtest {
 		if(user.getAccess() == 0) {
 			query += " WHERE id="+hvf.getId();
 		} else if(user.getAccess() ==1) { 
-			query += ", confirmed=2 WHERE pictureName="+request.getParameter("pictureName");
+			query += ", confirmed=2 WHERE pictureName='"+request.getParameter("pictureName")+"'";
 		}
 		
 		SQLCommands.update(query);
@@ -572,16 +572,18 @@ public class HVFtest {
 			query = "UPDATE HVFtest SET opthCheck=0, confirmed=3 WHERE ";
 			for(int i=0; i<toChange.size(); i++) {
 				if(i > 0) { query += " OR "; }
-				query += " pictureName ="+toChange.get(i).getPictureName()+" ";
+				query += " pictureName ='"+toChange.get(i).getPictureName()+"' ";
 			}
 
-			SQLCommands.update(query);
+			if(toChange.size() > 0) {
+				SQLCommands.update(query);
+			}
 		}
 	}
 
 	public static HVFtest getOpHVF(String picName) {
 		HVFtest result = null;
-		String query = "SELECT * FROM HVFtest WHERE pictureName="+picName;
+		String query = "SELECT * FROM HVFtest WHERE pictureName='"+picName+"'";
 
 		Vector<HVFtest> hvf = SQLCommands.queryHVFtestForOp(query);
 		if(hvf.size() > 0) {
@@ -601,7 +603,7 @@ public class HVFtest {
 	}
 
 	public static Vector<HVFtest> getPair(String picName) {
-		String query = "SELECT * FROM HVFtest WHERE pictureName="+picName;	
+		String query = "SELECT * FROM HVFtest WHERE pictureName='"+picName+"'";	
 		return SQLCommands.queryHVFtestForAdjudication(query);
 	}
 
@@ -643,7 +645,7 @@ public class HVFtest {
 	}
 
 	public static void setForAdjudication(String picName) {
-		String query = "SELECT * FROM HVFtest WHERE pictureName="+picName;
+		String query = "SELECT * FROM HVFtest WHERE pictureName='"+picName+"'";
 		Vector<HVFtest> hvf = SQLCommands.queryHVFtest(query);
 
 		if(hvf.size() > 1) {
@@ -669,24 +671,24 @@ public class HVFtest {
 			Vector<HVFtest> notSet = SQLCommands.queryHVFtest(query);
 
 			for(int i=set.size()-1; i>=0; i--) {
-				if (set.get(i).getPictureName() != picName) {
+				if (set.get(i).getPictureName().equals(picName)) {
 					set.remove(i);
 				}
 			}
 			for(int i=notSet.size()-1; i>=0; i--) {
-				if (notSet.get(i).getPictureName() != picName) {
+				if (notSet.get(i).getPictureName().equals(picName)) {
 					notSet.remove(i);
 				}
 			}
 			
 			//update the confirmed ones
-			query = "UPDATE HVFtest SET confirmed=2 WHERE pictureName="+picName;
+			query = "UPDATE HVFtest SET confirmed=2 WHERE pictureName='"+picName+"'";
 			if(set.size() > 0) {
 				SQLCommands.update(query);
 			}
 
 			//update the ones that need confirming
-			query = "UPDATE HVFtest SET confirmed=1 WHERE pictureName="+picName;
+			query = "UPDATE HVFtest SET confirmed=1 WHERE pictureName='"+picName+"'";
 			if(notSet.size() > 0) {
 				SQLCommands.update(query);
 			}
@@ -719,7 +721,7 @@ public class HVFtest {
 		query = "UPDATE HVFtest SET confirmed=2 WHERE ";
 		for(int i=0; i<set.size(); i++) {
 			if(i>0) { query += " OR "; }
-			query += "pictureName="+set.get(i).getPictureName();
+			query += "pictureName='"+set.get(i).getPictureName()+"'";
 		}
 		if(set.size() > 0) {
 			SQLCommands.update(query);
@@ -729,7 +731,7 @@ public class HVFtest {
 		query = "UPDATE HVFtest SET confirmed=1 WHERE ";
 		for(int i=0; i<notSet.size(); i++) {
 			if(i>0) { query += " OR "; }
-			query += "pictureName="+notSet.get(i).getPictureName();
+			query += "pictureName='"+notSet.get(i).getPictureName()+"'";
 		}
 		if(notSet.size() > 0) {
 			SQLCommands.update(query);
