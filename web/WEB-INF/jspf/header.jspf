@@ -13,12 +13,12 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" type="text/css" href="css/main.css">
-		<title>Glaucoma Grader</title>
+		<title>HVF Grader</title>
 	</head>
 	<body>
 		<div id="header">
 			<div class="spacer"></div>
-			<a class="title" href="home">Glaucoma Grader</a>
+			<a class="title" href="home">HVF Grader</a>
 			<span class="welcome">
 				<%
 					if(session.getAttribute("user") != null) {

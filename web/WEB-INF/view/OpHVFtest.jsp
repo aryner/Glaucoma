@@ -20,7 +20,7 @@ if(pic == null) {
 } else {
 	HVFtest hvf = (HVFtest)request.getAttribute("hvf");
 	String slash = ""+request.getAttribute("slash");
-	String src = "http://localhost:8080/Glaucoma/pdf?type=HVF&name="+pic.getName();
+	String src = "http://localhost:8080/HVF/pdf?type=HVF&name="+pic.getName();
 %>
 <!--pdf of HVFfile -->
 <embed src="<%out.print(src);%>" class="HVFimage">

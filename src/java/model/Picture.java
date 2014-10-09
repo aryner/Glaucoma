@@ -80,7 +80,7 @@ public class Picture {
 				FileItem fileItem = files.get(j);
 				String fileName = names.get(j);
 
-				String filePath = ".."+slash+"webapps"+slash+"Glaucoma"+slash + path + slash;
+				String filePath = ".."+slash+"webapps"+slash+"HVF"+slash + path + slash;
 				new File(filePath).mkdirs();
 				File file = new File(filePath + fileName);
 				fileItem.write(file); 

@@ -3,7 +3,7 @@
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/TR/xmlschema-1/" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <context-param>
 	    <param-name>file-upload</param-name>
-	    <param-value>/webapps/Glaucoma/</param-value>
+	    <param-value>/webapps/HVF/</param-value>
     </context-param>
     <session-config>
         <session-timeout>
@@ -21,7 +21,7 @@
     </jsp-config>
     <resource-ref>
 	    <description>DB Connection</description>
-	    <res-ref-name>glaucoma_grader</res-ref-name>
+	    <res-ref-name>hvf_grader</res-ref-name>
 	    <res-type>javax.sql.DataSource</res-type>
 	    <res-auth>Container</res-auth>
             <res-sharing-scope>Shareable</res-sharing-scope>

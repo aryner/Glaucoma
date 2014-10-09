@@ -31,7 +31,7 @@ if(session.getAttribute("errors") != null) {
 	if(access == 2){
 %>
 	<div class="thinColumn">
-		<a href="/Glaucoma/OpHVFtest" class="btn menuBtn">HVF test</a>
+		<a href="/HVF/OpHVFtest" class="btn menuBtn">HVF test</a>
 	</div>
 
 <%
@@ -48,7 +48,7 @@ if(session.getAttribute("errors") != null) {
 	if (access == 0 || (access == 1)) {
 %>
 	<div class="thinColumn">
-		<a href="/Glaucoma/HVFtest" class="btn menuBtn">HVF test</a> 
+		<a href="/HVF/HVFtest" class="btn menuBtn">HVF test</a> 
 	</div>
 <%
 	}
@@ -93,9 +93,9 @@ if(session.getAttribute("errors") != null) {
 <br>
 <div class='container'>
 	<div class='column'>
-		<a href='/Glaucoma/upload' class='btn menuBtn'>Upload Pictures</a>
+		<a href='/HVF/upload' class='btn menuBtn'>Upload Pictures</a>
 	</div>
 	<div class="thinColumn">
-		<a href="/Glaucoma/printCSV" class="btn menuBtn">Get CSV files</a>
+		<a href="/HVF/printCSV" class="btn menuBtn">Get CSV files</a>
 	</div>
 </div>
