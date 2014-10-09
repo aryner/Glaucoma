@@ -27,7 +27,7 @@ public class SQLCommands {
 
 		try{
 			InitialContext initialContext = new InitialContext();
-			Context context = (Context)initialContext.lookup("java:comp"+slash+"env");
+			Context context = (Context)initialContext.lookup("java:comp/env");
 			DataSource dataSource = (DataSource)context.lookup("hvf_grader");
 			con = dataSource.getConnection();
 
@@ -77,7 +77,7 @@ public class SQLCommands {
 
 		try{
 			InitialContext initialContext = new InitialContext();
-			Context context = (Context)initialContext.lookup("java:comp"+slash+"env");
+			Context context = (Context)initialContext.lookup("java:comp/env");
 			DataSource dataSource = (DataSource)context.lookup("hvf_grader");
 			con = dataSource.getConnection();
 
@@ -122,7 +122,7 @@ public class SQLCommands {
 
 		try{
 			InitialContext initialContext = new InitialContext();
-			Context context = (Context)initialContext.lookup("java:comp"+slash+"env");
+			Context context = (Context)initialContext.lookup("java:comp/env");
 			DataSource dataSource = (DataSource)context.lookup("hvf_grader");
 			con = dataSource.getConnection();
 
@@ -161,7 +161,7 @@ public class SQLCommands {
 
 		try{
 			InitialContext initialContext = new InitialContext();
-			Context context = (Context)initialContext.lookup("java:comp"+slash+"env");
+			Context context = (Context)initialContext.lookup("java:comp/env");
 			DataSource dataSource = (DataSource)context.lookup("hvf_grader");
 			con = dataSource.getConnection();
 
@@ -191,7 +191,7 @@ public class SQLCommands {
 
 		try{
 			InitialContext initialContext = new InitialContext();
-			Context context = (Context)initialContext.lookup("java:comp"+slash+"env");
+			Context context = (Context)initialContext.lookup("java:comp/env");
 			DataSource dataSource = (DataSource)context.lookup("hvf_grader");
 			con = dataSource.getConnection();
 
@@ -222,7 +222,7 @@ public class SQLCommands {
 
 		try{
 			InitialContext initialContext = new InitialContext();
-			Context context = (Context)initialContext.lookup("java:comp"+slash+"env");
+			Context context = (Context)initialContext.lookup("java:comp/env");
 			DataSource dataSource = (DataSource)context.lookup("hvf_grader");
 			con = dataSource.getConnection();
 
@@ -253,7 +253,7 @@ public class SQLCommands {
 
 		try{
 			InitialContext initialContext = new InitialContext();
-			Context context = (Context)initialContext.lookup("java:comp"+slash+"env");
+			Context context = (Context)initialContext.lookup("java:comp/env");
 			DataSource dataSource = (DataSource)context.lookup("hvf_grader");
 			con = dataSource.getConnection();
 
@@ -285,7 +285,7 @@ public class SQLCommands {
 
 		try{
 			InitialContext initialContext = new InitialContext();
-			Context context = (Context)initialContext.lookup("java:comp"+slash+"env");
+			Context context = (Context)initialContext.lookup("java:comp/env");
 			DataSource dataSource = (DataSource)context.lookup("hvf_grader");
 			con = dataSource.getConnection();
 
@@ -314,7 +314,7 @@ public class SQLCommands {
 		int result = 0;
 		try{
 			InitialContext initialContext = new InitialContext();
-			Context context = (Context)initialContext.lookup("java:comp"+slash+"env");
+			Context context = (Context)initialContext.lookup("java:comp/env");
 			DataSource dataSource = (DataSource)context.lookup("hvf_grader");
 			con = dataSource.getConnection();
 
