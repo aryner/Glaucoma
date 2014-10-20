@@ -295,132 +295,380 @@ $(document).ready(function(){
 		var cluster = $('input[type=radio][name=cluster][value=1]').prop('checked')
 			|| $('input[type=radio][name=cluster][value=2]').prop('checked'); 
 
+		var focused = false;
+
 		if(!mon) {
+			focused = true;
 			e.preventDefault(); 
 			$('input[type=radio][name=mon][value=1]').focus();
-		} else if(!mon_oth2_c74) {
-			e.preventDefault(); 
-			$('input[type=text][name=mon_oth2_c74]').focus();
-		} else if(!tar){
-			e.preventDefault(); 
-			$('input[type=radio][name=tar][value=1]').focus();
-		} else if(!tar_oth){
-			e.preventDefault(); 
-			$('input[type=text][name=tar_oth]').focus();
-		} else if(!lossnum){
-			e.preventDefault(); 
-			$('input[type=text][name=lossnum]').focus();
-		} else if(!lossden){
-			e.preventDefault(); 
-			$('input[type=text][name=lossden]').focus();
-		} else if(!fp){
-			e.preventDefault(); 
-			$('input[type=text][name=fp]').focus();
-		} else if(!fn){
-			e.preventDefault(); 
-			$('input[type=text][name=fn]').focus();
-		} else if(!dur){
-			e.preventDefault(); 
-			$('input[type=text][name=dur]').focus();
-		} else if(!fov){
-			e.preventDefault(); 
-			$('input[type=text][name=fov]').focus();
-		} else if(!stimintens){
-			e.preventDefault(); 
-			$('input[type=radio][name=stimintens][value=1]').focus();
-		} else if(!stimcol){
-			e.preventDefault(); 
-			$('input[type=radio][name=stimcol][value=1]').focus();
-		} else if(!stimcol_oth){
-			e.preventDefault(); 
-			$('input[type=text][name=stimcol_oth]').focus();
-		} else if(!back){
-			e.preventDefault(); 
-			$('input[type=text][name=back]').focus();
-		} else if(!strategy){
-			e.preventDefault(); 
-			$('input[type=radio][name=strategy][value=1]').focus();
-		} else if(!strategy_oth){
-			e.preventDefault(); 
-			$('input[type=text][name=strategy_oth]').focus();
-		} else if(!pup){
-			e.preventDefault(); 
-			$('input[type=text][name=pup]').focus();
-		} else if(!vanum){
-			e.preventDefault(); 
-			$('input[type=text][name=vanum]').focus();
-		} else if(!vaden){
-			e.preventDefault(); 
-			$('input[type=text][name=vaden]').focus();
-		} else if(!sph_sign){
-			e.preventDefault(); 
-			$('input[type=radio][name=sph_sign][value=1]').focus();
-		} else if(!sph_num){
-			e.preventDefault(); 
-			$('input[type=text][name=sph_num]').focus();
-		} else if(!cyl_sign){
-			e.preventDefault(); 
-			$('input[type=radio][name=cyl_sign][value=1]').focus(); 
-		} else if(!cyl_num){
-			e.preventDefault(); 
-			$('input[type=text][name=cyl_num]').focus();
-		} else if(!axis){
-			$('input[type=text][name=axis]').focus();
-			e.preventDefault(); 
-		} else if(!ght){
-			e.preventDefault(); 
-			$('input[type=radio][name=ght][value=1]').focus(); 
-		} else if(!vfi){
-			e.preventDefault(); 
-			$('input[type=text][name=vfi]').focus();
-		} else if(!mdsign){
-			e.preventDefault(); 
-			$('input[type=radio][name=mdsign][value=1]').focus(); 
-		} else if(!mddb){
-			e.preventDefault(); 
-			$('input[type=text][name=mddb]').focus();
-		} else if(!mdp){
-			e.preventDefault(); 
-			$('input[type=radio][name=mdp][value=1]').focus(); 
-		} else if(!psdsign){
-			e.preventDefault(); 
-			$('input[type=radio][name=psdsign][value=1]').focus(); 
-		} else if(!psddb){
-			e.preventDefault(); 
-			$('input[type=text][name=psddb]').focus();
-		} else if(!psdp){
-			e.preventDefault(); 
-			$('input[type=radio][name=psdp][value=1]').focus(); 
-		} else if(!central_15) {
-			e.preventDefault(); 
-			$('input[type=radio][name=central_15][value=0]').focus();
-		} else if(!central_0) {
-			e.preventDefault(); 
-			$('input[type=radio][name=central_0][value=0]').focus();
-		} else if(!sup_hem){
-			e.preventDefault(); 
-			$('input[type=text][name=sup_hem]').focus();
-		} else if(!inf_hem){
-			e.preventDefault(); 
-			$('input[type=text][name=inf_hem]').focus();
-		} else if(!sup_hem2){
-			e.preventDefault(); 
-			$('input[type=text][name=sup_hem2]').focus();
-		} else if(!inf_hem2){
-			e.preventDefault(); 
-			$('input[type=text][name=inf_hem2]').focus();
-		} else if(!pts_five){
-			e.preventDefault(); 
-			$('input[type=text][name=pts_five]').focus();
-		} else if(!pts_contig){
-			e.preventDefault(); 
-			$('input[type=text][name=pts_contig]').focus();
-		} else if(!pts_one){
-			e.preventDefault(); 
-			$('input[type=text][name=pts_one]').focus();
-		} else if(!cluster){
-			e.preventDefault(); 
-			$('input[type=radio][name=cluster][value=1]').focus(); 
-		} 
+			$('#mon').addClass('highlight');
+		} else {
+			$('#mon').removeClass('highlight');
+		} if(!mon_oth2_c74) {
+			$('#mon_oth2_c74').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=mon_oth2_c74]').focus();
+			}
+		} else {
+			$('#mon_oth2_c74').removeClass('highlight');
+		} if(!tar){
+			$('#tar').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=radio][name=tar][value=1]').focus();
+			}
+		} else {
+			$('#tar').removeClass('highlight');
+		} if(!tar_oth){
+			$('#tar_oth').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=tar_oth]').focus();
+			}
+		} else {
+			$('#tar_oth').removeClass('highlight');
+		} if(!lossnum){
+			$('#lossnum').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=lossnum]').focus();
+			}
+		} else if(lossden){
+			$('#lossnum').removeClass('highlight');
+		} if(!lossden){
+			$('#lossnum').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=lossden]').focus();
+			}
+		} if(!fp){
+			$('#fp').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=fp]').focus();
+			}
+		} else {
+			$('#fp').removeClass('highlight');
+		} if(!fn){
+			$('#fn').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=fn]').focus();
+			}
+		} else {
+			$('#fn').removeClass('highlight');
+		} if(!dur){
+			$('#dur').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=dur]').focus();
+			}
+		} else {
+			$('#dur').removeClass('highlight');
+		} if(!fov){
+			$('#fov').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=fov]').focus();
+			}
+		} else {
+			$('#fov').removeClass('highlight');
+		} if(!stimintens){
+			$('#stimintens').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=radio][name=stimintens][value=1]').focus();
+			}
+		} else {
+			$('#stimintens').removeClass('highlight');
+		} if(!stimcol){
+			$('#stimcol').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=radio][name=stimcol][value=1]').focus();
+			}
+		} else {
+			$('#stimcol').removeClass('highlight');
+		} if(!stimcol_oth){
+			$('#stimcol_oth').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=stimcol_oth]').focus();
+			}
+		} else {
+			$('#stimcol_oth').removeClass('highlight');
+		} if(!back){
+			$('#back').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=back]').focus();
+			}
+		} else {
+			$('#back').removeClass('highlight');
+		} if(!strategy){
+			$('#strategy').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=radio][name=strategy][value=1]').focus();
+			}
+		} else {
+			$('#strategy').removeClass('highlight');
+		} if(!strategy_oth){
+			$('#strategy_oth').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=strategy_oth]').focus();
+			}
+		} else {
+			$('#strategy_oth').removeClass('highlight');
+		} if(!pup){
+			$('#pup').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=pup]').focus();
+			}
+		} else {
+			$('#pup').removeClass('highlight');
+		} if(!vanum){
+			$('#vanum').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=vanum]').focus();
+			}
+		} else if(vaden) {
+			$('#vanum').removeClass('highlight');
+		} if(!vaden){
+			$('#vanum').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=vaden]').focus();
+			}
+		} if(!sph_sign){
+			$('#sph_sign').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=radio][name=sph_sign][value=1]').focus();
+			}
+		} else {
+			$('#sph_sign').removeClass('highlight');
+		} if(!sph_num){
+			$('#sph_num').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=sph_num]').focus();
+			}
+		} else {
+			$('#sph_num').removeClass('highlight');
+		} if(!cyl_sign){
+			$('#cyl_sign').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=radio][name=cyl_sign][value=1]').focus(); 
+			}
+		} else {
+			$('#cyl_sign').removeClass('highlight');
+		} if(!cyl_num){
+			$('#cyl_num').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=cyl_num]').focus();
+			}
+		} else {
+			$('#cyl_num').removeClass('highlight');
+		} if(!axis){
+			$('#axis').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				$('input[type=text][name=axis]').focus();
+				e.preventDefault(); 
+			}
+		} else {
+			$('#axis').removeClass('highlight');
+		} if(!ght){
+			$('#ght').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=radio][name=ght][value=1]').focus(); 
+			}
+		} else {
+			$('#ght').removeClass('highlight');
+		} if(!vfi){
+			$('#vfi').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=vfi]').focus();
+			}
+		} else {
+			$('#vfi').removeClass('highlight');
+		} if(!mdsign){
+			$('#mdsign').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=radio][name=mdsign][value=1]').focus(); 
+			}
+		} else {
+			$('#mdsign').removeClass('highlight');
+		} if(!mddb){
+			$('#mddb').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=mddb]').focus();
+			}
+		} else {
+			$('#mddb').removeClass('highlight');
+		} if(!mdp){
+			$('#mdp').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=radio][name=mdp][value=1]').focus(); 
+			}
+		} else {
+			$('#mdp').removeClass('highlight');
+		} if(!psdsign){
+			$('#psdsign').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=radio][name=psdsign][value=1]').focus(); 
+			}
+		} else {
+			$('#psdsign').removeClass('highlight');
+		} if(!psddb){
+			$('#psddb').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=psddb]').focus();
+			}
+		} else {
+			$('#psddb').removeClass('highlight');
+		} if(!psdp){
+			$('#psdp').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=radio][name=psdp][value=1]').focus(); 
+			}
+		} else {
+			$('#psdp').removeClass('highlight');
+		} if(!central_15) {
+			$('#central_15').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=radio][name=central_15][value=0]').focus();
+			}
+		} else {
+			$('#central_15').removeClass('highlight');
+		} if(!central_0) {
+			$('#central_0').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=radio][name=central_0][value=0]').focus();
+			}
+		} else {
+			$('#central_0').removeClass('highlight');
+		} if(!sup_hem){
+			$('#sup_hem').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=sup_hem]').focus();
+			}
+		} else {
+			$('#sup_hem').removeClass('highlight');
+		} if(!inf_hem){
+			$('#inf_hem').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=inf_hem]').focus();
+			}
+		} else {
+			$('#inf_hem').removeClass('highlight');
+		} if(!sup_hem2){
+			$('#sup_hem2').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=sup_hem2]').focus();
+			}
+		} else {
+			$('#sup_hem2').removeClass('highlight');
+		} if(!inf_hem2){
+			$('#inf_hem2').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=inf_hem2]').focus();
+			}
+		} else {
+			$('#inf_hem2').removeClass('highlight');
+		} if(!pts_five){
+			$('#pts_five').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=pts_five]').focus();
+			}
+		} else {
+			$('#pts_five').removeClass('highlight');
+		} if(!pts_contig){
+			$('#pts_contig').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=pts_contig]').focus();
+			}
+		} else {
+			$('#pts_contig').removeClass('highlight');
+		} if(!pts_one){
+			$('#pts_one').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=pts_one]').focus();
+			}
+		} else {
+			$('#pts_one').removeClass('highlight');
+		} if(!cluster){
+			$('#cluster').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=radio][name=cluster][value=1]').focus(); 
+			}
+		} else {
+			$('#cluster').removeClass('highlight');
+		}
 	});
 });
