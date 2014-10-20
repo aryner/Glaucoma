@@ -90,7 +90,18 @@ public class Picture {
 			Logger.getLogger(Picture.class.getName()).log(Level.SEVERE,null,ex);
 		}
 
-		String query = "INSERT INTO picture (name, type) VALUES ";
+		String query = "SELECT * FROM picture";
+		Vector<Picture> oldPics = SQLCommands.queryPictures(query);
+
+		for(int i=0; i<oldPics.size(); i++) {
+			for(int j=0; j<names.size(); i++) {
+				if(oldPics.get(i).getName().equals(names.get(j))) {
+					errors.add(names.remove(j));
+				}
+			}
+		}
+
+		query = "INSERT INTO picture (name, type) VALUES ";
 		for(int i=0; i<names.size(); i++) {
 			if (i>0) { query += ", "; }
 			query += "('"+names.get(i)+"', '"+path+"')";

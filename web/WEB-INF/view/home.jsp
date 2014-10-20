@@ -11,7 +11,7 @@ if(session.getAttribute("errors") != null) {
 	session.removeAttribute("errors");
 
 	out.print("<div class='error'>");
-	out.print("<h4>The following files where not uploaded because they did not have a pdf extension:</h4>");
+	out.print("<h4>The following files where not uploaded because they did not have a pdf extension or they are already in the program:</h4>");
 	for(int i=0; i<errors.size(); i++) {
 		if (i>0) {out.print(", ");}
 		out.print(errors.get(i)+"\n");
