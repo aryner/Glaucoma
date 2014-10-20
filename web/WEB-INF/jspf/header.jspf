@@ -17,7 +17,7 @@
 	</head>
 	<body>
 		<div id="header">
-			<div class="spacer"></div>
+			<div class='tinySpacer'></div>
 			<a class="title" href="home">HVF Grader</a>
 			<span class="welcome">
 				<%
