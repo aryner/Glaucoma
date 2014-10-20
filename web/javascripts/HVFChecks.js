@@ -165,6 +165,32 @@ $(document).ready(function(){
 		}
 	});
 
+	$('input').bind('keypress', function(e){
+		e = e || window.event;
+		var unicode = e.keycode || e.which;
+
+		if(unicode === 13) {
+			e.preventDefault();
+			var focus = document.activeElement;
+
+			if (focus.name === 'cluster') {
+				$(':submit[value=Submit]').click();
+			}
+			else {
+				$(focus).nextAll('input:first').focus();
+				var next = document.activeElement;
+
+				if(focus.type.toString() === 'radio') {
+					while(focus.name.toString() === next.name.toString()) {
+						$(next).nextAll('input:first').focus();
+						next = document.activeElement;
+						console.log("in while");
+					}
+				}
+			}
+		}
+	});
+
 	$(':submit[value=Submit]').click(function(e){ 
 		var mon = $('input[type=radio][name=mon][value=1]').prop('checked')
 			|| $('input[type=radio][name=mon][value=2]').prop('checked') 
