@@ -743,9 +743,69 @@ public class HVFtest {
 		return SQLCommands.getCount(query);
 	}
 
+	public static Vector<String> getUngradedNames() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM picture WHERE name NOT IN (SELECT pictureName FROM HVFtest)";
+		Vector<Picture> pictures = SQLCommands.queryPictures(query);
+
+		for(int i=0; i<pictures.size(); i++) {
+			result.add(pictures.get(i).getName());
+		}
+
+		return result;
+	}
+
+	public static Vector<String> getGradedOnceNames() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM HVFtest GROUP BY pictureName HAVING COUNT(*)=1";
+		Vector<HVFtest> hvf = SQLCommands.queryHVFtest(query);
+
+		for(int i=0; i<hvf.size(); i++) {
+			result.add(hvf.get(i).getPictureName());
+		}
+
+		return result;
+	}
+	
+	public static Vector<String> getNeedsAdjudication() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT DISTINCT pictureName FROM HVFtest WHERE confirmed='1'";
+		Vector<HVFtest> hvf = SQLCommands.queryHVFtest(query);
+
+		for(int i=0; i<hvf.size(); i++) {
+			result.add(hvf.get(i).getPictureName());
+		}
+
+		return result;
+	}
+
+	public static Vector<String> getNeedsReview() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT DISTINCT pictureName FROM HVFtest WHERE confirmed >= 2 AND opthCheck='0'";
+		Vector<HVFtest> hvf = SQLCommands.queryHVFtest(query);
+
+		for(int i=0; i<hvf.size(); i++) {
+			result.add(hvf.get(i).getPictureName());
+		}
+
+		return result;
+	}
+	
+	public static Vector<String> getReviewed() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT DISTINCT pictureName FROM HVFtest WHERE confirmed >=2 AND opthCheck > 0";
+		Vector<HVFtest> hvf = SQLCommands.queryHVFtest(query);
+
+		for(int i=0; i<hvf.size(); i++) {
+			result.add(hvf.get(i).getPictureName());
+		}
+
+		return result;
+	}
+
 	public static Vector<String> getCSVLines() {
 		Vector<String> result = new Vector<String>();
-		String query = "SELECT * FROM HVFtest";
+		String query = "SELECT DISTINCT pictureName FROM HVFtest";
 		Vector<HVFtest> hvf = SQLCommands.queryHVFtestMaster(query);
 
 		String currLine = "id, confirmed, opthCheck, pictureName, userID, vf_loss, vf_defect, glau, vf_loss_oth, vf_defect_oth, "+

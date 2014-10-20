@@ -59,12 +59,25 @@ public class Controller extends HttpServlet {
 		else if(userPath.equals("/home")) {
 			User user = (User)session.getAttribute("user");
 			request.setAttribute("access",user.getAccess());
+
 			if(user.getAccess() == 1) {
 				request.setAttribute("HVFACount", HVFtest.needAdjudicationCount());
 			}
 			else if(user.getAccess() == 2) {
 				request.setAttribute("HVFACount", HVFtest.getOpCheckCount());
 			}
+
+			Vector<String> ungraded = HVFtest.getUngradedNames();
+			Vector<String> onceGraded = HVFtest.getGradedOnceNames();
+			Vector<String> needsAdj = HVFtest.getNeedsAdjudication();
+			Vector<String> needsReview = HVFtest.getNeedsReview();
+			Vector<String> reviewed = HVFtest.getReviewed();
+
+			request.setAttribute("ungraded",ungraded);
+			request.setAttribute("gradedOnce",onceGraded);
+			request.setAttribute("needsAdj",needsAdj);
+			request.setAttribute("needsReview",needsReview);
+			request.setAttribute("reviewed",reviewed);
 		}
 
 		else if(userPath.equals("/HVFtest")) {

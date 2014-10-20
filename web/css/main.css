@@ -98,6 +98,21 @@ body {
 
 	cursor: pointer; 
 }
+.logOutBtn {
+	font-family: Helvetica;
+	border-radius: 6px;
+	border: 1px solid darkslategray;
+
+	padding: 5px;
+	margin-left: 20px;
+	margin-bottom: 0;
+	text-align: center;
+	background-color:  whitesmoke;
+	text-decoration: none;
+	color: darkslategray;
+
+	cursor: pointer; 
+}
 
 .menuBtn {
 	font-size: 100%;
@@ -166,6 +181,10 @@ a {
 }
 .full-column {
 	width: 100%;
+	float: left;
+}
+.fifth-column {
+	width: 20%;
 	float: left;
 }
 
@@ -536,7 +555,7 @@ and scalar of: 0.29411764705882354*/
 
 .HVFimage {
 	width : 45%; 
-	height : 90%;
+	height : 0800px;
 	postion : fixed;
 	float : left;
 }
@@ -548,7 +567,7 @@ and scalar of: 0.29411764705882354*/
 .questions {
 	margin : 10px;
 	float : left; 
-	height : 90%;
+	height : 0800px;
 	width: 45%;
 	overflow: scroll;
 }
