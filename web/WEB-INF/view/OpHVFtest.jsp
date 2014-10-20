@@ -35,8 +35,8 @@ False NEG Errors (%) <input type="text" name="fn" class="numBox" <%out.print("va
 
 GHT: <br>
 <input type="radio" name="ght" value="1"<%if(hvf.getGht()==1) {out.print(" checked");}%>>Within Normal Limits<br>
-<input type="radio" name="ght" value="2"<%if(hvf.getGht()==2) {out.print(" checked");}%>><span style='color:darkorange;'>Borderline</span><br>
-<input type="radio" name="ght" value="3"<%if(hvf.getGht()==3) {out.print(" checked");}%>>Outside Normal Limits<br>
+<input type="radio" name="ght" value="2"<%if(hvf.getGht()==2) {out.print(" checked");}%>>Borderline<br>
+<input type="radio" name="ght" value="3"<%if(hvf.getGht()==3) {out.print(" checked");}%>><span style='color:darkorange;'>Outside Normal Limits</span><br>
 <input type="radio" name="ght" value="4"<%if(hvf.getGht()==4) {out.print(" checked");}%>>General Reduction of Sensitivity<br>
 <input type="radio" name="ght" value="5"<%if(hvf.getGht()==5) {out.print(" checked");}%>>Abnormally High Sensitivity<br><br>
 
@@ -182,20 +182,20 @@ Categorization of glaucoma severity:<br>
 <input type="radio" name="severe" value="4"<%if(hvf.getSevere()==4) {out.print(" checked");}%>>Severe<br>
 <input type="radio" name="severe" value="4"<%if(hvf.getSevere()==5) {out.print(" checked");}%>>End stage glaucoma<br><br>
 
-Test Reliability:<br>
+<span id='reliable_review'>Test Reliability:</span><br>
 <input type="radio" name="reliable_review" value="1">Reliable<br>
 <input type="radio" name="reliable_review" value="2">Unreliable<br><br>
 
-Pattern of VF loss:<br>
+<span id='vf_loss'>Pattern of VF loss:</span><br>
 <input type="radio" name="vf_loss" value="1">glaucoma<br>
 <input type="radio" name="vf_loss" value="2">neuro<br>
 <input type="radio" name="vf_loss" value="3">nonspecific change<br>
 <input type="radio" name="vf_loss" value="4">could not determine (unreliable field)<br>
-<input type="radio" name="vf_loss" value="5">other:
+<input type="radio" name="vf_loss" value="5"><span id='vf_loss_oth'>other:</span>
 <input type="text" name="vf_loss_oth">
 <br><br>
 
-Type of VF defect:<br>
+<span id='vf_defect'>Type of VF defect:</span><br>
 <input type="radio" name="vf_defect" value="1">superior arcuate scotoma<br>
 <input type="radio" name="vf_defect" value="2">inferior arcuate scotoma<br>
 <input type="radio" name="vf_defect" value="3">superior nasal step<br>
@@ -203,7 +203,7 @@ Type of VF defect:<br>
 <input type="radio" name="vf_defect" value="5">temporal wedge<br>
 <input type="radio" name="vf_defect" value="6">tunnel vision<br>
 <input type="radio" name="vf_defect" value="7">end stage<br>
-<input type="radio" name="vf_defect" value="8">other:
+<input type="radio" name="vf_defect" value="8"><span id='vf_defect_oth'>other:</span>
 <input type="text" name="vf_defect_oth">
 <br><br>
 

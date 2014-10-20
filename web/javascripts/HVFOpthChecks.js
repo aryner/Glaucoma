@@ -5,6 +5,33 @@
  */
 
 $(document).ready(function(){
+
+	$('input').bind('keypress', function(e){
+		e = e || window.event;
+		var unicode = e.keycode || e.which;
+
+		if(unicode === 13) {
+			e.preventDefault();
+			var focus = document.activeElement;
+			
+			if (focus.name === 'vf_defect_oth'){
+				$(':submit[value=Submit]').click();
+			}
+			else {
+				$(focus).nextAll('input:first').focus();
+				var next = document.activeElement;
+
+				if(focus.type.toString() === 'radio') {
+					while(focus.name.toString() === next.name.toString()) {
+						$(next).nextAll('input:first').focus();
+						next = document.activeElement;
+						console.log("in while");
+					}
+				}
+			}
+		}
+	});
+
 	$(':submit[value=Submit]').click(function(e){ 
 		var fp = $('input[type=text][name=fp]').val().length > 0;
 		var fn = $('input[type=text][name=fn]').val().length > 0; 
@@ -82,6 +109,8 @@ $(document).ready(function(){
 		var vf_defect_oth_yes = $('input[type=radio][name=vf_defect][value=8]').prop('checked');
 		var vf_defect_oth = $('input[type=text][name=vf_defect_oth]').val().length > 0;
 
+		var focus = false;
+
 		if(!fn) {
 			e.preventDefault(); 
 			$('input[type=text][name=fn]').focus();
@@ -139,21 +168,50 @@ $(document).ready(function(){
 		} else if(!severe) {
 			e.preventDefault(); 
 			$('input[type=radio][name=severe][value=1]').focus();
-		} else if(!reliable_review) {
+		}
+		if(!reliable_review) {
+			focus = true;
 			e.preventDefault(); 
 			$('input[type=radio][name=reliable_review][value=1]').focus();
-		} else if(!vf_loss) {
-			e.preventDefault(); 
-			$('input[type=radio][name=vf_loss][value=1]').focus();
-		} else if(vf_loss_oth_yes && !vf_loss_oth) {
-			e.preventDefault(); 
-			$('input[type=text][name=vf_loss_oth]').focus();
-		} else if(!vf_defect) {
-			e.preventDefault(); 
-			$('input[type=radio][name=vf_defect][value=1]').focus();
-		} else if(vf_defect_oth_yes && !vf_defect_oth) {
-			e.preventDefault(); 
-			$('input[type=text][name=vf_defect_oth]').focus();
+			$('#reliable_review').addClass('highlight');
+		} else {
+			$('#reliable_review').removeClass('highlight');
+		} if(!vf_loss) {
+			if(!focus) {
+				e.preventDefault(); 
+				focus = true;
+				$('input[type=radio][name=vf_loss][value=1]').focus();
+			}
+			$('#vf_loss').addClass('highlight');
+		} else {
+			$('#vf_loss').removeClass('highlight');
+		} if(vf_loss_oth_yes && !vf_loss_oth) {
+			if(!focus){
+				focus = true;
+				e.preventDefault(); 
+				$('input[type=text][name=vf_loss_oth]').focus();
+			}
+			$('#vf_loss_oth').addClass('highlight');
+		} else {
+			$('#vf_loss_oth').removeClass('highlight');
+		} if(!vf_defect) {
+			if(!focus) {
+				focus = true;
+				e.preventDefault(); 
+				$('input[type=radio][name=vf_defect][value=1]').focus();
+			}
+			$('#vf_defect').addClass('highlight');
+		} else {
+			$('#vf_defect').removeClass('highlight');
+		} if(vf_defect_oth_yes && !vf_defect_oth) {
+			if(!focus) {
+				focus = true;
+				e.preventDefault(); 
+				$('input[type=text][name=vf_defect_oth]').focus();
+			}
+			$('#vf_defect_oth').addClass('highlight');
+		} else {
+			$('#vf_defect_oth').removeClass('highlight');
 		}
 	});
 });
