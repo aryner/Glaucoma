@@ -627,6 +627,10 @@ public class HVFtest {
 		if(pictures.size() > 0) {
 			Random rand = new Random(System.currentTimeMillis());
 			result = pictures.get(rand.nextInt(pictures.size()));
+
+			if(user.getAccess() == 0) {
+				result = pictures.get(0);
+			}
 		}
 
 		return result;
@@ -671,12 +675,12 @@ public class HVFtest {
 			Vector<HVFtest> notSet = SQLCommands.queryHVFtest(query);
 
 			for(int i=set.size()-1; i>=0; i--) {
-				if (set.get(i).getPictureName().equals(picName)) {
+				if (!set.get(i).getPictureName().equals(picName)) {
 					set.remove(i);
 				}
 			}
 			for(int i=notSet.size()-1; i>=0; i--) {
-				if (notSet.get(i).getPictureName().equals(picName)) {
+				if (!notSet.get(i).getPictureName().equals(picName)) {
 					notSet.remove(i);
 				}
 			}

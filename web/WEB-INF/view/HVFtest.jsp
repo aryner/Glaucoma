@@ -229,7 +229,9 @@ if(pic == null) {
 <input type="radio" name="stimintens" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>II<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
 <input type="radio" name="stimintens" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>III<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
 <input type="radio" name="stimintens" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>IV<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="stimintens" value="5"<%if(a && !diff && v1==5){out.print(" checked='true'");}%>>V<%if((a&&diff)&&((v1==5)||(v2==5))){%><span class='highlight'>***</span><%}%><br><br>
+<input type="radio" name="stimintens" value="5"<%if(a && !diff && v1==5){out.print(" checked='true'");}%>>V<%if((a&&diff)&&((v1==5)||(v2==5))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="stimintens" value="999"<%if(a && !diff && v1==999){out.print(" checked='true'");}%>>Blank<%if((a&&diff)&&((v1==999)||(v2==999))){%><span class='highlight'>***</span><%}%><br>
+<br>
 
 <%
 	v1 = -1;
@@ -466,7 +468,9 @@ if(pic == null) {
 <input type="radio" name="ght" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Borderline<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="ght" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Outside Normal Limits<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="ght" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>General Reduction of Sensitivity<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'> ***</span><%}%><br>
-	<input type="radio" name="ght" value="5"<%if(a && !diff && v1==5){out.print(" checked='true'");}%>>Abnormally High Sensitivity<%if((a&&diff)&&((v1==5)||(v2==5))){%><span class='highlight'>  ***</span><%}%><br><br>
+<input type="radio" name="ght" value="5"<%if(a && !diff && v1==5){out.print(" checked='true'");}%>>Abnormally High Sensitivity<%if((a&&diff)&&((v1==5)||(v2==5))){%><span class='highlight'>  ***</span><%}%><br>
+<input type="radio" name="ght" value="999"<%if(a && !diff && v1==999){out.print(" checked='true'");}%>>Blank<%if((a&&diff)&&((v1==999)||(v2==999))){%><span class='highlight'>  ***</span><%}%><br>
+<br>
 
 <%
 	if(a) {
@@ -501,7 +505,7 @@ if(pic == null) {
 %>
 <span id='mdsign'>MD - Sign </span>
 <input type="radio" name="mdsign" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>+<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'> ***</span><%}%> 
-	<input type="radio" name="mdsign" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>-<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="mdsign" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>-<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'> ***</span><%}%><br>
 
 <%
 	if(a) {
@@ -539,7 +543,8 @@ if(pic == null) {
 <input type="radio" name="mdp" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>><2%<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="mdp" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>><5%<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="mdp" value="5"<%if(a && !diff && v1==5){out.print(" checked='true'");}%>><10%<%if((a&&diff)&&((v1==5)||(v2==5))){%><span class='highlight'> ***</span><%}%><br>
-<input type="radio" name="mdp" value="6"<%if(a && !diff && v1==6){out.print(" checked='true'");}%>>Blank<%if((a&&diff)&&((v1==6)||(v2==6))){%><span class='highlight'> ***</span><%}%><br><br>
+<input type="radio" name="mdp" value="999"<%if(a && !diff && v1==999){out.print(" checked='true'");}%>>Blank<%if((a&&diff)&&((v1==999)||(v2==999))){%><span class='highlight'> ***</span><%}%><br>
+<br>
 
 <%
 	v1 = -1;
@@ -594,7 +599,7 @@ if(pic == null) {
 <input type="radio" name="psdp" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>><2%<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="psdp" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>><5%<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="psdp" value="5"<%if(a && !diff && v1==5){out.print(" checked='true'");}%>><10%<%if((a&&diff)&&((v1==5)||(v2==5))){%><span class='highlight'> ***</span><%}%><br>
-<input type="radio" name="psdp" value="6"<%if(a && !diff && v1==6){out.print(" checked='true'");}%>>Blank<%if((a&&diff)&&((v1==6)||(v2==6))){%><span class='highlight'> ***</span><%}%><br><br>
+<input type="radio" name="psdp" value="999"<%if(a && !diff && v1==999){out.print(" checked='true'");}%>>Blank<%if((a&&diff)&&((v1==999)||(v2==999))){%><span class='highlight'> ***</span><%}%><br><br>
 
 <%
 	v1 = -1;
@@ -615,7 +620,9 @@ if(pic == null) {
 <input type="radio" name="central_15" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>1<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="central_15" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>2<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="central_15" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>3<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'> ***</span><%}%><br>
-<input type="radio" name="central_15" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>4<%if((a&&diff)&&((v1==4)||(v2==5))){%><span class='highlight'> ***</span><%}%><br><br>
+<input type="radio" name="central_15" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>4<%if((a&&diff)&&((v1==4)||(v2==5))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="central_15" value="999"<%if(a && !diff && v1==999){out.print(" checked='true'");}%>>Blank<%if((a&&diff)&&((v1==999)||(v2==999))){%><span class='highlight'> ***</span><%}%><br>
+<br>
 
 <%
 	v1 = -1;
@@ -635,8 +642,10 @@ if(pic == null) {
 <input type="radio" name="central_0" value="0"<%if(a && !diff && v1==0){out.print(" checked='true'");}%>>0<%if((a&&diff)&&((v1==0)||(v2==0))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="central_0" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>1<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="central_0" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>2<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'> ***</span><%}%><br>
-<input type="radio" name="central_0" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>3<%if((a&&diff)&&((v1==3)||(v2==4))){%><span class='highlight'> ***</span><%}%><br>
-<input type="radio" name="central_0" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>4<%if((a&&diff)&&((v1==4)||(v2==5))){%><span class='highlight'> ***</span><%}%><br><br>
+<input type="radio" name="central_0" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>3<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="central_0" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>4<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="central_0" value="999"<%if(a && !diff && v1==999){out.print(" checked='true'");}%>>Blank<%if((a&&diff)&&((v1==999)||(v2==999))){%><span class='highlight'> ***</span><%}%><br>
+<br>
 
 <%
 	if(a) {
