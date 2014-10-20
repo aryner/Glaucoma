@@ -615,7 +615,7 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='central_15'># of points within central 5 degrees with sensitivity < 15 dB:</span><br>
+<span id='central_15'># of points within central 5 degrees with sensitivity < 15 dB on Pattern Deviation Plot:</span><br>
 <input type="radio" name="central_15" value="0"<%if(a && !diff && v1==0){out.print(" checked='true'");}%>>0<%if((a&&diff)&&((v1==0)||(v2==0))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="central_15" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>1<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="central_15" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>2<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'> ***</span><%}%><br>
@@ -638,7 +638,7 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='central_0'># of points within central 5 degrees with sensitivity < 0 dB:</span><br>
+<span id='central_0'># of points within central 5 degrees with sensitivity < 0 dB on Pattern Deviation Plot:</span><br>
 <input type="radio" name="central_0" value="0"<%if(a && !diff && v1==0){out.print(" checked='true'");}%>>0<%if((a&&diff)&&((v1==0)||(v2==0))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="central_0" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>1<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="central_0" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>2<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'> ***</span><%}%><br>
@@ -659,7 +659,7 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='sup_hem'>Superior hemifield: # points <15dB within 5 degrees of fixations?</span><br> 
+<span id='sup_hem'>Superior hemifield: # points <15dB within 5 degrees of fixations? on Pattern Deviation Plot</span><br> 
 <input type="text" name="sup_hem" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
 <br>
@@ -676,7 +676,7 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='inf_hem'>Inferior hemfield: # points <15dB within 5 degrees of fixation?</span><br> 
+<span id='inf_hem'>Inferior hemifield: # points <15dB within 5 degrees of fixation? on Pattern Deviation Plot</span><br> 
 <input type="text" name="inf_hem" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
 <br><br>
@@ -710,7 +710,7 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='inf_hem2'>Inferior hemfield: # points with sensitivity >=15dB within 5 degrees of fixation?</span><br>
+<span id='inf_hem2'>Inferior hemifield: # points with sensitivity >=15dB within 5 degrees of fixation?</span><br>
 <input type="text" name="inf_hem2" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
 <br><br>
@@ -780,10 +780,12 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='cluster'>Cluster of >= 3 non-edge points that are all significant<br> at p < 5% with >= 1 point being significant at p < 5% <br>with >= 1 point
+<span id='cluster'>Cluster of >= 3 non-edge points that are all significant<br> at p < 5% with with >= 1 point
 	being significant at p < 1%</span><br>
 <input type="radio" name="cluster" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>Yes<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'> ***</span><%}%> 
-<input type="radio" name="cluster" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>No<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'> ***</span><%}%> <br><br> 
+<input type="radio" name="cluster" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>No<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'> ***</span><%}%>
+<input type="radio" name="cluster" value="999"<%if(a && !diff && v1==999){out.print(" checked='true'");}%>>Blank<%if((a&&diff)&&((v1==999)||(v2==999))){%><span class='highlight'> ***</span><%}%> <br>
+<br> 
 
 <input type="submit" value="Submit" class="btn">
 </form>

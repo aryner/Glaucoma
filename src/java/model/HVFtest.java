@@ -359,7 +359,7 @@ public class HVFtest {
 			else if(mddb <= 20.) {
 				md = 3;
 			}
-			else {
+			else if (mddb < 999) {
 				md = 4;
 			}
 
@@ -371,40 +371,40 @@ public class HVFtest {
 			else if((ptsFive >= 37 && ptsFive <= 55) && (ptsOne >= 19 && ptsOne <= 36)) {
 				advanced++;
 			}
-			else if(ptsFive >= 56 || ptsOne >= 37) {
+			else if((ptsFive >= 56 && ptsFive < 999) || (ptsOne >= 37 && ptsOne < 999)) {
 				severe++;
 			}
 			else if(((ptsFive >= 19 && ptsFive <=36) && (ptsOne >=19)) || (ptsFive >= 37 && (ptsOne >= 12 && ptsOne <= 36))){
 				;//do nothing; it makes no contribution to classifications
 			}
-			else {
+			else if (ptsFive < 999 && ptsOne < 999) {
 				early++;
 			}
 
 			int central15 = hvf.getCentral_15();
 			int central0 = hvf.getCentral_0();
-			if (central15 >= 1 && central0 == 0) {
+			if (central15 >= 1 && central0 == 0 && central15 < 999) {
 				moderate++;
 			}
 			else if(central0 == 1) {
 				advanced++;
 			}
-			else if(central0 > 1) {
+			else if(central0 > 1 && central0 < 999) {
 				severe++;
 			}
-			else {
+			else if(central0 < 999) {
 				early++;
 			}
 
 			int sup = hvf.getSup_hem();
 			int inf = hvf.getInf_hem();
-			if((sup == 0 && inf > 0) || (sup > 0 && inf == 0)) {
+			if((sup == 0 && inf > 0 && inf < 999) || (sup > 0 && inf == 0 && sup < 999)) {
 				moderate++;
 			}
 			else if((sup == 1 || sup == 2) && (inf == 1 || inf == 2)) {
 				advanced++;
 			}
-			else if(sup >= 2 && inf >= 2) {
+			else if(sup >= 2 && inf >= 2 && (sup < 999 && inf < 999)) {
 				severe++;
 			}
 			else {
@@ -519,14 +519,14 @@ public class HVFtest {
 		hvf.setSup_hem(Integer.parseInt(attr));
 		attr = request.getParameter("inf_hem");
 		hvf.setInf_hem(Integer.parseInt(attr));
-		attr = request.getParameter("sup_hem2");
-		hvf.setSup_hem2(Integer.parseInt(attr));
-		attr = request.getParameter("inf_hem2");
-		hvf.setInf_hem2(Integer.parseInt(attr));
+//		attr = request.getParameter("sup_hem2");
+//		hvf.setSup_hem2(Integer.parseInt(attr));
+//		attr = request.getParameter("inf_hem2");
+//		hvf.setInf_hem2(Integer.parseInt(attr));
 		attr = request.getParameter("pts_five");
 		hvf.setPts_five(Integer.parseInt(attr));
-		attr = request.getParameter("pts_contig");
-		hvf.setPts_contig(Integer.parseInt(attr));
+//		attr = request.getParameter("pts_contig");
+//		hvf.setPts_contig(Integer.parseInt(attr));
 		attr = request.getParameter("pts_one");
 		hvf.setPts_one(Integer.parseInt(attr));
 		attr = request.getParameter("severe");
@@ -546,8 +546,8 @@ public class HVFtest {
 				"hvf_psdp='"+hvf.getPsdp()+"', hvf_cluster='"+hvf.getCluster()+"', hvf_glau='"+hvf.getHvf_glau()+"', "+
 				"hvf_mdsign='"+hvf.getMdsign()+"', hvf_mddb='"+hvf.getMddb()+"', hvf_mdp='"+hvf.getMdp()+"', "+
 				"hvf_central_15='"+hvf.getCentral_15()+"', hvf_central_0='"+hvf.getCentral_0()+"', hvf_sup_hem='"+hvf.getSup_hem()+"', "+
-				"hvf_inf_hem='"+hvf.getInf_hem()+"', hvf_sup_hem2='"+hvf.getSup_hem2()+"', hvf_inf_hem2='"+hvf.getInf_hem2()+"', "+
-				"hvf_pts_five='"+hvf.getPts_five()+"', hvf_pts_contig='"+hvf.getPts_contig()+"', hvf_pts_one='"+hvf.getPts_one()+"', "+
+				"hvf_inf_hem='"+hvf.getInf_hem()+"', "+
+				"hvf_pts_five='"+hvf.getPts_five()+"', hvf_pts_one='"+hvf.getPts_one()+"', "+
 				"hvf_severe='"+hvf.getSevere()+"', hvf_reliable_review='"+hvf.getReliable_review()+"', hvf_vf_loss='"+hvf.getVf_loss()+"', "+
 				"hvf_vf_loss_oth='"+hvf.getVf_loss_oth()+"', hvf_vf_defect='"+hvf.getVf_defect()+"', hvf_vf_defect_oth='"+hvf.getVf_defect_oth()+
 				"', opthCheck='"+user.getID()+"' WHERE pictureName='"+picName+"'";
