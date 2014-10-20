@@ -101,9 +101,9 @@ if(session.getAttribute("errors") != null) {
 </div>
 
 <div class='container'>
-	<div class='fifth-column'><h3>Ungraded</h3>
+	<%Vector<String> ungraded = (Vector)request.getAttribute("ungraded");%>
+	<div class='fifth-column'><h3>Ungraded (<%out.print(ungraded.size());%>)</h3>
 		<%
-			Vector<String> ungraded = (Vector)request.getAttribute("ungraded");
 			String name = "";
 			for(int i=0; i<ungraded.size(); i++) {
 				name = ungraded.get(i);
@@ -111,47 +111,43 @@ if(session.getAttribute("errors") != null) {
 			}
 		%>
 	</div>
-	<div class='fifth-column'><h3>Graded once</h3>
+	<%Vector<String> gradedOnce = (Vector)request.getAttribute("gradedOnce");%>
+	<div class='fifth-column'><h3>Graded once (<%out.print(gradedOnce.size());%>)</h3>
 		<%
-			Vector<String> gradedOnce = (Vector)request.getAttribute("gradedOnce");
 			name = "";
 			for(int i=0; i<gradedOnce.size(); i++) {
 				name = gradedOnce.get(i);
 				out.print(name.substring(0,name.length()-4)+"<br>");
-System.out.println("1");
 			}
 		%>
 	</div>
-	<div class='fifth-column'><h3>Needs Adjudication</h3>
+	<%Vector<String> needsAdj = (Vector)request.getAttribute("needsAdj");%>
+	<div class='fifth-column'><h3>Needs Adjudication (<%out.print(needsAdj.size());%>)</h3>
 		<%
-			Vector<String> needsAdj = (Vector)request.getAttribute("needsAdj");
 			name = "";
 			for(int i=0; i<needsAdj.size(); i++) {
 				name = needsAdj.get(i);
 				out.print(name.substring(0,name.length()-4)+"<br>");
-System.out.println("2");
 			}
 		%>
 	</div>
-	<div class='fifth-column'><h3>Needs review</h3>
+	<%Vector<String> needsReview = (Vector)request.getAttribute("needsReview");%>
+	<div class='fifth-column'><h3>Needs review (<%out.print(needsReview.size());%>)</h3>
 		<%
-			Vector<String> needsReview = (Vector)request.getAttribute("needsReview");
 			name = "";
 			for(int i=0; i<needsReview.size(); i++) {
 				name = needsReview.get(i);
 				out.print(name.substring(0,name.length()-4)+"<br>");
-System.out.println("3");
 			}
 		%>
 	</div>
-	<div class='fifth-column'><h3>Reviewed / Not glaucoma</h3>
+	<%Vector<String> reviewed = (Vector)request.getAttribute("reviewed");%>
+	<div class='fifth-column'><h3>Reviewed / Not glaucoma (<%out.print(reviewed.size());%>)</h3>
 		<%
-			Vector<String> reviewed = (Vector)request.getAttribute("reviewed");
 			name = "";
 			for(int i=0; i<reviewed.size(); i++) {
 				name = reviewed.get(i);
 				out.print(name.substring(0,name.length()-4)+"<br>");
-System.out.println("4");
 			}
 		%>
 	</div>
