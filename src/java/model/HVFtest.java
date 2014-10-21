@@ -473,7 +473,14 @@ public class HVFtest {
 				}
 			}
 		} else {
-			query += ", hvf_glau='2', hvf_severe='0', opthCheck=-1";
+			query += ", hvf_glau='2', hvf_severe='0',";
+			Random rand = new Random(System.currentTimeMillis());
+			if (rand.nextDouble() < 0.1) {
+				query += " opthCheck=0";
+			}
+			else {
+				query += " opthCheck=-1";
+			}
 		}
 
 		if(user.getAccess() == 0) {
@@ -686,7 +693,14 @@ public class HVFtest {
 			}
 			
 			//update the confirmed ones
-			query = "UPDATE HVFtest SET confirmed=2 WHERE pictureName='"+picName+"'";
+			query = "UPDATE HVFtest SET confirmed=2";
+			if(set.get(0).getHvf_glau() == 2) {
+				Random rand = new Random(System.currentTimeMillis());
+				if(rand.nextDouble() < 0.10) {
+					query += ", opthCheck=0";
+				}
+			}
+			query += " WHERE pictureName='"+picName+"'";
 			if(set.size() > 0) {
 				SQLCommands.update(query);
 			}
@@ -797,7 +811,7 @@ public class HVFtest {
 	
 	public static Vector<String> getReviewed() {
 		Vector<String> result = new Vector<String>();
-		String query = "SELECT DISTINCT pictureName FROM HVFtest WHERE confirmed >=2 AND opthCheck > 0";
+		String query = "SELECT DISTINCT pictureName FROM HVFtest WHERE confirmed >=2 AND opthCheck != 0";
 		Vector<HVFtest> hvf = SQLCommands.queryHVFtest(query);
 
 		for(int i=0; i<hvf.size(); i++) {

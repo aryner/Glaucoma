@@ -94,7 +94,7 @@ public class Controller extends HttpServlet {
 				}
 				if(user.getAccess() == 1 && HVFtest.needInitialCount() == 0) {
 					//add 10% of no glau to be checked by opth
-					HVFtest.addNegatives(0.1);
+					//HVFtest.addNegatives(0.1);
 				}
 			}
 			if(user.getAccess() == 1 && picture != null) {
