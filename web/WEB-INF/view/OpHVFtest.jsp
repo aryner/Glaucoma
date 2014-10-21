@@ -160,6 +160,16 @@ Inferior hemifield: # points <15dB within central 5 degrees of fixation? (top le
 Superiour hemifield: # points with sensitivity >=15dB within 5 degrees of fixation?<br> <input type="text" name="sup_hem2" <%out.print("value='"+hvf.getSup_hem2()+"'");%>><br>
 Inferior hemfield: # points with sensitivity >=15dB within 5 degrees of fixation?<br> <input type="text" name="inf_hem2" <%out.print("value='"+hvf.getInf_hem2()+"'");%>><br><br>
 -->
+<br>
+<%
+	String chart = (String)request.getAttribute("chart");
+	if(chart == null) {
+		chart = "";
+	}
+%>
+<input type="hidden" class="severityChart" name="<%out.print(chart);%>">
+<input type='button' id="chart" value="See Severity Chart" class="btn" id="chart">
+<br><br>
 Categorization of glaucoma severity:<br>
 <input type="radio" name="severe" value="0"<%if(hvf.getSevere()==0) {out.print(" checked");}%>>No glaucoma / minimal defect<br>
 <input type="radio" name="severe" value="1"<%if(hvf.getSevere()==1) {out.print(" checked");}%>>Early<br>
@@ -206,3 +216,4 @@ False NEG Errors (%) <input type="text" name="fn" class="numBox" <%out.print("va
 
 <script src="javascripts/jquery-1.11.1.min.js" type="text/javascript"></script>
 <script src="javascripts/HVFOpthChecks.js" type="text/javascript"></script>
+<script src="javascripts/HVFseverityChart.js" type="text/javascript"></script>

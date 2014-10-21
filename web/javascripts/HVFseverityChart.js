@@ -5,13 +5,15 @@
  */
 
 
+
+
 $(document).ready(function (e){
-	$('#gradingChart').click(function(e) {
+	$('#chart').click(function(e) {
 		e.stopPropagation();
-		var name = $('.gradingChart')[0].name;
+		var name = $('.severityChart')[0].name;
 
 		if(name.length > 0) {
-			$('body').append("<embed class='examineImg' src='http://localhost:8080/HVF/pdf?type=grading&name="+name+"' type='application/pdf'>")
+			$('body').append("<embed class='examineImg' src='http://localhost:8080/HVF/pdf?type=severity&name="+name+"' type='application/pdf'>")
 				.fadeIn("fast"); 
 		}
 	});

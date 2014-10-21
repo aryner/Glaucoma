@@ -115,6 +115,7 @@ public class Controller extends HttpServlet {
 			if(picture != null) {
 				request.setAttribute("hvf",HVFtest.getOpHVF(picture.getName()));
 			}
+			request.setAttribute("chart",SQLCommands.querySeverityChartName());
 			request.setAttribute("slash",slash);
 			request.setAttribute("picture",picture);
 		}
