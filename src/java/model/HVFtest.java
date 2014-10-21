@@ -484,7 +484,7 @@ public class HVFtest {
 		}
 
 		if(user.getAccess() == 0) {
-			query += " WHERE id="+hvf.getId();
+			query += " WHERE pictureName='"+hvf.getPictureName()+"'";
 		} else if(user.getAccess() ==1) { 
 			query += ", confirmed=2 WHERE pictureName='"+request.getParameter("pictureName")+"'";
 		}
@@ -693,12 +693,6 @@ public class HVFtest {
 			
 			//update the confirmed ones
 			query = "UPDATE HVFtest SET confirmed=2";
-			if(set.get(0).getHvf_glau() == 2) {
-				Random rand = new Random(System.currentTimeMillis());
-				if(rand.nextDouble() < 0.10) {
-					query += ", opthCheck=0";
-				}
-			}
 			query += " WHERE pictureName='"+picName+"'";
 			if(set.size() > 0) {
 				SQLCommands.update(query);
