@@ -618,15 +618,15 @@ public class HVFtest {
 		String query = "";
 		if (user.getAccess() == 0) {
 			query = "SELECT * FROM picture WHERE name NOT IN (SELECT "+
-				" pictureName FROM HVFtest WHERE userID="+user.getID()+")";
+				" pictureName FROM HVFtest WHERE userID="+user.getID()+") AND type='HVF'";
 		}
 		else if (user.getAccess() == 1) {
 			query = "SELECT * FROM picture WHERE name IN (SELECT pictureName FROM "+
-				"HVFtest WHERE CONFIRMED=1)";
+				"HVFtest WHERE CONFIRMED=1) AND type='HVF'";
 		}
 		else if (user.getAccess() == 2) {
 			query = "SELECT * FROM picture WHERE name IN (SELECT pictureName FROM HVFtest WHERE "+
-				"confirmed>=2 && opthCheck=0)";
+				"confirmed>=2 && opthCheck=0) AND type='HVF'";
 		}
 
 		Vector<Picture> pictures = SQLCommands.queryPictures(query); 
@@ -756,7 +756,7 @@ public class HVFtest {
 
 	public static Vector<String> getUngradedNames() {
 		Vector<String> result = new Vector<String>();
-		String query = "SELECT * FROM picture WHERE name NOT IN (SELECT pictureName FROM HVFtest)";
+		String query = "SELECT * FROM picture WHERE name NOT IN (SELECT pictureName FROM HVFtest) AND type='HVF'";
 		Vector<Picture> pictures = SQLCommands.queryPictures(query);
 
 		for(int i=0; i<pictures.size(); i++) {
