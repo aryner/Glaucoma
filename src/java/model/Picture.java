@@ -36,7 +36,7 @@ public class Picture {
 		Vector<String> names = new Vector<String>();
 		Vector<String> errors = new Vector<String>();
 		Vector<FileItem> files= new Vector<FileItem>();
-		String path = null;
+		String path = "";
 
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setSizeThreshold(100 * 1024);
@@ -76,27 +76,54 @@ public class Picture {
 				}
 			}
 
-			for(int j=0; j< names.size(); j++) {
-				FileItem fileItem = files.get(j);
-				String fileName = names.get(j);
+			if(path.equals("HVF")) {
+				for(int j=0; j< names.size(); j++) {
+					FileItem fileItem = files.get(j);
+					String fileName = names.get(j);
 
-				String filePath = ".."+slash+"webapps"+slash+"HVF"+slash + path + slash;
-				new File(filePath).mkdirs();
-				File file = new File(filePath + fileName);
-				fileItem.write(file); 
+					String filePath = ".."+slash+"webapps"+slash+"HVF"+slash + path + slash;
+					new File(filePath).mkdirs();
+					File file = new File(filePath + fileName);
+					fileItem.write(file); 
+				}
+			}
+			else if (path.equals("grading")) {
+				for(int j=0; j< names.size(); j++) {
+					FileItem fileItem = files.get(j);
+					String fileName = names.get(j);
+
+					String filePath = ".."+slash+"webapps"+slash+"HVF"+slash + path + slash;
+					new File(filePath).mkdirs();
+					File file = new File(filePath + fileName);
+					fileItem.write(file); 
+				}
+			}
+			else if (path.equals("severity")) {
+				for(int j=0; j< names.size(); j++) {
+					FileItem fileItem = files.get(j);
+					String fileName = names.get(j);
+
+					String filePath = ".."+slash+"webapps"+slash+"HVF"+slash + path + slash;
+					new File(filePath).mkdirs();
+					File file = new File(filePath + fileName);
+					fileItem.write(file); 
+				}
 			}
 		
 		} catch (Exception ex) {
 			Logger.getLogger(Picture.class.getName()).log(Level.SEVERE,null,ex);
 		}
 
-		String query = "SELECT * FROM picture";
-		Vector<Picture> oldPics = SQLCommands.queryPictures(query);
+		String query = "";
+		if(!path.equals("grading") && !path.equals("severity")){
+			query = "SELECT * FROM picture WHERE type='"+path+"'";
+			Vector<Picture> oldPics = SQLCommands.queryPictures(query);
 
-		for(int i=0; i<oldPics.size(); i++) {
-			for(int j=0; j<names.size(); i++) {
-				if(oldPics.get(i).getName().equals(names.get(j))) {
-					errors.add(names.remove(j));
+			for(int i=0; i<oldPics.size(); i++) {
+				for(int j=0; j<names.size(); i++) {
+					if(oldPics.get(i).getName().equals(names.get(j))) {
+						errors.add(names.remove(j));
+					}
 				}
 			}
 		}
