@@ -103,9 +103,10 @@ MD - P-value: <br>
 	}
 
 %>
+<b>Central 5% of fixation = the 4 points directly surrounding central fixation</b><br><br>
 <div <%out.print(severity);%>>
-# of points within central 5 degrees with sensitivity < 15 dB on Pattern Deviation Plot <input type="text" name="central_15" <%out.print("value='"+hvf.getCentral_15()+"'");%>><br>
-# of points within central 5 degrees with sensitivity < 0 dB on Pattern Deviation Plot <input type="text" name="central_0" <%out.print("value='"+hvf.getCentral_0()+"'");%>><br>
+# of points within central 5 degrees with sensitivity < 15 dB (top left graph) <input type="text" name="central_15" <%out.print("value='"+hvf.getCentral_15()+"'");%>><br>
+# of points within central 5 degrees with sensitivity < 0 dB (top left graph) <input type="text" name="central_0" <%out.print("value='"+hvf.getCentral_0()+"'");%>><br>
 </div>
 
 <%
@@ -151,8 +152,8 @@ MD - P-value: <br>
 
 %>
 <div <%out.print(severity);%>>
-Superior hemifield: # points <15dB within 5 degrees of fixations on Pattern Deviation Plot?<br> <input type="text" name="sup_hem" <%out.print("value='"+hvf.getSup_hem()+"'");%>><br>
-Inferior hemifield: # points <15dB within 5 degrees of fixation on Pattern Deviation Plot?<br> <input type="text" name="inf_hem" <%out.print("value='"+hvf.getInf_hem()+"'");%>>
+Superior hemifield: # points <15dB within central 5 degrees of fixation? (top left graph)<br> <input type="text" name="sup_hem" <%out.print("value='"+hvf.getSup_hem()+"'");%>><br>
+Inferior hemifield: # points <15dB within central 5 degrees of fixation? (top left graph)<br> <input type="text" name="inf_hem" <%out.print("value='"+hvf.getInf_hem()+"'");%>>
 </div><br><br>
 
 <!--

@@ -490,7 +490,6 @@ public class HVFtest {
 		}
 		
 		SQLCommands.update(query);
-
 		if(user.getAccess() == 0) {
 			setForAdjudication(picName);
 		}
@@ -657,7 +656,7 @@ public class HVFtest {
 
 	public static void setForAdjudication(String picName) {
 		String query = "SELECT * FROM HVFtest WHERE pictureName='"+picName+"'";
-		Vector<HVFtest> hvf = SQLCommands.queryHVFtest(query);
+		Vector<HVFtest> hvf = SQLCommands.queryHVFtestMaster(query);
 
 		if(hvf.size() > 1) {
 			//get the ones that don't need adjudication
@@ -669,7 +668,7 @@ public class HVFtest {
 				"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, "+
 				"hvf_inf_hem2, hvf_pts_five, hvf_pts_contig, hvf_pts_one, hvf_cluster "+
 				"HAVING COUNT(*)=2";
-			Vector<HVFtest> set = SQLCommands.queryHVFtest(query);
+			Vector<HVFtest> set = SQLCommands.queryHVFtestMaster(query);
 			//get the ones that need adjudication
 			query = "SELECT * FROM HVFtest GROUP BY pictureName, "+
 				"hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, hvf_lossnum, hvf_lossden, "+
