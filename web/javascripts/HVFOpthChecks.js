@@ -40,17 +40,20 @@ $(document).ready(function(){
 			|| $('input[type=radio][name=ght][value=2]').prop('checked') 
 			|| $('input[type=radio][name=ght][value=3]').prop('checked') 
 			|| $('input[type=radio][name=ght][value=4]').prop('checked')
-			|| $('input[type=radio][name=ght][value=5]').prop('checked');
+			|| $('input[type=radio][name=ght][value=5]').prop('checked')
+			|| $('input[type=radio][name=ght][value=999]').prop('checked');
 
 		var psdp = $('input[type=radio][name=psdp][value=1]').prop('checked')
 			|| $('input[type=radio][name=psdp][value=2]').prop('checked') 
 			|| $('input[type=radio][name=psdp][value=3]').prop('checked') 
 			|| $('input[type=radio][name=psdp][value=4]').prop('checked')
 			|| $('input[type=radio][name=psdp][value=5]').prop('checked')
-			|| $('input[type=radio][name=psdp][value=6]').prop('checked');
+			|| $('input[type=radio][name=psdp][value=6]').prop('checked')
+			|| $('input[type=radio][name=psdp][value=999]').prop('checked');
 
 		var cluster = $('input[type=radio][name=cluster][value=1]').prop('checked')
-			|| $('input[type=radio][name=cluster][value=2]').prop('checked'); 
+			|| $('input[type=radio][name=cluster][value=2]').prop('checked')
+			|| $('input[type=radio][name=cluster][value=999]').prop('checked'); 
 
 		var glau = $('input[type=radio][name=glau][value=1]').prop('checked')
 			|| $('input[type=radio][name=glau][value=2]').prop('checked'); 
@@ -65,17 +68,15 @@ $(document).ready(function(){
 			|| $('input[type=radio][name=mdp][value=3]').prop('checked') 
 			|| $('input[type=radio][name=mdp][value=4]').prop('checked')
 			|| $('input[type=radio][name=mdp][value=5]').prop('checked')
-			|| $('input[type=radio][name=mdp][value=6]').prop('checked');
+			|| $('input[type=radio][name=mdp][value=6]').prop('checked')
+			|| $('input[type=radio][name=mdp][value=999]').prop('checked');
 
 		var central_15 = $('input[type=text][name=central_15]').val().length > 0;
 		var central_0 = $('input[type=text][name=central_0]').val().length > 0; 
 
 		var sup_hem = $('input[type=text][name=sup_hem]').val().length > 0; 
 		var inf_hem = $('input[type=text][name=inf_hem]').val().length > 0; 
-		var sup_hem2 = $('input[type=text][name=sup_hem2]').val().length > 0; 
-		var inf_hem2 = $('input[type=text][name=inf_hem2]').val().length > 0; 
 		var pts_five = $('input[type=text][name=pts_five]').val().length > 0; 
-		var pts_contig = $('input[type=text][name=pts_contig]').val().length > 0; 
 		var pts_one = $('input[type=text][name=pts_one]').val().length > 0; 
 
 		var severe = $('input[type=radio][name=severe][value=0]').prop('checked')
@@ -150,18 +151,9 @@ $(document).ready(function(){
 		} else if(!inf_hem) {
 			e.preventDefault(); 
 			$('input[type=text][name=inf_hem]').focus();
-		} else if(!sup_hem2) {
-			e.preventDefault(); 
-			$('input[type=text][name=sup_hem2]').focus();
-		} else if(!inf_hem2) {
-			e.preventDefault(); 
-			$('input[type=text][name=inf_hem2]').focus();
 		} else if(!pts_five) {
 			e.preventDefault(); 
 			$('input[type=text][name=pts_five]').focus();
-		} else if(!pts_contig) {
-			e.preventDefault(); 
-			$('input[type=text][name=pts_contig]').focus();
 		} else if(!pts_one) {
 			e.preventDefault(); 
 			$('input[type=text][name=pts_one]').focus();

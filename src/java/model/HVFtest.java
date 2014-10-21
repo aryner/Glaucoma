@@ -327,14 +327,8 @@ public class HVFtest {
 		hvf.setSup_hem(Integer.parseInt(attr));
 		attr = request.getParameter("inf_hem");
 		hvf.setInf_hem(Integer.parseInt(attr));
-		attr = request.getParameter("sup_hem2");
-		hvf.setSup_hem2(Integer.parseInt(attr));
-		attr = request.getParameter("inf_hem2");
-		hvf.setInf_hem2(Integer.parseInt(attr));
 		attr = request.getParameter("pts_five");
 		hvf.setPts_five(Integer.parseInt(attr));
-		attr = request.getParameter("pts_contig");
-		hvf.setPts_contig(Integer.parseInt(attr));
 		attr = request.getParameter("pts_one");
 		hvf.setPts_one(Integer.parseInt(attr));
 		attr = request.getParameter("cluster");

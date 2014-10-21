@@ -293,8 +293,9 @@ input[type="text"].repeat{
 .examineImg {
 	position: fixed; 
 	height: 090%; 
-	width: 046%;
-	cursor: none;
+	width: 040%;
+	top: 10%;
+	left: 5%;
 }
 
 .circle {
@@ -552,10 +553,12 @@ and scalar of: 0.29411764705882354*/
 }
 
 .HVFimage {
-	width : 45%; 
-	height : 0800px;
-	postion : fixed;
+	width: 45%;
+	height: 800px;
 	float : left;
+	margin-right: 0px;
+	padding-right: 0px;
+	overflow: scroll;
 }
 
 .numBox {
@@ -564,7 +567,6 @@ and scalar of: 0.29411764705882354*/
 
 .questions {
 	margin : 10px;
-	float : left; 
 	height : 0800px;
 	width: 45%;
 	overflow: scroll;
@@ -577,4 +579,3 @@ and scalar of: 0.29411764705882354*/
 .textMargin {
 	margin-left: 19px;
 }
-

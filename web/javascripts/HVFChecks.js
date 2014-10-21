@@ -227,12 +227,14 @@ $(document).ready(function(){
 			|| $('input[type=radio][name=stimintens][value=2]').prop('checked') 
 			|| $('input[type=radio][name=stimintens][value=3]').prop('checked') 
 			|| $('input[type=radio][name=stimintens][value=4]').prop('checked')
-			|| $('input[type=radio][name=stimintens][value=5]').prop('checked');
+			|| $('input[type=radio][name=stimintens][value=5]').prop('checked')
+			|| $('input[type=radio][name=stimintens][value=999]').prop('checked');
 
 		var stimcol = $('input[type=radio][name=stimcol][value=1]').prop('checked')
 			|| $('input[type=radio][name=stimcol][value=2]').prop('checked') 
 			|| $('input[type=radio][name=stimcol][value=3]').prop('checked') 
-			|| $('input[type=radio][name=stimcol][value=4]').prop('checked');
+			|| $('input[type=radio][name=stimcol][value=4]').prop('checked')
+			|| $('input[type=radio][name=stimcol][value=999]').prop('checked');
 
 		thing = $('input[type=text][name=stimcol_oth]').val(); 
 		var stimcol_oth = !$('input[type=radio][name=stimcol][value=4]').prop('checked') 
@@ -270,7 +272,8 @@ $(document).ready(function(){
 			|| $('input[type=radio][name=ght][value=2]').prop('checked') 
 			|| $('input[type=radio][name=ght][value=3]').prop('checked') 
 			|| $('input[type=radio][name=ght][value=4]').prop('checked')
-			|| $('input[type=radio][name=ght][value=5]').prop('checked');
+			|| $('input[type=radio][name=ght][value=5]').prop('checked')
+			|| $('input[type=radio][name=ght][value=999]').prop('checked');
 
 		var vfi = $('input[type=text][name=vfi]').val().length > 0; 
 
@@ -284,7 +287,8 @@ $(document).ready(function(){
 			|| $('input[type=radio][name=mdp][value=3]').prop('checked') 
 			|| $('input[type=radio][name=mdp][value=4]').prop('checked')
 			|| $('input[type=radio][name=mdp][value=5]').prop('checked')
-			|| $('input[type=radio][name=mdp][value=6]').prop('checked');
+			|| $('input[type=radio][name=mdp][value=6]').prop('checked')
+			|| $('input[type=radio][name=mdp][value=999]').prop('checked');
 
 		var psdsign = $('input[type=radio][name=psdsign][value=1]').prop('checked')
 			|| $('input[type=radio][name=psdsign][value=2]').prop('checked');
@@ -296,30 +300,31 @@ $(document).ready(function(){
 			|| $('input[type=radio][name=psdp][value=3]').prop('checked') 
 			|| $('input[type=radio][name=psdp][value=4]').prop('checked')
 			|| $('input[type=radio][name=psdp][value=5]').prop('checked')
-			|| $('input[type=radio][name=psdp][value=6]').prop('checked');
+			|| $('input[type=radio][name=psdp][value=6]').prop('checked')
+			|| $('input[type=radio][name=psdp][value=999]').prop('checked');
 
 		var central_15 = $('input[type=radio][name=central_15][value=0]').prop('checked')
 			|| $('input[type=radio][name=central_15][value=1]').prop('checked')
 			|| $('input[type=radio][name=central_15][value=2]').prop('checked')
 			|| $('input[type=radio][name=central_15][value=3]').prop('checked')
-			|| $('input[type=radio][name=central_15][value=4]').prop('checked');
+			|| $('input[type=radio][name=central_15][value=4]').prop('checked')
+			|| $('input[type=radio][name=central_15][value=999]').prop('checked');
 
 		var central_0 = $('input[type=radio][name=central_0][value=0]').prop('checked')
 			|| $('input[type=radio][name=central_0][value=1]').prop('checked')
 			|| $('input[type=radio][name=central_0][value=2]').prop('checked')
 			|| $('input[type=radio][name=central_0][value=3]').prop('checked')
-			|| $('input[type=radio][name=central_0][value=4]').prop('checked');
+			|| $('input[type=radio][name=central_0][value=4]').prop('checked')
+			|| $('input[type=radio][name=central_0][value=999]').prop('checked');
 
 		var sup_hem = $('input[type=text][name=sup_hem]').val().length > 0; 
 		var inf_hem = $('input[type=text][name=inf_hem]').val().length > 0; 
-		var sup_hem2 = $('input[type=text][name=sup_hem2]').val().length > 0; 
-		var inf_hem2 = $('input[type=text][name=inf_hem2]').val().length > 0; 
 		var pts_five = $('input[type=text][name=pts_five]').val().length > 0; 
-		var pts_contig = $('input[type=text][name=pts_contig]').val().length > 0; 
 		var pts_one = $('input[type=text][name=pts_one]').val().length > 0; 
 
 		var cluster = $('input[type=radio][name=cluster][value=1]').prop('checked')
-			|| $('input[type=radio][name=cluster][value=2]').prop('checked'); 
+			|| $('input[type=radio][name=cluster][value=2]').prop('checked') 
+			|| $('input[type=radio][name=cluster][value=999]').prop('checked'); 
 
 		var focused = false;
 
@@ -641,24 +646,6 @@ $(document).ready(function(){
 			}
 		} else {
 			$('#inf_hem').removeClass('highlight');
-		} if(!sup_hem2){
-			$('#sup_hem2').addClass('highlight');
-			if(!focused) {
-				focused = true;
-				e.preventDefault(); 
-				$('input[type=text][name=sup_hem2]').focus();
-			}
-		} else {
-			$('#sup_hem2').removeClass('highlight');
-		} if(!inf_hem2){
-			$('#inf_hem2').addClass('highlight');
-			if(!focused) {
-				focused = true;
-				e.preventDefault(); 
-				$('input[type=text][name=inf_hem2]').focus();
-			}
-		} else {
-			$('#inf_hem2').removeClass('highlight');
 		} if(!pts_five){
 			$('#pts_five').addClass('highlight');
 			if(!focused) {
@@ -668,15 +655,6 @@ $(document).ready(function(){
 			}
 		} else {
 			$('#pts_five').removeClass('highlight');
-		} if(!pts_contig){
-			$('#pts_contig').addClass('highlight');
-			if(!focused) {
-				focused = true;
-				e.preventDefault(); 
-				$('input[type=text][name=pts_contig]').focus();
-			}
-		} else {
-			$('#pts_contig').removeClass('highlight');
 		} if(!pts_one){
 			$('#pts_one').addClass('highlight');
 			if(!focused) {

@@ -40,7 +40,7 @@ if(pic == null) {
 	}
 %>
 <!--pdf of HVFfile -->
-<embed src="<%out.print(src);%>" class="HVFimage">
+<iframe src="<%out.print(src);%>" class="HVFimage"></iframe>
 
 <!--Questions-->
 <div class="questions">
@@ -688,39 +688,6 @@ if(pic == null) {
 <%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
 <br><br>
 
-<%
-	if(a) {
-		s1 = HVF.get(0).getSup_hem2()+"";
-		s2 = HVF.get(1).getSup_hem2()+"";
-		if(s1.equals(s2)) {
-			diff = false;
-		}
-		else {
-			diff = true;
-		}
-	}
-%>
-<span id='sup_hem2'>Superiour hemifield: # points with sensitivity >=15dB within 5 degrees of fixation?</span><br> 
-<input type="text" name="sup_hem2" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
-<%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
-<br>
-
-<%
-	if(a) {
-		s1 = HVF.get(0).getInf_hem2()+"";
-		s2 = HVF.get(1).getInf_hem2()+"";
-		if(s1.equals(s2)) {
-			diff = false;
-		}
-		else {
-			diff = true;
-		}
-	}
-%>
-<span id='inf_hem2'>Inferior hemifield: # points with sensitivity >=15dB within 5 degrees of fixation?</span><br>
-<input type="text" name="inf_hem2" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
-<%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
-<br><br>
 
 <%
 	if(a) {
@@ -736,23 +703,6 @@ if(pic == null) {
 %>
 <span id='pts_five'># points depressed < 5% level on Pattern Deviation Plot</span>
 <input type="text" name="pts_five" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
-<%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
-<br>
-
-<%
-	if(a) {
-		s1 = HVF.get(0).getPts_contig()+"";
-		s2 = HVF.get(1).getPts_contig()+"";
-		if(s1.equals(s2)) {
-			diff = false;
-		}
-		else {
-			diff = true;
-		}
-	}
-%>
-<span id='pts_contig'># contiguous points < 5% level on Pattern Deviation Plot </span>
-<input type="text" name="pts_contig" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
 <br>
 

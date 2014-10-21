@@ -23,7 +23,7 @@ if(pic == null) {
 	String src = "http://localhost:8080/HVF/pdf?type=HVF&name="+pic.getName();
 %>
 <!--pdf of HVFfile -->
-<embed src="<%out.print(src);%>" class="HVFimage">
+<iframe src="<%out.print(src);%>" class="HVFimage"></iframe>
 
 <!--Questions-->
 <div class="questions">
@@ -52,7 +52,7 @@ being significant at p < 1%<br>
 <input type="radio" name="cluster" value="2"<%if(hvf.getCluster()==2) {out.print(" checked");}%>>No 
 <input type="radio" name="cluster" value="999"<%if(hvf.getCluster()==999) {out.print(" checked");}%>>Blank <br><br> 
 
-Glaucoma Determination  
+Glaucoma Present
 <input type="radio" name="glau" value="1"<%if(hvf.getHvf_glau()==1) {out.print(" checked");}%>>Yes 
 <input type="radio" name="glau" value="2"<%if(hvf.getHvf_glau()==2) {out.print(" checked");}%>>No <br><br>
 
