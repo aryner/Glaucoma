@@ -33,7 +33,7 @@
 		<select name="graderType" class="btn bigBtn">
 			<option value="0">Initial Grader</option>
 			<option value="1">Adjudicator</option>
-			<option value="2">Opthamologist</option>
+			<option value="2">Ophthalmologist</option>
 		</select>
 	</p>
 	<p>

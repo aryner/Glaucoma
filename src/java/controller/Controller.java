@@ -102,6 +102,7 @@ public class Controller extends HttpServlet {
 				request.setAttribute("pair",pair);
 			}
 
+			request.setAttribute("gradingChart", SQLCommands.queryGradingChartName());
 			request.setAttribute("access", user.getAccess());
 			request.setAttribute("slash",slash);
 			request.setAttribute("picture",picture);

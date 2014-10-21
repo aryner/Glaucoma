@@ -213,6 +213,70 @@ public class SQLCommands {
 
 		return result;
 	}
+	
+	public static String querySeverityChartName(){
+		String query = "SELECT * FROM picture WHERE type='severity' ORDER BY id DESC LIMIT 1";
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet resultSet = null;
+		String result = null;
+
+		try{
+			InitialContext initialContext = new InitialContext();
+			Context context = (Context)initialContext.lookup("java:comp/env");
+			DataSource dataSource = (DataSource)context.lookup("hvf_grader");
+			con = dataSource.getConnection();
+
+			stmt = con.createStatement();
+
+			resultSet = stmt.executeQuery(query); 
+
+			while(resultSet.next()) {
+				result = resultSet.getString("name");
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(SQLCommands.class.getName()).log(Level.SEVERE,null,ex); 
+		} catch (Exception e) { e.printStackTrace(); } 
+		finally { 
+			if(resultSet != null) try {resultSet.close();} catch(SQLException ignore) {}
+			if(con != null) try {con.close();} catch(SQLException ignore) {}
+			if(stmt != null) try {stmt.close();} catch(SQLException ignore) {}
+		}
+
+		return result;
+	}
+
+	public static String queryGradingChartName(){
+		String query = "SELECT * FROM picture WHERE type='grading' ORDER BY id DESC LIMIT 1";
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet resultSet = null;
+		String result = null;
+
+		try{
+			InitialContext initialContext = new InitialContext();
+			Context context = (Context)initialContext.lookup("java:comp/env");
+			DataSource dataSource = (DataSource)context.lookup("hvf_grader");
+			con = dataSource.getConnection();
+
+			stmt = con.createStatement();
+
+			resultSet = stmt.executeQuery(query); 
+
+			while(resultSet.next()) {
+				result = resultSet.getString("name");
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(SQLCommands.class.getName()).log(Level.SEVERE,null,ex); 
+		} catch (Exception e) { e.printStackTrace(); } 
+		finally { 
+			if(resultSet != null) try {resultSet.close();} catch(SQLException ignore) {}
+			if(con != null) try {con.close();} catch(SQLException ignore) {}
+			if(stmt != null) try {stmt.close();} catch(SQLException ignore) {}
+		}
+
+		return result;
+	}
 
 	public static Vector<User> queryUsers(String query){
 		Vector<User> result = new Vector<User>();

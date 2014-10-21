@@ -34,6 +34,10 @@ if(pic == null) {
 		a = true;
 		HVF = (Vector)request.getAttribute("pair");
 	}
+	String name = (String)request.getAttribute("gradingChart");
+	if (name == null) {
+		name = "";
+	}
 %>
 <!--pdf of HVFfile -->
 <embed src="<%out.print(src);%>" class="HVFimage">
@@ -41,6 +45,7 @@ if(pic == null) {
 <!--Questions-->
 <div class="questions">
 <form action="assignHVF" method="POST">
+	<input type="hidden" class="gradingChart" name="<%out.print(name);%>">
 	<input type="hidden" name="pictureName" value="<%out.print(pic.getName());%>" autocomplete="off">
 <%
 	int v1 = -1;
@@ -374,6 +379,7 @@ if(pic == null) {
 		}
 	}
 %>
+<br> <input type="button" id="gradingChart" value="See Grading Chart" class="btn"><br><br>
 <span id='sph_sign'>RX Sphere - Sign </span>
 <input type="radio" name="sph_sign" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>+<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%> 
 	<input type="radio" name="sph_sign" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>-<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%>
@@ -615,7 +621,7 @@ if(pic == null) {
 		}
 	}
 %>
-<b>Centeral 5% of fixation = the 4 points directly surrounding central fixation</b><br>
+<br><b>Centeral 5% of fixation = the 4 points directly surrounding central fixation</b><br><br>
 <span id='central_15'># of points within central 5 degrees with sensitivity < 15 dB (top left graph):</span><br>
 <input type="radio" name="central_15" value="0"<%if(a && !diff && v1==0){out.print(" checked='true'");}%>>0<%if((a&&diff)&&((v1==0)||(v2==0))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="central_15" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>1<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'> ***</span><%}%><br>
@@ -797,3 +803,4 @@ if(pic == null) {
 
 <script src="javascripts/jquery-1.11.1.min.js" type="text/javascript"></script>
 <script src="javascripts/HVFChecks.js" type="text/javascript"></script>
+<script src="javascripts/HVFgradingChart.js" type="text/javascript"></script>

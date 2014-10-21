@@ -292,10 +292,8 @@ input[type="text"].repeat{
 
 .examineImg {
 	position: fixed; 
-/*720 for laptop demos
-and scalar of: 0.29411764705882354*/
-/*880 for imac and 0.35947712418300654 for the scalar*/
-	height: 880px; 
+	height: 090%; 
+	width: 046%;
 	cursor: none;
 }
 
