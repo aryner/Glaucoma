@@ -687,8 +687,8 @@ public class HVFtest {
 			//update the confirmed ones
 			query = "UPDATE HVFtest SET confirmed=2";
 			Random rand = new Random(System.currentTimeMillis());
-			if(rand.nextDouble() < 0.1) {
-				query += ", opthCheck=0";
+			if(rand.nextDouble() > 0.1) {
+				query += ", opthCheck=-1";
 			}
 			query += " WHERE pictureName='"+picName+"'";
 			if(set.size() > 0) {
