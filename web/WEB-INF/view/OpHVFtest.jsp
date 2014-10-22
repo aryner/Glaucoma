@@ -20,7 +20,7 @@ if(pic == null) {
 } else {
 	HVFtest hvf = (HVFtest)request.getAttribute("hvf");
 	String slash = ""+request.getAttribute("slash");
-	String src = "http://localhost:8080/HVF/pdf?type=HVF&name="+pic.getName();
+	String src = "http://localhost:8084/HVF/pdf?type=HVF&name="+pic.getName();
 %>
 <!--pdf of HVFfile -->
 <iframe src="<%out.print(src);%>" class="HVFimage"></iframe>
@@ -176,7 +176,7 @@ Categorization of glaucoma severity:<br>
 <input type="radio" name="severe" value="2"<%if(hvf.getSevere()==2) {out.print(" checked");}%>>Moderate<br>
 <input type="radio" name="severe" value="3"<%if(hvf.getSevere()==3) {out.print(" checked");}%>>Advanced<br>
 <input type="radio" name="severe" value="4"<%if(hvf.getSevere()==4) {out.print(" checked");}%>>Severe<br>
-<input type="radio" name="severe" value="4"<%if(hvf.getSevere()==5) {out.print(" checked");}%>>End stage glaucoma<br><br>
+<input type="radio" name="severe" value="5"<%if(hvf.getSevere()==5) {out.print(" checked");}%>>End stage glaucoma<br><br>
 
 
 False POS Errors (%) <input type="text" name="fp" class="numBox" <%out.print("value='"+hvf.getFp()+"'");%>><br>

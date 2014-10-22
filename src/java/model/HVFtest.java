@@ -467,22 +467,21 @@ public class HVFtest {
 				}
 			}
 		} else {
-			query += ", hvf_glau='2', hvf_severe='0',";
+			query += ", hvf_glau='2', hvf_severe='0'";
 			Random rand = new Random(System.currentTimeMillis());
-			if (rand.nextDouble() < 0.1) {
-				query += " opthCheck=0";
+			if (rand.nextDouble() < 0.1 && user.getAccess() == 1) {
+				query += ", opthCheck=0";
 			}
-			else {
-				query += " opthCheck=-1";
+			else if(user.getAccess() == 1) {
+				query += ", opthCheck=-1";
 			}
 		}
 
 		if(user.getAccess() == 0) {
-			query += " WHERE pictureName='"+hvf.getPictureName()+"'";
+			query += " WHERE id='"+hvf.getId()+"'";
 		} else if(user.getAccess() ==1) { 
 			query += ", confirmed=2 WHERE pictureName='"+request.getParameter("pictureName")+"'";
 		}
-		
 		SQLCommands.update(query);
 		if(user.getAccess() == 0) {
 			setForAdjudication(picName);
@@ -659,8 +658,8 @@ public class HVFtest {
 				"hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, "+
 				"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
 				"hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
-				"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, "+
-				"hvf_inf_hem2, hvf_pts_five, hvf_pts_contig, hvf_pts_one, hvf_cluster "+
+				"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_sup_hem, hvf_inf_hem, "+
+				"hvf_pts_five, hvf_pts_one, hvf_cluster "+
 				"HAVING COUNT(*)=2";
 			Vector<HVFtest> set = SQLCommands.queryHVFtestMaster(query);
 			//get the ones that need adjudication
@@ -669,8 +668,8 @@ public class HVFtest {
 				"hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, "+
 				"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
 				"hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
-				"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, "+
-				"hvf_inf_hem2, hvf_pts_five, hvf_pts_contig, hvf_pts_one, hvf_cluster "+
+				"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_sup_hem, hvf_inf_hem, "+
+				"hvf_pts_five, hvf_pts_one, hvf_cluster "+
 				"HAVING COUNT(*)=1";
 			Vector<HVFtest> notSet = SQLCommands.queryHVFtest(query);
 
@@ -687,6 +686,10 @@ public class HVFtest {
 			
 			//update the confirmed ones
 			query = "UPDATE HVFtest SET confirmed=2";
+			Random rand = new Random(System.currentTimeMillis());
+			if(rand.nextDouble() < 0.1) {
+				query += ", opthCheck=0";
+			}
 			query += " WHERE pictureName='"+picName+"'";
 			if(set.size() > 0) {
 				SQLCommands.update(query);
@@ -810,7 +813,7 @@ public class HVFtest {
 
 	public static Vector<String> getCSVLines() {
 		Vector<String> result = new Vector<String>();
-		String query = "SELECT DISTINCT pictureName FROM HVFtest";
+		String query = "SELECT * FROM HVFtest";
 		Vector<HVFtest> hvf = SQLCommands.queryHVFtestMaster(query);
 
 		String currLine = "id, confirmed, opthCheck, pictureName, userID, vf_loss, vf_defect, glau, vf_loss_oth, vf_defect_oth, "+
@@ -874,7 +877,7 @@ public class HVFtest {
 	}
 
 	/**
-	 * @return the userID
+	 * @return the user/ID
 	 */
 	public int getUserID() {
 		return userID;

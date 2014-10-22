@@ -120,7 +120,7 @@ public class Picture {
 			Vector<Picture> oldPics = SQLCommands.queryPictures(query);
 
 			for(int i=0; i<oldPics.size(); i++) {
-				for(int j=0; j<names.size(); i++) {
+				for(int j=0; j<names.size(); j++) {
 					if(oldPics.get(i).getName().equals(names.get(j))) {
 						errors.add(names.remove(j));
 					}

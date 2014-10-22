@@ -27,7 +27,7 @@ if(pic == null) {
 	}
 } else {
 	String slash = ""+request.getAttribute("slash");
-	String src = "http://localhost:8080/HVF/pdf?type=HVF&name="+pic.getName();
+	String src = "http://localhost:8084/HVF/pdf?type=HVF&name="+pic.getName();
 	boolean a = false;
 	Vector<HVFtest> HVF = null;
 	if(((Integer)request.getAttribute("access"))==1) {
