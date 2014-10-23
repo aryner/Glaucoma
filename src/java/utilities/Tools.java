@@ -20,7 +20,12 @@ public class Tools {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 
-		fileName += cal.get(Calendar.DAY_OF_MONTH);
+		int day = cal.get(Calendar.DAY_OF_MONTH);
+		if(day < 10) {
+			fileName += "0";
+		}
+		fileName += day;
+
 		int month = cal.get(Calendar.MONTH);
 
 		switch (month) {
