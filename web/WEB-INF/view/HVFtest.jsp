@@ -471,7 +471,7 @@ if(pic == null) {
 %>
 <span id='ght'>GHT:</span> <br>
 <input type="radio" name="ght" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>Within Normal Limits<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'> ***</span><%}%><br>
-<input type="radio" name="ght" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Borderline<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="ght" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Borderline / General Reduction<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="ght" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Outside Normal Limits<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="ght" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>General Reduction of Sensitivity<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="ght" value="5"<%if(a && !diff && v1==5){out.print(" checked='true'");}%>>Abnormally High Sensitivity<%if((a&&diff)&&((v1==5)||(v2==5))){%><span class='highlight'>  ***</span><%}%><br>

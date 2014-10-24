@@ -32,7 +32,7 @@ if(pic == null) {
 
 GHT: <br>
 <input type="radio" name="ght" value="1"<%if(hvf.getGht()==1) {out.print(" checked");}%>>Within Normal Limits<br>
-<input type="radio" name="ght" value="2"<%if(hvf.getGht()==2) {out.print(" checked");}%>>Borderline<br>
+<input type="radio" name="ght" value="2"<%if(hvf.getGht()==2) {out.print(" checked");}%>>Borderline / General Reduction<br>
 <input type="radio" name="ght" value="3"<%if(hvf.getGht()==3) {out.print(" checked");}%>><span style='color:darkorange;'>Outside Normal Limits</span><br>
 <input type="radio" name="ght" value="4"<%if(hvf.getGht()==4) {out.print(" checked");}%>>General Reduction of Sensitivity<br>
 <input type="radio" name="ght" value="5"<%if(hvf.getGht()==5) {out.print(" checked");}%>>Abnormally High Sensitivity<br>

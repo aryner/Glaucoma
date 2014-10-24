@@ -611,7 +611,8 @@ public class HVFtest {
 		String query = "";
 		if (user.getAccess() == 0) {
 			query = "SELECT * FROM picture WHERE name NOT IN (SELECT "+
-				" pictureName FROM HVFtest WHERE userID="+user.getID()+") AND type='HVF'";
+				" pictureName FROM HVFtest WHERE userID="+user.getID()+") AND type='HVF'"+
+				" AND name NOT IN (SELECT pictureName FROM HVFtest GROUP BY pictureName HAVING COUNT(*)>=2)";
 		}
 		else if (user.getAccess() == 1) {
 			query = "SELECT * FROM picture WHERE name IN (SELECT pictureName FROM "+
@@ -687,7 +688,7 @@ public class HVFtest {
 			//update the confirmed ones
 			query = "UPDATE HVFtest SET confirmed=2";
 			Random rand = new Random(System.currentTimeMillis());
-			if(rand.nextDouble() > 0.1) {
+			if(set.size() > 0 && (set.get(0).getHvf_glau() == 2 && rand.nextDouble() > 0.1)) {
 				query += ", opthCheck=-1";
 			}
 			query += " WHERE pictureName='"+picName+"'";
