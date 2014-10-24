@@ -621,7 +621,7 @@ if(pic == null) {
 		}
 	}
 %>
-<br><b>Centeral 5% of fixation = the 4 points directly surrounding central fixation</b><br><br>
+<br><b>Central 5% of fixation = the 4 points directly surrounding central fixation</b><br><br>
 <span id='central_15'># of points within central 5 degrees with sensitivity < 15 dB (top left graph):</span><br>
 <input type="radio" name="central_15" value="0"<%if(a && !diff && v1==0){out.print(" checked='true'");}%>>0<%if((a&&diff)&&((v1==0)||(v2==0))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="central_15" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>1<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'> ***</span><%}%><br>
@@ -737,7 +737,7 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='cluster'>Cluster of >= 3 non-edge points that are all significant<br> at p < 5% with with >= 1 point
+<span id='cluster'>Cluster of >= 3 non-edge points that are all significant<br> at p < 5% with >= 1 point
 	being significant at p < 1%</span><br>
 <input type="radio" name="cluster" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>Yes<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'> ***</span><%}%> 
 <input type="radio" name="cluster" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>No<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'> ***</span><%}%>
