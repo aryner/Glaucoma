@@ -98,6 +98,9 @@ if(session.getAttribute("errors") != null) {
 	<div class="thinColumn">
 		<a href="/HVF/printCSV" class="btn menuBtn">Get CSV files</a>
 	</div>
+	<div class="thinColumn">
+		<a href="/HVF/uploadData" class="btn menuBtn">Upload Data</a>
+	</div>
 </div>
 
 <div class='container'>
