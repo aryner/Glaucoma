@@ -250,7 +250,7 @@ public class Controller extends HttpServlet {
 
 		else if(userPath.equals("/printCSVs")) {
 
-			Tools.createCSV(Picture.getCSVLines(),"hvf_pictures");
+//			Tools.createCSV(Picture.getCSVLines(),"hvf_pictures");
 			Tools.createCSV(HVFtest.getCSVLines(),"hvf_grades");
 			response.sendRedirect("/HVF/home"); 
 			return;

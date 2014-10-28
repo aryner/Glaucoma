@@ -854,8 +854,10 @@ public class HVFtest {
 		String query = "SELECT * FROM HVFtest";
 
 		Vector<HVFtest> alreadyHere = SQLCommands.queryHVFtestMaster(query);
-		ArrayList<String> lines = new ArrayList<String>();
+		ArrayList<String> newLines = new ArrayList<String>();
+		ArrayList<String> updateLines = new ArrayList<String>();
 		String picName;
+		int confirmed, opthCheck;
 		File file = null;
 		FileReader reader = null;
 		BufferedReader fileReader = null;
@@ -866,16 +868,60 @@ public class HVFtest {
 			fileReader = new BufferedReader(reader);
 
 			String line = fileReader.readLine();
+			int index;
 			if(line != null && line.length() > 0) {
 				line = fileReader.readLine();
 			}
 			while(line != null && line.length() > 0) {
 				line = "'"+line+"'";
-				line = line.replaceAll("[, ]", "', '");
+				line = line.replaceAll(", ", "', '");
 				line.replaceAll("null", "");
-System.out.println(line);
+				line.replaceAll("NULL", "");
+				index = line.indexOf(",");
+				confirmed = Integer.parseInt(line.substring(index+3,line.indexOf(",",index+1)-1));
+				index = line.indexOf(",", index+1);
+				opthCheck = Integer.parseInt(line.substring(index+3,line.indexOf(",",index+1)-1));
+				index = line.indexOf(",", index+1);
+				picName = line.substring(index+3,line.indexOf(",",index+1)-5);
+				line = line.substring(line.indexOf(",")+2);
+
+				boolean duplicate = false;
+				HVFtest oldTest = null;
+				for(int i=0; i<alreadyHere.size() && !duplicate; i++) {
+					if(picName.equals(alreadyHere.get(i).getPictureName())){
+						oldTest = alreadyHere.get(i);
+						duplicate = true;
+					}
+				}
+
+				if(!duplicate) {
+					newLines.add(line);
+				}
+				else {
+					if(confirmed > oldTest.getConfirmed()) {
+						updateLines.add(line);
+					}
+					else if(confirmed == oldTest.getConfirmed() && oldTest.getOpthCheck() == 0) {
+						updateLines.add(line);
+					}
+				}
+
 				line = fileReader.readLine();
 			}
+
+			query = "INSERT INTO HVFtest (confirmed, opthCheck, pictureName, userID, hvf_vf_loss, "+
+				"hvf_vf_defect, hvf_glau, hvf_vf_loss_oth, hvf_vf_defect_oth, hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, "+
+				"hvf_lossnum, hvf_lossden, hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, hvf_back, "+
+				"hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, "+
+				"hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_central_15, hvf_central_0, "+
+				"hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, hvf_inf_hem2, hvf_pts_five, hvf_pts_contig, hvf_pts_one, hvf_cluster, "+
+				"hvf_severe, hvf_reliable_review) VALUES ";
+			for(int i=0; i<newLines.size(); i++) {
+				if(i > 0) { query += ", "; }
+				query += "("+newLines.get(i)+")";
+			}
+			SQLCommands.update(query);
+
 		}
 		catch (Exception e) { 
 			e.printStackTrace(); 
