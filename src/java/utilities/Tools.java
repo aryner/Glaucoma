@@ -138,6 +138,8 @@ public class Tools {
 							HVFtest.readCSV(fileName);
 							file.delete();
 						}
+						else if(type.equals("hvf_pictures")) {}
+						else { errors.add(fileName); }
 					}
 					else {
 						errors.add(fileName);

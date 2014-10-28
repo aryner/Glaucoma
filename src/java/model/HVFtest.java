@@ -936,6 +936,20 @@ public class HVFtest {
 		}
 	}
 
+	public static ArrayList<String> needPictures(){
+		ArrayList<String> needPics = new ArrayList<String>();
+		String query = "SELECT * FROM HVFtest WHERE pictureName NOT IN (SELECT name FROM picture)";
+		Vector<HVFtest> hvf = SQLCommands.queryHVFtestMaster(query);
+
+		for(int i=0; i<hvf.size(); i++) {
+			if(!needPics.contains(hvf.get(i).getPictureName())) {
+				needPics.add(hvf.get(i).getPictureName());
+			}
+		}
+
+		return needPics;
+	}
+
 	/**
 	 * @return the id
 	 */

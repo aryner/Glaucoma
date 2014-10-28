@@ -18,6 +18,15 @@ if(session.getAttribute("errors") != null) {
 	}
 	out.print("</div>"); 
 } 
+	ArrayList<String> needPics = (ArrayList)request.getAttribute("hvfNeedPictures");
+	if(needPics != null && needPics.size() > 0) {
+		out.print("<h4>The following have records but no pictures, please upload the PDFs that belong to them</h4>");
+		for(int i=0; i<needPics.size(); i++) {
+			if(i>0) { out.print(", "); }
+			out.print(needPics.get(i));
+		}
+	}
+	
 	int HVFACount= 0;
 	int access = (Integer)request.getAttribute("access");
 	if(access > 0) {

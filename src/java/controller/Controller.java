@@ -78,6 +78,7 @@ public class Controller extends HttpServlet {
 			request.setAttribute("needsAdj",needsAdj);
 			request.setAttribute("needsReview",needsReview);
 			request.setAttribute("reviewed",reviewed);
+			request.setAttribute("hvfNeedPictures", HVFtest.needPictures());
 		}
 
 		else if(userPath.equals("/HVFtest")) {
