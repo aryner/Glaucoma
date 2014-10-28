@@ -11,7 +11,7 @@ in the upload pictures page if you haven't already.
 </p>
 
 <br><br>
-<from action="dataUpload" method="POST">
+<form action="dataUpload" method="POST" enctype="multipart/form-data">
 	<input type="file" multiple="multiple" name="csvs" style="margin-right:20px;">
 	<input type="submit" value="Submit" class="btn bigBtn">
-</from>
+</form>

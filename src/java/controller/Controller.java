@@ -32,7 +32,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  *
  * @author aryner
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload", "/uploadPictures", "/img", "/pdf", "/assignHVF", "/OpHVFtest", "/OpReviewHVF", "/printCSV", "/printCSVs", "/uploadData"})
+@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload", "/uploadPictures", "/img", "/pdf", "/assignHVF", "/OpHVFtest", "/OpReviewHVF", "/printCSV", "/printCSVs", "/uploadData", "/dataUpload"})
 public class Controller extends HttpServlet {
 	private final String slash = System.getProperty("file.separator");
 	/**
@@ -221,6 +221,13 @@ public class Controller extends HttpServlet {
 			if(errors.size()>0) {
 				session.setAttribute("errors", errors);
 			}
+			response.sendRedirect("/HVF/home"); 
+			return;
+		}
+
+		else if(userPath.equals("/dataUpload")) {
+			Vector<String> errors = Tools.readCSVs(request);
+
 			response.sendRedirect("/HVF/home"); 
 			return;
 		}

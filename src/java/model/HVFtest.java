@@ -7,6 +7,7 @@
 package model;
 
 import java.util.*; 
+import java.io.*;
 import utilities.SQLCommands;
 import javax.servlet.http.HttpServletRequest;
 
@@ -847,6 +848,46 @@ public class HVFtest {
 		}
 
 		return result;
+	}
+
+	public static void readCSV(String fileName) {
+		String query = "SELECT * FROM HVFtest";
+
+		Vector<HVFtest> alreadyHere = SQLCommands.queryHVFtestMaster(query);
+		ArrayList<String> lines = new ArrayList<String>();
+		String picName;
+		File file = null;
+		FileReader reader = null;
+		BufferedReader fileReader = null;
+
+		try {
+			file = new File(".."+slash+"webapps"+slash+"HVF"+slash+"temp"+slash+fileName);
+			reader = new FileReader(file);
+			fileReader = new BufferedReader(reader);
+
+			String line = fileReader.readLine();
+			if(line != null && line.length() > 0) {
+				line = fileReader.readLine();
+			}
+			while(line != null && line.length() > 0) {
+				line = "'"+line+"'";
+				line = line.replaceAll("[, ]", "', '");
+				line.replaceAll("null", "");
+System.out.println(line);
+				line = fileReader.readLine();
+			}
+		}
+		catch (Exception e) { 
+			e.printStackTrace(); 
+		}
+		finally {
+			try {
+				reader.close();
+				fileReader.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**

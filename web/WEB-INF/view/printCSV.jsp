@@ -6,7 +6,6 @@
 <%@page import="java.util.*"%>
 
 <%
-Vector<String> pics = (Vector)request.getAttribute("pics");
 Vector<String> hvf = (Vector)request.getAttribute("hvf");
 %>
 
@@ -15,10 +14,6 @@ Vector<String> hvf = (Vector)request.getAttribute("hvf");
 </form>
 <br><br>
 <%
-for(int i=0; i<pics.size(); i++) {
-	out.print(pics.get(i)+"<br>");
-}
-out.print("<br><br>");
 for(int i=0; i<hvf.size(); i++) {
 	out.print(hvf.get(i)+"<br>");
 }
