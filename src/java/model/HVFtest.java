@@ -856,6 +856,7 @@ public class HVFtest {
 		Vector<HVFtest> alreadyHere = SQLCommands.queryHVFtestMaster(query);
 		ArrayList<String> newLines = new ArrayList<String>();
 		ArrayList<String> updateLines = new ArrayList<String>();
+		ArrayList<String> toBeReplaced = new ArrayList<String>();
 		String picName;
 		int confirmed, opthCheck;
 		File file = null;
@@ -882,7 +883,7 @@ public class HVFtest {
 				index = line.indexOf(",", index+1);
 				opthCheck = Integer.parseInt(line.substring(index+3,line.indexOf(",",index+1)-1));
 				index = line.indexOf(",", index+1);
-				picName = line.substring(index+3,line.indexOf(",",index+1)-5);
+				picName = line.substring(index+3,line.indexOf(",",index+1)-1);
 				line = line.substring(line.indexOf(",")+2);
 
 				boolean duplicate = false;
@@ -900,15 +901,18 @@ public class HVFtest {
 				else {
 					if(confirmed > oldTest.getConfirmed()) {
 						updateLines.add(line);
+						toBeReplaced.add(oldTest.getPictureName());
 					}
 					else if(confirmed == oldTest.getConfirmed() && oldTest.getOpthCheck() == 0) {
 						updateLines.add(line);
+						toBeReplaced.add(oldTest.getPictureName());
 					}
 				}
 
 				line = fileReader.readLine();
 			}
 
+			//Add new records
 			query = "INSERT INTO HVFtest (confirmed, opthCheck, pictureName, userID, hvf_vf_loss, "+
 				"hvf_vf_defect, hvf_glau, hvf_vf_loss_oth, hvf_vf_defect_oth, hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, "+
 				"hvf_lossnum, hvf_lossden, hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, hvf_back, "+
@@ -920,8 +924,35 @@ public class HVFtest {
 				if(i > 0) { query += ", "; }
 				query += "("+newLines.get(i)+")";
 			}
-			SQLCommands.update(query);
+			if(newLines.size() > 0) {
+				SQLCommands.update(query);
+			}
 
+			//delete records that will be replaced
+			query = "DELETE FROM HVFtest WHERE ";
+			for(int i=0; i<updateLines.size(); i++) {
+				if(i>0) {query+=" OR ";}
+				query += "pictureName='"+toBeReplaced.get(i)+"'";
+			}
+			if(updateLines.size() > 0) {
+				SQLCommands.update(query);
+			}
+
+			//insert records to replace the deleted ones
+			query = "INSERT INTO HVFtest (confirmed, opthCheck, pictureName, userID, hvf_vf_loss, "+
+				"hvf_vf_defect, hvf_glau, hvf_vf_loss_oth, hvf_vf_defect_oth, hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, "+
+				"hvf_lossnum, hvf_lossden, hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, hvf_back, "+
+				"hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, "+
+				"hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_central_15, hvf_central_0, "+
+				"hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, hvf_inf_hem2, hvf_pts_five, hvf_pts_contig, hvf_pts_one, hvf_cluster, "+
+				"hvf_severe, hvf_reliable_review) VALUES ";
+			for(int i=0; i<updateLines.size(); i++) {
+				if(i>0) { query += ", "; }
+				query += "("+updateLines.get(i)+")";
+			}
+			if(updateLines.size() > 0) {
+				SQLCommands.update(query);
+			}
 		}
 		catch (Exception e) { 
 			e.printStackTrace(); 
