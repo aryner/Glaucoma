@@ -70,22 +70,22 @@ being significant at p < 1%<br>
 <%
 	String severity = "";
 	if(hvf.getMdsign() == 2 || Float.parseFloat(hvf.getMddb()) < 0.001) {
-		severity = " style='background:lightblue;border-bottom-style:solid;' ";
+		severity = "class='noGlau borderTop' style='border-bottom-style:solid;' ";
 	}
 	else if(Float.parseFloat(hvf.getMddb()) <= 6.) {
-		severity = " style='background:green;border-bottom-style:solid;' ";
+		severity = "class='earlyGlau borderTop' style='border-bottom-style:solid;' ";
 	}
 	else if(Float.parseFloat(hvf.getMddb()) <= 12.) {
-		severity = " style='background:yellow;border-bottom-style:solid;'";
+		severity = "class='modGlau borderTop' style='border-bottom-style:solid;'";
 	}
 	else if(Float.parseFloat(hvf.getMddb()) <= 20.) {
-		severity = " style='background:orange;border-bottom-style:solid;'";
+		severity = "class='advGlau borderTop' style='border-bottom-style:solid;'";
 	}
 	else {
-		severity = " style='background:red;border-bottom-style:solid;'";
+		severity = "class='severeGlau borderTop' style='border-bottom-style:solid;'";
 	}
 %>
-<div <%out.print(severity);%> class="borderTop">
+<div id="MD" <%out.print(severity);%>>
 MD - Sign <input type="radio" name="mdsign" value="2"<%if(hvf.getMdsign()==2) {out.print(" checked");}%>>+ 
 <input type="radio" name="mdsign" value="1"<%if(hvf.getMdsign()==1) {out.print(" checked");}%>>-<br>
 MD - dB <input type="text" name="mddb" <%out.print("value='"+hvf.getMddb()+"'");%>><br>
@@ -93,16 +93,16 @@ MD - dB <input type="text" name="mddb" <%out.print("value='"+hvf.getMddb()+"'");
 <%
 	severity = "";
 	if(hvf.getCentral_0() >= 2) {
-		severity = " style='background:red;border-bottom-style:solid;' ";
+		severity = "class='severeGlau' style='border-bottom-style:solid;' ";
 	}
 	else if(hvf.getCentral_0() == 1) {
-		severity = " style='background:orange;border-bottom-style:solid;' ";
+		severity = "class='advGlau' style='border-bottom-style:solid;' ";
 	}
 	else if(hvf.getCentral_15() >= 1) {
-		severity = " style='background:yellow;border-bottom-style:solid;'";
+		severity = "class='modGlau' style='border-bottom-style:solid;'";
 	}
 	else {
-		severity = " style='background:green;border-bottom-style:solid;'";
+		severity = "class='earlyGlau' style='border-bottom-style:solid;'";
 	}
 
 %>
@@ -114,16 +114,16 @@ MD - dB <input type="text" name="mddb" <%out.print("value='"+hvf.getMddb()+"'");
 <%
 	severity = "";
 	if(hvf.getPts_five() >= 56 || hvf.getPts_one() >= 37) {
-		severity = " style='background:red;border-bottom-style:solid;' ";
+		severity = "class='severeGlau' style='border-bottom-style:solid;' ";
 	}
 	else if(hvf.getPts_five() >= 37 && hvf.getPts_one() >= 19) {
-		severity = " style='background:orange;border-bottom-style:solid;' ";
+		severity = "class='advGlau' style='border-bottom-style:solid;' ";
 	}
 	else if(hvf.getPts_five() >= 19 && hvf.getPts_one() >= 12) {
-		severity = " style='background:yellow;border-bottom-style:solid;'";
+		severity = "class='modGlau' style='border-bottom-style:solid;'";
 	}
 	else {
-		severity = " style='background:green;border-bottom-style:solid;'";
+		severity = "class='earlyGlau' style='border-bottom-style:solid;'";
 	}
 
 %>
@@ -140,16 +140,16 @@ MD - dB <input type="text" name="mddb" <%out.print("value='"+hvf.getMddb()+"'");
 	int sup = hvf.getSup_hem();
 	int inf = hvf.getInf_hem();
 	if(sup >= 2 && inf >= 2) {
-		severity = " style='background:red;border-bottom-style:solid;' ";
+		severity = "class='severeGlau' style='border-bottom-style:solid;' ";
 	}
 	else if(sup >= 1 && inf >= 1) {
-		severity = " style='background:orange;border-bottom-style:solid;' ";
+		severity = "class='advGlau' style='border-bottom-style:solid;' ";
 	}
 	else if((sup + inf) >= 1) {
-		severity = " style='background:yellow;border-bottom-style:solid;'";
+		severity = "class='modGlau' style='border-bottom-style:solid;'";
 	}
 	else {
-		severity = " style='background:green;border-bottom-style:solid;'";
+		severity = "class='earlyGlau' style='border-bottom-style:solid;'";
 	}
 
 %>
@@ -173,12 +173,12 @@ Inferior hemfield: # points with sensitivity >=15dB within 5 degrees of fixation
 <input type='button' id="chart" value="See Severity Chart" class="btn" id="chart">
 <br><br>
 <b>Categorization of glaucoma severity:</b> <span id="glauMatch2" class="invis error">Glaucoma present, glaucoma severity, and VF loss answers must be consistent</span><br><b>
-<div class="severityAnswers" style="background-color:lightblue;"><input type="radio" name="severe" value="0"<%if(hvf.getSevere()==0) {out.print(" checked");}%>>No glaucoma / minimal defect</div>
-<div class="severityAnswers" style="background-color:green;"><input type="radio" name="severe" value="1"<%if(hvf.getSevere()==1) {out.print(" checked");}%>>Early</div>
-<div class="severityAnswers" style="background-color:yellow;"><input type="radio" name="severe" value="2"<%if(hvf.getSevere()==2) {out.print(" checked");}%>>Moderate</div>
-<div class="severityAnswers" style="background-color:orange;"><input type="radio" name="severe" value="3"<%if(hvf.getSevere()==3) {out.print(" checked");}%>>Advanced</div>
-<div class="severityAnswers" style="background-color:red;"><input type="radio" name="severe" value="4"<%if(hvf.getSevere()==4) {out.print(" checked");}%>>Severe</div>
-<div class="severityAnswers" style="background-color:darkred;"><input type="radio" name="severe" value="5"<%if(hvf.getSevere()==5) {out.print(" checked");}%>>End stage glaucoma</div></b><br>
+<div class="severityAnswers noGlau"><input type="radio" name="severe" value="0"<%if(hvf.getSevere()==0) {out.print(" checked");}%>>No glaucoma / minimal defect</div>
+<div class="severityAnswers earlyGlau"><input type="radio" name="severe" value="1"<%if(hvf.getSevere()==1) {out.print(" checked");}%>>Early</div>
+<div class="severityAnswers modGlau"><input type="radio" name="severe" value="2"<%if(hvf.getSevere()==2) {out.print(" checked");}%>>Moderate</div>
+<div class="severityAnswers advGlau"><input type="radio" name="severe" value="3"<%if(hvf.getSevere()==3) {out.print(" checked");}%>>Advanced</div>
+<div class="severityAnswers severeGlau"><input type="radio" name="severe" value="4"<%if(hvf.getSevere()==4) {out.print(" checked");}%>>Severe</div>
+<div class="severityAnswers endGlau"><input type="radio" name="severe" value="5"<%if(hvf.getSevere()==5) {out.print(" checked");}%>>End stage glaucoma</div></b><br>
 
 
 False POS Errors (%) <input type="text" name="fp" class="numBox" <%out.print("value='"+hvf.getFp()+"'");%>><br>

@@ -5,6 +5,13 @@
  */
 
 $(document).ready(function(){
+	$('input[name=mdsign]').change(function(){
+		colorMD();
+	});
+	$('input[name=mddb]').change(function() {
+		colorMD();
+	});
+
 	var glauCount = 0;
 	var severeGlau = false;
 	var lossGlau = false;
@@ -265,4 +272,28 @@ function clearDefect() {
 		$('input[name=vf_defect'+i+']').prop('checked',false);
 	}
 	$('input[name=vf_defect_oth]').val("");
+}
+
+function colorMD() {
+	var md = $('#MD');
+	var sign = ($('input[name=mdsign][value=2]').prop('checked')) ? 2 : 1;
+	var db = $('input[name=mddb]').val();
+
+	md.removeClass('noGlau');
+	md.removeClass('earlyGlau');
+	md.removeClass('modGlau');
+	md.removeClass('advGlau');
+	md.removeClass('endGlau');
+
+	if(sign === 2 || Number(db) <= 0.001) {
+		md.addClass('noGlau');
+	} else if(Number(db) < 6) {
+		md.addClass('earlyGlau');
+	} else if(Number(db) < 12) {
+		md.addClass('modGlau');
+	} else if(Number(db) < 20) {
+		md.addClass('advGlau');
+	} else {
+		md.addClass('severeGlau');
+	}
 }
