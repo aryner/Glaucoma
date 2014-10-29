@@ -10,12 +10,21 @@
 
 <%
 Picture pic = (Picture)request.getAttribute("picture");
+ArrayList missingPics = (ArrayList)request.getAttribute("missingPics");
 
 if(pic == null) { 
 
 %>
 <h3>You have finished all uploaded HVF files!</h3>
 <%
+	if(missingPics != null && missingPics.size() > 0) {
+%>
+<h3>The following HVF PDFs still need to be uploaded</h3>
+<%
+		for(int i=0; i<missingPics.size(); i++) {
+			out.print(missingPics.get(i)+"<br>");
+		}
+	}
 
 } else {
 	HVFtest hvf = (HVFtest)request.getAttribute("hvf");
@@ -52,9 +61,11 @@ being significant at p < 1%<br>
 <input type="radio" name="cluster" value="2"<%if(hvf.getCluster()==2) {out.print(" checked");}%>>No 
 <input type="radio" name="cluster" value="999"<%if(hvf.getCluster()==999) {out.print(" checked");}%>>Blank <br><br> 
 
-Glaucoma Present
+<b>Glaucoma Present</b> <b>
 <input type="radio" name="glau" value="1"<%if(hvf.getHvf_glau()==1) {out.print(" checked");}%>>Yes 
-<input type="radio" name="glau" value="2"<%if(hvf.getHvf_glau()==2) {out.print(" checked");}%>>No <br><br>
+<input type="radio" name="glau" value="2"<%if(hvf.getHvf_glau()==2) {out.print(" checked");}%>>No </b>
+<span id="glauMatch1" class="invis error">Glaucoma present, glaucoma severity, and VF loss answers must be consistent</span>
+<br><br>
 
 <%
 	String severity = "";
@@ -74,19 +85,11 @@ Glaucoma Present
 		severity = " style='background:red;border-bottom-style:solid;'";
 	}
 %>
-<div <%out.print(severity);%>>
+<div <%out.print(severity);%> class="borderTop">
 MD - Sign <input type="radio" name="mdsign" value="2"<%if(hvf.getMdsign()==2) {out.print(" checked");}%>>+ 
 <input type="radio" name="mdsign" value="1"<%if(hvf.getMdsign()==1) {out.print(" checked");}%>>-<br>
 MD - dB <input type="text" name="mddb" <%out.print("value='"+hvf.getMddb()+"'");%>><br>
 </div>
-MD - P-value: <br>
-<input type="radio" name="mdp" value="1"<%if(hvf.getMdp()==1) {out.print(" checked");}%>><0.5%<br>
-<input type="radio" name="mdp" value="2"<%if(hvf.getMdp()==2) {out.print(" checked");}%>><1%<br>
-<input type="radio" name="mdp" value="3"<%if(hvf.getMdp()==3) {out.print(" checked");}%>><2%<br>
-<input type="radio" name="mdp" value="4"<%if(hvf.getMdp()==4) {out.print(" checked");}%>><5%<br>
-<input type="radio" name="mdp" value="5"<%if(hvf.getMdp()==5) {out.print(" checked");}%>><10%<br>
-<input type="radio" name="mdp" value="999"<%if(hvf.getMdp()==999) {out.print(" checked");}%>>Blank<br><br>
-
 <%
 	severity = "";
 	if(hvf.getCentral_0() >= 2) {
@@ -103,7 +106,6 @@ MD - P-value: <br>
 	}
 
 %>
-<b>Central 5% of fixation = the 4 points directly surrounding central fixation</b><br><br>
 <div <%out.print(severity);%>>
 # of points within central 5 degrees with sensitivity < 15 dB (top left graph) <input type="text" name="central_15" <%out.print("value='"+hvf.getCentral_15()+"'");%>><br>
 # of points within central 5 degrees with sensitivity < 0 dB (top left graph) <input type="text" name="central_0" <%out.print("value='"+hvf.getCentral_0()+"'");%>><br>
@@ -170,13 +172,13 @@ Inferior hemfield: # points with sensitivity >=15dB within 5 degrees of fixation
 <input type="hidden" class="severityChart" name="<%out.print(chart);%>">
 <input type='button' id="chart" value="See Severity Chart" class="btn" id="chart">
 <br><br>
-Categorization of glaucoma severity:<br>
+<b>Categorization of glaucoma severity:</b> <span id="glauMatch2" class="invis error">Glaucoma present, glaucoma severity, and VF loss answers must be consistent</span><br><b>
 <input type="radio" name="severe" value="0"<%if(hvf.getSevere()==0) {out.print(" checked");}%>>No glaucoma / minimal defect<br>
 <input type="radio" name="severe" value="1"<%if(hvf.getSevere()==1) {out.print(" checked");}%>>Early<br>
 <input type="radio" name="severe" value="2"<%if(hvf.getSevere()==2) {out.print(" checked");}%>>Moderate<br>
 <input type="radio" name="severe" value="3"<%if(hvf.getSevere()==3) {out.print(" checked");}%>>Advanced<br>
 <input type="radio" name="severe" value="4"<%if(hvf.getSevere()==4) {out.print(" checked");}%>>Severe<br>
-<input type="radio" name="severe" value="5"<%if(hvf.getSevere()==5) {out.print(" checked");}%>>End stage glaucoma<br><br>
+<input type="radio" name="severe" value="5"<%if(hvf.getSevere()==5) {out.print(" checked");}%>>End stage glaucoma</b><br><br>
 
 
 False POS Errors (%) <input type="text" name="fp" class="numBox" <%out.print("value='"+hvf.getFp()+"'");%>><br>
@@ -186,7 +188,7 @@ False NEG Errors (%) <input type="text" name="fn" class="numBox" <%out.print("va
 <input type="radio" name="reliable_review" value="1">Reliable<br>
 <input type="radio" name="reliable_review" value="2">Unreliable<br><br>
 
-<span id='vf_loss'>Pattern of VF loss:</span><br>
+<span id='vf_loss'>Pattern of glaucoma VF loss:</span> <span id="glauMatch3" class="invis error">Glaucoma present, glaucoma severity, and VF loss answers must be consistent</span><br>
 <input type="radio" name="vf_loss" value="1">glaucoma<br>
 <input type="radio" name="vf_loss" value="2">neuro<br>
 <input type="radio" name="vf_loss" value="3">nonspecific change<br>
@@ -195,15 +197,15 @@ False NEG Errors (%) <input type="text" name="fn" class="numBox" <%out.print("va
 <input type="text" name="vf_loss_oth">
 <br><br>
 
-<span id='vf_defect'>Type of VF defect:</span><br>
-<input type="radio" name="vf_defect" value="1">superior arcuate scotoma<br>
-<input type="radio" name="vf_defect" value="2">inferior arcuate scotoma<br>
-<input type="radio" name="vf_defect" value="3">superior nasal step<br>
-<input type="radio" name="vf_defect" value="4">inferior nasal step<br>
-<input type="radio" name="vf_defect" value="5">temporal wedge<br>
-<input type="radio" name="vf_defect" value="6">tunnel vision<br>
-<input type="radio" name="vf_defect" value="7">end stage<br>
-<input type="radio" name="vf_defect" value="8"><span id='vf_defect_oth'>other:</span>
+<span id='vf_defect'>Type of glaucoma VF defect:</span><br>
+<input type="checkbox" name="vf_defect1" value="1">superior arcuate scotoma<br>
+<input type="checkbox" name="vf_defect2" value="2">inferior arcuate scotoma<br>
+<input type="checkbox" name="vf_defect3" value="3">superior nasal step<br>
+<input type="checkbox" name="vf_defect4" value="4">inferior nasal step<br>
+<input type="checkbox" name="vf_defect5" value="5">temporal wedge<br>
+<input type="checkbox" name="vf_defect6" value="6">tunnel vision<br>
+<input type="checkbox" name="vf_defect7" value="7">end stage<br>
+<input type="checkbox" name="vf_defect8" value="8"><span id='vf_defect_oth'>other:</span>
 <input type="text" name="vf_defect_oth">
 <br><br>
 

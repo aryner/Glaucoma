@@ -5,6 +5,49 @@
  */
 
 $(document).ready(function(){
+	var glauCount = 0;
+	var severeGlau = false;
+	var lossGlau = false;
+	if($('input[name=glau][value=1]').prop('checked')) {
+		glauCount++;
+	}
+	if(!$('input[name=severe][value=0]').prop('checked')) {
+		glauCount++;
+		severeGlau = true;
+	}
+	if($('input[name=vf_loss][value=1]').prop('checked')) {
+		glauCount++;
+		lossGlau = true;
+	}
+
+	$('input[name=glau]').change(function() {
+		if($('input[name=glau][value=1]').prop('checked')) {
+			glauCount++;
+		}
+		else {
+			glauCount--;
+		}
+	});
+	$('input[name=severe]').change(function() {
+		if(!$('input[name=severe][value=0]').prop('checked') && !severeGlau) {
+			glauCount++;
+			severeGlau = true;
+		}
+		else if($('input[name=severe][value=0]').prop('checked') && severeGlau){
+			glauCount--;
+			severeGlau = false;
+		}
+	});
+	$('input[name=vf_loss]').change(function() {
+		if($('input[name=vf_loss][value=1]').prop('checked') && !lossGlau) {
+			glauCount++;
+			lossGlau = true;
+		}
+		else if(!$('input[name=vf_loss][value=1]').prop('checked') && lossGlau) {
+			glauCount--;
+			lossGlau = false;
+		}
+	});
 
 	$('input').bind('keypress', function(e){
 		e = e || window.event;
@@ -63,14 +106,6 @@ $(document).ready(function(){
 
 		var mddb = $('input[type=text][name=mddb]').val().length > 0; 
 
-		var mdp = $('input[type=radio][name=mdp][value=1]').prop('checked')
-			|| $('input[type=radio][name=mdp][value=2]').prop('checked') 
-			|| $('input[type=radio][name=mdp][value=3]').prop('checked') 
-			|| $('input[type=radio][name=mdp][value=4]').prop('checked')
-			|| $('input[type=radio][name=mdp][value=5]').prop('checked')
-			|| $('input[type=radio][name=mdp][value=6]').prop('checked')
-			|| $('input[type=radio][name=mdp][value=999]').prop('checked');
-
 		var central_15 = $('input[type=text][name=central_15]').val().length > 0;
 		var central_0 = $('input[type=text][name=central_0]').val().length > 0; 
 
@@ -98,14 +133,14 @@ $(document).ready(function(){
 		var vf_loss_oth_yes = $('input[type=radio][name=vf_loss][value=5]').prop('checked');
 		var vf_loss_oth = $('input[type=text][name=vf_loss_oth]').val().length > 0;
 
-		var vf_defect = $('input[type=radio][name=vf_defect][value=1]').prop('checked')
-			|| $('input[type=radio][name=vf_defect][value=2]').prop('checked') 
-			|| $('input[type=radio][name=vf_defect][value=3]').prop('checked')
-			|| $('input[type=radio][name=vf_defect][value=4]').prop('checked')
-			|| $('input[type=radio][name=vf_defect][value=5]').prop('checked')
-			|| $('input[type=radio][name=vf_defect][value=6]').prop('checked')
-			|| $('input[type=radio][name=vf_defect][value=7]').prop('checked')
-			|| $('input[type=radio][name=vf_defect][value=8]').prop('checked');
+		var vf_defect = $('input[type=checkbox][name=vf_defect1]').prop('checked')
+			|| $('input[type=checkbox][name=vf_defect2]').prop('checked') 
+			|| $('input[type=checkbox][name=vf_defect3]').prop('checked')
+			|| $('input[type=checkbox][name=vf_defect4]').prop('checked')
+			|| $('input[type=checkbox][name=vf_defect5]').prop('checked')
+			|| $('input[type=checkbox][name=vf_defect6]').prop('checked')
+			|| $('input[type=checkbox][name=vf_defect7]').prop('checked')
+			|| $('input[type=checkbox][name=vf_defect8]').prop('checked');
 		
 		var vf_defect_oth_yes = $('input[type=radio][name=vf_defect][value=8]').prop('checked');
 		var vf_defect_oth = $('input[type=text][name=vf_defect_oth]').val().length > 0;
@@ -136,9 +171,6 @@ $(document).ready(function(){
 		} else if(!mddb) {
 			e.preventDefault(); 
 			$('input[type=text][name=mddb]').focus();
-		} else if(!mdp) {
-			e.preventDefault(); 
-			$('input[type=radio][name=mdp][value=1]').focus();
 		} else if(!central_15) {
 			e.preventDefault(); 
 			$('input[type=text][name=central_15]').focus();
@@ -204,6 +236,19 @@ $(document).ready(function(){
 			$('#vf_defect_oth').addClass('highlight');
 		} else {
 			$('#vf_defect_oth').removeClass('highlight');
+		} if(glauCount !== 3 && glauCount !== 0) {
+			if(!focus) {
+				focus = true;
+				e.preventDefault();
+				$('input[type=radio][name=glau]').focus();
+			}
+			$('#glauMatch1').removeClass('invis');
+			$('#glauMatch2').removeClass('invis');
+			$('#glauMatch3').removeClass('invis');
+		} else {
+			$('#glauMatch1').addClass('invis');
+			$('#glauMatch2').addClass('invis');
+			$('#glauMatch3').addClass('invis');
 		}
 	});
 });

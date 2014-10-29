@@ -68,8 +68,8 @@ public class HVFtest {
 	private int cluster;
 	private int severe;
 	private int reliable_review;
-	private int vf_loss;
-	private int vf_defect;
+	private String vf_loss;
+	private String vf_defect;
 	private static final String slash = System.getProperty("file.separator");
 
 	public HVFtest(String npictureName) {
@@ -164,8 +164,8 @@ public class HVFtest {
 		severe = nsevere;
 	}
 
-	public HVFtest(int nid, int nconfirmed, int nopthCheck, String npictureName, int nuserID, int nvf_loss, 
-		int nvf_defect, int nglau, String nvf_loss_oth, String nvf_defect_oth, int nmon, String nmon_oth2_c47,
+	public HVFtest(int nid, int nconfirmed, int nopthCheck, String npictureName, int nuserID, String nvf_loss, 
+		String nvf_defect, int nglau, String nvf_loss_oth, String nvf_defect_oth, int nmon, String nmon_oth2_c47,
 		int ntar, String ntar_oth, int nlossnum, int nlossden, int nfp, int nfn, String ndur, int nfov, 
 		int nstimintens, int nstimcol, String nstimcol_oth, String nback, int nstrategy, String nstrategy_oth,
 		String npup, int nvanum, int nvaden, int nsph_sign, String nsph_num, int ncyl_sign, String ncyl_num,
@@ -509,8 +509,8 @@ public class HVFtest {
 		hvf.setMdsign(Integer.parseInt(attr));
 		attr = request.getParameter("mddb");
 		hvf.setMddb(attr);
-		attr = request.getParameter("mdp");
-		hvf.setMdp(Integer.parseInt(attr));
+//		attr = request.getParameter("mdp");
+//		hvf.setMdp(Integer.parseInt(attr));
 		attr = request.getParameter("central_15");
 		hvf.setCentral_15(Integer.parseInt(attr));
 		attr = request.getParameter("central_0");
@@ -534,17 +534,28 @@ public class HVFtest {
 		attr = request.getParameter("reliable_review");
 		hvf.setReliable_review(Integer.parseInt(attr));
 		attr = request.getParameter("vf_loss");
-		hvf.setVf_loss(Integer.parseInt(attr));
+		hvf.setVf_loss(attr);
 		attr = request.getParameter("vf_loss_oth");
 		hvf.setVf_loss_oth(attr);
-		attr = request.getParameter("vf_defect");
-		hvf.setVf_defect(Integer.parseInt(attr));
+//		attr = request.getParameter("vf_defect");
+//		hvf.setVf_defect(Integer.parseInt(attr));
 		attr = request.getParameter("vf_defect_oth");
 		hvf.setVf_defect_oth(attr);
 
+		String defect = "";
+		for(int i=1; i<9; i++) {
+			if(request.getParameter("vf_defect"+i) != null) {
+				defect += "1";
+			}
+			else {
+				defect += "0";
+			}
+		}
+		hvf.setVf_defect(defect);
+
 		String query = "UPDATE HVFtest SET hvf_fp='"+hvf.getFp()+"', hvf_fn='"+hvf.getFn()+"', hvf_ght='"+hvf.getGht()+"', "+
 				"hvf_psdp='"+hvf.getPsdp()+"', hvf_cluster='"+hvf.getCluster()+"', hvf_glau='"+hvf.getHvf_glau()+"', "+
-				"hvf_mdsign='"+hvf.getMdsign()+"', hvf_mddb='"+hvf.getMddb()+"', hvf_mdp='"+hvf.getMdp()+"', "+
+				"hvf_mdsign='"+hvf.getMdsign()+"', hvf_mddb='"+hvf.getMddb()+"', "+
 				"hvf_central_15='"+hvf.getCentral_15()+"', hvf_central_0='"+hvf.getCentral_0()+"', hvf_sup_hem='"+hvf.getSup_hem()+"', "+
 				"hvf_inf_hem='"+hvf.getInf_hem()+"', "+
 				"hvf_pts_five='"+hvf.getPts_five()+"', hvf_pts_one='"+hvf.getPts_one()+"', "+
@@ -1670,28 +1681,28 @@ public class HVFtest {
 	/**
 	 * @return the vf_loss
 	 */
-	public int getVf_loss() {
+	public String getVf_loss() {
 		return vf_loss;
 	}
 
 	/**
 	 * @param vf_loss the vf_loss to set
 	 */
-	public void setVf_loss(int vf_loss) {
+	public void setVf_loss(String vf_loss) {
 		this.vf_loss = vf_loss;
 	}
 
 	/**
 	 * @return the vf_defect
 	 */
-	public int getVf_defect() {
+	public String getVf_defect() {
 		return vf_defect;
 	}
 
 	/**
 	 * @param vf_defect the vf_defect to set
 	 */
-	public void setVf_defect(int vf_defect) {
+	public void setVf_defect(String vf_defect) {
 		this.vf_defect = vf_defect;
 	}
 

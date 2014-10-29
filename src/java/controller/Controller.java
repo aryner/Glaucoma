@@ -81,6 +81,10 @@ public class Controller extends HttpServlet {
 			request.setAttribute("hvfNeedPictures", HVFtest.needPictures());
 		}
 
+		else if (userPath.equals("/upload")) {
+			request.setAttribute("hvfNeedPictures", HVFtest.needPictures());
+		}
+
 		else if(userPath.equals("/HVFtest")) {
 			User user = (User)session.getAttribute("user");
 			Picture picture = HVFtest.getNext(user);
@@ -107,6 +111,7 @@ public class Controller extends HttpServlet {
 			request.setAttribute("access", user.getAccess());
 			request.setAttribute("slash",slash);
 			request.setAttribute("picture",picture);
+			request.setAttribute("missingPics", HVFtest.needPictures());
 		}
 
 		else if (userPath.equals("/OpHVFtest")) {
@@ -119,6 +124,7 @@ public class Controller extends HttpServlet {
 			request.setAttribute("chart",SQLCommands.querySeverityChartName());
 			request.setAttribute("slash",slash);
 			request.setAttribute("picture",picture);
+			request.setAttribute("missingPics", HVFtest.needPictures());
 		}
 
 		else if (userPath.equals("/printCSV")){

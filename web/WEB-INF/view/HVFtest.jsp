@@ -9,6 +9,7 @@
 
 <%
 Picture pic = (Picture)request.getAttribute("picture");
+ArrayList<String> missingPics = (ArrayList)request.getAttribute("missingPics");
 
 if(pic == null) { 
 
@@ -23,6 +24,14 @@ if(pic == null) {
 			out.print(needToPairCount+" still need to be graded by someone else before adjudication");
 		} else {
 			out.print("HVF is ready for adjudication!");
+		}
+	}
+	if(missingPics != null && missingPics.size() > 0) {
+%>
+<h3>The following HVF PDFs still need to be uploaded</h3>
+<%
+		for(int i=0; i<missingPics.size(); i++) {
+			out.print(missingPics.get(i)+"<br>");
 		}
 	}
 } else {
