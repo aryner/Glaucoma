@@ -197,6 +197,7 @@ False NEG Errors (%) <input type="text" name="fn" class="numBox" <%out.print("va
 <input type="text" name="vf_loss_oth">
 <br><br>
 
+<div id="vf_defectInvis">
 <span id='vf_defect'>Type of glaucoma VF defect:</span><br>
 <input type="checkbox" name="vf_defect1" value="1">superior arcuate scotoma<br>
 <input type="checkbox" name="vf_defect2" value="2">inferior arcuate scotoma<br>
@@ -208,6 +209,7 @@ False NEG Errors (%) <input type="text" name="fn" class="numBox" <%out.print("va
 <input type="checkbox" name="vf_defect8" value="8"><span id='vf_defect_oth'>other:</span>
 <input type="text" name="vf_defect_oth">
 <br><br>
+</div>
 
 <input type="submit" value="Submit" class="btn">
 </form>

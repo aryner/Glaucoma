@@ -18,6 +18,10 @@ $(document).ready(function(){
 	if($('input[name=vf_loss][value=1]').prop('checked')) {
 		glauCount++;
 		lossGlau = true;
+		$('#vf_defectInvis').removeClass('invis');
+	}
+	else {
+		$('#vf_defectInvis').addClass('invis');
 	}
 
 	$('input[name=glau]').change(function() {
@@ -42,10 +46,13 @@ $(document).ready(function(){
 		if($('input[name=vf_loss][value=1]').prop('checked') && !lossGlau) {
 			glauCount++;
 			lossGlau = true;
+			$('#vf_defectInvis').removeClass('invis');
 		}
 		else if(!$('input[name=vf_loss][value=1]').prop('checked') && lossGlau) {
 			glauCount--;
 			lossGlau = false;
+			$('#vf_defectInvis').addClass('invis');
+			clearDefect();
 		}
 	});
 
@@ -142,7 +149,7 @@ $(document).ready(function(){
 			|| $('input[type=checkbox][name=vf_defect7]').prop('checked')
 			|| $('input[type=checkbox][name=vf_defect8]').prop('checked');
 		
-		var vf_defect_oth_yes = $('input[type=radio][name=vf_defect][value=8]').prop('checked');
+		var vf_defect_oth_yes = $('input[type=checkbox][name=vf_defect8]').prop('checked');
 		var vf_defect_oth = $('input[type=text][name=vf_defect_oth]').val().length > 0;
 
 		var focus = false;
@@ -218,7 +225,7 @@ $(document).ready(function(){
 			$('#vf_loss_oth').addClass('highlight');
 		} else {
 			$('#vf_loss_oth').removeClass('highlight');
-		} if(!vf_defect) {
+		} if(!vf_defect && glauCount == 3) {
 			if(!focus) {
 				focus = true;
 				e.preventDefault(); 
@@ -252,3 +259,10 @@ $(document).ready(function(){
 		}
 	});
 });
+
+function clearDefect() {
+	for(var i=1; i<9; i++) {
+		$('input[name=vf_defect'+i+']').prop('checked',false);
+	}
+	$('input[name=vf_defect_oth]').val("");
+}
