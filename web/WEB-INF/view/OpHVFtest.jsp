@@ -106,7 +106,7 @@ MD - dB <input type="text" name="mddb" <%out.print("value='"+hvf.getMddb()+"'");
 	}
 
 %>
-<div <%out.print(severity);%>>
+<div id="central" <%out.print(severity);%>>
 # of points within central 5 degrees with sensitivity < 15 dB (top left graph) <input type="text" name="central_15" <%out.print("value='"+hvf.getCentral_15()+"'");%>><br>
 # of points within central 5 degrees with sensitivity < 0 dB (top left graph) <input type="text" name="central_0" <%out.print("value='"+hvf.getCentral_0()+"'");%>><br>
 </div>
@@ -127,7 +127,7 @@ MD - dB <input type="text" name="mddb" <%out.print("value='"+hvf.getMddb()+"'");
 	}
 
 %>
-<div <%out.print(severity);%>>
+<div id="pts" <%out.print(severity);%>>
 # points depressed < 5% level on Pattern Deviation Plot <input type="text" name="pts_five" <%out.print("value='"+hvf.getPts_five()+"'");%>><br>
 # points depressed < 1% level on Pattern Deviation Plot <input type="text" name="pts_one" <%out.print("value='"+hvf.getPts_one()+"'");%>><br>
 </div>
@@ -153,7 +153,7 @@ MD - dB <input type="text" name="mddb" <%out.print("value='"+hvf.getMddb()+"'");
 	}
 
 %>
-<div <%out.print(severity);%>>
+<div id="hem" <%out.print(severity);%>>
 Superior hemifield: # points <15dB within central 5 degrees of fixation? (top left graph)<br> <input type="text" name="sup_hem" <%out.print("value='"+hvf.getSup_hem()+"'");%>><br>
 Inferior hemifield: # points <15dB within central 5 degrees of fixation? (top left graph)<br> <input type="text" name="inf_hem" <%out.print("value='"+hvf.getInf_hem()+"'");%>>
 </div><br><br>

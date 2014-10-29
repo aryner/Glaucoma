@@ -11,6 +11,24 @@ $(document).ready(function(){
 	$('input[name=mddb]').change(function() {
 		colorMD();
 	});
+	$('input[name=central_0]').change(function() {
+		colorCentral();
+	});
+	$('input[name=central_15]').change(function(){
+		colorCentral();
+	});
+	$('input[name=pts_five]').change(function() {
+		colorPts();
+	});
+	$('input[name=pts_one]').change(function() {
+		colorPts();
+	});
+	$('input[name=sup_hem]').change(function() {
+		colorHem();
+	});
+	$('input[name=inf_hem]').change(function() {
+		colorHem();
+	});
 
 	var glauCount = 0;
 	var severeGlau = false;
@@ -283,6 +301,7 @@ function colorMD() {
 	md.removeClass('earlyGlau');
 	md.removeClass('modGlau');
 	md.removeClass('advGlau');
+	md.removeClass('severeGlau');
 	md.removeClass('endGlau');
 
 	if(sign === 2 || Number(db) <= 0.001) {
@@ -295,5 +314,76 @@ function colorMD() {
 		md.addClass('advGlau');
 	} else {
 		md.addClass('severeGlau');
+	}
+}
+
+function colorCentral()  {
+	var central = $('#central');
+	var zero = Number($('input[name=central_0').val());
+	var fifteen = Number($('input[name=central_15').val());
+
+	central.removeClass('noGlau');
+	central.removeClass('earlyGlau');
+	central.removeClass('modGlau');
+	central.removeClass('advGlau');
+	central.removeClass('severeGlau');
+	central.removeClass('endGlau');
+
+	if(zero >= 2) {
+		central.addClass('severeGlau');
+	} else if (zero === 1) {
+		central.addClass('advGlau');
+	} else if (fifteen > 0) {
+		central.addClass('modGlau');
+	} else  {
+		central.addClass('earlyGlau');
+	}
+}
+
+function colorPts() {
+	var pts = $('#pts');
+	var one = Number($('input[name=pts_one]').val());
+	var five = Number($('input[name=pts_five]').val());
+
+	pts.removeClass('noGlau');
+	pts.removeClass('earlyGlau');
+	pts.removeClass('modGlau');
+	pts.removeClass('advGlau');
+	pts.removeClass('severeGlau');
+	pts.removeClass('endGlau');
+
+	if (five >= 56 || one >= 37) {
+		pts.addClass('severeGlau');
+	} else if (five >= 37 && one >= 19) {
+		pts.addClass('advGlau');
+	} else if (five >= 19 && one >= 12) {
+		pts.addClass('modGlau');
+	} else if(((five >= 19 && five <=36) && (one >=19)) || (five >= 37 && (one >= 12 && one <= 36))){
+		;//do nothing; it makes no contribution to classifications
+	} else {
+		pts.addClass('earlyGlau');
+	}
+}
+
+function colorHem() {
+	var hem = $('#hem');
+	var sup = Number($('input[name=sup_hem]').val());
+	var inf = Number($('input[name=inf_hem]').val());
+
+	hem.removeClass('noGlau');
+	hem.removeClass('earlyGlau');
+	hem.removeClass('modGlau');
+	hem.removeClass('advGlau');
+	hem.removeClass('severeGlau');
+	hem.removeClass('endGlau');
+console.log('sup = '+sup+' : inf = '+inf);
+	if(sup >= 2 && inf >= 2) {
+		hem.addClass('severeGlau');
+	} else if (sup >= 1 && inf >= 1) {
+		hem.addClass('advGlau');
+	} else if ((sup + inf) >= 1) {
+		hem.addClass('modGlau');
+	} else {
+		hem.addClass('earlyGlau');
 	}
 }
