@@ -173,12 +173,12 @@ Inferior hemfield: # points with sensitivity >=15dB within 5 degrees of fixation
 <input type='button' id="chart" value="See Severity Chart" class="btn" id="chart">
 <br><br>
 <b>Categorization of glaucoma severity:</b> <span id="glauMatch2" class="invis error">Glaucoma present, glaucoma severity, and VF loss answers must be consistent</span><br><b>
-<input type="radio" name="severe" value="0"<%if(hvf.getSevere()==0) {out.print(" checked");}%>>No glaucoma / minimal defect<br>
-<input type="radio" name="severe" value="1"<%if(hvf.getSevere()==1) {out.print(" checked");}%>>Early<br>
-<input type="radio" name="severe" value="2"<%if(hvf.getSevere()==2) {out.print(" checked");}%>>Moderate<br>
-<input type="radio" name="severe" value="3"<%if(hvf.getSevere()==3) {out.print(" checked");}%>>Advanced<br>
-<input type="radio" name="severe" value="4"<%if(hvf.getSevere()==4) {out.print(" checked");}%>>Severe<br>
-<input type="radio" name="severe" value="5"<%if(hvf.getSevere()==5) {out.print(" checked");}%>>End stage glaucoma</b><br><br>
+<div class="severityAnswers" style="background-color:lightblue;"><input type="radio" name="severe" value="0"<%if(hvf.getSevere()==0) {out.print(" checked");}%>>No glaucoma / minimal defect</div>
+<div class="severityAnswers" style="background-color:green;"><input type="radio" name="severe" value="1"<%if(hvf.getSevere()==1) {out.print(" checked");}%>>Early</div>
+<div class="severityAnswers" style="background-color:yellow;"><input type="radio" name="severe" value="2"<%if(hvf.getSevere()==2) {out.print(" checked");}%>>Moderate</div>
+<div class="severityAnswers" style="background-color:orange;"><input type="radio" name="severe" value="3"<%if(hvf.getSevere()==3) {out.print(" checked");}%>>Advanced</div>
+<div class="severityAnswers" style="background-color:red;"><input type="radio" name="severe" value="4"<%if(hvf.getSevere()==4) {out.print(" checked");}%>>Severe</div>
+<div class="severityAnswers" style="background-color:darkred;"><input type="radio" name="severe" value="5"<%if(hvf.getSevere()==5) {out.print(" checked");}%>>End stage glaucoma</div></b><br>
 
 
 False POS Errors (%) <input type="text" name="fp" class="numBox" <%out.print("value='"+hvf.getFp()+"'");%>><br>
