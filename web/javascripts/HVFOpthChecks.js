@@ -5,6 +5,16 @@
  */
 
 $(document).ready(function(){
+	$('input[name=ght').change(function(){
+		validateGlaucoma();
+	});
+	$('input[name=psdp]').change(function(){
+		validateGlaucoma();
+	});
+	$('input[name=cluster]').change(function(){
+		validateGlaucoma();
+	});
+
 	$('input[type=text][name=mddb]').on('input', function() {
 		if(this.value != this.value.replace(/[^0-9^\.]/g, '')) {
 			this.value = this.value.replace(/[^0-9^\.]/g, '');
@@ -431,5 +441,26 @@ console.log('sup = '+sup+' : inf = '+inf);
 		hem.addClass('modGlau');
 	} else {
 		hem.addClass('earlyGlau');
+	}
+}
+
+function validateGlaucoma() {
+	var glauPresenceCount = 0;
+
+	if($('input[name=ght][value=3]').prop('checked')) {
+		glauPresenceCount++;
+	}
+	if (!$('input[name=psdp][value=5]').prop('checked') && !$('input[name=psdp][value=999]').prop('checked')) {
+		glauPresenceCount++;
+	}
+	if($('input[name=cluster][value=1]').prop('checked')){
+		glauPresenceCount++;
+	}
+
+	if(glauPresenceCount > 0) {
+		$('input[name=glau][value=1]').prop('checked',true);
+	}
+	else {
+		$('input[name=glau][value=2]').prop('checked',true);
 	}
 }
