@@ -36,7 +36,16 @@ $(document).ready(function(){
 			this.value = this.value.replace(/[^0-9]/g, '');
 		}
 	});
-
+	$('input[type=text][name=central_15]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=central_0]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
 
 	$('input[name=mdsign]').change(function(){
 		colorMD();
