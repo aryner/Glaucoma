@@ -32,6 +32,16 @@ public class Picture {
 		type = ntype;
 	}
 
+	public static Picture getPictureByName(String picName) {
+		String query = "SELECT * FROM picture WHERE name='"+picName+"'";
+		Vector<Picture> pics = SQLCommands.queryPictures(query);
+
+		if(pics == null || pics.size() == 0 ) {
+			return null;
+		}
+		return pics.get(0);
+	}
+
 	public static Vector<String> uploadDocs(HttpServletRequest request) {
 		Vector<String> names = new Vector<String>();
 		Vector<String> errors = new Vector<String>();

@@ -73,6 +73,10 @@ public class Controller extends HttpServlet {
 			Vector<String> needsReview = HVFtest.getNeedsReview();
 			Vector<String> reviewed = HVFtest.getReviewed();
 
+			if(user.getAccess() == 2) {
+				request.setAttribute("reviewedBy", HVFtest.getReviewedBy(user.getUserName()));
+			}
+
 			request.setAttribute("ungraded",ungraded);
 			request.setAttribute("gradedOnce",onceGraded);
 			request.setAttribute("needsAdj",needsAdj);
@@ -115,8 +119,16 @@ public class Controller extends HttpServlet {
 		}
 
 		else if (userPath.equals("/OpHVFtest")) {
-			User user = (User)session.getAttribute("user");
-			Picture picture = HVFtest.getNext(user);
+			Picture picture = null;
+			String pictureName = request.getParameter("pictureName");
+
+			if (pictureName != null && pictureName.length() > 0) {
+				picture = Picture.getPictureByName(pictureName);
+			} 
+			else {
+				User user = (User)session.getAttribute("user");
+				picture = HVFtest.getNext(user);
+			}
 
 			if(picture != null) {
 				request.setAttribute("hvf",HVFtest.getOpHVF(picture.getName()));

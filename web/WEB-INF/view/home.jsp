@@ -4,6 +4,7 @@
     Author     : aryner
 --%>
 <%@page import="java.util.*"%>
+<%@page import="model.*"%>
 
 <%
 if(session.getAttribute("errors") != null) {
@@ -156,10 +157,21 @@ if(session.getAttribute("errors") != null) {
 	<%Vector<String> reviewed = (Vector)request.getAttribute("reviewed");%>
 	<div class='fifth-column'><h3>Reviewed / Not glaucoma (<%out.print(reviewed.size());%>)</h3>
 		<%
+			Vector<HVFtest> reviewedBy = (Vector)request.getAttribute("reviewedBy");
 			name = "";
 			for(int i=0; i<reviewed.size(); i++) {
 				name = reviewed.get(i);
+				if(reviewedBy != null) {
+					for(int j=0; j<reviewedBy.size(); j++) {
+						if(reviewedBy.get(j).getPictureName().equals(name)) {
+							out.print("<a href='OpHVFtest?pictureName="+name+"'>");
+						}
+					}
+				}
 				out.print(name.substring(0,name.length()-4)+"<br>");
+				if(reviewedBy != null) {
+					out.print("</a>");
+				}
 			}
 		%>
 	</div>

@@ -826,6 +826,14 @@ public class HVFtest {
 		return result;
 	}
 
+	public static Vector<HVFtest> getReviewedBy(String userName) {
+		Vector<HVFtest> result = null;
+		String query = "SELECT * FROM HVFtest WHERE opthName='"+userName+"'";
+		result = SQLCommands.queryHVFtestMaster(query);
+
+		return result;
+	}
+
 	public static Vector<String> getCSVLines() {
 		Vector<String> result = new Vector<String>();
 		String query = "SELECT * FROM HVFtest";
