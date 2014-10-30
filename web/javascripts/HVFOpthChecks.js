@@ -5,6 +5,39 @@
  */
 
 $(document).ready(function(){
+	$('input[type=text][name=mddb]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9^\.]/g, '')) {
+			this.value = this.value.replace(/[^0-9^\.]/g, '');
+		}
+		if(this.value.indexOf(".") >= 0 && this.value.indexOf(".") < this.value.length) { 
+			var second = this.value.substring(this.value.indexOf(".")+1, this.value.length); 
+			if(second.indexOf(".") >= 0) {
+				this.value = this.value.substring(0,this.value.length-1);
+			}
+		}
+	});
+	$('input[type=text][name=pts_five]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=pts_one]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=sup_hem]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=inf_hem]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+
+
 	$('input[name=mdsign]').change(function(){
 		colorMD();
 	});
