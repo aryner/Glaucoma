@@ -70,19 +70,19 @@ being significant at p < 1%<br>
 <%
 	String severity = "";
 	if(hvf.getMdsign() == 2 || Float.parseFloat(hvf.getMddb()) < 0.001) {
-		severity = "class='noGlau borderTop' style='border-bottom-style:solid;' ";
+		severity = "class='noGlau borderTop' style='border:solid;border-bottom:none' ";
 	}
 	else if(Float.parseFloat(hvf.getMddb()) <= 6.) {
-		severity = "class='earlyGlau borderTop' style='border-bottom-style:solid;' ";
+		severity = "class='earlyGlau borderTop' style='border:solid;border-bottom:none' ";
 	}
 	else if(Float.parseFloat(hvf.getMddb()) <= 12.) {
-		severity = "class='modGlau borderTop' style='border-bottom-style:solid;'";
+		severity = "class='modGlau borderTop' style='border:solid;border-bottom:none'";
 	}
 	else if(Float.parseFloat(hvf.getMddb()) <= 20.) {
-		severity = "class='advGlau borderTop' style='border-bottom-style:solid;'";
+		severity = "class='advGlau borderTop' style='border:solid;border-bottom:none'";
 	}
 	else {
-		severity = "class='severeGlau borderTop' style='border-bottom-style:solid;'";
+		severity = "class='severeGlau borderTop' style='border:solid;border-bottom:none'";
 	}
 %>
 <div id="MD" <%out.print(severity);%>>
@@ -93,16 +93,16 @@ MD - dB <input type="text" name="mddb" <%out.print("value='"+hvf.getMddb()+"'");
 <%
 	severity = "";
 	if(hvf.getCentral_0() >= 2) {
-		severity = "class='severeGlau' style='border-bottom-style:solid;' ";
+		severity = "class='severeGlau' style='border:solid;border-bottom:none' ";
 	}
 	else if(hvf.getCentral_0() == 1) {
-		severity = "class='advGlau' style='border-bottom-style:solid;' ";
+		severity = "class='advGlau' style='border:solid;border-bottom:none' ";
 	}
 	else if(hvf.getCentral_15() >= 1) {
-		severity = "class='modGlau' style='border-bottom-style:solid;'";
+		severity = "class='modGlau' style='border:solid;border-bottom:none'";
 	}
 	else {
-		severity = "class='earlyGlau' style='border-bottom-style:solid;'";
+		severity = "class='earlyGlau' style='border:solid;border-bottom:none'";
 	}
 
 %>
@@ -114,16 +114,16 @@ MD - dB <input type="text" name="mddb" <%out.print("value='"+hvf.getMddb()+"'");
 <%
 	severity = "";
 	if(hvf.getPts_five() >= 56 || hvf.getPts_one() >= 37) {
-		severity = "class='severeGlau' style='border-bottom-style:solid;' ";
+		severity = "class='severeGlau' style='border:solid;border-bottom:none' ";
 	}
 	else if(hvf.getPts_five() >= 37 && hvf.getPts_one() >= 19) {
-		severity = "class='advGlau' style='border-bottom-style:solid;' ";
+		severity = "class='advGlau' style='border:solid;border-bottom:none' ";
 	}
 	else if(hvf.getPts_five() >= 19 && hvf.getPts_one() >= 12) {
-		severity = "class='modGlau' style='border-bottom-style:solid;'";
+		severity = "class='modGlau' style='border:solid;border-bottom:none'";
 	}
 	else {
-		severity = "class='earlyGlau' style='border-bottom-style:solid;'";
+		severity = "class='earlyGlau' style='border:solid;border-bottom:none'";
 	}
 
 %>
@@ -140,16 +140,16 @@ MD - dB <input type="text" name="mddb" <%out.print("value='"+hvf.getMddb()+"'");
 	int sup = hvf.getSup_hem();
 	int inf = hvf.getInf_hem();
 	if(sup >= 2 && inf >= 2) {
-		severity = "class='severeGlau' style='border-bottom-style:solid;' ";
+		severity = "class='severeGlau' style='border:solid;' ";
 	}
 	else if(sup >= 1 && inf >= 1) {
-		severity = "class='advGlau' style='border-bottom-style:solid;' ";
+		severity = "class='advGlau' style='border:solid;' ";
 	}
 	else if((sup + inf) >= 1) {
-		severity = "class='modGlau' style='border-bottom-style:solid;'";
+		severity = "class='modGlau' style='border:solid;'";
 	}
 	else {
-		severity = "class='earlyGlau' style='border-bottom-style:solid;'";
+		severity = "class='earlyGlau' style='border:solid;'";
 	}
 
 %>

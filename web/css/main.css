@@ -589,6 +589,8 @@ and scalar of: 0.29411764705882354*/
 }
 .severityAnswers {
 	width: 28%;
+	border: solid;
+	border-bottom: none;
 }
 .noGlau {
 	background-color: lightblue;
@@ -607,4 +609,5 @@ and scalar of: 0.29411764705882354*/
 }
 .endGlau {
 	background-color: darkred;
+	border-bottom: solid;
 }
