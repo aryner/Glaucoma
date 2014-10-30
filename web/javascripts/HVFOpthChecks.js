@@ -306,11 +306,11 @@ function colorMD() {
 
 	if(sign === 2 || Number(db) <= 0.001) {
 		md.addClass('noGlau');
-	} else if(Number(db) < 6) {
+	} else if(Number(db) <= 6) {
 		md.addClass('earlyGlau');
-	} else if(Number(db) < 12) {
+	} else if(Number(db) <= 12) {
 		md.addClass('modGlau');
-	} else if(Number(db) < 20) {
+	} else if(Number(db) <= 20) {
 		md.addClass('advGlau');
 	} else {
 		md.addClass('severeGlau');
@@ -361,7 +361,7 @@ function colorPts() {
 		else if((five >= 56 && five < 999) || (one >= 37 && one < 999)) {
 			pts.addClass('severeGlau');
 		}
-		else if(((five >= 19 && five <=36) && (one >=19)) || (five >= 37 && (one >= 12 && one <= 36))){
+		else if(((five >= 19 && five <=36) && (one >=19)) || (five >= 37 && (one >= 12 && one <= 18))){
 			;//do nothing; it makes no contribution to classifications
 		}
 		else if (five < 999 && one < 999) {

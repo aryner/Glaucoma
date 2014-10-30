@@ -369,7 +369,7 @@ public class HVFtest {
 			else if((ptsFive >= 56 && ptsFive < 999) || (ptsOne >= 37 && ptsOne < 999)) {
 				severe++;
 			}
-			else if(((ptsFive >= 19 && ptsFive <=36) && (ptsOne >=19)) || (ptsFive >= 37 && (ptsOne >= 12 && ptsOne <= 36))){
+			else if(((ptsFive >= 19 && ptsFive <=36) && (ptsOne >=19)) || (ptsFive >= 37 && (ptsOne >= 12 && ptsOne <= 18))){
 				;//do nothing; it makes no contribution to classifications
 			}
 			else if (ptsFive < 999 && ptsOne < 999) {
@@ -396,11 +396,11 @@ public class HVFtest {
 			if((sup == 0 && inf > 0 && inf < 999) || (sup > 0 && inf == 0 && sup < 999)) {
 				moderate++;
 			}
-			else if((sup == 1 || sup == 2) && (inf == 1 || inf == 2)) {
-				advanced++;
-			}
 			else if(sup >= 2 && inf >= 2 && (sup < 999 && inf < 999)) {
 				severe++;
+			}
+			else if((sup == 1 || sup == 2) && (inf == 1 || inf == 2)) {
+				advanced++;
 			}
 			else {
 				early++;
