@@ -491,7 +491,8 @@ public class HVFtest {
 		}
 	}
 
-	public static void opthAssignHVF(HttpServletRequest request, User user) {
+	public static boolean opthAssignHVF(HttpServletRequest request, User user) {
+		boolean firstReview = true;
 		String picName = request.getParameter("pictureName");
 		HVFtest hvf = new HVFtest(picName);
 
@@ -565,6 +566,11 @@ public class HVFtest {
 				"hvf_vf_loss_oth='"+hvf.getVf_loss_oth()+"', hvf_vf_defect='"+hvf.getVf_defect()+"', hvf_vf_defect_oth='"+hvf.getVf_defect_oth()+
 				"', opthCheck='"+user.getID()+"', opthName='"+user.getUserName()+"' WHERE pictureName='"+picName+"'";
 		SQLCommands.update(query);
+
+		if(request.getParameter("reviewedAgain").equals("true")) {
+			firstReview = false;
+		}
+		return firstReview;
 	}
 
 	public static void addNegatives(double percent) {
@@ -598,7 +604,7 @@ public class HVFtest {
 		HVFtest result = null;
 		String query = "SELECT * FROM HVFtest WHERE pictureName='"+picName+"'";
 
-		Vector<HVFtest> hvf = SQLCommands.queryHVFtestForOp(query);
+		Vector<HVFtest> hvf = SQLCommands.queryHVFtestMaster(query);
 		if(hvf.size() > 0) {
 			result = hvf.get(0);
 		}

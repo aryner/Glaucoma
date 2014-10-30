@@ -28,6 +28,7 @@ if(pic == null) {
 
 } else {
 	HVFtest hvf = (HVFtest)request.getAttribute("hvf");
+	boolean reviewed = (hvf.getOpthName() != null && hvf.getOpthName().length() > 0) ? true : false;
 	String slash = ""+request.getAttribute("slash");
 	String src = "http://localhost:8084/HVF/pdf?type=HVF&name="+pic.getName();
 	out.print("<h3 class='picName'>"+pic.getType()+" "+pic.getName()+"</h3>");
@@ -39,6 +40,7 @@ if(pic == null) {
 <div class="questions">
 <form action="OpReviewHVF" method="POST">
 <input type="hidden" name="pictureName" value="<%out.print(pic.getName());%>">
+<input type="hidden" name="reviewedAgain" value="<%out.print((reviewed)?"true":"false");%>">
 
 GHT: <br>
 <input type="radio" name="ght" value="1"<%if(hvf.getGht()==1) {out.print(" checked");}%>>Within Normal Limits<br>
@@ -186,29 +188,43 @@ False POS Errors (%) <input type="text" name="fp" class="numBox" <%out.print("va
 False NEG Errors (%) <input type="text" name="fn" class="numBox" <%out.print("value='"+hvf.getFp()+"'");%>><br><br>
 
 <span id='reliable_review'>Test Reliability:</span><br>
-<input type="radio" name="reliable_review" value="1">Reliable<br>
-<input type="radio" name="reliable_review" value="2">Unreliable<br><br>
+<input type="radio" name="reliable_review" value="1"<%if(reviewed && hvf.getReliable_review()==1){out.print(" checked");}%>>Reliable<br>
+<input type="radio" name="reliable_review" value="2"<%if(reviewed && hvf.getReliable_review()==2){out.print(" checked");}%>>Unreliable<br><br>
 
 <span id='vf_loss'>Pattern of glaucoma VF loss:</span> <span id="glauMatch3" class="invis error">Glaucoma present, glaucoma severity, and VF loss answers must be consistent</span><br>
-<input type="radio" name="vf_loss" value="1">glaucoma<br>
-<input type="radio" name="vf_loss" value="2">neuro<br>
-<input type="radio" name="vf_loss" value="3">nonspecific change<br>
-<input type="radio" name="vf_loss" value="4">could not determine (unreliable field)<br>
-<input type="radio" name="vf_loss" value="5"><span id='vf_loss_oth'>other:</span>
+<input type="radio" name="vf_loss" value="1"<%if(reviewed && hvf.getVf_loss().equals("1")){out.print(" checked");}%>>glaucoma<br>
+<input type="radio" name="vf_loss" value="2"<%if(reviewed && hvf.getVf_loss().equals("2")){out.print(" checked");}%>>neuro<br>
+<input type="radio" name="vf_loss" value="3"<%if(reviewed && hvf.getVf_loss().equals("3")){out.print(" checked");}%>>nonspecific change<br>
+<input type="radio" name="vf_loss" value="4"<%if(reviewed && hvf.getVf_loss().equals("4")){out.print(" checked");}%>>could not determine (unreliable field)<br>
+<input type="radio" name="vf_loss" value="5"<%if(reviewed && hvf.getVf_loss().equals("5")){out.print(" checked");}%>><span id='vf_loss_oth'>other:</span>
 <input type="text" name="vf_loss_oth">
 <br><br>
-
+<%
+String result = "";
+String resultString = "00000000";
+if(reviewed) {
+	resultString = hvf.getVf_defect();
+}
+%>
 <div id="vf_defectInvis">
 <span id='vf_defect'>Type of glaucoma VF defect:</span><br>
-<input type="checkbox" name="vf_defect1" value="1">superior arcuate scotoma<br>
-<input type="checkbox" name="vf_defect2" value="2">inferior arcuate scotoma<br>
-<input type="checkbox" name="vf_defect3" value="3">superior nasal step<br>
-<input type="checkbox" name="vf_defect4" value="4">inferior nasal step<br>
-<input type="checkbox" name="vf_defect5" value="5">temporal wedge<br>
-<input type="checkbox" name="vf_defect6" value="6">tunnel vision<br>
-<input type="checkbox" name="vf_defect7" value="7">end stage<br>
-<input type="checkbox" name="vf_defect8" value="8"><span id='vf_defect_oth'>other:</span>
-<input type="text" name="vf_defect_oth">
+<% result = resultString.substring(0,1); %>
+<input type="checkbox" name="vf_defect1" value="1"<%if(result.equals("1")) { out.print(" checked");}%>>superior arcuate scotoma<br>
+<% result = resultString.substring(1,2); %>
+<input type="checkbox" name="vf_defect2" value="2"<%if(result.equals("1")) { out.print(" checked");}%>>inferior arcuate scotoma<br>
+<% result = resultString.substring(2,3); %>
+<input type="checkbox" name="vf_defect3" value="3"<%if(result.equals("1")) { out.print(" checked");}%>>superior nasal step<br>
+<% result = resultString.substring(3,4); %>
+<input type="checkbox" name="vf_defect4" value="4"<%if(result.equals("1")) { out.print(" checked");}%>>inferior nasal step<br>
+<% result = resultString.substring(4,5); %>
+<input type="checkbox" name="vf_defect5" value="5"<%if(result.equals("1")) { out.print(" checked");}%>>temporal wedge<br>
+<% result = resultString.substring(5,6); %>
+<input type="checkbox" name="vf_defect6" value="6"<%if(result.equals("1")) { out.print(" checked");}%>>tunnel vision<br>
+<% result = resultString.substring(6,7); %>
+<input type="checkbox" name="vf_defect7" value="7"<%if(result.equals("1")) { out.print(" checked");}%>>end stage<br>
+<% result = resultString.substring(7,8); %>
+<input type="checkbox" name="vf_defect8" value="8"<%if(result.equals("1")) { out.print(" checked");}%>><span id='vf_defect_oth'>other:</span>
+<input type="text" name="vf_defect_oth" <%if(reviewed) {out.print("value='"+hvf.getVf_defect_oth()+"'");}%>>
 <br><br>
 </div>
 

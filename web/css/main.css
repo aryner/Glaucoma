@@ -615,3 +615,10 @@ and scalar of: 0.29411764705882354*/
 .picName {
 	text-align: center;
 }
+
+a:link.opthReviewed {
+	color: blue;
+}
+a:visited.opthReviewed {
+	color: purple;
+}

@@ -261,7 +261,12 @@ public class Controller extends HttpServlet {
 
 		else if(userPath.equals("/OpReviewHVF")) {
 			User user = (User)session.getAttribute("user");
-			HVFtest.opthAssignHVF(request, user);
+			boolean firstReview = HVFtest.opthAssignHVF(request, user);
+
+			if(!firstReview) {
+				response.sendRedirect("/HVF/home"); 
+				return;
+			}
 
 			response.sendRedirect("/HVF/OpHVFtest"); 
 			return;

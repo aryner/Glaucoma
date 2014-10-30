@@ -164,7 +164,7 @@ if(session.getAttribute("errors") != null) {
 				if(reviewedBy != null) {
 					for(int j=0; j<reviewedBy.size(); j++) {
 						if(reviewedBy.get(j).getPictureName().equals(name)) {
-							out.print("<a href='OpHVFtest?pictureName="+name+"'>");
+							out.print("<a class='opthReviewed' href='OpHVFtest?pictureName="+name+"'>");
 						}
 					}
 				}
