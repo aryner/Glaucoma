@@ -76,6 +76,9 @@ public class Controller extends HttpServlet {
 			if(user.getAccess() == 2) {
 				request.setAttribute("reviewedBy", HVFtest.getReviewedBy(user.getUserName()));
 			}
+			if(user.getAccess() == 1) {
+				request.setAttribute("adjudicatedBy", HVFtest.getAdjudicatedBy(user.getID()));
+			}
 
 			request.setAttribute("ungraded",ungraded);
 			request.setAttribute("gradedOnce",onceGraded);
@@ -90,22 +93,32 @@ public class Controller extends HttpServlet {
 		}
 
 		else if(userPath.equals("/HVFtest")) {
+			String pictureName = request.getParameter("pictureName");
 			User user = (User)session.getAttribute("user");
-			Picture picture = HVFtest.getNext(user);
-			if(picture == null) {
-				if(user.getAccess() == 0) {
-					Integer needToPairCount = HVFtest.getNeedToPairCount(); 
-					request.setAttribute("needToPairCount", needToPairCount);
-					if(needToPairCount == 0) {
-						//saftey measure to ensure nothing was missed but shouldn't be needed
-						HVFtest.setAllForAdjudication();
+			Picture picture = null;
+
+			if(pictureName != null && pictureName.length() > 0) {
+				picture = Picture.getPictureByName(pictureName);
+				request.setAttribute("confirmed","true");
+			}
+			else {
+				picture = HVFtest.getNext(user);
+				if(picture == null) {
+					if(user.getAccess() == 0) {
+						Integer needToPairCount = HVFtest.getNeedToPairCount(); 
+						request.setAttribute("needToPairCount", needToPairCount);
+						if(needToPairCount == 0) {
+							//saftey measure to ensure nothing was missed but shouldn't be needed
+							HVFtest.setAllForAdjudication();
+						}
+					}
+					if(user.getAccess() == 1 && HVFtest.needInitialCount() == 0) {
+						//add 10% of no glau to be checked by opth
+						//HVFtest.addNegatives(0.1);
 					}
 				}
-				if(user.getAccess() == 1 && HVFtest.needInitialCount() == 0) {
-					//add 10% of no glau to be checked by opth
-					//HVFtest.addNegatives(0.1);
-				}
 			}
+
 			if(user.getAccess() == 1 && picture != null) {
 				Vector<HVFtest> pair = HVFtest.getPair(picture.getName());
 				request.setAttribute("pair",pair);
@@ -253,7 +266,12 @@ public class Controller extends HttpServlet {
 
 		else if(userPath.equals("/assignHVF")) {
 			User user = (User)session.getAttribute("user");
-			HVFtest.assignHVF(request, user);
+			int returnType = HVFtest.assignHVF(request, user);
+
+			if(returnType == 2) {
+				response.sendRedirect("/HVF/home"); 
+				return;
+			}
 		
 			response.sendRedirect("/HVF/HVFtest"); 
 			return;

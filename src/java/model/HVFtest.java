@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 public class HVFtest {
 	private int id;
 	private String opthName;
+	private int adjudicatorID;
 	private int confirmed;
 	private int opthCheck;
 	private String pictureName;
@@ -165,7 +166,7 @@ public class HVFtest {
 		severe = nsevere;
 	}
 
-	public HVFtest(int nid, String nopthName, int nconfirmed, int nopthCheck, String npictureName, int nuserID, String nvf_loss, 
+	public HVFtest(int nid, String nopthName, int nadjudicatorID, int nconfirmed, int nopthCheck, String npictureName, int nuserID, String nvf_loss, 
 		String nvf_defect, int nglau, String nvf_loss_oth, String nvf_defect_oth, int nmon, String nmon_oth2_c47,
 		int ntar, String ntar_oth, int nlossnum, int nlossden, int nfp, int nfn, String ndur, int nfov, 
 		int nstimintens, int nstimcol, String nstimcol_oth, String nback, int nstrategy, String nstrategy_oth,
@@ -177,6 +178,7 @@ public class HVFtest {
 	){
 		id = nid;
 		opthName = nopthName;
+		adjudicatorID = nadjudicatorID;
 		confirmed = nconfirmed;
 		opthCheck = nopthCheck;
 		pictureName = npictureName;
@@ -232,7 +234,8 @@ public class HVFtest {
 		reliable_review = nreliable_review;
 	}
 
-	public static void assignHVF(HttpServletRequest request, User user) {
+	public static int assignHVF(HttpServletRequest request, User user) {
+		int result = 0;
 		boolean glaucoma = false;
 
 		int early = 0;
@@ -483,12 +486,17 @@ public class HVFtest {
 		if(user.getAccess() == 0) {
 			query += " WHERE id='"+hvf.getId()+"'";
 		} else if(user.getAccess() ==1) { 
-			query += ", confirmed=2 WHERE pictureName='"+request.getParameter("pictureName")+"'";
+			query += ", confirmed=2, adjudicatorID="+user.getID()+" WHERE pictureName='"+request.getParameter("pictureName")+"'";
+			if(request.getParameter("alreadyConfirmed").equals("true")) {
+				result = 2;
+			}
 		}
 		SQLCommands.update(query);
 		if(user.getAccess() == 0) {
 			setForAdjudication(picName);
 		}
+
+		return result;
 	}
 
 	public static boolean opthAssignHVF(HttpServletRequest request, User user) {
@@ -839,6 +847,13 @@ public class HVFtest {
 
 		return result;
 	}
+	public static Vector<HVFtest> getAdjudicatedBy(int adID) {
+		Vector<HVFtest> result = null;
+		String query = "SELECT * FROM HVFtest WHERE adjudicatorID='"+adID+"' AND opthCheck <= 0";
+		result = SQLCommands.queryHVFtestMaster(query);
+
+		return result;
+	}
 
 	public static Vector<String> getCSVLines() {
 		Vector<String> result = new Vector<String>();
@@ -849,7 +864,7 @@ public class HVFtest {
 			"mon, mon_oth2_c47, tar, tar_oth, lossnum, lossden, fp, fn, dur, fov, stimintens, stimcol, stimcol_oth, back, "+
 			"strategy, strategy_oth, pup, vanum, vaden, sph_sign, sph_num, cyl_sign, cyl_num, axis, ght, vfi, mdsign, mddb, "+
 			"mdp, psdsign, psddb, psdp, central_15, central_0, sup_hem, inf_hem, sup_hem2, inf_hem2, pts_five, pts_contig, "+
-			"pts_one, cluster, severe, reliable_review, opthName";
+			"pts_one, cluster, severe, reliable_review, opthName, adjudicatorID";
 		result.add(currLine);
 		for(int i=0; i<hvf.size(); i++) {
 			currLine = 
@@ -870,7 +885,8 @@ public class HVFtest {
 				hvf.get(i).getCentral_15()+", "+hvf.get(i).getCentral_0()+", "+hvf.get(i).getSup_hem()+", "+
 				hvf.get(i).getInf_hem()+", "+hvf.get(i).getSup_hem2()+", "+hvf.get(i).getInf_hem2()+", "+
 				hvf.get(i).getPts_five()+", "+hvf.get(i).getPts_contig()+", "+hvf.get(i).getPts_one()+", "+
-				hvf.get(i).getCluster()+", "+hvf.get(i).getSevere()+", "+hvf.get(i).getReliable_review()+", "+hvf.get(i).getOpthName();
+				hvf.get(i).getCluster()+", "+hvf.get(i).getSevere()+", "+hvf.get(i).getReliable_review()+", "+
+				hvf.get(i).getOpthName()+", "+hvf.get(i).getAdjudicatorID();
 			result.add(currLine);
 		}
 
@@ -946,7 +962,7 @@ public class HVFtest {
 				"hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, "+
 				"hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_central_15, hvf_central_0, "+
 				"hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, hvf_inf_hem2, hvf_pts_five, hvf_pts_contig, hvf_pts_one, hvf_cluster, "+
-				"hvf_severe, hvf_reliable_review, opthName) VALUES ";
+				"hvf_severe, hvf_reliable_review, opthName, adjudicatorID) VALUES ";
 			for(int i=0; i<newLines.size(); i++) {
 				if(i > 0) { query += ", "; }
 				query += "("+newLines.get(i)+")";
@@ -972,7 +988,7 @@ public class HVFtest {
 				"hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, "+
 				"hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_central_15, hvf_central_0, "+
 				"hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, hvf_inf_hem2, hvf_pts_five, hvf_pts_contig, hvf_pts_one, hvf_cluster, "+
-				"hvf_severe, hvf_reliable_review, opthName) VALUES ";
+				"hvf_severe, hvf_reliable_review, opthName, adjudicatorID) VALUES ";
 			for(int i=0; i<updateLines.size(); i++) {
 				if(i>0) { query += ", "; }
 				query += "("+updateLines.get(i)+")";
@@ -1790,6 +1806,20 @@ public class HVFtest {
 	 */
 	public void setOpthName(String opthName) {
 		this.opthName = opthName;
+	}
+
+	/**
+	 * @return the adjudicatorID
+	 */
+	public int getAdjudicatorID() {
+		return adjudicatorID;
+	}
+
+	/**
+	 * @param adjudicatorID the adjudicatorID to set
+	 */
+	public void setAdjudicatorID(int adjudicatorID) {
+		this.adjudicatorID = adjudicatorID;
 	}
 
 }

@@ -147,10 +147,23 @@ if(session.getAttribute("errors") != null) {
 	<%Vector<String> needsReview = (Vector)request.getAttribute("needsReview");%>
 	<div class='fifth-column'><h3>Needs review (<%out.print(needsReview.size());%>)</h3>
 		<%
+			Vector<HVFtest> adjudicatedBy = (Vector)request.getAttribute("adjudicatedBy");
 			name = "";
 			for(int i=0; i<needsReview.size(); i++) {
 				name = needsReview.get(i);
+				boolean link = false;
+				if(adjudicatedBy != null) {
+					for(int j=0; j<adjudicatedBy.size(); j++) {
+						if(adjudicatedBy.get(j).getPictureName().equals(name)) {
+							out.print("<a class='opthReviewed' href='HVFtest?pictureName="+name+"'>");
+							link = true;
+						}
+					}
+				}
 				out.print(name.substring(0,name.length()-4)+"<br>");
+				if(link) {
+					out.print("</a>");
+				}
 			}
 		%>
 	</div>
@@ -161,15 +174,25 @@ if(session.getAttribute("errors") != null) {
 			name = "";
 			for(int i=0; i<reviewed.size(); i++) {
 				name = reviewed.get(i);
+				boolean link = false;
 				if(reviewedBy != null) {
 					for(int j=0; j<reviewedBy.size(); j++) {
 						if(reviewedBy.get(j).getPictureName().equals(name)) {
 							out.print("<a class='opthReviewed' href='OpHVFtest?pictureName="+name+"'>");
+							link = true;
+						}
+					}
+				}
+				if(!link && adjudicatedBy != null) {
+					for(int j=0; j<adjudicatedBy.size(); j++) {
+						if(adjudicatedBy.get(j).getPictureName().equals(name)) {
+							out.print("<a class='opthReviewed' href='HVFtest?pictureName="+name+"'>");
+							link = true;
 						}
 					}
 				}
 				out.print(name.substring(0,name.length()-4)+"<br>");
-				if(reviewedBy != null) {
+				if(link) {
 					out.print("</a>");
 				}
 			}

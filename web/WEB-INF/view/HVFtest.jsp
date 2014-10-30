@@ -57,6 +57,7 @@ if(pic == null) {
 <form action="assignHVF" method="POST">
 	<input type="hidden" class="gradingChart" name="<%out.print(name);%>">
 	<input type="hidden" name="pictureName" value="<%out.print(pic.getName());%>" autocomplete="off">
+	<input type="hidden" name="alreadyConfirmed" value="<%out.print((request.getAttribute("confirmed")!=null)?"true":"false");%>">
 <%
 	int v1 = -1;
 	int v2 = -1;

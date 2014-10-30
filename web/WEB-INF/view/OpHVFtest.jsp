@@ -64,7 +64,7 @@ being significant at p < 1%<br>
 <input type="radio" name="cluster" value="2"<%if(hvf.getCluster()==2) {out.print(" checked");}%>>No 
 <input type="radio" name="cluster" value="999"<%if(hvf.getCluster()==999) {out.print(" checked");}%>>Blank <br><br> 
 
-<b>Glaucoma Present</b> <b>
+<span class="bold">Glaucoma Present</span> <b>
 <input type="radio" name="glau" value="1"<%if(hvf.getHvf_glau()==1) {out.print(" checked");}%>>Yes 
 <input type="radio" name="glau" value="2"<%if(hvf.getHvf_glau()==2) {out.print(" checked");}%>>No </b>
 <span id="glauMatch1" class="invis error">Glaucoma present, glaucoma severity, and VF loss answers must be consistent</span>
@@ -175,7 +175,7 @@ Inferior hemfield: # points with sensitivity >=15dB within 5 degrees of fixation
 <input type="hidden" class="severityChart" name="<%out.print(chart);%>">
 <input type='button' id="chart" value="See Severity Chart" class="btn" id="chart">
 <br><br>
-<b>Categorization of glaucoma severity:</b> <span id="glauMatch2" class="invis error">Glaucoma present, glaucoma severity, and VF loss answers must be consistent</span><br><b>
+<span class="bold">Categorization of glaucoma severity:</span> <span id="glauMatch2" class="invis error">Glaucoma present, glaucoma severity, and VF loss answers must be consistent</span><br><b>
 <div class="severityAnswers noGlau"><input type="radio" name="severe" value="0"<%if(hvf.getSevere()==0) {out.print(" checked");}%>>No glaucoma / minimal defect</div>
 <div class="severityAnswers earlyGlau"><input type="radio" name="severe" value="1"<%if(hvf.getSevere()==1) {out.print(" checked");}%>>Early</div>
 <div class="severityAnswers modGlau"><input type="radio" name="severe" value="2"<%if(hvf.getSevere()==2) {out.print(" checked");}%>>Moderate</div>

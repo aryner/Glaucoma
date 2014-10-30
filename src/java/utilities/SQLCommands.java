@@ -37,7 +37,7 @@ public class SQLCommands {
 
 			while(resultSet.next()) {
 				result.add(new HVFtest(
-					resultSet.getInt("id"), resultSet.getString("opthName"), resultSet.getInt("confirmed"),resultSet.getInt("opthCheck"),
+					resultSet.getInt("id"), resultSet.getString("opthName"), resultSet.getInt("adjudicatorID"), resultSet.getInt("confirmed"),resultSet.getInt("opthCheck"),
 					resultSet.getString("pictureName"),resultSet.getInt("userID"),resultSet.getString("hvf_vf_loss"),
 					resultSet.getString("hvf_vf_defect"),resultSet.getInt("hvf_glau"),resultSet.getString("hvf_vf_loss_oth"),
 					resultSet.getString("hvf_vf_defect_oth"),resultSet.getInt("hvf_mon"),resultSet.getString("hvf_mon_oth2_c47"),
