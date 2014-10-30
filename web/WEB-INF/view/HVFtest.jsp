@@ -47,6 +47,7 @@ if(pic == null) {
 	if (name == null) {
 		name = "";
 	}
+	out.print("<h3 class='picName'>"+pic.getType()+" "+pic.getName()+"</h3>");
 %>
 <!--pdf of HVFfile -->
 <iframe src="<%out.print(src);%>" class="HVFimage"></iframe>

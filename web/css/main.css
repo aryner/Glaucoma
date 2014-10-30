@@ -611,3 +611,7 @@ and scalar of: 0.29411764705882354*/
 	background-color: darkred;
 	border-bottom: solid;
 }
+
+.picName {
+	text-align: center;
+}

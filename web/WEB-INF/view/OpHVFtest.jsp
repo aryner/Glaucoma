@@ -30,6 +30,7 @@ if(pic == null) {
 	HVFtest hvf = (HVFtest)request.getAttribute("hvf");
 	String slash = ""+request.getAttribute("slash");
 	String src = "http://localhost:8084/HVF/pdf?type=HVF&name="+pic.getName();
+	out.print("<h3 class='picName'>"+pic.getType()+" "+pic.getName()+"</h3>");
 %>
 <!--pdf of HVFfile -->
 <iframe src="<%out.print(src);%>" class="HVFimage"></iframe>

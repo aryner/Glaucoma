@@ -36,7 +36,15 @@
 			<option value="2">Ophthalmologist</option>
 		</select>
 	</p>
+<!--
+	<p id="opthChosen" class="invis">
+		If you had an old ID enter it here, if not leave it blank: <input type="text" name="oldID">
+	</p>
+ -->
 	<p>
 		<input type="submit" value="submit" class="btn">
 	</p>
 </form>
+
+<script src="javascripts/jquery-1.11.1.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="javascripts/register.js"></script>
