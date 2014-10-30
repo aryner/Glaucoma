@@ -352,17 +352,21 @@ function colorPts() {
 	pts.removeClass('severeGlau');
 	pts.removeClass('endGlau');
 
-	if (five >= 56 || one >= 37) {
-		pts.addClass('severeGlau');
-	} else if (five >= 37 && one >= 19) {
-		pts.addClass('advGlau');
-	} else if (five >= 19 && one >= 12) {
-		pts.addClass('modGlau');
-	} else if(((five >= 19 && five <=36) && (one >=19)) || (five >= 37 && (one >= 12 && one <= 36))){
-		;//do nothing; it makes no contribution to classifications
-	} else {
-		pts.addClass('earlyGlau');
-	}
+		if((five >= 19 && five <=36) && (one >= 12 && one <= 18)) {
+			pts.addClass('modGlau');
+		}
+		else if((five >= 37 && five <= 55) && (one >= 19 && one <= 36)) {
+			pts.addClass('advGlau');
+		}
+		else if((five >= 56 && five < 999) || (one >= 37 && one < 999)) {
+			pts.addClass('severeGlau');
+		}
+		else if(((five >= 19 && five <=36) && (one >=19)) || (five >= 37 && (one >= 12 && one <= 36))){
+			;//do nothing; it makes no contribution to classifications
+		}
+		else if (five < 999 && one < 999) {
+			pts.addClass('earlyGlau');
+		}
 }
 
 function colorHem() {

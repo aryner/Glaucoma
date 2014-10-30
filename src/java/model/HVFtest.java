@@ -360,7 +360,7 @@ public class HVFtest {
 
 			int ptsFive = hvf.getPts_five();
 			int ptsOne = hvf.getPts_one();
-			if((ptsFive >= 19 && ptsFive <=36) && (ptsOne >= 12 && ptsOne <= 36)) {
+			if((ptsFive >= 19 && ptsFive <=36) && (ptsOne >= 12 && ptsOne <= 18)) {
 				moderate++;
 			}
 			else if((ptsFive >= 37 && ptsFive <= 55) && (ptsOne >= 19 && ptsOne <= 36)) {
