@@ -440,7 +440,7 @@ public class HVFtest {
 				}
 			}
 			else if (md == 2){
-				if(early == 3) {
+				if(early == 3 || (advanced + severe + moderate) == 0) {
 					query += ", hvf_severe='1'";
 				}
 				else if((advanced + severe) >= 1 && early == 0) {
@@ -451,7 +451,7 @@ public class HVFtest {
 				}
 			}
 			else if (md == 3) {
-				if((early + moderate) == 3) {
+				if((early + moderate) == 3 || (advanced + severe) == 0) {
 					query += ", hvf_severe='2'";
 				}
 				else if(severe >= 1 && (early + moderate) == 0) {
@@ -462,7 +462,7 @@ public class HVFtest {
 				}
 			}
 			else if (md == 4){
-				if ((early + moderate + advanced) == 3) {
+				if ((early + moderate + advanced) == 3 || severe == 0) {
 					query += ", hvf_severe='3'";
 				}
 				else {

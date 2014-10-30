@@ -57,29 +57,40 @@ $(document).ready(function(){
 		}
 	});
 
+	$('input[name=glau]').change(function() {
+		determineSeverity();
+	});
 	$('input[name=mdsign]').change(function(){
 		colorMD();
+		determineSeverity();
 	});
 	$('input[name=mddb]').change(function() {
 		colorMD();
+		determineSeverity();
 	});
 	$('input[name=central_0]').change(function() {
 		colorCentral();
+		determineSeverity();
 	});
 	$('input[name=central_15]').change(function(){
 		colorCentral();
+		determineSeverity();
 	});
 	$('input[name=pts_five]').change(function() {
 		colorPts();
+		determineSeverity();
 	});
 	$('input[name=pts_one]').change(function() {
 		colorPts();
+		determineSeverity();
 	});
 	$('input[name=sup_hem]').change(function() {
 		colorHem();
+		determineSeverity();
 	});
 	$('input[name=inf_hem]').change(function() {
 		colorHem();
+		determineSeverity();
 	});
 
 	var glauCount = 0;
@@ -462,5 +473,82 @@ function validateGlaucoma() {
 	}
 	else {
 		$('input[name=glau][value=2]').prop('checked',true);
+	}
+
+	determineSeverity();
+}
+
+function determineSeverity() {
+	var severeCount = $('.severeGlau').length - 1;
+	var advCount = $('.advGlau').length -1;
+	var modCount = $('.modGlau').length -1;
+	var earlyCount = $('.earlyGlau').length -1;
+	var noCount = $('.noGlau').length -1;
+	var md = 0;
+	var presence = $('input[name=glau][value=2]').prop('checked');
+	
+	if($('#MD').hasClass('severeGlau')) {
+		severeCount--;
+		md = 4;
+	}
+	if($('#MD').hasClass('advGlau')) {
+		advCount--;
+		md = 3;
+	}
+	if($('#MD').hasClass('modGlau')) {
+		modCount--;
+		md = 2;
+	}
+	if($('#MD').hasClass('earlyGlau')) {
+		earlyCount--;
+		md = 1;
+	}
+	if($('#MD').hasClass('noGlau')) {
+		noCount--;
+	}
+
+	if(presence){
+		$('input[name=severe][value=0]').prop('checked',true);
+	}
+	else if(md === 0) {
+		$('input[name=severe][value=1]').prop('checked',true);
+	}
+	else if(md === 1) {
+		if((modCount + advCount + severeCount) >= 1) {
+			$('input[name=severe][value=2]').prop('checked',true);
+		}
+		else {
+			$('input[name=severe][value=1]').prop('checked',true);
+		}
+	}
+	else if(md === 2) {
+		if((advCount + modCount + severeCount) === 0) {
+			$('input[name=severe][value=1]').prop('checked',true);
+		}
+		else if((advCount + severeCount) >= 1 && earlyCount === 0)  {
+			$('input[name=severe][value=3]').prop('checked',true);
+		}
+		else {
+			$('input[name=severe][value=2]').prop('checked',true);
+		}
+	}
+	else if(md === 3) {
+		if((advCount + severeCount) == 0) {
+			$('input[name=severe][value=2]').prop('checked',true);
+		}
+		else if(severeCount >= 1 && (earlyCount + modCount) === 0) {
+			$('input[name=severe][value=4]').prop('checked',true);
+		}
+		else {
+			$('input[name=severe][value=3]').prop('checked',true);
+		}
+	}
+	else {
+		if(severeCount === 0) {
+			$('input[name=severe][value=3]').prop('checked',true);
+		}
+		else {
+			$('input[name=severe][value=4]').prop('checked',true);
+		}
 	}
 }
