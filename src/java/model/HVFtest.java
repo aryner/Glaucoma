@@ -330,8 +330,10 @@ public class HVFtest {
 		attr = request.getParameter("central_0");
 		hvf.setCentral_0(Integer.parseInt(attr));
 		attr = request.getParameter("sup_hem");
+System.out.println(attr);
 		hvf.setSup_hem(Integer.parseInt(attr));
 		attr = request.getParameter("inf_hem");
+System.out.println(attr);
 		hvf.setInf_hem(Integer.parseInt(attr));
 		attr = request.getParameter("pts_five");
 		hvf.setPts_five(Integer.parseInt(attr));

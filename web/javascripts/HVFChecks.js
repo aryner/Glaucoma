@@ -317,8 +317,12 @@ $(document).ready(function(){
 			|| $('input[type=radio][name=central_0][value=4]').prop('checked')
 			|| $('input[type=radio][name=central_0][value=999]').prop('checked');
 
-		var sup_hem = $('input[type=text][name=sup_hem]').val().length > 0; 
-		var inf_hem = $('input[type=text][name=inf_hem]').val().length > 0; 
+		var sup_hem = $('input[type=radio][name=sup_hem][value=0]').prop('checked')
+			|| $('input[type=radio][name=sup_hem][value=1]').prop('checked')
+			|| $('input[type=radio][name=sup_hem][value=2]').prop('checked');
+		var inf_hem = $('input[type=radio][name=inf_hem][value=0]').prop('checked')
+			|| $('input[type=radio][name=inf_hem][value=1]').prop('checked')
+			|| $('input[type=radio][name=inf_hem][value=2]').prop('checked');
 		var pts_five = $('input[type=text][name=pts_five]').val().length > 0; 
 		var pts_one = $('input[type=text][name=pts_one]').val().length > 0; 
 

@@ -204,8 +204,13 @@ $(document).ready(function(){
 		var central_15 = $('input[type=text][name=central_15]').val().length > 0;
 		var central_0 = $('input[type=text][name=central_0]').val().length > 0; 
 
-		var sup_hem = $('input[type=text][name=sup_hem]').val().length > 0; 
-		var inf_hem = $('input[type=text][name=inf_hem]').val().length > 0; 
+
+		var sup_hem = $('input[type=radio][name=sup_hem][value=0]').prop('checked')
+			|| $('input[type=radio][name=sup_hem][value=1]').prop('checked')
+			|| $('input[type=radio][name=sup_hem][value=2]').prop('checked');
+		var inf_hem = $('input[type=radio][name=inf_hem][value=0]').prop('checked')
+			|| $('input[type=radio][name=inf_hem][value=1]').prop('checked')
+			|| $('input[type=radio][name=inf_hem][value=2]').prop('checked');
 		var pts_five = $('input[type=text][name=pts_five]').val().length > 0; 
 		var pts_one = $('input[type=text][name=pts_one]').val().length > 0; 
 
@@ -382,8 +387,8 @@ function colorMD() {
 
 function colorCentral()  {
 	var central = $('#central');
-	var zero = Number($('input[name=central_0').val());
-	var fifteen = Number($('input[name=central_15').val());
+	var zero = Number($('input[name=central_0]').val());
+	var fifteen = Number($('input[name=central_15]').val());
 
 	central.removeClass('noGlau');
 	central.removeClass('earlyGlau');
@@ -434,8 +439,12 @@ function colorPts() {
 
 function colorHem() {
 	var hem = $('#hem');
-	var sup = Number($('input[name=sup_hem]').val());
-	var inf = Number($('input[name=inf_hem]').val());
+	var sup2 = $('input[name=sup_hem][value=2]').prop('checked');
+	var inf2 = $('input[name=inf_hem][value=2]').prop('checked');
+	var sup1 = $('input[name=sup_hem][value=1]').prop('checked');
+	var inf1 = $('input[name=inf_hem][value=1]').prop('checked');
+	var sup0 = $('input[name=sup_hem][value=0]').prop('checked');
+	var inf0 = $('input[name=inf_hem][value=0]').prop('checked');
 
 	hem.removeClass('noGlau');
 	hem.removeClass('earlyGlau');
@@ -444,11 +453,11 @@ function colorHem() {
 	hem.removeClass('severeGlau');
 	hem.removeClass('endGlau');
 
-	if(sup >= 2 && inf >= 2) {
+	if(sup2 && inf2) {
 		hem.addClass('severeGlau');
-	} else if (sup >= 1 && inf >= 1) {
+	} else if ((sup2 || sup1) && (inf1 || inf2)) {
 		hem.addClass('advGlau');
-	} else if ((sup + inf) >= 1) {
+	} else if (sup2 || sup1 || inf2 || inf1) {
 		hem.addClass('modGlau');
 	}
 	else {

@@ -112,8 +112,18 @@ MD - dB <input type="text" name="mddb" <%out.print("value='"+hvf.getMddb()+"'");
 
 %>
 <div id="central" <%out.print(severity);%>>
-# of points within central 5 degrees with sensitivity < 15 dB (top left graph) <input type="text" name="central_15" <%out.print("value='"+hvf.getCentral_15()+"'");%>><br>
-# of points within central 5 degrees with sensitivity < 0 dB (top left graph) <input type="text" name="central_0" <%out.print("value='"+hvf.getCentral_0()+"'");%>><br>
+# of points within central 5 degrees with sensitivity < 15 dB (top left graph) <br>
+<input type="radio" name="central_15" value="0"<%if(hvf.getCentral_15()==0) {out.print(" checked");}%>> 0 
+<input type="radio" name="central_15" value="1"<%if(hvf.getCentral_15()==1) {out.print(" checked");}%>> 1 
+<input type="radio" name="central_15" value="2"<%if(hvf.getCentral_15()==2) {out.print(" checked");}%>> 2 
+<input type="radio" name="central_15" value="3"<%if(hvf.getCentral_15()==3) {out.print(" checked");}%>> 3 
+<input type="radio" name="central_15" value="4"<%if(hvf.getCentral_15()==4) {out.print(" checked");}%>> 4 <br>
+# of points within central 5 degrees with sensitivity < 0 dB (top left graph) <br>
+<input type="radio" name="central_0" value="0"<%if(hvf.getCentral_0()==0) {out.print(" checked");}%>> 0 
+<input type="radio" name="central_0" value="1"<%if(hvf.getCentral_0()==1) {out.print(" checked");}%>> 1 
+<input type="radio" name="central_0" value="2"<%if(hvf.getCentral_0()==2) {out.print(" checked");}%>> 2 
+<input type="radio" name="central_0" value="3"<%if(hvf.getCentral_0()==3) {out.print(" checked");}%>> 3 
+<input type="radio" name="central_0" value="4"<%if(hvf.getCentral_0()==4) {out.print(" checked");}%>> 4 
 </div>
 
 <%
@@ -159,8 +169,14 @@ MD - dB <input type="text" name="mddb" <%out.print("value='"+hvf.getMddb()+"'");
 
 %>
 <div id="hem" <%out.print(severity);%>>
-Superior hemifield: # points <15dB within central 5 degrees of fixation? (top left graph)<br> <input type="text" name="sup_hem" <%out.print("value='"+hvf.getSup_hem()+"'");%>><br>
-Inferior hemifield: # points <15dB within central 5 degrees of fixation? (top left graph)<br> <input type="text" name="inf_hem" <%out.print("value='"+hvf.getInf_hem()+"'");%>>
+Superior hemifield: # points <15dB within central 5 degrees of fixation? (top left graph)<br> 
+<input type="radio" name="sup_hem" value="0"<%if(hvf.getSup_hem()==0) {out.print(" checked");}%>> 0 
+<input type="radio" name="sup_hem" value="1"<%if(hvf.getSup_hem()==1) {out.print(" checked");}%>> 1 
+<input type="radio" name="sup_hem" value="2"<%if(hvf.getSup_hem()==2) {out.print(" checked");}%>> 2 <br>
+Inferior hemifield: # points <15dB within central 5 degrees of fixation? (top left graph)<br> 
+<input type="radio" name="inf_hem" value="0"<%if(hvf.getInf_hem()==0) {out.print(" checked");}%>> 0 
+<input type="radio" name="inf_hem" value="1"<%if(hvf.getInf_hem()==1) {out.print(" checked");}%>> 1 
+<input type="radio" name="inf_hem" value="2"<%if(hvf.getInf_hem()==2) {out.print(" checked");}%>> 2 <br>
 </div><br><br>
 
 <!--

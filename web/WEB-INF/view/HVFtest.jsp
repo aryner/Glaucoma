@@ -677,9 +677,10 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='sup_hem'>Superior hemifield: # points <15dB within central 5 degrees of fixation? (top left graph) </span><br><br>
-<input type="text" name="sup_hem" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
-<%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
+<span id='sup_hem'>Superior hemifield: # points <15dB within central 5 degrees of fixation? (top left graph) </span><br>
+<input type="radio" name="sup_hem" value="0"<%if(a && !diff && s1.equals("0")){out.print(" checked='true'");}%>>0<%if((a&&diff)&&((s1.equals("0"))||(s2.equals("0")))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="sup_hem" value="1"<%if(a && !diff && s1.equals("1")){out.print(" checked='true'");}%>>1<%if((a&&diff)&&((s1.equals("1"))||(s2.equals("1")))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="sup_hem" value="2"<%if(a && !diff && s1.equals("2")){out.print(" checked='true'");}%>>2<%if((a&&diff)&&((s1.equals("2"))||(s2.equals("2")))){%><span class='highlight'> ***</span><%}%><br>
 <br>
 
 <%
@@ -695,9 +696,10 @@ if(pic == null) {
 	}
 %>
 <span id='inf_hem'>Inferior hemifield: # points <15dB within central 5 degrees of fixation? (top left graph) </span><br> 
-<input type="text" name="inf_hem" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
-<%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
-<br><br>
+<input type="radio" name="inf_hem" value="0"<%if(a && !diff && s1.equals("0")){out.print(" checked='true'");}%>>0<%if((a&&diff)&&((s1.equals("0"))||(s2.equals("0")))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="inf_hem" value="1"<%if(a && !diff && s1.equals("1")){out.print(" checked='true'");}%>>1<%if((a&&diff)&&((s1.equals("1"))||(s2.equals("1")))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="inf_hem" value="2"<%if(a && !diff && s1.equals("2")){out.print(" checked='true'");}%>>2<%if((a&&diff)&&((s1.equals("2"))||(s2.equals("2")))){%><span class='highlight'> ***</span><%}%><br>
+<br>
 
 
 <%
