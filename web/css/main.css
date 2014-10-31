@@ -627,3 +627,8 @@ a:visited.opthReviewed {
 	font-weight: bold;
 	font-size: 1.2em;
 }
+
+.boxed {
+	border: solid;
+	margin-bottom: 05%;
+}

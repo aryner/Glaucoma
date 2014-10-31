@@ -5,7 +5,7 @@
  */
 
 $(document).ready(function(){
-	$('input[name=ght').change(function(){
+	$('input[name=ght]').change(function(){
 		validateGlaucoma();
 	});
 	$('input[name=psdp]').change(function(){
@@ -399,7 +399,7 @@ function colorCentral()  {
 	} else if (fifteen > 0) {
 		central.addClass('modGlau');
 	} else  {
-		central.addClass('earlyGlau');
+		central.addClass('noGlau');
 	}
 }
 
@@ -428,7 +428,7 @@ function colorPts() {
 			;//do nothing; it makes no contribution to classifications
 		}
 		else if (five < 999 && one < 999) {
-			pts.addClass('earlyGlau');
+			pts.addClass('noGlau');
 		}
 }
 
@@ -443,15 +443,16 @@ function colorHem() {
 	hem.removeClass('advGlau');
 	hem.removeClass('severeGlau');
 	hem.removeClass('endGlau');
-console.log('sup = '+sup+' : inf = '+inf);
+
 	if(sup >= 2 && inf >= 2) {
 		hem.addClass('severeGlau');
 	} else if (sup >= 1 && inf >= 1) {
 		hem.addClass('advGlau');
 	} else if ((sup + inf) >= 1) {
 		hem.addClass('modGlau');
-	} else {
-		hem.addClass('earlyGlau');
+	}
+	else {
+		hem.addClass('noGlau');
 	}
 }
 

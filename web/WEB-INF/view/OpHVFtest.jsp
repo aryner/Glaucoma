@@ -64,10 +64,12 @@ being significant at p < 1%<br>
 <input type="radio" name="cluster" value="2"<%if(hvf.getCluster()==2) {out.print(" checked");}%>>No 
 <input type="radio" name="cluster" value="999"<%if(hvf.getCluster()==999) {out.print(" checked");}%>>Blank <br><br> 
 
+<div class="boxed" style="width:40%;">
 <span class="bold">Glaucoma Present</span> <b>
-<input type="radio" name="glau" value="1"<%if(hvf.getHvf_glau()==1) {out.print(" checked");}%>>Yes 
+	<input type="radio" name="glau" value="1"<%if(hvf.getHvf_glau()==1) {out.print(" checked");}%>><span style='color:darkorange;'>Yes </span>
 <input type="radio" name="glau" value="2"<%if(hvf.getHvf_glau()==2) {out.print(" checked");}%>>No </b>
 <span id="glauMatch1" class="invis error">Glaucoma present, glaucoma severity, and VF loss answers must be consistent</span>
+</div>
 <br><br>
 
 <%
@@ -105,7 +107,7 @@ MD - dB <input type="text" name="mddb" <%out.print("value='"+hvf.getMddb()+"'");
 		severity = "class='modGlau' style='border:solid;border-bottom:none'";
 	}
 	else {
-		severity = "class='earlyGlau' style='border:solid;border-bottom:none'";
+		severity = "class='noGlau' style='border:solid;border-bottom:none'";
 	}
 
 %>
@@ -126,7 +128,7 @@ MD - dB <input type="text" name="mddb" <%out.print("value='"+hvf.getMddb()+"'");
 		severity = "class='modGlau' style='border:solid;border-bottom:none'";
 	}
 	else {
-		severity = "class='earlyGlau' style='border:solid;border-bottom:none'";
+		severity = "class='noGlau' style='border:solid;border-bottom:none'";
 	}
 
 %>
@@ -152,7 +154,7 @@ MD - dB <input type="text" name="mddb" <%out.print("value='"+hvf.getMddb()+"'");
 		severity = "class='modGlau' style='border:solid;'";
 	}
 	else {
-		severity = "class='earlyGlau' style='border:solid;'";
+		severity = "class='noGlau' style='border:solid;'";
 	}
 
 %>
