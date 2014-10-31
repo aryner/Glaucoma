@@ -387,8 +387,16 @@ function colorMD() {
 
 function colorCentral()  {
 	var central = $('#central');
-	var zero = Number($('input[name=central_0]').val());
-	var fifteen = Number($('input[name=central_15]').val());
+	var zero4 = $('input[name=central_0][value=4]').prop('checked');
+	var zero3 = $('input[name=central_0][value=3]').prop('checked');
+	var zero2 = $('input[name=central_0][value=2]').prop('checked');
+	var zero1 = $('input[name=central_0][value=1]').prop('checked');
+	var zero0 = $('input[name=central_0][value=0]').prop('checked');
+	var fifteen4 = $('input[name=central_15][value=4]').prop('checked');
+	var fifteen3 = $('input[name=central_15][value=3]').prop('checked');
+	var fifteen2 = $('input[name=central_15][value=2]').prop('checked');
+	var fifteen1 = $('input[name=central_15][value=1]').prop('checked');
+	var fifteen0 = $('input[name=central_15][value=0]').prop('checked');
 
 	central.removeClass('noGlau');
 	central.removeClass('earlyGlau');
@@ -397,11 +405,11 @@ function colorCentral()  {
 	central.removeClass('severeGlau');
 	central.removeClass('endGlau');
 
-	if(zero >= 2) {
+	if(zero4 || zero3 || zero2) {
 		central.addClass('severeGlau');
-	} else if (zero === 1) {
+	} else if (zero1) {
 		central.addClass('advGlau');
-	} else if (fifteen > 0) {
+	} else if (!fifteen0) {
 		central.addClass('modGlau');
 	} else  {
 		central.addClass('noGlau');
