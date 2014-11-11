@@ -201,8 +201,19 @@ $(document).ready(function(){
 
 		var mddb = $('input[type=text][name=mddb]').val().length > 0; 
 
-		var central_15 = $('input[type=text][name=central_15]').val().length > 0;
-		var central_0 = $('input[type=text][name=central_0]').val().length > 0; 
+		var central_15 = $('input[type=radio][name=central_15][value=0]').prop('checked')
+			|| $('input[type=radio][name=central_15][value=1]').prop('checked')
+			|| $('input[type=radio][name=central_15][value=2]').prop('checked')
+			|| $('input[type=radio][name=central_15][value=3]').prop('checked')
+			|| $('input[type=radio][name=central_15][value=4]').prop('checked')
+			|| $('input[type=radio][name=central_15][value=999]').prop('checked');
+
+		var central_0 = $('input[type=radio][name=central_0][value=0]').prop('checked')
+			|| $('input[type=radio][name=central_0][value=1]').prop('checked')
+			|| $('input[type=radio][name=central_0][value=2]').prop('checked')
+			|| $('input[type=radio][name=central_0][value=3]').prop('checked')
+			|| $('input[type=radio][name=central_0][value=4]').prop('checked')
+			|| $('input[type=radio][name=central_0][value=999]').prop('checked');
 
 
 		var sup_hem = $('input[type=radio][name=sup_hem][value=0]').prop('checked')

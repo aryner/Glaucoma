@@ -10,10 +10,6 @@ import model.*;
 import utilities.*;
 import java.io.*; 
 import java.util.*; 
-import java.awt.image.*;
-import java.awt.Image; 
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import javax.servlet.ServletOutputStream; 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.*;
@@ -21,12 +17,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession; 
-import java.util.logging.Level;
-import java.util.logging.Logger; 
-import javax.imageio.ImageIO;
-import org.apache.commons.fileupload.FileItem; 
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload; 
 
 /**
  *
