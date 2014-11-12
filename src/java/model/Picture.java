@@ -182,6 +182,13 @@ public class Picture {
 		if(names.size() > 0) {
 			SQLCommands.update(query); 
 		}
+		String ext;
+		for(int i=0; i<errors.size(); i++) {
+			ext = errors.get(i).substring(errors.get(i).indexOf(".")+1, errors.get(i).length());
+			if(ext.equals("pdf")) {
+				errors.set(i, errors.get(i).substring(0,errors.get(i).indexOf("."))+".jpg");
+			}
+		}
 		return errors;
 	}
 
