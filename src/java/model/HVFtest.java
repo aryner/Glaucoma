@@ -259,10 +259,8 @@ public class HVFtest {
 		attr = request.getParameter("central_0");
 		hvf.setCentral_0(Integer.parseInt(attr));
 		attr = request.getParameter("sup_hem");
-System.out.println(attr);
 		hvf.setSup_hem(Integer.parseInt(attr));
 		attr = request.getParameter("inf_hem");
-System.out.println(attr);
 		hvf.setInf_hem(Integer.parseInt(attr));
 		attr = request.getParameter("pts_five");
 		hvf.setPts_five(Integer.parseInt(attr));
@@ -495,10 +493,10 @@ System.out.println(attr);
 		String defect = "";
 		for(int i=1; i<9; i++) {
 			if(request.getParameter("vf_defect"+i) != null) {
-				defect += "1";
+				defect += "2";
 			}
 			else {
-				defect += "0";
+				defect += "1";
 			}
 		}
 		hvf.setVf_defect(defect);
