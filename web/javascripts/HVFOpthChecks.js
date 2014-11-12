@@ -256,6 +256,16 @@ $(document).ready(function(){
 		var vf_defect_oth_yes = $('input[type=checkbox][name=vf_defect8]').prop('checked');
 		var vf_defect_oth = $('input[type=text][name=vf_defect_oth]').val().length > 0;
 
+		var notes = $('input[type=radio][name=notes][value=0]').prop('checked')
+			|| $('input[type=radio][name=notes][value=1]').prop('checked')
+			|| $('input[type=radio][name=notes][value=2]').prop('checked')
+			|| $('input[type=radio][name=notes][value=3]').prop('checked')
+			|| $('input[type=radio][name=notes][value=999]').prop('checked');
+
+			thing =  $('input[type=text][name=notes_other]').val();
+		var notes_other = !$('input[type=radio][name=notes][value=3]').prop('checked')
+			|| thing.length > 0;
+
 		var focus = false;
 
 		if(!fn) {
@@ -360,6 +370,24 @@ $(document).ready(function(){
 			$('#glauMatch1').addClass('invis');
 			$('#glauMatch2').addClass('invis');
 			$('#glauMatch3').addClass('invis');
+		} if(!notes) {
+			$('#notes').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault();
+				$('input[type=radio][name=notes][value=0]').focus();
+			}
+		} else {
+			$('#notes').removeClass('highlight');
+		} if (!notes_other) {
+			$('#notes_other').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault();
+				$('input[type=text][name=notes_other]').focus();
+			}
+		} else {
+			$('#notes_other').removeClass('highlight');
 		}
 	});
 });

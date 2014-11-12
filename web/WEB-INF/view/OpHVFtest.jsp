@@ -246,7 +246,16 @@ if(reviewed) {
 <br><br>
 </div>
 
-<input type="submit" value="Submit" class="btn">
+Notes: <br>
+<input type="radio" name="notes" value="0"<%if(hvf.getNotes()==0) {out.print(" checked");}%>>Low test reliability<br>
+<input type="radio" name="notes" value="1"<%if(hvf.getNotes()==1) {out.print(" checked");}%>>Excessive High False Positives<br>
+<input type="radio" name="notes" value="2"<%if(hvf.getNotes()==2) {out.print(" checked");}%>>Excessive High False Negatives<br>
+<input type="radio" name="notes" value="3"<%if(hvf.getNotes()==3) {out.print(" checked");}%>><span id="notes_other">Other:</span>
+<input type="text" name="notes_other" value="<%out.print(hvf.getNotes_other());%>"><br>
+<input type="radio" name="notes" value="999"<%if(hvf.getNotes()==999) {out.print(" checked");}%>>Blank<br><br>
+
+
+<input type="submit" value="Submit" class="btn"><br><br>
 </form>
 </div>
 <%

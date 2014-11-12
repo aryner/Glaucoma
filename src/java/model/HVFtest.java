@@ -92,82 +92,6 @@ public class HVFtest {
 		id = data.get(1);	
 	}
 
-	public HVFtest(int nmon, String nmon_oth2_c74, int ntar, String ntar_oth, int nlossnum, int nlossden, int nfp, int nfn, String ndur, 
-			int nfov, int nstimintens, int nstimcol, String nstimcol_oth, String nback, int nstrategy, String nstrategy_oth, 
-			String npup, int nvanum, int nvaden, int nsph_sign, String nsph_num, int ncyl_sign, String ncyl_num, 
-			int naxis, int nght, String nvfi, int nmdsign, String nmddb, int nmdp, int npsdisgn, String npsddb, int npsdp,
-			int ncentral_15, int ncentral_0, int nsup_hem, int ninf_hem, int nsup_hem2, int ninf_hem2, int npts_five,
-			int npts_contig, int npts_one, int ncluster) {
-	
-		mon = nmon;
-		mon_oth2_c74 = nmon_oth2_c74;
-		tar = ntar; 
-		tar_oth = ntar_oth;
-		lossnum = nlossnum;
-		lossden = nlossden;
-		fp = nfp;
-		fn = nfn;
-		dur = ndur;
-		fov = nfov;
-		stimintens = nstimintens;
-		stimcol = nstimcol;
-		stimcol_oth = nstimcol_oth;
-		back = nback;
-		strategy = nstrategy;
-		strategy_oth = nstrategy_oth;
-		pup = npup;
-		vanum = nvanum;
-		vaden = nvaden;
-		sph_sign = nsph_sign;
-		sph_num = nsph_num;
-		cyl_sign = ncyl_sign;
-		cyl_num = ncyl_num;
-		axis = naxis; 
-		ght = nght;
-		vfi = nvfi;
-		mdsign = nmdsign;
-		mddb = nmddb;
-		mdp = nmdp;
-		psdsign = npsdisgn;
-		psddb = npsddb;
-		psdp = npsdp;
-		central_15 = ncentral_15;
-		central_0 = ncentral_0;
-		sup_hem = nsup_hem;
-		inf_hem = ninf_hem;
-		sup_hem2 = nsup_hem2;
-		inf_hem2 = ninf_hem2;
-		pts_five = npts_five;
-		pts_contig = npts_contig;
-		pts_one = npts_one;
-		cluster = ncluster;
-	}
-
-	public HVFtest(int nfp, int nfn, int nght, int npsdp, int ncluster, int nglau, int nmdsign, String nmddb,
-			int nmdp, int ncentral_15, int ncentral_0, int nsup_hem, int ninf_hem, int nsup_hem2, 
-			int ninf_hem2, int npts_five, int npts_contig, int npts_one, int nsevere) {
-		
-		fp = nfp;
-		fn = nfn;
-		ght = nght;
-		psdp = npsdp;
-		cluster = ncluster;
-		hvf_glau = nglau;
-		mdsign = nmdsign;
-		mddb = nmddb;
-		mdp = nmdp;
-		central_15 = ncentral_15;
-		central_0 = ncentral_0;
-		sup_hem = nsup_hem;
-		inf_hem = ninf_hem;
-		sup_hem2 = nsup_hem2;
-		inf_hem2 = ninf_hem2;
-		pts_five = npts_five;
-		pts_contig = npts_contig;
-		pts_one = npts_one;
-		severe = nsevere;
-	}
-
 	public HVFtest(int nid, String nopthName, int nadjudicatorID, int nconfirmed, int nopthCheck, 
 		String npictureName, int nuserID, int nnotes, String nnotes_other, String nvf_loss,
 		String nvf_defect, int nglau, String nvf_loss_oth, String nvf_defect_oth, int nmon, String nmon_oth2_c47,
@@ -349,6 +273,10 @@ System.out.println(attr);
 		if(hvf.getCluster() == 1) {
 			glaucoma = true;
 		}
+		attr = request.getParameter("notes");
+		hvf.setNotes(Integer.parseInt(attr));
+		attr = request.getParameter("notes_other");
+		hvf.setNotes_other(attr);
 		
 		//check for severity if glaucoma
 		if(glaucoma) {
@@ -433,7 +361,7 @@ System.out.println(attr);
 			"hvf_central_15='"+hvf.getCentral_15()+"', hvf_central_0='"+hvf.getCentral_0()+"', hvf_sup_hem='"+hvf.getSup_hem()+"', "+
 			"hvf_inf_hem='"+hvf.getInf_hem()+"', hvf_sup_hem2='"+hvf.getSup_hem2()+"', hvf_inf_hem2='"+hvf.getInf_hem2()+"', "+
 			"hvf_pts_five='"+hvf.getPts_five()+"', "+ "hvf_pts_contig='"+hvf.getPts_contig()+"', hvf_pts_one='"+hvf.getPts_one()+"', "+
-			"hvf_cluster='"+hvf.getCluster()+"' ";
+			"hvf_cluster='"+hvf.getCluster()+"', hvf_notes='"+hvf.getNotes()+"', hvf_notes_other='"+hvf.getNotes_other()+"' ";
 
 		if(glaucoma) {
 			query += ", hvf_glau='1'";
@@ -559,6 +487,10 @@ System.out.println(attr);
 //		hvf.setVf_defect(Integer.parseInt(attr));
 		attr = request.getParameter("vf_defect_oth");
 		hvf.setVf_defect_oth(attr);
+		attr = request.getParameter("notes");
+		hvf.setNotes(Integer.parseInt(attr));
+		attr = request.getParameter("notes_other");
+		hvf.setNotes_other(attr);
 
 		String defect = "";
 		for(int i=1; i<9; i++) {
@@ -579,7 +511,8 @@ System.out.println(attr);
 				"hvf_pts_five='"+hvf.getPts_five()+"', hvf_pts_one='"+hvf.getPts_one()+"', "+
 				"hvf_severe='"+hvf.getSevere()+"', hvf_reliable_review='"+hvf.getReliable_review()+"', hvf_vf_loss='"+hvf.getVf_loss()+"', "+
 				"hvf_vf_loss_oth='"+hvf.getVf_loss_oth()+"', hvf_vf_defect='"+hvf.getVf_defect()+"', hvf_vf_defect_oth='"+hvf.getVf_defect_oth()+
-				"', opthCheck='"+user.getID()+"', opthName='"+user.getUserName()+"' WHERE pictureName='"+picName+"'";
+				"', opthCheck='"+user.getID()+"', opthName='"+user.getUserName()+"', hvf_notes='"+hvf.getNotes()+"', hvf_notes_other='"+
+				hvf.getNotes_other()+"' WHERE pictureName='"+picName+"'";
 		SQLCommands.update(query);
 
 		if(request.getParameter("reviewedAgain").equals("true")) {
@@ -638,7 +571,7 @@ System.out.println(attr);
 
 	public static Vector<HVFtest> getPair(String picName) {
 		String query = "SELECT * FROM HVFtest WHERE pictureName='"+picName+"'";	
-		return SQLCommands.queryHVFtestForAdjudication(query);
+		return SQLCommands.queryHVFtestMaster(query);
 	}
 
 	public static Picture getNext(User user) {
@@ -695,7 +628,7 @@ System.out.println(attr);
 				"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
 				"hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
 				"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_sup_hem, hvf_inf_hem, "+
-				"hvf_pts_five, hvf_pts_one, hvf_cluster "+
+				"hvf_pts_five, hvf_pts_one, hvf_cluster, hvf_notes, hvf_notes_other "+
 				"HAVING COUNT(*)=2";
 			Vector<HVFtest> set = SQLCommands.queryHVFtestMaster(query);
 			//get the ones that need adjudication
@@ -705,7 +638,7 @@ System.out.println(attr);
 				"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
 				"hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
 				"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_sup_hem, hvf_inf_hem, "+
-				"hvf_pts_five, hvf_pts_one, hvf_cluster "+
+				"hvf_pts_five, hvf_pts_one, hvf_cluster, hvf_notes, hvf_notes_other "+
 				"HAVING COUNT(*)=1";
 			Vector<HVFtest> notSet = SQLCommands.queryHVFtest(query);
 
@@ -747,7 +680,7 @@ System.out.println(attr);
 			"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
 			"hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
 			"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, "+
-			"hvf_inf_hem2, hvf_pts_five, hvf_pts_contig, hvf_pts_one, hvf_cluster "+
+			"hvf_inf_hem2, hvf_pts_five, hvf_pts_contig, hvf_pts_one, hvf_cluster, hvf_notes, hvf_notes_other "+
 			"HAVING COUNT(*)=2";
 		Vector<HVFtest> set = SQLCommands.queryHVFtest(query);
 		//get the ones that need adjudication
@@ -757,7 +690,7 @@ System.out.println(attr);
 			"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
 			"hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
 			"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, "+
-			"hvf_inf_hem2, hvf_pts_five, hvf_pts_contig, hvf_pts_one, hvf_cluster "+
+			"hvf_inf_hem2, hvf_pts_five, hvf_pts_contig, hvf_pts_one, hvf_cluster, hvf_notes, hvf_notes_other "+
 			"HAVING COUNT(*)=1";
 		Vector<HVFtest> notSet = SQLCommands.queryHVFtest(query);
 		
@@ -871,7 +804,7 @@ System.out.println(attr);
 			"mon, mon_oth2_c47, tar, tar_oth, lossnum, lossden, fp, fn, dur, fov, stimintens, stimcol, stimcol_oth, back, "+
 			"strategy, strategy_oth, pup, vanum, vaden, sph_sign, sph_num, cyl_sign, cyl_num, axis, ght, vfi, mdsign, mddb, "+
 			"mdp, psdsign, psddb, psdp, central_15, central_0, sup_hem, inf_hem, sup_hem2, inf_hem2, pts_five, pts_contig, "+
-			"pts_one, cluster, severe, reliable_review, opthName, adjudicatorID";
+			"pts_one, cluster, severe, reliable_review, notes, notes_other, opthName, adjudicatorID";
 		result.add(currLine);
 		for(int i=0; i<hvf.size(); i++) {
 			currLine = 
@@ -893,6 +826,7 @@ System.out.println(attr);
 				hvf.get(i).getInf_hem()+", "+hvf.get(i).getSup_hem2()+", "+hvf.get(i).getInf_hem2()+", "+
 				hvf.get(i).getPts_five()+", "+hvf.get(i).getPts_contig()+", "+hvf.get(i).getPts_one()+", "+
 				hvf.get(i).getCluster()+", "+hvf.get(i).getSevere()+", "+hvf.get(i).getReliable_review()+", "+
+				hvf.get(i).getNotes()+", "+hvf.get(i).getNotes_other()+", "+
 				hvf.get(i).getOpthName()+", "+hvf.get(i).getAdjudicatorID();
 			result.add(currLine);
 		}
@@ -969,7 +903,7 @@ System.out.println(attr);
 				"hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, "+
 				"hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_central_15, hvf_central_0, "+
 				"hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, hvf_inf_hem2, hvf_pts_five, hvf_pts_contig, hvf_pts_one, hvf_cluster, "+
-				"hvf_severe, hvf_reliable_review, opthName, adjudicatorID) VALUES ";
+				"hvf_severe, hvf_reliable_review, hvf_notes, hvf_notes_other, opthName, adjudicatorID) VALUES ";
 			for(int i=0; i<newLines.size(); i++) {
 				if(i > 0) { query += ", "; }
 				query += "("+newLines.get(i)+")";
@@ -995,7 +929,7 @@ System.out.println(attr);
 				"hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, "+
 				"hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_central_15, hvf_central_0, "+
 				"hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, hvf_inf_hem2, hvf_pts_five, hvf_pts_contig, hvf_pts_one, hvf_cluster, "+
-				"hvf_severe, hvf_reliable_review, opthName, adjudicatorID) VALUES ";
+				"hvf_severe, hvf_reliable_review, hvf_notes, hvf_notes_other, opthName, adjudicatorID) VALUES ";
 			for(int i=0; i<updateLines.size(); i++) {
 				if(i>0) { query += ", "; }
 				query += "("+updateLines.get(i)+")";
@@ -1025,6 +959,14 @@ System.out.println(attr);
 		for(int i=0; i<hvf.size(); i++) {
 			if(!needPics.contains(hvf.get(i).getPictureName())) {
 				needPics.add(hvf.get(i).getPictureName());
+			}
+		}
+
+		String ext;
+		for(int i=0; i<needPics.size(); i++) {
+			ext = needPics.get(i).substring(needPics.get(i).indexOf(".")+1, needPics.get(i).length());
+			if(ext.equals("pdf")) {
+				needPics.set(i, needPics.get(i).substring(0,needPics.get(i).indexOf("."))+".jpg");
 			}
 		}
 
