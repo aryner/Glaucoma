@@ -76,9 +76,11 @@ public class Tools {
 		}
 
 		fileName += cal.get(Calendar.YEAR);
+		String slash = System.getProperty("file.separator");
+		new File(System.getProperty("user.home")+slash+"Desktop"+slash+fileName+".csv").delete();
 
 		try {
-			String slash = System.getProperty("file.separator");
+			slash = System.getProperty("file.separator");
 			FileOutputStream fileOut = new FileOutputStream(System.getProperty("user.home")+slash+"Desktop"+slash+fileName+".csv");
 
 			for(int i=0; i<lines.size(); i++) {

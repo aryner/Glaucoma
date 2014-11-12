@@ -227,21 +227,21 @@ if(reviewed) {
 <div id="vf_defectInvis">
 <span id='vf_defect'>Type of glaucoma VF defect:</span><br>
 <% result = resultString.substring(0,1); %>
-<input type="checkbox" name="vf_defect1" value="1"<%if(result.equals("1")) { out.print(" checked");}%>>superior arcuate scotoma<br>
+<input type="checkbox" name="vf_defect1" value="1"<%if(result.equals("2")) { out.print(" checked");}%>>superior arcuate scotoma<br>
 <% result = resultString.substring(1,2); %>
-<input type="checkbox" name="vf_defect2" value="2"<%if(result.equals("1")) { out.print(" checked");}%>>inferior arcuate scotoma<br>
+<input type="checkbox" name="vf_defect2" value="2"<%if(result.equals("2")) { out.print(" checked");}%>>inferior arcuate scotoma<br>
 <% result = resultString.substring(2,3); %>
-<input type="checkbox" name="vf_defect3" value="3"<%if(result.equals("1")) { out.print(" checked");}%>>superior nasal step<br>
+<input type="checkbox" name="vf_defect3" value="3"<%if(result.equals("2")) { out.print(" checked");}%>>superior nasal step<br>
 <% result = resultString.substring(3,4); %>
-<input type="checkbox" name="vf_defect4" value="4"<%if(result.equals("1")) { out.print(" checked");}%>>inferior nasal step<br>
+<input type="checkbox" name="vf_defect4" value="4"<%if(result.equals("2")) { out.print(" checked");}%>>inferior nasal step<br>
 <% result = resultString.substring(4,5); %>
-<input type="checkbox" name="vf_defect5" value="5"<%if(result.equals("1")) { out.print(" checked");}%>>temporal wedge<br>
+<input type="checkbox" name="vf_defect5" value="5"<%if(result.equals("2")) { out.print(" checked");}%>>temporal wedge<br>
 <% result = resultString.substring(5,6); %>
-<input type="checkbox" name="vf_defect6" value="6"<%if(result.equals("1")) { out.print(" checked");}%>>tunnel vision<br>
+<input type="checkbox" name="vf_defect6" value="6"<%if(result.equals("2")) { out.print(" checked");}%>>tunnel vision<br>
 <% result = resultString.substring(6,7); %>
-<input type="checkbox" name="vf_defect7" value="7"<%if(result.equals("1")) { out.print(" checked");}%>>end stage<br>
+<input type="checkbox" name="vf_defect7" value="7"<%if(result.equals("2")) { out.print(" checked");}%>>end stage<br>
 <% result = resultString.substring(7,8); %>
-<input type="checkbox" name="vf_defect8" value="8"<%if(result.equals("1")) { out.print(" checked");}%>><span id='vf_defect_oth'>other:</span>
+<input type="checkbox" name="vf_defect8" value="8"<%if(result.equals("2")) { out.print(" checked");}%>><span id='vf_defect_oth'>other:</span>
 <input type="text" name="vf_defect_oth" <%if(reviewed) {out.print("value='"+hvf.getVf_defect_oth()+"'");}%>>
 <br><br>
 </div>
