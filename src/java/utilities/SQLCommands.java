@@ -37,9 +37,11 @@ public class SQLCommands {
 
 			while(resultSet.next()) {
 				result.add(new HVFtest(
-					resultSet.getInt("id"), resultSet.getString("opthName"), resultSet.getInt("adjudicatorID"), resultSet.getInt("confirmed"),resultSet.getInt("opthCheck"),
-					resultSet.getString("pictureName"),resultSet.getInt("userID"),resultSet.getString("hvf_vf_loss"),
-					resultSet.getString("hvf_vf_defect"),resultSet.getInt("hvf_glau"),resultSet.getString("hvf_vf_loss_oth"),
+					resultSet.getInt("id"), resultSet.getString("opthName"), resultSet.getInt("adjudicatorID"), 
+					resultSet.getInt("confirmed"),resultSet.getInt("opthCheck"), resultSet.getString("pictureName"),
+					resultSet.getInt("userID"),resultSet.getInt("hvf_notes"),resultSet.getString("hvf_notes_other"),
+					resultSet.getString("hvf_vf_loss"), resultSet.getString("hvf_vf_defect"),
+					resultSet.getInt("hvf_glau"),resultSet.getString("hvf_vf_loss_oth"),
 					resultSet.getString("hvf_vf_defect_oth"),resultSet.getInt("hvf_mon"),resultSet.getString("hvf_mon_oth2_c47"),
 					resultSet.getInt("hvf_tar"),resultSet.getString("hvf_tar_oth"),resultSet.getInt("hvf_lossnum"),
 					resultSet.getInt("hvf_lossden"),resultSet.getInt("hvf_fp"),resultSet.getInt("hvf_fn"),

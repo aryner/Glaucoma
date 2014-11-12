@@ -756,6 +756,43 @@ if(pic == null) {
 <input type="radio" name="cluster" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>No<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'> ***</span><%}%>
 <input type="radio" name="cluster" value="999"<%if(a && !diff && v1==999){out.print(" checked='true'");}%>>Blank<%if((a&&diff)&&((v1==999)||(v2==999))){%><span class='highlight'> ***</span><%}%> <br>
 <br> 
+<%
+	v1 = -1;
+	v2 = -1;
+	if(a) {
+		v1 = HVF.get(0).getNotes();
+		v2 = HVF.get(1).getNotes();
+		if(v1 == v2) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+<span id='notes'>Notes: </span><br>
+<input type="radio" name="notes" value="0"<%if(a && !diff && v1==0){out.print(" checked='true'");}%>>Low test reliability<%if((a&&diff)&&((v1==0)||(v2==0))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="notes" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>Excessive High False Positives<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="notes" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Excessive High False Negatives<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'> ***</span><%}%><br>
+<input type="radio" name="notes" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%><%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'> ***</span><%}%>>
+<%
+	if(a) {
+		s1 = HVF.get(0).getNotes_other()+"";
+		s2 = HVF.get(1).getNotes_other()+"";
+		if(s1.equals(s2)) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+<span id='notes_other'>Other: </span>
+<input type="text" name="notes_other">
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<br>
+<input type="radio" name="notes" value="999"<%if(a && !diff && v1==999){out.print(" checked='true'");}%>>Blank<%if((a&&diff)&&((v1==999)||(v2==999))){%><span class='highlight'> ***</span><%}%><br>
+<br>
 
 <input type="submit" value="Submit" class="btn">
 </form>

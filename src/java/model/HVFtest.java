@@ -23,6 +23,8 @@ public class HVFtest {
 	private int opthCheck;
 	private String pictureName;
 	private int userID;
+	private int notes;
+	private String notes_other;
 	private int hvf_glau;
 	private String vf_loss_oth;
 	private String vf_defect_oth;
@@ -166,7 +168,8 @@ public class HVFtest {
 		severe = nsevere;
 	}
 
-	public HVFtest(int nid, String nopthName, int nadjudicatorID, int nconfirmed, int nopthCheck, String npictureName, int nuserID, String nvf_loss, 
+	public HVFtest(int nid, String nopthName, int nadjudicatorID, int nconfirmed, int nopthCheck, 
+		String npictureName, int nuserID, int nnotes, String nnotes_other, String nvf_loss,
 		String nvf_defect, int nglau, String nvf_loss_oth, String nvf_defect_oth, int nmon, String nmon_oth2_c47,
 		int ntar, String ntar_oth, int nlossnum, int nlossden, int nfp, int nfn, String ndur, int nfov, 
 		int nstimintens, int nstimcol, String nstimcol_oth, String nback, int nstrategy, String nstrategy_oth,
@@ -183,6 +186,8 @@ public class HVFtest {
 		opthCheck = nopthCheck;
 		pictureName = npictureName;
 		userID = nuserID;
+		notes = nnotes;
+		notes_other = nnotes_other;
 		vf_loss = nvf_loss;
 		vf_defect = nvf_defect;
 		hvf_glau = nglau;
@@ -1822,6 +1827,34 @@ System.out.println(attr);
 	 */
 	public void setAdjudicatorID(int adjudicatorID) {
 		this.adjudicatorID = adjudicatorID;
+	}
+
+	/**
+	 * @return the notes
+	 */
+	public int getNotes() {
+		return notes;
+	}
+
+	/**
+	 * @param notes the notes to set
+	 */
+	public void setNotes(int notes) {
+		this.notes = notes;
+	}
+
+	/**
+	 * @return the notes_other
+	 */
+	public String getNotes_other() {
+		return notes_other;
+	}
+
+	/**
+	 * @param notes_other the notes_other to set
+	 */
+	public void setNotes_other(String notes_other) {
+		this.notes_other = notes_other;
 	}
 
 }
