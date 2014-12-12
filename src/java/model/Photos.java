@@ -11,5 +11,290 @@ package model;
  * @author aryner
  */
 public class Photos {
+	private int id;
+	private int confirmed;
+	private String pictureName;
+	private int userID;
+	private int type;
+	private int qual;
+	private String cdr;
+	private int notch;
+	private String hrs_one;
+	private String hrs_two;
+	private int erosion;
+	private String eros_hrs_one;
+	private String eros_hrs_two;
+	private int disc;
+	private String disc_hrs_one;
+	private String disc_hrs_two;
+	private int rnfl;
+	private String rnfl_hrs_one;
+	private String rnfl_hrs_two;
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the confirmed
+	 */
+	public int getConfirmed() {
+		return confirmed;
+	}
+
+	/**
+	 * @param confirmed the confirmed to set
+	 */
+	public void setConfirmed(int confirmed) {
+		this.confirmed = confirmed;
+	}
+
+	/**
+	 * @return the pictureName
+	 */
+	public String getPictureName() {
+		return pictureName;
+	}
+
+	/**
+	 * @param pictureName the pictureName to set
+	 */
+	public void setPictureName(String pictureName) {
+		this.pictureName = pictureName;
+	}
+
+	/**
+	 * @return the userID
+	 */
+	public int getUserID() {
+		return userID;
+	}
+
+	/**
+	 * @param userID the userID to set
+	 */
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
+
+	/**
+	 * @return the type
+	 */
+	public int getType() {
+		return type;
+	}
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	/**
+	 * @return the qual
+	 */
+	public int getQual() {
+		return qual;
+	}
+
+	/**
+	 * @param qual the qual to set
+	 */
+	public void setQual(int qual) {
+		this.qual = qual;
+	}
+
+	/**
+	 * @return the cdr
+	 */
+	public String getCdr() {
+		return cdr;
+	}
+
+	/**
+	 * @param cdr the cdr to set
+	 */
+	public void setCdr(String cdr) {
+		this.cdr = cdr;
+	}
+
+	/**
+	 * @return the notch
+	 */
+	public int getNotch() {
+		return notch;
+	}
+
+	/**
+	 * @param notch the notch to set
+	 */
+	public void setNotch(int notch) {
+		this.notch = notch;
+	}
+
+	/**
+	 * @return the hrs_one
+	 */
+	public String getHrs_one() {
+		return hrs_one;
+	}
+
+	/**
+	 * @param hrs_one the hrs_one to set
+	 */
+	public void setHrs_one(String hrs_one) {
+		this.hrs_one = hrs_one;
+	}
+
+	/**
+	 * @return the hrs_two
+	 */
+	public String getHrs_two() {
+		return hrs_two;
+	}
+
+	/**
+	 * @param hrs_two the hrs_two to set
+	 */
+	public void setHrs_two(String hrs_two) {
+		this.hrs_two = hrs_two;
+	}
+
+	/**
+	 * @return the erosion
+	 */
+	public int getErosion() {
+		return erosion;
+	}
+
+	/**
+	 * @param erosion the erosion to set
+	 */
+	public void setErosion(int erosion) {
+		this.erosion = erosion;
+	}
+
+	/**
+	 * @return the eros_hrs_one
+	 */
+	public String getEros_hrs_one() {
+		return eros_hrs_one;
+	}
+
+	/**
+	 * @param eros_hrs_one the eros_hrs_one to set
+	 */
+	public void setEros_hrs_one(String eros_hrs_one) {
+		this.eros_hrs_one = eros_hrs_one;
+	}
+
+	/**
+	 * @return the eros_hrs_two
+	 */
+	public String getEros_hrs_two() {
+		return eros_hrs_two;
+	}
+
+	/**
+	 * @param eros_hrs_two the eros_hrs_two to set
+	 */
+	public void setEros_hrs_two(String eros_hrs_two) {
+		this.eros_hrs_two = eros_hrs_two;
+	}
+
+	/**
+	 * @return the disc
+	 */
+	public int getDisc() {
+		return disc;
+	}
+
+	/**
+	 * @param disc the disc to set
+	 */
+	public void setDisc(int disc) {
+		this.disc = disc;
+	}
+
+	/**
+	 * @return the disc_hrs_one
+	 */
+	public String getDisc_hrs_one() {
+		return disc_hrs_one;
+	}
+
+	/**
+	 * @param disc_hrs_one the disc_hrs_one to set
+	 */
+	public void setDisc_hrs_one(String disc_hrs_one) {
+		this.disc_hrs_one = disc_hrs_one;
+	}
+
+	/**
+	 * @return the disc_hrs_two
+	 */
+	public String getDisc_hrs_two() {
+		return disc_hrs_two;
+	}
+
+	/**
+	 * @param disc_hrs_two the disc_hrs_two to set
+	 */
+	public void setDisc_hrs_two(String disc_hrs_two) {
+		this.disc_hrs_two = disc_hrs_two;
+	}
+
+	/**
+	 * @return the rnfl
+	 */
+	public int getRnfl() {
+		return rnfl;
+	}
+
+	/**
+	 * @param rnfl the rnfl to set
+	 */
+	public void setRnfl(int rnfl) {
+		this.rnfl = rnfl;
+	}
+
+	/**
+	 * @return the rnfl_hrs_one
+	 */
+	public String getRnfl_hrs_one() {
+		return rnfl_hrs_one;
+	}
+
+	/**
+	 * @param rnfl_hrs_one the rnfl_hrs_one to set
+	 */
+	public void setRnfl_hrs_one(String rnfl_hrs_one) {
+		this.rnfl_hrs_one = rnfl_hrs_one;
+	}
+
+	/**
+	 * @return the rnfl_hrs_two
+	 */
+	public String getRnfl_hrs_two() {
+		return rnfl_hrs_two;
+	}
+
+	/**
+	 * @param rnfl_hrs_two the rnfl_hrs_two to set
+	 */
+	public void setRnfl_hrs_two(String rnfl_hrs_two) {
+		this.rnfl_hrs_two = rnfl_hrs_two;
+	}
 	
 }

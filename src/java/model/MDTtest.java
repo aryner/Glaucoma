@@ -13,7 +13,7 @@ package model;
 public class MDTtest {
 	private int id;
 	private int confirmed;
-	private int pictureID;
+	private String pictureName;
 	private int userID;
 	private String late;
 	private String fp;
@@ -25,6 +25,7 @@ public class MDTtest {
 	private String ru_one;
 	private String ll_one;
 	private String rl_one;
+	private int abnormal;
 
 	/**
 	 * @return the id
@@ -52,20 +53,6 @@ public class MDTtest {
 	 */
 	public void setConfirmed(int confirmed) {
 		this.confirmed = confirmed;
-	}
-
-	/**
-	 * @return the pictureID
-	 */
-	public int getPictureID() {
-		return pictureID;
-	}
-
-	/**
-	 * @param pictureID the pictureID to set
-	 */
-	public void setPictureID(int pictureID) {
-		this.pictureID = pictureID;
 	}
 
 	/**
@@ -220,6 +207,34 @@ public class MDTtest {
 	 */
 	public void setRl_one(String rl_one) {
 		this.rl_one = rl_one;
+	}
+
+	/**
+	 * @return the pictureName
+	 */
+	public String getPictureName() {
+		return pictureName;
+	}
+
+	/**
+	 * @param pictureName the pictureName to set
+	 */
+	public void setPictureName(String pictureName) {
+		this.pictureName = pictureName;
+	}
+
+	/**
+	 * @return the abnormal
+	 */
+	public int getAbnormal() {
+		return abnormal;
+	}
+
+	/**
+	 * @param abnormal the abnormal to set
+	 */
+	public void setAbnormal(int abnormal) {
+		this.abnormal = abnormal;
 	}
 	
 }

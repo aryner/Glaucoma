@@ -13,12 +13,13 @@ package model;
 public class FDTtest {
 	private int id;
 	private int confirmed;
-	private int pictureID;
+	private String pictureName;
 	private int userID;
 	private String dur;
 	private int targ;
 	private String targ_oth;
 	private int fixerr_num;
+	private int fixerr_den;
 	private int fp_num;
 	private int fp_den;
 	private int fn_num;
@@ -34,7 +35,7 @@ public class FDTtest {
 	private String mddb;
 	private String mdp;
 	private int psdisgn;
-	private String psbd;
+	private String psdb;
 	private String psdp;
 	private String lu_one;
 	private String lu_five;
@@ -44,6 +45,7 @@ public class FDTtest {
 	private String ll_five;
 	private String rl_one;
 	private String rl_five;
+	private int abnormal;
 
 	/**
 	 * @return the id
@@ -71,20 +73,6 @@ public class FDTtest {
 	 */
 	public void setConfirmed(int confirmed) {
 		this.confirmed = confirmed;
-	}
-
-	/**
-	 * @return the pictureID
-	 */
-	public int getPictureID() {
-		return pictureID;
-	}
-
-	/**
-	 * @param pictureID the pictureID to set
-	 */
-	public void setPictureID(int pictureID) {
-		this.pictureID = pictureID;
 	}
 
 	/**
@@ -368,20 +356,6 @@ public class FDTtest {
 	}
 
 	/**
-	 * @return the psbd
-	 */
-	public String getPsbd() {
-		return psbd;
-	}
-
-	/**
-	 * @param psbd the psbd to set
-	 */
-	public void setPsbd(String psbd) {
-		this.psbd = psbd;
-	}
-
-	/**
 	 * @return the psdp
 	 */
 	public String getPsdp() {
@@ -505,6 +479,62 @@ public class FDTtest {
 	 */
 	public void setRl_five(String rl_five) {
 		this.rl_five = rl_five;
+	}
+
+	/**
+	 * @return the pictureName
+	 */
+	public String getPictureName() {
+		return pictureName;
+	}
+
+	/**
+	 * @param pictureName the pictureName to set
+	 */
+	public void setPictureName(String pictureName) {
+		this.pictureName = pictureName;
+	}
+
+	/**
+	 * @return the fixerr_den
+	 */
+	public int getFixerr_den() {
+		return fixerr_den;
+	}
+
+	/**
+	 * @param fixerr_den the fixerr_den to set
+	 */
+	public void setFixerr_den(int fixerr_den) {
+		this.fixerr_den = fixerr_den;
+	}
+
+	/**
+	 * @return the psdb
+	 */
+	public String getPsdb() {
+		return psdb;
+	}
+
+	/**
+	 * @param psdb the psdb to set
+	 */
+	public void setPsdb(String psdb) {
+		this.psdb = psdb;
+	}
+
+	/**
+	 * @return the abnormal
+	 */
+	public int getAbnormal() {
+		return abnormal;
+	}
+
+	/**
+	 * @param abnormal the abnormal to set
+	 */
+	public void setAbnormal(int abnormal) {
+		this.abnormal = abnormal;
 	}
 	
 	
