@@ -81,8 +81,8 @@ public class Picture {
 						extension.equals("png") || extension.equals("PNG")) {
 
 						Document document = new Document();
-						String tempPath = ".."+slash+"webapps"+slash+"HVF"+slash+"tempImg"+slash;
-						String finalPath = ".."+slash+"webapps"+slash+"HVF"+slash + path + slash;
+						String tempPath = ".."+slash+"webapps"+slash+"Glaucoma"+slash+"tempImg"+slash;
+						String finalPath = ".."+slash+"webapps"+slash+"Glaucoma"+slash + path + slash;
 						new File(finalPath).mkdirs();
 						String temp = fileName.substring(0,fileName.indexOf("."));
 						finalPath += temp + ".pdf";
@@ -121,23 +121,12 @@ public class Picture {
 				}
 			}
 
-			if(path.equals("HVF")) {
+			if (path.equals("grading")) {
 				for(int j=0; j< names.size(); j++) {
 					FileItem fileItem = files.get(j);
 					String fileName = names.get(j);
 
-					String filePath = ".."+slash+"webapps"+slash+"HVF"+slash + path + slash;
-					new File(filePath).mkdirs();
-					File file = new File(filePath + fileName);
-					fileItem.write(file); 
-				}
-			}
-			else if (path.equals("grading")) {
-				for(int j=0; j< names.size(); j++) {
-					FileItem fileItem = files.get(j);
-					String fileName = names.get(j);
-
-					String filePath = ".."+slash+"webapps"+slash+"HVF"+slash + path + slash;
+					String filePath = ".."+slash+"webapps"+slash+"Glaucoma"+slash + path + slash;
 					new File(filePath).mkdirs();
 					File file = new File(filePath + fileName);
 					fileItem.write(file); 
@@ -148,7 +137,18 @@ public class Picture {
 					FileItem fileItem = files.get(j);
 					String fileName = names.get(j);
 
-					String filePath = ".."+slash+"webapps"+slash+"HVF"+slash + path + slash;
+					String filePath = ".."+slash+"webapps"+slash+"Glaucoma"+slash + path + slash;
+					new File(filePath).mkdirs();
+					File file = new File(filePath + fileName);
+					fileItem.write(file); 
+				}
+			}
+			else {
+				for(int j=0; j< names.size(); j++) {
+					FileItem fileItem = files.get(j);
+					String fileName = names.get(j);
+
+					String filePath = ".."+slash+"webapps"+slash+"Glaucoma"+slash + path + slash;
 					new File(filePath).mkdirs();
 					File file = new File(filePath + fileName);
 					fileItem.write(file); 

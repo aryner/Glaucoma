@@ -14,6 +14,7 @@
 <!--		<option value="grading">Grading Chart</option> -->
 <!--		<option value="severity">Glaucoma Severity Chart</option> -->
 		<option value="FDT">FDT</option>
+		<option value="MDT">MDT</option>
 		<option value="OCT">OCT</option>
 		<option value="stereo">Stereo</option>
 		<option value="3Nethra">3Nethra</option> 
@@ -25,7 +26,7 @@
 </form>
 
 <div class="container">
-	<h3>Missing PDFs</h3>
+	<h3>Missing Images</h3>
 	<!--
 	<div class="fifth-column">
 		<h4>HVF</h4>
