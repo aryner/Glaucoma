@@ -12,7 +12,7 @@ package model;
  */
 public class OCTtest {
 	private int id;
-	private int confrimed;
+	private int confirmed;
 	private String pictureName;
 	private int userID;
 	private String length;
@@ -50,6 +50,56 @@ public class OCTtest {
 	private String atnum;
 	private int atcol;
 
+	private static final String slash = System.getProperty("file.separator");
+
+	public OCTtest(int id, int confirmed, String pictureName, int userID, String length,
+		       int type, String type_oth, String snum, int scol, String nnum, int ncol,
+		       String inum, int icol, String tnum, int tcol, String sig, String isnum,
+		       int iscol, String sinum, int sicol, String stnum, int stcol, String itnum,
+		       int itcol, String snnum, int sncol, String mmnum, int mmcol, String smaxnum,
+		       int smaxcol, String imaxnum, int imaxcol, String savgnum, int savgcol, 
+		       String iavgnum, int iavgcol, String atnum, int atcol)
+	{
+		this.id = id;
+		this.confirmed = confirmed;
+		this.pictureName = pictureName;
+		this.userID = userID;
+		this.length = length;
+		this.type = type;
+		this.type_oth = type_oth;
+		this.snum = snum;
+		this.scol = scol;
+		this.nnum = nnum;
+		this.ncol = ncol;
+		this.inum = inum; 
+		this.icol = icol;
+		this.tnum = tnum;
+		this.tcol = tcol;
+		this.sig = sig;
+		this.isnum = isnum;
+		this.iscol = iscol;
+		this.sinum = sinum; 
+		this.sicol = sicol;
+		this.stnum = stnum;
+		this.stcol  = stcol;
+		this.itnum = itnum;
+		this.itcol = itcol;
+		this.snnum = snnum;
+		this.sncol = sncol;
+		this.mmnum = mmnum;
+		this.mmcol = mmcol;
+		this.smaxnum = smaxnum;
+		this.smaxcol = smaxcol;
+		this.imaxnum = imaxnum;
+		this.imaxcol = imaxcol;
+		this.savgnum = savgnum;
+		this.savgcol = savgcol;
+		this.iavgnum = iavgnum;
+		this.iavgcol = iavgcol;
+		this.atnum = atnum;
+		this.atcol = atcol;
+	}
+
 	/**
 	 * @return the id
 	 */
@@ -68,14 +118,14 @@ public class OCTtest {
 	 * @return the confrimed
 	 */
 	public int getConfrimed() {
-		return confrimed;
+		return confirmed;
 	}
 
 	/**
 	 * @param confrimed the confrimed to set
 	 */
 	public void setConfrimed(int confrimed) {
-		this.confrimed = confrimed;
+		this.confirmed = confrimed;
 	}
 
 	/**

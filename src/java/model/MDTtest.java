@@ -27,6 +27,29 @@ public class MDTtest {
 	private String rl_one;
 	private int abnormal;
 
+	private static final String slash = System.getProperty("file.separator");
+
+	public MDTtest(int id, int confirmed, String pictureName, int userID, String late, String fp,
+		       int lens, String lens_y, String dur, String ptd, String lu_one, String ru_one,
+		       String ll_one, String rl_one, int abnormal) 
+	{
+		this.id = id;
+		this.confirmed = confirmed;
+		this.pictureName = pictureName;
+		this.userID = userID;
+		this.late = late;
+		this.fp = fp;
+		this.lens = lens;
+		this.lens_y = lens_y;
+		this.dur = dur;
+		this.ptd = ptd;
+		this.lu_one = lu_one;
+		this.ru_one = ru_one;
+		this.ll_one = ll_one;
+		this.rl_one = rl_one;
+		this.abnormal = abnormal;
+	}
+
 	/**
 	 * @return the id
 	 */

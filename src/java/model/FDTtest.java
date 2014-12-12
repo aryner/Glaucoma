@@ -47,6 +47,50 @@ public class FDTtest {
 	private String rl_five;
 	private int abnormal;
 
+	private static final String slash = System.getProperty("file.separator");
+
+	public FDTtest(int id, int confirmed, String pictureName, int userID, String dur, int targ,
+		       String targ_oth, int fixerr_num, int fixerr_den, int fp_num, int fp_den, int test,
+		       String test_oth, int speed, String speed_oth, String pupil, String va_num, String va_den,
+		       int mdsign, String mddb, String mdp, int psdisgn, String psdb, String psdp, String lu_one,
+		       String lu_five, String ru_one, String ru_five, String ll_one, String ll_five, String rl_one,
+		       String rl_five, int abnormal) 
+	{
+		this.id = id;
+		this.confirmed = confirmed;
+		this.pictureName = pictureName;
+		this.userID = userID;
+		this.dur = dur;
+		this.targ = targ;
+		this.targ_oth = targ_oth;
+		this.fixerr_num = fixerr_num;
+		this.fixerr_den = fixerr_den;
+		this.fp_num = fp_num;
+		this.fp_den = fp_den;
+		this.test = test;
+		this.test_oth = test_oth;
+		this.speed = speed;
+		this.speed_oth = speed_oth;
+		this.pupil = pupil;
+		this.va_num = va_num;
+		this.va_den = va_den;
+		this.mdsign = mdsign;
+		this.mddb = mddb;
+		this.mdp = mdp;
+		this.psdisgn = psdisgn;
+		this.psdb = psdb;
+		this.psdp = psdp;
+		this.lu_one = lu_one;
+		this.lu_five = lu_five;
+		this.ru_one = ru_one;
+		this.ru_five = ru_five;
+		this.ll_one = ll_one;
+		this.ll_five = ll_five;
+		this.rl_one = rl_one;
+		this.rl_five = rl_five;
+		this.abnormal = abnormal;
+	}
+
 	/**
 	 * @return the id
 	 */

@@ -19,8 +19,8 @@ public class Photos {
 	private int qual;
 	private String cdr;
 	private int notch;
-	private String hrs_one;
-	private String hrs_two;
+	private String notch_hrs_one;
+	private String notch_hrs_two;
 	private int erosion;
 	private String eros_hrs_one;
 	private String eros_hrs_two;
@@ -30,6 +30,34 @@ public class Photos {
 	private int rnfl;
 	private String rnfl_hrs_one;
 	private String rnfl_hrs_two;
+
+	private static final String slash = System.getProperty("file.separator");
+
+	public Photos(int id, int confirmed, String pictureName, int userID, int type, int qual,
+		      String cdr, int notch, String notch_hrs_one, String notch_hrs_two, int erosion,
+		      String eros_hrs_one, String eros_hrs_two, int disc, String disc_hrs_one,
+		      String disc_hrs_two, int rnfl, String rnfl_hrs_one, String rnfl_hrs_two) 
+	{
+		this.id = id;
+		this.confirmed = confirmed;
+		this.pictureName = pictureName;
+		this.userID = userID;
+		this.type = type;
+		this.qual = qual;
+		this.cdr = cdr; 
+		this.notch = notch;
+		this.notch_hrs_one = notch_hrs_one;
+		this.notch_hrs_two = notch_hrs_two;
+		this.erosion = erosion;
+		this.eros_hrs_one = eros_hrs_one;
+		this.eros_hrs_two = eros_hrs_two;
+		this.disc = disc;
+		this.disc_hrs_one = disc_hrs_one;
+		this.disc_hrs_two = disc_hrs_two;
+		this.rnfl = rnfl;
+		this.rnfl_hrs_one = rnfl_hrs_one;
+		this.rnfl_hrs_two = rnfl_hrs_two;
+	}
 
 	/**
 	 * @return the id
@@ -146,29 +174,29 @@ public class Photos {
 	/**
 	 * @return the hrs_one
 	 */
-	public String getHrs_one() {
-		return hrs_one;
+	public String getNotch_hrs_one() {
+		return notch_hrs_one;
 	}
 
 	/**
 	 * @param hrs_one the hrs_one to set
 	 */
-	public void setHrs_one(String hrs_one) {
-		this.hrs_one = hrs_one;
+	public void setNotch_hrs_one(String hrs_one) {
+		this.notch_hrs_one = hrs_one;
 	}
 
 	/**
 	 * @return the hrs_two
 	 */
-	public String getHrs_two() {
-		return hrs_two;
+	public String getNotch_hrs_two() {
+		return notch_hrs_two;
 	}
 
 	/**
-	 * @param hrs_two the hrs_two to set
+	 * @param notch_hrs_two the hrs_two to set
 	 */
-	public void setHrs_two(String hrs_two) {
-		this.hrs_two = hrs_two;
+	public void setNotch_hrs_two(String notch_hrs_two) {
+		this.notch_hrs_two = notch_hrs_two;
 	}
 
 	/**

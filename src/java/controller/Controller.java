@@ -82,6 +82,122 @@ public class Controller extends HttpServlet {
 			request.setAttribute("hvfNeedPictures", HVFtest.needPictures());
 		}
 
+		else if(userPath.equals("/FDTtest")) {
+			String pictureName = request.getParameter("pictureName");
+			User user = (User)session.getAttribute("user");
+			Picture picture;
+
+			if(pictureName != null && pictureName.length() > 0) {
+				picture = Picture.getPictureByName(pictureName);
+				request.setAttribute("confirmed", "true");
+			}
+			else {
+				picture = FDTtest.getNext(user);
+				if(picture == null) {
+					if(user.getAccess() == 0) {
+						Integer needToPairCount = FDTtest.getNeedToPairCount();
+					}
+				}
+			}
+
+			if(user.getAccess() == 1 && picture != null) {
+				Vector<FDTtest> pair = FDTtest.getPair(picture.getName());
+				request.setAttribute("pair",pair);
+			}
+
+			request.setAttribute("access", user.getAccess());
+			request.setAttribute("slash",slash);
+			request.setAttribute("picture",picture);
+			request.setAttribute("missingPics", Tools.needPictures());
+		}
+
+		else if(userPath.equals("/MDTtest")) {
+			String pictureName = request.getParameter("pictureName");
+			User user = (User)session.getAttribute("user");
+			Picture picture;
+
+			if(pictureName != null && pictureName.length() > 0) {
+				picture = Picture.getPictureByName(pictureName);
+				request.setAttribute("confirmed", "true");
+			}
+			else {
+				picture = MDTtest.getNext(user);
+				if(picture == null) {
+					if(user.getAccess() == 0) {
+						Integer needToPairCount = MDTtest.getNeedToPairCount();
+					}
+				}
+			}
+
+			if(user.getAccess() == 1 && picture != null) {
+				Vector<MDTtest> pair = MDTtest.getPair(picture.getName());
+				request.setAttribute("pair",pair);
+			}
+
+			request.setAttribute("access", user.getAccess());
+			request.setAttribute("slash",slash);
+			request.setAttribute("picture",picture);
+			request.setAttribute("missingPics", Tools.needPictures());
+		}
+
+		else if(userPath.equals("/OCTtest")) {
+			String pictureName = request.getParameter("pictureName");
+			User user = (User)session.getAttribute("user");
+			Picture picture;
+
+			if(pictureName != null && pictureName.length() > 0) {
+				picture = Picture.getPictureByName(pictureName);
+				request.setAttribute("confirmed", "true");
+			}
+			else {
+				picture = OCTtext.getNext(user);
+				if(picture == null) {
+					if(user.getAccess() == 0) {
+						Integer needToPairCount = OCTtest.getNeedToPairCount();
+					}
+				}
+			}
+
+			if(user.getAccess() == 1 && picture != null) {
+				Vector<OCTtest> pair = OCTtest.getPair(picture.getName());
+				request.setAttribute("pair",pair);
+			}
+
+			request.setAttribute("access", user.getAccess());
+			request.setAttribute("slash",slash);
+			request.setAttribute("picture",picture);
+			request.setAttribute("missingPics", Tools.needPictures());
+		}
+
+		else if(userPath.equals("/PhotoTest")) {
+			String pictureName = request.getParameter("pictureName");
+			User user = (User)session.getAttribute("user");
+			Picture picture;
+
+			if(pictureName != null && pictureName.length() > 0) {
+				picture = Picture.getPictureByName(pictureName);
+				request.setAttribute("confirmed", "true");
+			}
+			else {
+				picture = Photos.getNext(user);
+				if(picture == null) {
+					if(user.getAccess() == 0) {
+						Integer needToPairCount = Photos.getNeedToPairCount();
+					}
+				}
+			}
+
+			if(user.getAccess() == 1 && picture != null) {
+				Vector<Photos> pair = Photos.getPair(picture.getName());
+				request.setAttribute("pair",pair);
+			}
+
+			request.setAttribute("access", user.getAccess());
+			request.setAttribute("slash",slash);
+			request.setAttribute("picture",picture);
+			request.setAttribute("missingPics", Tools.needPictures());
+		}
+
 		else if(userPath.equals("/HVFtest")) {
 			String pictureName = request.getParameter("pictureName");
 			User user = (User)session.getAttribute("user");
