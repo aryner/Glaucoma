@@ -40,62 +40,56 @@ if(session.getAttribute("errors") != null) {
 <%
 	if(access == 2){
 %>
+<!--
 	<div class="thinColumn">
-		<a href="/HVF/OpHVFtest" class="btn menuBtn">HVF test</a>
+		<a href="/Glaucoma/OpHVFtest" class="btn menuBtn">HVF test</a>
 	</div>
+-->
 
 <%
 	}
 	if(access == 0 ){
 %>
-<!--
 	<div class="thinColumn">
 		<a href="/Glaucoma/FDTtest" class="btn menuBtn">FDT test</a>
 	</div>
--->
 <%
 	}
 	if (access == 0 || (access == 1)) {
 %>
+<!--
 	<div class="thinColumn">
-		<a href="/HVF/HVFtest" class="btn menuBtn">HVF test</a> 
+		<a href="/Glaucoma/HVFtest" class="btn menuBtn">HVF test</a> 
 	</div>
+-->
 <%
 	}
 	if (access == 0) {
 %>
-<!--
 	<div class="thinColumn">
 		<a href="/Glaucoma/MDTtest" class="btn menuBtn">MDT test</a> 
 	</div>
--->
 <%
 	}
 	if (access == 0) {
 %>
-<!--
 	<div class="thinColumn">
 		<a href="/Glaucoma/OCTtest" class="btn menuBtn">OCT test</a> 
 	</div> 
--->
 <%
 	}
 	if (access == 0) {
 %>
-<!--
 	<div class="thinColumn">
 		<a href="/Glaucoma/stereo" class="btn menuBtn">Stereo</a>
 	</div>
--->
 <%
 	}
 	if (access == 0) {
 %>
-<!--
 	<div class="thinColumn">
 		<a href="/Glaucoma/nethra" class="btn menuBtn">3Nethra</a>
 	</div>
--->
 <%
 	} 
 %>
@@ -103,13 +97,13 @@ if(session.getAttribute("errors") != null) {
 <br>
 <div class='container'>
 	<div class='column'>
-		<a href='/HVF/upload' class='btn menuBtn'>Upload Pictures</a>
+		<a href='/Glaucoma/upload' class='btn menuBtn'>Upload Pictures</a>
 	</div>
 	<div class="thinColumn">
-		<a href="/HVF/printCSV" class="btn menuBtn">Get CSV files</a>
+		<a href="/Glaucoma/printCSV" class="btn menuBtn">Get CSV files</a>
 	</div>
 	<div class="thinColumn">
-		<a href="/HVF/uploadData" class="btn menuBtn">Upload Data</a>
+		<a href="/Glaucoma/uploadData" class="btn menuBtn">Upload Data</a>
 	</div>
 </div>
 
@@ -144,6 +138,7 @@ if(session.getAttribute("errors") != null) {
 			}
 		%>
 	</div>
+	<!--
 	<%Vector<String> needsReview = (Vector)request.getAttribute("needsReview");%>
 	<div class='fifth-column'><h3>Needs review (<%out.print(needsReview.size());%>)</h3>
 		<%
@@ -198,4 +193,5 @@ if(session.getAttribute("errors") != null) {
 			}
 		%>
 	</div>
+ -->
 </div>

@@ -846,7 +846,7 @@ public class HVFtest {
 		BufferedReader fileReader = null;
 
 		try {
-			file = new File(".."+slash+"webapps"+slash+"HVF"+slash+"temp"+slash+fileName);
+			file = new File(".."+slash+"webapps"+slash+"Glaucoma"+slash+"temp"+slash+fileName);
 			reader = new FileReader(file);
 			fileReader = new BufferedReader(reader);
 

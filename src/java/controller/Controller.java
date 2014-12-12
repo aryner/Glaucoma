@@ -42,7 +42,7 @@ public class Controller extends HttpServlet {
 
 		//The user is not logged in so is redirected to the index/login page
 		if(session.getAttribute("user") == null && !userPath.equals("/register")) {
-			response.sendRedirect("/HVF/index.jsp");
+			response.sendRedirect("/Glaucoma/index.jsp");
 			return;
 		}
 
@@ -152,7 +152,7 @@ public class Controller extends HttpServlet {
 			String type = request.getParameter("type");
 			response.setContentType("application/pdf");
 			ServletOutputStream outPut = response.getOutputStream(); 
-			FileInputStream imgStream = new FileInputStream(".."+slash+"webapps"+slash+"HVF"+slash+type+slash+name);
+			FileInputStream imgStream = new FileInputStream(".."+slash+"webapps"+slash+"Glaucoma"+slash+type+slash+name);
 
 			BufferedInputStream bufferedIn = new BufferedInputStream(imgStream);
 			BufferedOutputStream bufferedOut = new BufferedOutputStream(outPut);
@@ -175,7 +175,7 @@ public class Controller extends HttpServlet {
 			String type = request.getParameter("type");
 			response.setContentType("image/jpeg");
 			ServletOutputStream outPut = response.getOutputStream(); 
-			FileInputStream imgStream = new FileInputStream(".."+slash+"webapps"+slash+"HVF"+slash+type+slash+name);
+			FileInputStream imgStream = new FileInputStream(".."+slash+"webapps"+slash+"Glaucoma"+slash+type+slash+name);
 
 			BufferedInputStream bufferedIn = new BufferedInputStream(imgStream);
 			BufferedOutputStream bufferedOut = new BufferedOutputStream(outPut);
@@ -227,12 +227,12 @@ public class Controller extends HttpServlet {
 
 			if(user.getUserName() != null) {
 				session.setAttribute("user", user); 
-				response.sendRedirect("/HVF/home"); 
+				response.sendRedirect("/Glaucoma/home"); 
 				return;
 			}
 			else { 
 				session.setAttribute("error", "Incorrect password or username");
-				response.sendRedirect("/HVF/index.jsp"); 
+				response.sendRedirect("/Glaucoma/index.jsp"); 
 				return;
 			} 
 		}
@@ -243,14 +243,14 @@ public class Controller extends HttpServlet {
 			if(errors.size()>0) {
 				session.setAttribute("errors", errors);
 			}
-			response.sendRedirect("/HVF/home"); 
+			response.sendRedirect("/Glaucoma/home"); 
 			return;
 		}
 
 		else if(userPath.equals("/dataUpload")) {
 			Vector<String> errors = Tools.readCSVs(request);
 
-			response.sendRedirect("/HVF/home"); 
+			response.sendRedirect("/Glaucoma/home"); 
 			return;
 		}
 
@@ -259,11 +259,11 @@ public class Controller extends HttpServlet {
 			int returnType = HVFtest.assignHVF(request, user);
 
 			if(returnType == 2) {
-				response.sendRedirect("/HVF/home"); 
+				response.sendRedirect("/Glaucoma/home"); 
 				return;
 			}
 		
-			response.sendRedirect("/HVF/HVFtest"); 
+			response.sendRedirect("/Glaucoma/HVFtest"); 
 			return;
 		}
 
@@ -272,11 +272,11 @@ public class Controller extends HttpServlet {
 			boolean firstReview = HVFtest.opthAssignHVF(request, user);
 
 			if(!firstReview) {
-				response.sendRedirect("/HVF/home"); 
+				response.sendRedirect("/Glaucoma/home"); 
 				return;
 			}
 
-			response.sendRedirect("/HVF/OpHVFtest"); 
+			response.sendRedirect("/Glaucoma/OpHVFtest"); 
 			return;
 		}
 
@@ -284,14 +284,14 @@ public class Controller extends HttpServlet {
 
 //			Tools.createCSV(Picture.getCSVLines(),"hvf_pictures");
 			Tools.createCSV(HVFtest.getCSVLines(),"hvf_grades");
-			response.sendRedirect("/HVF/home"); 
+			response.sendRedirect("/Glaucoma/home"); 
 			return;
 		}
 
 		else if(userPath.equals("/logout")) { 
 			session.removeAttribute("user");
 			session.removeAttribute("categoryID");
-			response.sendRedirect("/HVF/index.jsp"); 
+			response.sendRedirect("/Glaucoma/index.jsp"); 
 			return;
 		}
 
@@ -306,18 +306,18 @@ public class Controller extends HttpServlet {
 
 				if(user == null) {
 					session.setAttribute("error", "That user name has been taken");
-					response.sendRedirect("/HVF/register");
+					response.sendRedirect("/Glaucoma/register");
 					return;
 				}
 				else { 
 					session.setAttribute("user", user); 
-					response.sendRedirect("/HVF/home"); 
+					response.sendRedirect("/Glaucoma/home"); 
 					return;
 				} 
 			}
 			else {
 				session.setAttribute("error", "Passwords do not match");
-				response.sendRedirect("/HVF/register"); 
+				response.sendRedirect("/Glaucoma/register"); 
 				return;
 			}
 		}

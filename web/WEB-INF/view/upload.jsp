@@ -10,14 +10,14 @@
 <form action='uploadPictures' method="POST" enctype="multipart/form-data">
 	Choose which section to add to
 	<select name="type" class="btn bigBtn"> 
-		<option value="HVF">HVF</option>
-		<option value="grading">Grading Chart</option>
-		<option value="severity">Glaucoma Severity Chart</option>
-<!--		<option value="FDT">FDT</option>
+<!--		<option value="HVF">HVF</option> -->
+<!--		<option value="grading">Grading Chart</option> -->
+<!--		<option value="severity">Glaucoma Severity Chart</option> -->
+		<option value="FDT">FDT</option>
 		<option value="OCT">OCT</option>
 		<option value="stereo">Stereo</option>
 		<option value="3Nethra">3Nethra</option> 
--->
+
 	</select>
 	<p>Select which pictures to upload</p>
 	<input type="file" multiple="multiple" name="pictures">
@@ -26,6 +26,7 @@
 
 <div class="container">
 	<h3>Missing PDFs</h3>
+	<!--
 	<div class="fifth-column">
 		<h4>HVF</h4>
 <%
@@ -36,4 +37,5 @@
 		}
 %>
 	</div>
+ 	-->
 </div>
