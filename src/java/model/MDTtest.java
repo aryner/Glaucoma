@@ -6,6 +6,9 @@
 
 package model;
 
+import utilities.*;
+import java.util.*;
+
 /**
  *
  * @author aryner
@@ -48,6 +51,64 @@ public class MDTtest {
 		this.ll_one = ll_one;
 		this.rl_one = rl_one;
 		this.abnormal = abnormal;
+	}
+
+	public static Picture getNext(User user) {
+		Picture result = null;
+		String query = "";
+		if (user.getAccess() == 0) {
+			query = "SELECT * FROM picture WHERE name NOT IN (SELECT "+
+				" pictureName FROM MDTtest WHERE userID="+user.getID()+") AND type='MDT'"+
+				" AND name NOT IN (SELECT pictureName FROM MDTtest GROUP BY pictureName HAVING COUNT(*)>=2)";
+		}
+		else if (user.getAccess() == 1) {
+			query = "SELECT * FROM picture WHERE name IN (SELECT pictureName FROM "+
+				"MDTtest WHERE CONFIRMED=1) AND type='MDT'";
+		}
+
+		Vector<Picture> pictures = SQLCommands.queryPictures(query); 
+		if(pictures.size() > 0) {
+			Random rand = new Random(System.currentTimeMillis());
+			result = pictures.get(rand.nextInt(pictures.size()));
+
+			if(user.getAccess() == 0) {
+				result = pictures.get(0);
+			}
+		}
+
+		return result;
+	}
+
+	public static int getNeedToPairCount() {
+		String query = "SELECT * FROM MDTtest GROUP BY pictureName HAVING COUNT(*)=1";
+		return SQLCommands.getCount(query);
+	}
+
+	public static Vector<MDTtest> getPair(String picName) {
+		String query = "SELECT * FROM MDTtest WHERE pictureName='"+picName+"'";	
+		return SQLCommands.queryMDTtest(query);
+	}
+
+	public static ArrayList<String> needPictures(){
+		ArrayList<String> needPics = new ArrayList<String>();
+		String query = "SELECT * FROM MDTtest WHERE pictureName NOT IN (SELECT name FROM picture)";
+		Vector<FDTtest> mdt = SQLCommands.queryFDTtest(query);
+
+		for(int i=0; i<mdt.size(); i++) {
+			if(!needPics.contains(mdt.get(i).getPictureName())) {
+				needPics.add(mdt.get(i).getPictureName());
+			}
+		}
+
+		String ext;
+		for(int i=0; i<needPics.size(); i++) {
+			ext = needPics.get(i).substring(needPics.get(i).indexOf(".")+1, needPics.get(i).length());
+			if(ext.equals("pdf")) {
+				needPics.set(i, "MDT: "+needPics.get(i).substring(0,needPics.get(i).indexOf("."))+".jpg");
+			}
+		}
+
+		return needPics;
 	}
 
 	/**

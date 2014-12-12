@@ -6,6 +6,9 @@
 
 package model;
 
+import utilities.*;
+import java.util.*;
+
 /**
  *
  * @author aryner
@@ -89,6 +92,64 @@ public class FDTtest {
 		this.rl_one = rl_one;
 		this.rl_five = rl_five;
 		this.abnormal = abnormal;
+	}
+
+	public static Picture getNext(User user) {
+		Picture result = null;
+		String query = "";
+		if (user.getAccess() == 0) {
+			query = "SELECT * FROM picture WHERE name NOT IN (SELECT "+
+				" pictureName FROM FDTtest WHERE userID="+user.getID()+") AND type='FDT'"+
+				" AND name NOT IN (SELECT pictureName FROM FDTtest GROUP BY pictureName HAVING COUNT(*)>=2)";
+		}
+		else if (user.getAccess() == 1) {
+			query = "SELECT * FROM picture WHERE name IN (SELECT pictureName FROM "+
+				"FDTtest WHERE CONFIRMED=1) AND type='FDT'";
+		}
+
+		Vector<Picture> pictures = SQLCommands.queryPictures(query); 
+		if(pictures.size() > 0) {
+			Random rand = new Random(System.currentTimeMillis());
+			result = pictures.get(rand.nextInt(pictures.size()));
+
+			if(user.getAccess() == 0) {
+				result = pictures.get(0);
+			}
+		}
+
+		return result;
+	}
+
+	public static int getNeedToPairCount() {
+		String query = "SELECT * FROM FDTtest GROUP BY pictureName HAVING COUNT(*)=1";
+		return SQLCommands.getCount(query);
+	}
+
+	public static Vector<FDTtest> getPair(String picName) {
+		String query = "SELECT * FROM FDTtest WHERE pictureName='"+picName+"'";	
+		return SQLCommands.queryFDTtest(query);
+	}
+
+	public static ArrayList<String> needPictures(){
+		ArrayList<String> needPics = new ArrayList<String>();
+		String query = "SELECT * FROM FDTtest WHERE pictureName NOT IN (SELECT name FROM picture)";
+		Vector<FDTtest> fdt = SQLCommands.queryFDTtest(query);
+
+		for(int i=0; i<fdt.size(); i++) {
+			if(!needPics.contains(fdt.get(i).getPictureName())) {
+				needPics.add(fdt.get(i).getPictureName());
+			}
+		}
+
+		String ext;
+		for(int i=0; i<needPics.size(); i++) {
+			ext = needPics.get(i).substring(needPics.get(i).indexOf(".")+1, needPics.get(i).length());
+			if(ext.equals("pdf")) {
+				needPics.set(i, "FDT: "+needPics.get(i).substring(0,needPics.get(i).indexOf("."))+".jpg");
+			}
+		}
+
+		return needPics;
 	}
 
 	/**

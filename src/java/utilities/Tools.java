@@ -153,4 +153,11 @@ public class Tools {
 	
 		return errors;
 	}
+
+	public static ArrayList<String> needPictures(){
+		ArrayList<String> result = FDTtest.needPictures();
+		result.addAll(MDTtest.needPictures());
+		result.addAll(OCTtest.needPictures());
+		return result;
+	}
 }

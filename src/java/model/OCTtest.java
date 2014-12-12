@@ -6,6 +6,9 @@
 
 package model;
 
+import utilities.*;
+import java.util.*;
+
 /**
  *
  * @author aryner
@@ -98,6 +101,64 @@ public class OCTtest {
 		this.iavgcol = iavgcol;
 		this.atnum = atnum;
 		this.atcol = atcol;
+	}
+
+	public static Picture getNext(User user) {
+		Picture result = null;
+		String query = "";
+		if (user.getAccess() == 0) {
+			query = "SELECT * FROM picture WHERE name NOT IN (SELECT "+
+				" pictureName FROM OCTtest WHERE userID="+user.getID()+") AND type='OCT'"+
+				" AND name NOT IN (SELECT pictureName FROM OCTtest GROUP BY pictureName HAVING COUNT(*)>=2)";
+		}
+		else if (user.getAccess() == 1) {
+			query = "SELECT * FROM picture WHERE name IN (SELECT pictureName FROM "+
+				"OCTtest WHERE CONFIRMED=1) AND type='OCT'";
+		}
+
+		Vector<Picture> pictures = SQLCommands.queryPictures(query); 
+		if(pictures.size() > 0) {
+			Random rand = new Random(System.currentTimeMillis());
+			result = pictures.get(rand.nextInt(pictures.size()));
+
+			if(user.getAccess() == 0) {
+				result = pictures.get(0);
+			}
+		}
+
+		return result;
+	}
+
+	public static int getNeedToPairCount() {
+		String query = "SELECT * FROM OCTtest GROUP BY pictureName HAVING COUNT(*)=1";
+		return SQLCommands.getCount(query);
+	}
+
+	public static Vector<OCTtest> getPair(String picName) {
+		String query = "SELECT * FROM OCTtest WHERE pictureName='"+picName+"'";	
+		return SQLCommands.queryOCTtest(query);
+	}
+
+	public static ArrayList<String> needPictures(){
+		ArrayList<String> needPics = new ArrayList<String>();
+		String query = "SELECT * FROM OCTtest WHERE pictureName NOT IN (SELECT name FROM picture)";
+		Vector<FDTtest> oct = SQLCommands.queryFDTtest(query);
+
+		for(int i=0; i<oct.size(); i++) {
+			if(!needPics.contains(oct.get(i).getPictureName())) {
+				needPics.add(oct.get(i).getPictureName());
+			}
+		}
+
+		String ext;
+		for(int i=0; i<needPics.size(); i++) {
+			ext = needPics.get(i).substring(needPics.get(i).indexOf(".")+1, needPics.get(i).length());
+			if(ext.equals("pdf")) {
+				needPics.set(i, "OCT: "+needPics.get(i).substring(0,needPics.get(i).indexOf("."))+".jpg");
+			}
+		}
+
+		return needPics;
 	}
 
 	/**
