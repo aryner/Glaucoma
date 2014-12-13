@@ -37,7 +37,7 @@ public class FDTtest {
 	private int mdsign;
 	private String mddb;
 	private String mdp;
-	private int psdisgn;
+	private int psdsign;
 	private String psdb;
 	private String psdp;
 	private String lu_one;
@@ -80,7 +80,7 @@ public class FDTtest {
 		this.mdsign = mdsign;
 		this.mddb = mddb;
 		this.mdp = mdp;
-		this.psdisgn = psdisgn;
+		this.psdsign = psdisgn;
 		this.psdb = psdb;
 		this.psdp = psdp;
 		this.lu_one = lu_one;
@@ -449,15 +449,15 @@ public class FDTtest {
 	/**
 	 * @return the psdisgn
 	 */
-	public int getPsdisgn() {
-		return psdisgn;
+	public int getPsdsign() {
+		return psdsign;
 	}
 
 	/**
-	 * @param psdisgn the psdisgn to set
+	 * @param psdsign the psdisgn to set
 	 */
-	public void setPsdisgn(int psdisgn) {
-		this.psdisgn = psdisgn;
+	public void setPsdsign(int psdsign) {
+		this.psdsign = psdsign;
 	}
 
 	/**
