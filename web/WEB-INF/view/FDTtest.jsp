@@ -231,7 +231,7 @@ if(pic == null) {
 <span id='speed'>Test Speed</span><br>
 <input type="radio" name="speed" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>Normal<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
 <input type="radio" name="speed" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Slow<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="speed" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>><span id='targ_oth'>Other : </span>
+<input type="radio" name="speed" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>><span id='speed_oth'>Other : </span>
 <%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%>
 <%
 	s1 = "";
@@ -565,3 +565,4 @@ if(pic == null) {
 %>
 
 <script src="javascripts/jquery-1.11.1.min.js" type="text/javascript"></script>
+<script src="javascripts/FDTChecks.js" type="text/javascript"></script>
