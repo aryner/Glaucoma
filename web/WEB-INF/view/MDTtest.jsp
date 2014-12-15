@@ -68,7 +68,7 @@ if(pic == null) {
 		}
 	}
 %>
-<span id="Late">Late Responses (%): </span>
+<span id="late">Late Responses (%): </span>
 <input type="text" name="late" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 <br><br>
@@ -256,3 +256,4 @@ if(pic == null) {
 %>
 
 <script src="javascripts/jquery-1.11.1.min.js" type="text/javascript"></script>
+<script src="javascripts/MDTChecks.js" type="text/javascript"></script>
