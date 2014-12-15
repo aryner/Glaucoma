@@ -96,6 +96,7 @@ public class Controller extends HttpServlet {
 				if(picture == null) {
 					if(user.getAccess() == 0) {
 						Integer needToPairCount = FDTtest.getNeedToPairCount();
+						request.setAttribute("needToPairCount", needToPairCount);
 					}
 				}
 			}
@@ -125,6 +126,7 @@ public class Controller extends HttpServlet {
 				if(picture == null) {
 					if(user.getAccess() == 0) {
 						Integer needToPairCount = MDTtest.getNeedToPairCount();
+						request.setAttribute("needToPairCount", needToPairCount);
 					}
 				}
 			}
@@ -154,6 +156,7 @@ public class Controller extends HttpServlet {
 				if(picture == null) {
 					if(user.getAccess() == 0) {
 						Integer needToPairCount = OCTtest.getNeedToPairCount();
+						request.setAttribute("needToPairCount", needToPairCount);
 					}
 				}
 			}
