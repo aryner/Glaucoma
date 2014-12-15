@@ -95,7 +95,7 @@ if(pic == null) {
 <input type="radio" name="type" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>RNFL thickness(3.4)<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
 <input type="radio" name="type" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>RNFL thickness(2.27 x disk)<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
 <input type="radio" name="type" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>RNFL map<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="type" value="5"<%if(a && !diff && v1==5){out.print(" checked='true'");}%>><span id='targ_oth'>Other : </span>
+<input type="radio" name="type" value="5"<%if(a && !diff && v1==5){out.print(" checked='true'");}%>><span id='type_oth'>Other : </span>
 <%if((a&&diff)&&((v1==5)||(v2==5))){%><span class='highlight'>***</span><%}%>
 <%
 	s1 = "";
@@ -654,6 +654,49 @@ if(pic == null) {
 	s1 = "";
 	s2 = "";
 	if(a) {
+		s1 = OCT.get(0).getSavgnum()+"";
+		s2 = OCT.get(1).getSavgnum()+"";
+		if(s1.equals(s2)) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+<span id="savgnum">Savg - Number: </span>
+<input type="text" name="savgnum" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<br>
+
+<%
+	v1 = -1;
+	v2 = -1;
+	if(a) {
+		v1 = OCT.get(0).getSavgcol();
+		v2 = OCT.get(1).getSavgcol();
+		if(v1 == v2) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+		if(diff) {
+
+		}
+	}
+%>
+<span id='savgcol'>Savg - Color: </span><br>
+<input type="radio" name="savgcol" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="savgcol" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="savgcol" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="savgcol" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%>
+<br><br>
+
+<%
+	s1 = "";
+	s2 = "";
+	if(a) {
 		s1 = OCT.get(0).getIavgnum()+"";
 		s2 = OCT.get(1).getIavgnum()+"";
 		if(s1.equals(s2)) {
@@ -745,3 +788,4 @@ if(pic == null) {
 %>
 
 <script src="javascripts/jquery-1.11.1.min.js" type="text/javascript"></script>
+<script src="javascripts/OCTChecks.js" type="text/javascript"></script>
