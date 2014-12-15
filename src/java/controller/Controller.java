@@ -172,7 +172,63 @@ public class Controller extends HttpServlet {
 			request.setAttribute("missingPics", Tools.needPictures());
 		}
 
-		else if(userPath.equals("/PhotoTest")) {
+		else if(userPath.equals("/stereo")) {
+			String pictureName = request.getParameter("pictureName");
+			User user = (User)session.getAttribute("user");
+			Picture picture;
+
+			if(pictureName != null && pictureName.length() > 0) {
+				picture = Picture.getPictureByName(pictureName);
+				request.setAttribute("confirmed", "true");
+			}
+			else {
+				picture = Photos.getNextStereo(user);
+				if(picture == null) {
+					if(user.getAccess() == 0) {
+						Integer needToPairCount = Photos.getNeedToPairCountStereo();
+						request.setAttribute("needToPairCount", needToPairCount);
+					}
+				}
+			}
+
+			if(user.getAccess() == 1 && picture != null) {
+				Vector<Photos> pair = Photos.getPairStereo(picture.getName());
+				request.setAttribute("pair",pair);
+			}
+
+			request.setAttribute("access", user.getAccess());
+			request.setAttribute("slash",slash);
+			request.setAttribute("picture",picture);
+			request.setAttribute("missingPics", Tools.needPictures());
+		}
+		else if(userPath.equals("/nethra")) {
+			String pictureName = request.getParameter("pictureName");
+			User user = (User)session.getAttribute("user");
+			Picture picture;
+
+			if(pictureName != null && pictureName.length() > 0) {
+				picture = Picture.getPictureByName(pictureName);
+				request.setAttribute("confirmed", "true");
+			}
+			else {
+				picture = Photos.getNextNethra(user);
+				if(picture == null) {
+					if(user.getAccess() == 0) {
+						Integer needToPairCount = Photos.getNeedToPairCountNethra();
+						request.setAttribute("needToPairCount", needToPairCount);
+					}
+				}
+			}
+
+			if(user.getAccess() == 1 && picture != null) {
+				Vector<Photos> pair = Photos.getPairNethra(picture.getName());
+				request.setAttribute("pair",pair);
+			}
+
+			request.setAttribute("access", user.getAccess());
+			request.setAttribute("slash",slash);
+			request.setAttribute("picture",picture);
+			request.setAttribute("missingPics", Tools.needPictures());
 		}
 
 		else if(userPath.equals("/HVFtest")) {

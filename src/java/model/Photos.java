@@ -6,6 +6,9 @@
 
 package model;
 
+import java.util.*;
+import utilities.*;
+
 /**
  *
  * @author aryner
@@ -32,6 +35,8 @@ public class Photos {
 	private String rnfl_hrs_two;
 
 	private static final String slash = System.getProperty("file.separator");
+	private static final int STEREO = 1;
+	private static final int NETHRA = 2;
 
 	public Photos(int id, int confirmed, String pictureName, int userID, int type, int qual,
 		      String cdr, int notch, String notch_hrs_one, String notch_hrs_two, int erosion,
@@ -57,6 +62,98 @@ public class Photos {
 		this.rnfl = rnfl;
 		this.rnfl_hrs_one = rnfl_hrs_one;
 		this.rnfl_hrs_two = rnfl_hrs_two;
+	}
+
+	public static Picture getNextStereo(User user) {
+		Picture result = null;
+		String query = "";
+		if (user.getAccess() == 0) {
+			query = "SELECT * FROM picture WHERE name NOT IN (SELECT "+
+				" pictureName FROM Photos WHERE userID="+user.getID()+" AND type="+STEREO+") AND type='stereo'"+
+				" AND name NOT IN (SELECT pictureName FROM Photos GROUP BY pictureName HAVING COUNT(*)>=2)";
+		}
+		else if (user.getAccess() == 1) {
+			query = "SELECT * FROM picture WHERE name IN (SELECT pictureName FROM "+
+				"Photos WHERE CONFIRMED=1 AND type="+STEREO+") AND type='stereo'";
+		}
+
+		Vector<Picture> pictures = SQLCommands.queryPictures(query); 
+		if(pictures.size() > 0) {
+			Random rand = new Random(System.currentTimeMillis());
+			result = pictures.get(rand.nextInt(pictures.size()));
+
+			if(user.getAccess() == 0) {
+				result = pictures.get(0);
+			}
+		}
+
+		return result;
+	}
+
+	public static Picture getNextNethra(User user) {
+		Picture result = null;
+		String query = "";
+		if (user.getAccess() == 0) {
+			query = "SELECT * FROM picture WHERE name NOT IN (SELECT "+
+				" pictureName FROM Photos WHERE userID="+user.getID()+" AND type="+NETHRA+") AND type='3Nethra'"+
+				" AND name NOT IN (SELECT pictureName FROM Photos GROUP BY pictureName HAVING COUNT(*)>=2)";
+		}
+		else if (user.getAccess() == 1) {
+			query = "SELECT * FROM picture WHERE name IN (SELECT pictureName FROM "+
+				"Photos WHERE CONFIRMED=1 AND type="+NETHRA+") AND type='3Nethra'";
+		}
+
+		Vector<Picture> pictures = SQLCommands.queryPictures(query); 
+		if(pictures.size() > 0) {
+			Random rand = new Random(System.currentTimeMillis());
+			result = pictures.get(rand.nextInt(pictures.size()));
+
+			if(user.getAccess() == 0) {
+				result = pictures.get(0);
+			}
+		}
+
+		return result;
+	}
+
+	public static int getNeedToPairCountStereo() {
+		String query = "SELECT * FROM Photos WHERE type="+STEREO+" GROUP BY pictureName HAVING COUNT(*)=1";
+		return SQLCommands.getCount(query);
+	}
+	public static int getNeedToPairCountNethra() {
+		String query = "SELECT * FROM Photos WHERE type="+NETHRA+" GROUP BY pictureName HAVING COUNT(*)=1";
+		return SQLCommands.getCount(query);
+	}
+
+	public static Vector<Photos> getPairStereo(String picName) {
+		String query = "SELECT * FROM Photos WHERE pictureName='"+picName+"' AND type="+STEREO;	
+		return SQLCommands.queryPhotos(query);
+	}
+	public static Vector<Photos> getPairNethra(String picName) {
+		String query = "SELECT * FROM Photos WHERE pictureName='"+picName+"' AND type="+NETHRA;	
+		return SQLCommands.queryPhotos(query);
+	}
+
+	public static ArrayList<String> needPictures(){
+		ArrayList<String> needPics = new ArrayList<String>();
+		String query = "SELECT * FROM Photos WHERE pictureName NOT IN (SELECT name FROM picture)";
+		Vector<Photos> photos = SQLCommands.queryPhotos(query);
+
+		for(int i=0; i<photos.size(); i++) {
+			if(!needPics.contains(photos.get(i).getPictureName())) {
+				needPics.add(photos.get(i).getPictureName());
+			}
+		}
+
+		String ext;
+		for(int i=0; i<needPics.size(); i++) {
+			ext = needPics.get(i).substring(needPics.get(i).indexOf(".")+1, needPics.get(i).length());
+			if(ext.equals("pdf")) {
+				needPics.set(i, "Photos: "+needPics.get(i).substring(0,needPics.get(i).indexOf("."))+".jpg");
+			}
+		}
+
+		return needPics;
 	}
 
 	/**
