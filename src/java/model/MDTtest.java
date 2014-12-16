@@ -8,6 +8,7 @@ package model;
 
 import utilities.*;
 import java.util.*;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -31,6 +32,22 @@ public class MDTtest {
 	private int abnormal;
 
 	private static final String slash = System.getProperty("file.separator");
+
+	public MDTtest(String npictureName) {
+		pictureName = npictureName;
+	}
+
+	public MDTtest(String npictureName, int nuserID) {
+		String query = "INSERT INTO MDTtest (pictureName, userID) VALUES ('"+npictureName+"', '"+nuserID+"')";
+		SQLCommands.update(query);
+
+		query = "SELECT * FROM MDTtest WHERE pictureName='"+npictureName+"' AND userID="+nuserID;
+		Vector<Integer> data = SQLCommands.queryNewGrade(query);
+
+		pictureName = npictureName;
+		userID = data.get(0);
+		id = data.get(1);	
+	}
 
 	public MDTtest(int id, int confirmed, String pictureName, int userID, String late, String fp,
 		       int lens, String lens_y, String dur, String ptd, String lu_one, String ru_one,
@@ -109,6 +126,22 @@ public class MDTtest {
 		}
 
 		return needPics;
+	}
+
+	public static int assignMDT(HttpServletRequest request, User user) {
+		int result = 0;
+
+		int uID = user.getID();
+		String picName = request.getParameter("pictureName");
+		MDTtest mdt = null;
+		if(user.getAccess() == 0) {
+			mdt = new MDTtest(picName, uID);
+		}
+		else if (user.getAccess() == 1) {
+			mdt = new MDTtest(picName);
+		}
+
+		return result;
 	}
 
 	/**

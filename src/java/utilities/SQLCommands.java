@@ -42,11 +42,11 @@ public class SQLCommands {
 					   resultSet.getInt("fdt_fp_num"),resultSet.getInt("fdt_fp_den"),resultSet.getInt("fdt_test"),resultSet.getString("fdt_test_oth"),
 					   resultSet.getInt("fdt_speed"),resultSet.getString("fdt_speed_oth"),resultSet.getString("fdt_pupil"),
 					   resultSet.getString("fdt_va_num"),resultSet.getString("fdt_va_den"),resultSet.getInt("fdt_mdsign"),
-					   resultSet.getString("fdt_mddb"),resultSet.getString("fdt_mdp"),resultSet.getInt("fdt_psdisgn"),
+					   resultSet.getString("fdt_mddb"),resultSet.getString("fdt_mdp"),resultSet.getInt("fdt_psdsign"),
 					   resultSet.getString("fdt_psdb"),resultSet.getString("fdt_psdp"),resultSet.getString("fdt_lu_one"),
 					   resultSet.getString("fdt_lu_five"),resultSet.getString("fdt_ru_one"),resultSet.getString("fdt_ru_five"),
 					   resultSet.getString("fdt_ll_one"),resultSet.getString("fdt_ll_five"),resultSet.getString("fdt_rl_one"),
-					   resultSet.getString("fdt_rl_five"),resultSet.getInt("fdt_abnomral")));
+					   resultSet.getString("fdt_rl_five"),resultSet.getInt("fdt_abnormal")));
 			}
 		} catch (SQLException ex) {
 			Logger.getLogger(SQLCommands.class.getName()).log(Level.SEVERE,null,ex); 

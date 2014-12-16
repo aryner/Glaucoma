@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author aryner
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload", "/uploadPictures", "/img", "/pdf", "/assignHVF", "/OpHVFtest", "/OpReviewHVF", "/printCSV", "/printCSVs", "/uploadData", "/dataUpload"})
+@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload", "/uploadPictures", "/img", "/pdf", "/assignHVF", "/OpHVFtest", "/OpReviewHVF", "/printCSV", "/printCSVs", "/uploadData", "/dataUpload", "/assignFDT", "/assignMDT", "/assignOCT", "/assign3Nethra", "/assignStereo"})
 public class Controller extends HttpServlet {
 	private final String slash = System.getProperty("file.separator");
 	/**
@@ -416,6 +416,70 @@ public class Controller extends HttpServlet {
 			return;
 		}
 
+		else if(userPath.equals("/assignFDT")) {
+			User user = (User)session.getAttribute("user");
+			int returnType = FDTtest.assignFDT(request, user);
+
+			if(returnType == 2) {
+				response.sendRedirect("/Glaucoma/home"); 
+				return;
+			}
+		
+			response.sendRedirect("/Glaucoma/FDTtest"); 
+			return;
+		}
+
+		else if(userPath.equals("/assignMDT")) {
+			User user = (User)session.getAttribute("user");
+			int returnType = MDTtest.assignMDT(request, user);
+
+			if(returnType == 2) {
+				response.sendRedirect("/Glaucoma/home"); 
+				return;
+			}
+		
+			response.sendRedirect("/Glaucoma/MDTtest"); 
+			return;
+		}
+
+		else if(userPath.equals("/assignOCT")) {
+			User user = (User)session.getAttribute("user");
+			int returnType = OCTtest.assignOCT(request, user);
+
+			if(returnType == 2) {
+				response.sendRedirect("/Glaucoma/home"); 
+				return;
+			}
+		
+			response.sendRedirect("/Glaucoma/OCTtest"); 
+			return;
+		}
+
+		else if(userPath.equals("/assignStereo")) {
+			User user = (User)session.getAttribute("user");
+			int returnType = Photos.assignPhoto(request, user, Photos.STEREO);
+
+			if(returnType == 2) {
+				response.sendRedirect("/Glaucoma/home"); 
+				return;
+			}
+		
+			response.sendRedirect("/Glaucoma/stereo"); 
+			return;
+		}
+
+		else if(userPath.equals("/assign3Nethra")) {
+			User user = (User)session.getAttribute("user");
+			int returnType = Photos.assignPhoto(request, user, Photos.NETHRA);
+
+			if(returnType == 2) {
+				response.sendRedirect("/Glaucoma/home"); 
+				return;
+			}
+		
+			response.sendRedirect("/Glaucoma/nethra"); 
+			return;
+		}
 		else if(userPath.equals("/OpReviewHVF")) {
 			User user = (User)session.getAttribute("user");
 			boolean firstReview = HVFtest.opthAssignHVF(request, user);

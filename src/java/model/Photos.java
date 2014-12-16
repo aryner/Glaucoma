@@ -8,6 +8,7 @@ package model;
 
 import java.util.*;
 import utilities.*;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -35,8 +36,24 @@ public class Photos {
 	private String rnfl_hrs_two;
 
 	private static final String slash = System.getProperty("file.separator");
-	private static final int STEREO = 1;
-	private static final int NETHRA = 2;
+	public static final int STEREO = 1;
+	public static final int NETHRA = 2;
+
+	public Photos(String npictureName) {
+		pictureName = npictureName;
+	}
+
+	public Photos(String npictureName, int nuserID) {
+		String query = "INSERT INTO Photos (pictureName, userID) VALUES ('"+npictureName+"', '"+nuserID+"')";
+		SQLCommands.update(query);
+
+		query = "SELECT * FROM Photos WHERE pictureName='"+npictureName+"' AND userID="+nuserID;
+		Vector<Integer> data = SQLCommands.queryNewGrade(query);
+
+		pictureName = npictureName;
+		userID = data.get(0);
+		id = data.get(1);	
+	}
 
 	public Photos(int id, int confirmed, String pictureName, int userID, int type, int qual,
 		      String cdr, int notch, String notch_hrs_one, String notch_hrs_two, int erosion,
@@ -154,6 +171,22 @@ public class Photos {
 		}
 
 		return needPics;
+	}
+
+	public static int assignPhoto(HttpServletRequest request, User user, int type) {
+		int result = 0;
+
+		int uID = user.getID();
+		String picName = request.getParameter("pictureName");
+		Photos photo = null;
+		if(user.getAccess() == 0) {
+			photo = new Photos(picName, uID);
+		}
+		else if (user.getAccess() == 1) {
+			photo = new Photos(picName);
+		}
+
+		return result;
 	}
 
 	/**

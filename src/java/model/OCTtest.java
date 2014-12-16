@@ -8,6 +8,7 @@ package model;
 
 import utilities.*;
 import java.util.*;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -54,6 +55,22 @@ public class OCTtest {
 	private int atcol;
 
 	private static final String slash = System.getProperty("file.separator");
+
+	public OCTtest(String npictureName) {
+		pictureName = npictureName;
+	}
+
+	public OCTtest(String npictureName, int nuserID) {
+		String query = "INSERT INTO OCTtest (pictureName, userID) VALUES ('"+npictureName+"', '"+nuserID+"')";
+		SQLCommands.update(query);
+
+		query = "SELECT * FROM OCTtest WHERE pictureName='"+npictureName+"' AND userID="+nuserID;
+		Vector<Integer> data = SQLCommands.queryNewGrade(query);
+
+		pictureName = npictureName;
+		userID = data.get(0);
+		id = data.get(1);	
+	}
 
 	public OCTtest(int id, int confirmed, String pictureName, int userID, String length,
 		       int type, String type_oth, String snum, int scol, String nnum, int ncol,
@@ -159,6 +176,22 @@ public class OCTtest {
 		}
 
 		return needPics;
+	}
+
+	public static int assignOCT(HttpServletRequest request, User user) {
+		int result = 0;
+
+		int uID = user.getID();
+		String picName = request.getParameter("pictureName");
+		OCTtest oct = null;
+		if(user.getAccess() == 0) {
+			oct = new OCTtest(picName, uID);
+		}
+		else if (user.getAccess() == 1) {
+			oct = new OCTtest(picName);
+		}
+
+		return result;
 	}
 
 	/**
