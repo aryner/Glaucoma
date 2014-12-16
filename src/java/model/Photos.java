@@ -230,17 +230,17 @@ public class Photos {
 	public static Vector<String> getNeedsAdjudication() {
 		Vector<String> result = new Vector<String>();
 		String query = "SELECT DISTINCT pictureName FROM Photos WHERE confirmed='1' AND type='"+STEREO+"'";
-		Vector<Photos> photo = SQLCommands.queryPhotos(query);
+		Vector<String> photo = SQLCommands.queryNames(query);
 
 		for(int i=0; i<photo.size(); i++) {
-			result.add("Stereo - " + photo.get(i).getPictureName());
+			result.add("Stereo - " + photo.get(i));
 		}
 
 		query = "SELECT DISTINCT pictureName FROM Photos WHERE confirmed='1' AND type='"+NETHRA+"'";
-		photo = SQLCommands.queryPhotos(query);
+		photo = SQLCommands.queryNames(query);
 
 		for(int i=0; i<photo.size(); i++) {
-			result.add("3Nethra - " + photo.get(i).getPictureName());
+			result.add("3Nethra - " + photo.get(i));
 		}
 
 		return result;
@@ -248,18 +248,18 @@ public class Photos {
 
 	public static Vector<String> getAdjudicated() {
 		Vector<String> result = new Vector<String>();
-		String query = "SELECT DISTINT pictureName FROM Photos WHERE confirmed='2' AND type='"+STEREO+"'";
-		Vector<Photos> photos = SQLCommands.queryPhotos(query);
+		String query = "SELECT DISTINCT pictureName FROM Photos WHERE confirmed='2' AND type='"+STEREO+"'";
+		Vector<String> photos = SQLCommands.queryNames(query);
 
 		for(int i=0; i<photos.size(); i++) {
-			result.add("Stereo - " + photos.get(i).getPictureName());
+			result.add("Stereo - " + photos.get(i));
 		}
 
-		query = "SELECT DISTINT pictureName FROM Photos WHERE confirmed='2' AND type='"+NETHRA+"'";
-		photos = SQLCommands.queryPhotos(query);
+		query = "SELECT DISTINCT pictureName FROM Photos WHERE confirmed='2' AND type='"+NETHRA+"'";
+		photos = SQLCommands.queryNames(query);
 
 		for(int i=0; i<photos.size(); i++) {
-			result.add("3Nethra - " + photos.get(i).getPictureName());
+			result.add("3Nethra - " + photos.get(i));
 		}
 
 		return result;

@@ -19,6 +19,37 @@ import model.*;
  * @author aryner
  */
 public class SQLCommands {
+	public static Vector<String> queryNames(String query){
+		Vector<String> result = new Vector<String>();
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet resultSet = null;
+
+		try{
+			InitialContext initialContext = new InitialContext();
+			Context context = (Context)initialContext.lookup("java:comp/env");
+			DataSource dataSource = (DataSource)context.lookup("hvf_grader");
+			con = dataSource.getConnection();
+
+			stmt = con.createStatement();
+
+			resultSet = stmt.executeQuery(query); 
+
+			while(resultSet.next()) {
+				result.add(resultSet.getString("pictureName"));
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(SQLCommands.class.getName()).log(Level.SEVERE,null,ex); 
+		} catch (Exception e) { e.printStackTrace(); } 
+		finally { 
+			if(resultSet != null) try {resultSet.close();} catch(SQLException ignore) {}
+			if(con != null) try {con.close();} catch(SQLException ignore) {}
+			if(stmt != null) try {stmt.close();} catch(SQLException ignore) {}
+		}
+
+		return result;
+	}
+
 	public static Vector<FDTtest> queryFDTtest(String query){
 		Vector<FDTtest> result = new Vector<FDTtest>();
 		Connection con = null;
@@ -39,7 +70,8 @@ public class SQLCommands {
 				result.add(new FDTtest(resultSet.getInt("id"),resultSet.getInt("confirmed"),resultSet.getString("pictureName"),
 					   resultSet.getInt("userID"),resultSet.getString("fdt_dur"),resultSet.getInt("fdt_targ"),
 					   resultSet.getString("fdt_targ_oth"),resultSet.getInt("fdt_fixerr_num"),resultSet.getInt("fdt_fixerr_den"),
-					   resultSet.getInt("fdt_fp_num"),resultSet.getInt("fdt_fp_den"),resultSet.getInt("fdt_test"),resultSet.getString("fdt_test_oth"),
+					   resultSet.getInt("fdt_fp_num"),resultSet.getInt("fdt_fp_den"),resultSet.getInt("fdt_fn_num"),resultSet.getInt("fdt_fn_den"),
+					   resultSet.getInt("fdt_test"),resultSet.getString("fdt_test_oth"),
 					   resultSet.getInt("fdt_speed"),resultSet.getString("fdt_speed_oth"),resultSet.getString("fdt_pupil"),
 					   resultSet.getString("fdt_va_num"),resultSet.getString("fdt_va_den"),resultSet.getInt("fdt_mdsign"),
 					   resultSet.getString("fdt_mddb"),resultSet.getString("fdt_mdp"),resultSet.getInt("fdt_psdsign"),

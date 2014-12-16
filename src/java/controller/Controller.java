@@ -62,6 +62,7 @@ public class Controller extends HttpServlet {
 			Vector<String> needsAdj = Tools.getNeedsAdjudication();
 			Vector<String> needsReview = HVFtest.getNeedsReview();
 			Vector<String> reviewed = HVFtest.getReviewed();
+			Vector<String> adjudicated = Tools.getAdjudicated();
 
 			if(user.getAccess() == 2) {
 				request.setAttribute("reviewedBy", HVFtest.getReviewedBy(user.getUserName()));
@@ -72,6 +73,7 @@ public class Controller extends HttpServlet {
 
 			request.setAttribute("ungraded",ungraded);
 			request.setAttribute("gradedOnce",onceGraded);
+			request.setAttribute("adjudicated", adjudicated);
 			request.setAttribute("needsAdj",needsAdj);
 			request.setAttribute("needsReview",needsReview);
 			request.setAttribute("reviewed",reviewed);

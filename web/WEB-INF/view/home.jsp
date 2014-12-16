@@ -48,7 +48,7 @@ if(session.getAttribute("errors") != null) {
 
 <%
 	}
-	if(access == 0 ){
+	if(access == 0 || access == 1){
 %>
 	<div class="thinColumn">
 		<a href="/Glaucoma/FDTtest" class="btn menuBtn">FDT test</a>
@@ -64,28 +64,28 @@ if(session.getAttribute("errors") != null) {
 -->
 <%
 	}
-	if (access == 0) {
+	if (access == 0|| access == 1) {
 %>
 	<div class="thinColumn">
 		<a href="/Glaucoma/MDTtest" class="btn menuBtn">MDT test</a> 
 	</div>
 <%
 	}
-	if (access == 0) {
+	if (access == 0|| access == 1) {
 %>
 	<div class="thinColumn">
 		<a href="/Glaucoma/OCTtest" class="btn menuBtn">OCT test</a> 
 	</div> 
 <%
 	}
-	if (access == 0) {
+	if (access == 0|| access == 1) {
 %>
 	<div class="thinColumn">
 		<a href="/Glaucoma/stereo" class="btn menuBtn">Stereo</a>
 	</div>
 <%
 	}
-	if (access == 0) {
+	if (access == 0|| access == 1) {
 %>
 	<div class="thinColumn">
 		<a href="/Glaucoma/nethra" class="btn menuBtn">3Nethra</a>
@@ -134,6 +134,16 @@ if(session.getAttribute("errors") != null) {
 			name = "";
 			for(int i=0; i<needsAdj.size(); i++) {
 				name = needsAdj.get(i);
+				out.print(name.substring(0,name.length()-4)+"<br>");
+			}
+		%>
+	</div>
+	<%Vector<String> adjudicated = (Vector)request.getAttribute("adjudicated");%>
+	<div class='fifth-column'><h3>Adjudicated (<%out.print(adjudicated.size());%>)</h3>
+		<%
+			name = "";
+			for(int i=0; i<adjudicated.size(); i++) {
+				name = adjudicated.get(i);
 				out.print(name.substring(0,name.length()-4)+"<br>");
 			}
 		%>

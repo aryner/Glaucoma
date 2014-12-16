@@ -221,10 +221,10 @@ public class OCTtest {
 	public static Vector<String> getNeedsAdjudication() {
 		Vector<String> result = new Vector<String>();
 		String query = "SELECT DISTINCT pictureName FROM OCTtest WHERE confirmed='1'";
-		Vector<OCTtest> oct = SQLCommands.queryOCTtest(query);
+		Vector<String> oct = SQLCommands.queryNames(query);
 
 		for(int i=0; i<oct.size(); i++) {
-			result.add("OCT - " + oct.get(i).getPictureName());
+			result.add("OCT - " + oct.get(i));
 		}
 
 		return result;
@@ -232,11 +232,11 @@ public class OCTtest {
 
 	public static Vector<String> getAdjudicated() {
 		Vector<String> result = new Vector<String>();
-		String query = "SELECT DISTINT pictureName FROM OCTtest WHERE confirmed='2'";
-		Vector<OCTtest> oct = SQLCommands.queryOCTtest(query);
+		String query = "SELECT DISTINCT pictureName FROM OCTtest WHERE confirmed='2'";
+		Vector<String> oct = SQLCommands.queryNames(query);
 
 		for(int i=0; i<oct.size(); i++) {
-			result.add("OCT - " + oct.get(i).getPictureName());
+			result.add("OCT - " + oct.get(i));
 		}
 
 		return result;

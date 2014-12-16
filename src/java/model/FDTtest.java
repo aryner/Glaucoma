@@ -70,7 +70,7 @@ public class FDTtest {
 	}
 
 	public FDTtest(int id, int confirmed, String pictureName, int userID, String dur, int targ,
-		       String targ_oth, int fixerr_num, int fixerr_den, int fp_num, int fp_den, int test,
+		       String targ_oth, int fixerr_num, int fixerr_den, int fp_num, int fp_den, int fn_num, int fn_den , int test,
 		       String test_oth, int speed, String speed_oth, String pupil, String va_num, String va_den,
 		       int mdsign, String mddb, String mdp, int psdisgn, String psdb, String psdp, String lu_one,
 		       String lu_five, String ru_one, String ru_five, String ll_one, String ll_five, String rl_one,
@@ -87,6 +87,8 @@ public class FDTtest {
 		this.fixerr_den = fixerr_den;
 		this.fp_num = fp_num;
 		this.fp_den = fp_den;
+		this.fn_num = fn_num;
+		this.fn_den = fn_den;
 		this.test = test;
 		this.test_oth = test_oth;
 		this.speed = speed;
@@ -276,7 +278,7 @@ public class FDTtest {
 		if(hvf.size() > 1) {
 			//get the ones that don't need adjudication
 			query = "SELECT * FROM FDTtest GROUP BY pictureName, "+
-				"fdt_dur, fdt_targ, fdt_trag_oth, fdt_fixerr_num, fdt_fixerr_den, fdt_fp_num, fdt_fp_den, "+
+				"fdt_dur, fdt_targ, fdt_targ_oth, fdt_fixerr_num, fdt_fixerr_den, fdt_fp_num, fdt_fp_den, "+
 				"fdt_fn_num, fdt_fn_den, fdt_test, fdt_test_oth, fdt_speed, fdt_speed_oth, fdt_pupil, "+
 				"fdt_va_num, fdt_va_den, fdt_mdsign, fdt_mddb, fdt_mdp, fdt_psdsign, fdt_psdb, fdt_psdp, "+
 				"fdt_lu_one, fdt_lu_five, fdt_ru_one, fdt_ru_five, fdt_ll_one, fdt_ll_five, "+
@@ -284,8 +286,8 @@ public class FDTtest {
 				"HAVING COUNT(*)=2";
 			Vector<FDTtest> set = SQLCommands.queryFDTtest(query);
 			//get the ones that need adjudication
-			query = "SELECT * FROM HVFtest GROUP BY pictureName, "+
-				"fdt_dur, fdt_targ, fdt_trag_oth, fdt_fixerr_num, fdt_fixerr_den, fdt_fp_num, fdt_fp_den, "+
+			query = "SELECT * FROM FDTtest GROUP BY pictureName, "+
+				"fdt_dur, fdt_targ, fdt_targ_oth, fdt_fixerr_num, fdt_fixerr_den, fdt_fp_num, fdt_fp_den, "+
 				"fdt_fn_num, fdt_fn_den, fdt_test, fdt_test_oth, fdt_speed, fdt_speed_oth, fdt_pupil, "+
 				"fdt_va_num, fdt_va_den, fdt_mdsign, fdt_mddb, fdt_mdp, fdt_psdsign, fdt_psdb, fdt_psdp, "+
 				"fdt_lu_one, fdt_lu_five, fdt_ru_one, fdt_ru_five, fdt_ll_one, fdt_ll_five, "+
@@ -346,10 +348,10 @@ public class FDTtest {
 	public static Vector<String> getNeedsAdjudication() {
 		Vector<String> result = new Vector<String>();
 		String query = "SELECT DISTINCT pictureName FROM FDTtest WHERE confirmed='1'";
-		Vector<FDTtest> fdt = SQLCommands.queryFDTtest(query);
+		Vector<String> fdt = SQLCommands.queryNames(query);
 
 		for(int i=0; i<fdt.size(); i++) {
-			result.add("FDT - " + fdt.get(i).getPictureName());
+			result.add("FDT - " + fdt.get(i));
 		}
 
 		return result;
@@ -357,11 +359,11 @@ public class FDTtest {
 
 	public static Vector<String> getAdjudicated() {
 		Vector<String> result = new Vector<String>();
-		String query = "SELECT DISTINT pictureName FROM FDTtest WHERE confirmed='2'";
-		Vector<FDTtest> fdt = SQLCommands.queryFDTtest(query);
+		String query = "SELECT DISTINCT pictureName FROM FDTtest WHERE confirmed='2'";
+		Vector<String> fdt = SQLCommands.queryNames(query);
 
 		for(int i=0; i<fdt.size(); i++) {
-			result.add("FDT - " + fdt.get(i).getPictureName());
+			result.add("FDT - " + fdt.get(i));
 		}
 
 		return result;

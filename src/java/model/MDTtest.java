@@ -171,10 +171,10 @@ public class MDTtest {
 	public static Vector<String> getNeedsAdjudication() {
 		Vector<String> result = new Vector<String>();
 		String query = "SELECT DISTINCT pictureName FROM MDTtest WHERE confirmed='1'";
-		Vector<MDTtest> mdt = SQLCommands.queryMDTtest(query);
+		Vector<String> mdt = SQLCommands.queryNames(query);
 
 		for(int i=0; i<mdt.size(); i++) {
-			result.add("MDT - " + mdt.get(i).getPictureName());
+			result.add("MDT - " + mdt.get(i));
 		}
 
 		return result;
@@ -182,11 +182,11 @@ public class MDTtest {
 
 	public static Vector<String> getAdjudicated() {
 		Vector<String> result = new Vector<String>();
-		String query = "SELECT DISTINT pictureName FROM MDTtest WHERE confirmed='2'";
-		Vector<MDTtest> mdt = SQLCommands.queryMDTtest(query);
+		String query = "SELECT DISTINCT pictureName FROM MDTtest WHERE confirmed='2'";
+		Vector<String> mdt = SQLCommands.queryNames(query);
 
 		for(int i=0; i<mdt.size(); i++) {
-			result.add("MDT - " + mdt.get(i).getPictureName());
+			result.add("MDT - " + mdt.get(i));
 		}
 
 		return result;
