@@ -113,7 +113,7 @@ public class SQLCommands {
 						       resultSet.getInt("userID"),resultSet.getString("mdt_late"),resultSet.getString("mdt_fp"),
 						       resultSet.getInt("mdt_lens"),resultSet.getString("mdt_lens_y"),resultSet.getString("mdt_dur"),
 						       resultSet.getString("mdt_ptd"),resultSet.getString("mdt_lu_one"),resultSet.getString("mdt_ru_one"),
-						       resultSet.getString("mdt_ll_one"),resultSet.getString("mdt_rl_one"),resultSet.getInt("mdt_abnomrmal")));
+						       resultSet.getString("mdt_ll_one"),resultSet.getString("mdt_rl_one"),resultSet.getInt("mdt_abnormal")));
 			}
 		} catch (SQLException ex) {
 			Logger.getLogger(SQLCommands.class.getName()).log(Level.SEVERE,null,ex); 

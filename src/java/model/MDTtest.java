@@ -141,7 +141,91 @@ public class MDTtest {
 			mdt = new MDTtest(picName);
 		}
 
+		String attr = request.getParameter("late");
+		mdt.setLate(attr);
+		attr = request.getParameter("fp");
+		mdt.setFp(attr);
+		attr = request.getParameter("lens");
+		mdt.setLens(Integer.parseInt(attr));
+		attr = request.getParameter("lens_y");
+		mdt.setLens_y(attr);
+		attr = request.getParameter("dur");
+		mdt.setDur(attr);
+		attr = request.getParameter("ptd");
+		mdt.setPtd(attr);
+		attr = request.getParameter("lu_one");
+		mdt.setLu_one(attr);
+		attr = request.getParameter("ru_one");
+		mdt.setRu_one(attr);
+		attr = request.getParameter("ll_one");
+		mdt.setLl_one(attr);
+		attr = request.getParameter("rl_one");
+		mdt.setRl_one(attr);
+
+		String query = "UPDATE MDTtest SET mdt_late='"+mdt.getLate()+"', mdt_fp='"+mdt.getFp()+"', "+
+				"mdt_lens='"+mdt.getLens()+"', mdt_lens_y='"+mdt.getLens_y()+"', "+
+				"mdt_dur='"+mdt.getDur()+"', mdt_ptd='"+mdt.getPtd()+"', "+
+				"mdt_lu_one='"+mdt.getLu_one()+"', mdt_ru_one='"+mdt.getRu_one()+"', "+
+				"mdt_ll_one='"+mdt.getLl_one()+"', mdt_rl_one='"+mdt.getRl_one()+"' ";
+
+		if(user.getAccess() == 0) {
+			query += " WHERE id='"+mdt.getId()+"'";
+		} else if(user.getAccess() ==1) { 
+			query += ", confirmed=2, adjudicatorID="+user.getID()+" WHERE pictureName='"+request.getParameter("pictureName")+"'";
+			if(request.getParameter("alreadyConfirmed").equals("true")) {
+				result = 2;
+			}
+		}
+		SQLCommands.update(query);
+		if(user.getAccess() == 0) {
+			setForAdjudication(picName);
+		}
+
 		return result;
+	}
+
+	public static void setForAdjudication(String picName) {
+		String query = "SELECT * FROM MDTtest WHERE pictureName='"+picName+"'";
+		Vector<MDTtest> mdt = SQLCommands.queryMDTtest(query);
+
+		if(mdt.size() > 1) {
+			//get the ones that don't need adjudication
+			query = "SELECT * FROM MDTtest GROUP BY pictureName, "+
+				"mdt_late, mdt_fp, mdt_lens, mdt_lens_y, mdt_dur, mdt_ptd, "+
+				"mdt_lu_one, mdt_ru_one, mdt_ll_one, mdt_rl_one "+
+				"HAVING COUNT(*)=2";
+			Vector<MDTtest> set = SQLCommands.queryMDTtest(query);
+			//get the ones that need adjudication
+			query = "SELECT * FROM MDTtest GROUP BY pictureName, "+
+				"mdt_late, mdt_fp, mdt_lens, mdt_lens_y, mdt_dur, mdt_ptd, "+
+				"mdt_lu_one, mdt_ru_one, mdt_ll_one, mdt_rl_one "+
+				"HAVING COUNT(*)=1";
+			Vector<MDTtest> notSet = SQLCommands.queryMDTtest(query);
+
+			for(int i=set.size()-1; i>=0; i--) {
+				if (!set.get(i).getPictureName().equals(picName)) {
+					set.remove(i);
+				}
+			}
+			for(int i=notSet.size()-1; i>=0; i--) {
+				if (!notSet.get(i).getPictureName().equals(picName)) {
+					notSet.remove(i);
+				}
+			}
+			
+			//update the confirmed ones
+			query = "UPDATE MDTtest SET confirmed=2";
+			query += " WHERE pictureName='"+picName+"'";
+			if(set.size() > 0) {
+				SQLCommands.update(query);
+			}
+
+			//update the ones that need confirming
+			query = "UPDATE MDTtest SET confirmed=1 WHERE pictureName='"+picName+"'";
+			if(notSet.size() > 0) {
+				SQLCommands.update(query);
+			}
+		}
 	}
 
 	public static Vector<String> getUngradedNames() {
