@@ -144,6 +144,54 @@ public class MDTtest {
 		return result;
 	}
 
+	public static Vector<String> getUngradedNames() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM picture WHERE name NOT IN (SELECT pictureName FROM MDTtest) AND type='MDT'";
+		Vector<Picture> pictures = SQLCommands.queryPictures(query);
+
+		for(int i=0; i<pictures.size(); i++) {
+			result.add("MDT - " + pictures.get(i).getName());
+		}
+
+		return result;
+	}
+
+	public static Vector<String> getGradedOnceNames() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM MDTtest GROUP BY pictureName HAVING COUNT(*)=1";
+		Vector<MDTtest> mdt = SQLCommands.queryMDTtest(query);
+
+		for(int i=0; i<mdt.size(); i++) {
+			result.add("MDT - " + mdt.get(i).getPictureName());
+		}
+
+		return result;
+	}
+	
+	public static Vector<String> getNeedsAdjudication() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT DISTINCT pictureName FROM MDTtest WHERE confirmed='1'";
+		Vector<MDTtest> mdt = SQLCommands.queryMDTtest(query);
+
+		for(int i=0; i<mdt.size(); i++) {
+			result.add("MDT - " + mdt.get(i).getPictureName());
+		}
+
+		return result;
+	}
+
+	public static Vector<String> getAdjudicated() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT DISTINT pictureName FROM MDTtest WHERE confirmed='2'";
+		Vector<MDTtest> mdt = SQLCommands.queryMDTtest(query);
+
+		for(int i=0; i<mdt.size(); i++) {
+			result.add("MDT - " + mdt.get(i).getPictureName());
+		}
+
+		return result;
+	}
+
 	/**
 	 * @return the id
 	 */

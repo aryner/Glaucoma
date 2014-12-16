@@ -189,6 +189,82 @@ public class Photos {
 		return result;
 	}
 
+	public static Vector<String> getUngradedNames() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM picture WHERE name NOT IN (SELECT pictureName FROM Photos) AND type='stereo'";
+		Vector<Picture> pictures = SQLCommands.queryPictures(query);
+
+		for(int i=0; i<pictures.size(); i++) {
+			result.add("Stereo - " + pictures.get(i).getName());
+		}
+
+		query = "SELECT * FROM picture WHERE name NOT IN (SELECT pictureName FROM Photos) AND type='3Nethra'";
+		pictures = SQLCommands.queryPictures(query);
+
+		for(int i=0; i<pictures.size(); i++) {
+			result.add("3Nethra - " + pictures.get(i).getName());
+		}
+
+		return result;
+	}
+
+	public static Vector<String> getGradedOnceNames() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM Photos WHERE type='"+STEREO+"' GROUP BY pictureName HAVING COUNT(*)=1";
+		Vector<Photos> photos = SQLCommands.queryPhotos(query);
+
+		for(int i=0; i<photos.size(); i++) {
+			result.add("Stereo - " + photos.get(i).getPictureName());
+		}
+
+		query = "SELECT * FROM Photos WHERE type='"+NETHRA+"' GROUP BY pictureName HAVING COUNT(*)=1";
+		photos = SQLCommands.queryPhotos(query);
+
+		for(int i=0; i<photos.size(); i++) {
+			result.add("3Nethra - " + photos.get(i).getPictureName());
+		}
+
+		return result;
+	}
+	
+	public static Vector<String> getNeedsAdjudication() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT DISTINCT pictureName FROM Photos WHERE confirmed='1' AND type='"+STEREO+"'";
+		Vector<Photos> photo = SQLCommands.queryPhotos(query);
+
+		for(int i=0; i<photo.size(); i++) {
+			result.add("Stereo - " + photo.get(i).getPictureName());
+		}
+
+		query = "SELECT DISTINCT pictureName FROM Photos WHERE confirmed='1' AND type='"+NETHRA+"'";
+		photo = SQLCommands.queryPhotos(query);
+
+		for(int i=0; i<photo.size(); i++) {
+			result.add("3Nethra - " + photo.get(i).getPictureName());
+		}
+
+		return result;
+	}
+
+	public static Vector<String> getAdjudicated() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT DISTINT pictureName FROM Photos WHERE confirmed='2' AND type='"+STEREO+"'";
+		Vector<Photos> photos = SQLCommands.queryPhotos(query);
+
+		for(int i=0; i<photos.size(); i++) {
+			result.add("Stereo - " + photos.get(i).getPictureName());
+		}
+
+		query = "SELECT DISTINT pictureName FROM Photos WHERE confirmed='2' AND type='"+NETHRA+"'";
+		photos = SQLCommands.queryPhotos(query);
+
+		for(int i=0; i<photos.size(); i++) {
+			result.add("3Nethra - " + photos.get(i).getPictureName());
+		}
+
+		return result;
+	}
+
 	/**
 	 * @return the id
 	 */

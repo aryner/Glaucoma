@@ -319,6 +319,54 @@ public class FDTtest {
 		}
 	}
 
+	public static Vector<String> getUngradedNames() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM picture WHERE name NOT IN (SELECT pictureName FROM FDTtest) AND type='FDT'";
+		Vector<Picture> pictures = SQLCommands.queryPictures(query);
+
+		for(int i=0; i<pictures.size(); i++) {
+			result.add("FDT - " + pictures.get(i).getName());
+		}
+
+		return result;
+	}
+
+	public static Vector<String> getGradedOnceNames() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM FDTtest GROUP BY pictureName HAVING COUNT(*)=1";
+		Vector<FDTtest> fdt = SQLCommands.queryFDTtest(query);
+
+		for(int i=0; i<fdt.size(); i++) {
+			result.add("FDT - " + fdt.get(i).getPictureName());
+		}
+
+		return result;
+	}
+	
+	public static Vector<String> getNeedsAdjudication() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT DISTINCT pictureName FROM FDTtest WHERE confirmed='1'";
+		Vector<FDTtest> fdt = SQLCommands.queryFDTtest(query);
+
+		for(int i=0; i<fdt.size(); i++) {
+			result.add("FDT - " + fdt.get(i).getPictureName());
+		}
+
+		return result;
+	}
+
+	public static Vector<String> getAdjudicated() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT DISTINT pictureName FROM FDTtest WHERE confirmed='2'";
+		Vector<FDTtest> fdt = SQLCommands.queryFDTtest(query);
+
+		for(int i=0; i<fdt.size(); i++) {
+			result.add("FDT - " + fdt.get(i).getPictureName());
+		}
+
+		return result;
+	}
+
 	/**
 	 * @return the id
 	 */

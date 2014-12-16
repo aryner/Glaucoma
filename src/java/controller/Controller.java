@@ -57,9 +57,9 @@ public class Controller extends HttpServlet {
 				request.setAttribute("HVFACount", HVFtest.getOpCheckCount());
 			}
 
-			Vector<String> ungraded = HVFtest.getUngradedNames();
-			Vector<String> onceGraded = HVFtest.getGradedOnceNames();
-			Vector<String> needsAdj = HVFtest.getNeedsAdjudication();
+			Vector<String> ungraded = Tools.getUngradedNames();
+			Vector<String> onceGraded = Tools.getGradedOnceNames();
+			Vector<String> needsAdj = Tools.getNeedsAdjudication();
 			Vector<String> needsReview = HVFtest.getNeedsReview();
 			Vector<String> reviewed = HVFtest.getReviewed();
 

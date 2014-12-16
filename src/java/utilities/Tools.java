@@ -160,4 +160,44 @@ public class Tools {
 		result.addAll(OCTtest.needPictures());
 		return result;
 	}
+
+	public static Vector<String> getUngradedNames() {
+		Vector<String> result = new Vector<String>();
+		result.addAll(FDTtest.getUngradedNames());
+		result.addAll(MDTtest.getUngradedNames());
+		result.addAll(OCTtest.getUngradedNames());
+		result.addAll(Photos.getUngradedNames());
+
+		return result;
+	}
+
+	public static Vector<String> getGradedOnceNames() {
+		Vector<String> result = new Vector<String>();
+		result.addAll(FDTtest.getGradedOnceNames());
+		result.addAll(MDTtest.getGradedOnceNames());
+		result.addAll(OCTtest.getGradedOnceNames());
+		result.addAll(Photos.getGradedOnceNames());
+
+		return result;
+	}
+
+	public static Vector<String> getNeedsAdjudication() {
+		Vector<String> result = new Vector<String>();
+		result.addAll(FDTtest.getNeedsAdjudication());
+		result.addAll(MDTtest.getNeedsAdjudication());
+		result.addAll(OCTtest.getNeedsAdjudication());
+		result.addAll(Photos.getNeedsAdjudication());
+
+		return result;
+	}
+
+	public static Vector<String> getAdjudicated() {
+		Vector<String> result = new Vector<String>();
+		result.addAll(FDTtest.getAdjudicated());
+		result.addAll(MDTtest.getAdjudicated());
+		result.addAll(OCTtest.getAdjudicated());
+		result.addAll(Photos.getAdjudicated());
+
+		return result;
+	}
 }

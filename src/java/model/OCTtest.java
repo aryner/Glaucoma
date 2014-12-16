@@ -194,6 +194,54 @@ public class OCTtest {
 		return result;
 	}
 
+	public static Vector<String> getUngradedNames() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM picture WHERE name NOT IN (SELECT pictureName FROM OCTtest) AND type='OCT'";
+		Vector<Picture> pictures = SQLCommands.queryPictures(query);
+
+		for(int i=0; i<pictures.size(); i++) {
+			result.add("OCT - " + pictures.get(i).getName());
+		}
+
+		return result;
+	}
+
+	public static Vector<String> getGradedOnceNames() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM OCTtest GROUP BY pictureName HAVING COUNT(*)=1";
+		Vector<OCTtest> oct = SQLCommands.queryOCTtest(query);
+
+		for(int i=0; i<oct.size(); i++) {
+			result.add("OCT - " + oct.get(i).getPictureName());
+		}
+
+		return result;
+	}
+	
+	public static Vector<String> getNeedsAdjudication() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT DISTINCT pictureName FROM OCTtest WHERE confirmed='1'";
+		Vector<OCTtest> oct = SQLCommands.queryOCTtest(query);
+
+		for(int i=0; i<oct.size(); i++) {
+			result.add("OCT - " + oct.get(i).getPictureName());
+		}
+
+		return result;
+	}
+
+	public static Vector<String> getAdjudicated() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT DISTINT pictureName FROM OCTtest WHERE confirmed='2'";
+		Vector<OCTtest> oct = SQLCommands.queryOCTtest(query);
+
+		for(int i=0; i<oct.size(); i++) {
+			result.add("OCT - " + oct.get(i).getPictureName());
+		}
+
+		return result;
+	}
+
 	/**
 	 * @return the id
 	 */
