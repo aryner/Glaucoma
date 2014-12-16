@@ -191,7 +191,154 @@ public class OCTtest {
 			oct = new OCTtest(picName);
 		}
 
+		String attr = request.getParameter("length");
+		oct.setLength(attr);
+		attr = request.getParameter("type");
+		oct.setType(Integer.parseInt(attr));
+		attr = request.getParameter("type_oth");
+		oct.setType_oth(attr);
+		attr = request.getParameter("snum");
+		oct.setSnum(attr);
+		attr = request.getParameter("scol");
+		oct.setScol(Integer.parseInt(attr));
+		attr = request.getParameter("nnum");
+		oct.setNnum(attr);
+		attr = request.getParameter("ncol");
+		oct.setNcol(Integer.parseInt(attr));
+		attr = request.getParameter("inum");
+		oct.setInum(attr);
+		attr = request.getParameter("icol");
+		oct.setIcol(Integer.parseInt(attr));
+		attr = request.getParameter("tnum");
+		oct.setTnum(attr);
+		attr = request.getParameter("tcol");
+		oct.setTcol(Integer.parseInt(attr));
+		attr = request.getParameter("sig");
+		oct.setSig(attr);
+		attr = request.getParameter("isnum");
+		oct.setIsnum(attr);
+		attr = request.getParameter("iscol");
+		oct.setIscol(Integer.parseInt(attr));
+		attr = request.getParameter("sinum");
+		oct.setSinum(attr);
+		attr = request.getParameter("sicol");
+		oct.setSicol(Integer.parseInt(attr));
+		attr = request.getParameter("stnum");
+		oct.setStnum(attr);
+		attr = request.getParameter("stcol");
+		oct.setStcol(Integer.parseInt(attr));
+		attr = request.getParameter("itnum");
+		oct.setItnum(attr);
+		attr = request.getParameter("itcol");
+		oct.setItcol(Integer.parseInt(attr));
+		attr = request.getParameter("snnum");
+		oct.setSnnum(attr);
+		attr = request.getParameter("sncol");
+		oct.setSncol(Integer.parseInt(attr));
+		attr = request.getParameter("mmnum");
+		oct.setMmnum(attr);
+		attr = request.getParameter("mmcol");
+		oct.setMmcol(Integer.parseInt(attr));
+		attr = request.getParameter("smaxnum");
+		oct.setSmaxnum(attr);
+		attr = request.getParameter("smaxcol");
+		oct.setSmaxcol(Integer.parseInt(attr));
+		attr = request.getParameter("imaxnum");
+		oct.setImaxnum(attr);
+		attr = request.getParameter("imaxcol");
+		oct.setImaxcol(Integer.parseInt(attr));
+		attr = request.getParameter("savgnum");
+		oct.setSavgnum(attr);
+		attr = request.getParameter("savgcol");
+		oct.setSavgcol(Integer.parseInt(attr));
+		attr = request.getParameter("iavgnum");
+		oct.setIavgnum(attr);
+		attr = request.getParameter("iavgcol");
+		oct.setIavgcol(Integer.parseInt(attr));
+		attr = request.getParameter("atnum");
+		oct.setAtnum(attr);
+		attr = request.getParameter("atcol");
+		oct.setAtcol(Integer.parseInt(attr));
+
+		String query = "UPDATE OCTtest SET oct_length='"+oct.getLength()+"', oct_type='"+oct.getType()+"', "+
+				"oct_type_oth='"+oct.getType_oth()+"', oct_snum='"+oct.getSnum()+"', "+
+				"oct_scol='"+oct.getScol()+"', oct_nnum='"+oct.getNnum()+"', oct_ncol='"+oct.getNcol()+"', "+
+				"oct_inum='"+oct.getInum()+"', oct_icol='"+oct.getIcol()+"', oct_tnum='"+oct.getTnum()+"', "+
+				"oct_tcol='"+oct.getTcol()+"', oct_sig='"+oct.getSig()+"', oct_isnum='"+oct.getIsnum()+"', "+
+				"oct_iscol='"+oct.getIscol()+"', oct_sinum='"+oct.getSinum()+"', oct_sicol='"+oct.getSicol()+"', "+
+				"oct_stnum='"+oct.getStnum()+"', oct_stcol='"+oct.getStcol()+"', oct_itnum='"+oct.getItnum()+"', "+
+				"oct_itcol='"+oct.getItcol()+"', oct_snnum='"+oct.getSnnum()+"', oct_sncol='"+oct.getSncol()+"', "+
+				"oct_mmnum='"+oct.getMmnum()+"', oct_mmcol='"+oct.getMmcol()+"', oct_smaxnum='"+oct.getSmaxnum()+"', "+
+				"oct_smaxcol='"+oct.getSmaxcol()+"', oct_imaxnum='"+oct.getImaxnum()+"', oct_imaxcol='"+oct.getImaxcol()+"', "+
+				"oct_savgnum='"+oct.getSavgnum()+"', oct_savgcol='"+oct.getSavgcol()+"', oct_iavgnum='"+oct.getIavgnum()+"', "+
+				"oct_iavgcol='"+oct.getIavgcol()+"', oct_atnum='"+oct.getAtnum()+"', oct_atcol='"+oct.getAtcol()+"' ";
+
+		if(user.getAccess() == 0) {
+			query += " WHERE id='"+oct.getId()+"'";
+		} else if(user.getAccess() ==1) { 
+			query += ", confirmed=2, adjudicatorID="+user.getID()+" WHERE pictureName='"+request.getParameter("pictureName")+"'";
+			if(request.getParameter("alreadyConfirmed").equals("true")) {
+				result = 2;
+			}
+		}
+		SQLCommands.update(query);
+		if(user.getAccess() == 0) {
+			setForAdjudication(picName);
+		}
+
 		return result;
+	}
+
+	public static void setForAdjudication(String picName) {
+		String query = "SELECT * FROM OCTtest WHERE pictureName='"+picName+"'";
+		Vector<OCTtest> oct = SQLCommands.queryOCTtest(query);
+
+		if(oct.size() > 1) {
+			//get the ones that don't need adjudication
+			query = "SELECT * FROM OCTtest GROUP BY pictureName, "+
+				"oct_length, oct_type, oct_type_oth, oct_snum, oct_scol, " +
+				"oct_nnum, oct_ncol, oct_inum, oct_icol, oct_tnum, oct_tcol, " +
+				"oct_sig, oct_isnum, oct_iscol, oct_sinum, oct_sicol, oct_stnum, " +
+				"oct_stcol, oct_itnum, oct_itcol, oct_snnum, oct_sncol, oct_mmnum, " +
+				"oct_mmcol, oct_smaxnum, oct_smaxcol, oct_imaxnum, oct_imaxcol, " +
+				"oct_savgnum, oct_savgcol, oct_iavgnum, oct_iavgcol, oct_atnum, oct_atcol " +
+				"HAVING COUNT(*)=2";
+			Vector<OCTtest> set = SQLCommands.queryOCTtest(query);
+			//get the ones that need adjudication
+			query = "SELECT * FROM OCTtest GROUP BY pictureName, "+
+				"oct_length, oct_type, oct_type_oth, oct_snum, oct_scol, " +
+				"oct_nnum, oct_ncol, oct_inum, oct_icol, oct_tnum, oct_tcol, " +
+				"oct_sig, oct_isnum, oct_iscol, oct_sinum, oct_sicol, oct_stnum, " +
+				"oct_stcol, oct_itnum, oct_itcol, oct_snnum, oct_sncol, oct_mmnum, " +
+				"oct_mmcol, oct_smaxnum, oct_smaxcol, oct_imaxnum, oct_imaxcol, " +
+				"oct_savgnum, oct_savgcol, oct_iavgnum, oct_iavgcol, oct_atnum, oct_atcol " +
+				"HAVING COUNT(*)=1";
+			Vector<OCTtest> notSet = SQLCommands.queryOCTtest(query);
+
+			for(int i=set.size()-1; i>=0; i--) {
+				if (!set.get(i).getPictureName().equals(picName)) {
+					set.remove(i);
+				}
+			}
+			for(int i=notSet.size()-1; i>=0; i--) {
+				if (!notSet.get(i).getPictureName().equals(picName)) {
+					notSet.remove(i);
+				}
+			}
+			
+			//update the confirmed ones
+			query = "UPDATE OCTtest SET confirmed=2";
+			query += " WHERE pictureName='"+picName+"'";
+			if(set.size() > 0) {
+				SQLCommands.update(query);
+			}
+
+			//update the ones that need confirming
+			query = "UPDATE OCTtest SET confirmed=1 WHERE pictureName='"+picName+"'";
+			if(notSet.size() > 0) {
+				SQLCommands.update(query);
+			}
+		}
 	}
 
 	public static Vector<String> getUngradedNames() {
