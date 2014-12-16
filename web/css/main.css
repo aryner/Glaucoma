@@ -632,3 +632,7 @@ a:visited.opthReviewed {
 	border: solid;
 	margin-bottom: 05%;
 }
+
+.hidden {
+	display: none;
+}

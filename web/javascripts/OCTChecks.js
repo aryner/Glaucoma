@@ -38,6 +38,10 @@ $(document).ready(function() {
 				this.value = this.value.substring(0,this.value.length-1);
 			}
 		}
+		var num = Number(this.value);
+		if(num > 10) {
+			this.value = this.value.substring(0,this.value.length-1);
+		}
 	});
 	$('input[type=text][name=isnum]').on('input', function() {
 		if(this.value != this.value.replace(/[^0-9^\.]/g, '')) {
@@ -164,6 +168,10 @@ $(document).ready(function() {
 	$('input[type=text][name=snum]').on('input', function() {
 		if(this.value != this.value.replace(/[^0-9]/g, '')) {
 			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+		var num = Number(this.value);
+		if(num > 500) {
+			this.value = this.value.substring(0,this.value.length-1);
 		}
 	});
 	$('input[type=text][name=nnum]').on('input', function() {
@@ -312,6 +320,12 @@ $(document).ready(function() {
 			|| $('input[type=radio][name=atcol][value=2]').prop('checked')
 			|| $('input[type=radio][name=atcol][value=3]').prop('checked')
 			|| $('input[type=radio][name=atcol][value=4]').prop('checked');
+
+		var s_savg = Number($('input[type=text][name=snum]').val()) ===
+			     Number($('input[type=text][name=savgnum]').val());
+
+		var i_iavg = Number($('input[type=text][name=inum]').val()) ===
+			     Number($('input[type=text][name=iavgnum]').val());
 
 		var focused = false;
 
@@ -619,6 +633,24 @@ $(document).ready(function() {
 			}
 		} else {
 			$('#atcol').removeClass('highlight');
+		} if(!s_savg) {
+			$('#savg_snum').removeClass('hidden');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=snum]').focus();
+			}
+		} else {
+			$('#savg_snum').addClass('hidden');
+		} if(!i_iavg) {
+			$('#iavg_inum').removeClass('hidden');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=inum]').focus();
+			}
+		} else {
+			$('#iavg_inum').addClass('hidden');
 		}
 	});
 });

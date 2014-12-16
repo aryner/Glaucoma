@@ -129,6 +129,7 @@ if(pic == null) {
 		}
 	}
 %>
+<span id="savg_snum" class="error hidden">S-Number and Savg - Number must match</span><br>
 <span id="snum">S - Number: </span>
 <input type="text" name="snum" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
@@ -215,6 +216,7 @@ if(pic == null) {
 		}
 	}
 %>
+<span id="iavg_inum" class="error hidden">I-Number and Iavg-Number must match</span><br>
 <span id="inum">I - Number: </span>
 <input type="text" name="inum" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
@@ -664,6 +666,7 @@ if(pic == null) {
 		}
 	}
 %>
+<span id="savg_snum" class="error hidden">S-Number and Savg - Number must match</span><br>
 <span id="savgnum">Savg - Number: </span>
 <input type="text" name="savgnum" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
@@ -707,6 +710,7 @@ if(pic == null) {
 		}
 	}
 %>
+<span id="iavg_inum" class="error hidden">I-Number and Iavg-Number must match</span><br>
 <span id="iavgnum">Iavg - Number: </span>
 <input type="text" name="iavgnum" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
