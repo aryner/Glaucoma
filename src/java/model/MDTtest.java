@@ -164,11 +164,18 @@ public class MDTtest {
 		attr = request.getParameter("rl_one");
 		mdt.setRl_one(attr);
 
+		int abnormalCount = Integer.parseInt(mdt.getLu_one())+
+				    Integer.parseInt(mdt.getRu_one())+
+				    Integer.parseInt(mdt.getLl_one())+
+			  	    Integer.parseInt(mdt.getRl_one());
+		mdt.setAbnormal((abnormalCount>=3)?2:1);
+
 		String query = "UPDATE MDTtest SET mdt_late='"+mdt.getLate()+"', mdt_fp='"+mdt.getFp()+"', "+
 				"mdt_lens='"+mdt.getLens()+"', mdt_lens_y='"+mdt.getLens_y()+"', "+
 				"mdt_dur='"+mdt.getDur()+"', mdt_ptd='"+mdt.getPtd()+"', "+
 				"mdt_lu_one='"+mdt.getLu_one()+"', mdt_ru_one='"+mdt.getRu_one()+"', "+
-				"mdt_ll_one='"+mdt.getLl_one()+"', mdt_rl_one='"+mdt.getRl_one()+"' ";
+				"mdt_ll_one='"+mdt.getLl_one()+"', mdt_rl_one='"+mdt.getRl_one()+
+				"', mdt_abnormal='"+mdt.getAbnormal()+"' ";
 
 		if(user.getAccess() == 0) {
 			query += " WHERE id='"+mdt.getId()+"'";

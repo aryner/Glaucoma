@@ -247,6 +247,12 @@ public class FDTtest {
 		attr = request.getParameter("rl_five");
 		fdt.setRl_five(attr);
 
+		int abnormalCount = Integer.parseInt(fdt.getLu_one())+
+				    Integer.parseInt(fdt.getRu_one())+
+				    Integer.parseInt(fdt.getLl_one())+
+				    Integer.parseInt(fdt.getRl_one());
+		fdt.setAbnormal((abnormalCount>=2)?2:1);
+
 		String query = "UPDATE FDTtest SET fdt_dur='"+fdt.getDur()+"', fdt_targ='"+fdt.getTarg()+"', fdt_targ_oth='"+fdt.getTarg_oth()+"', "+
 			       "fdt_fixerr_num='"+fdt.getFixerr_num()+"', fdt_fixerr_den='"+fdt.getFixerr_den()+"', fdt_fp_num='"+fdt.getFp_num()+"', "+
 			       "fdt_fp_den='"+fdt.getFp_den()+"', fdt_fn_num='"+fdt.getFn_num()+"', fdt_fn_den='"+fdt.getFn_den()+"', fdt_test='"+fdt.getTest()+"', "+
@@ -255,7 +261,7 @@ public class FDTtest {
 			       "fdt_mddb='"+fdt.getMddb()+"', fdt_mdp='"+fdt.getMdp()+"', fdt_psdsign='"+fdt.getPsdsign()+"', fdt_psdb='"+fdt.getPsdb()+"', "+
 			       "fdt_psdp='"+fdt.getPsdp()+"', fdt_lu_one='"+fdt.getLu_one()+"', fdt_lu_five='"+fdt.getLu_five()+"', fdt_ru_one='"+fdt.getRu_one()+"', "+
 			       "fdt_ru_five='"+fdt.getRu_five()+"', fdt_ll_one='"+fdt.getLl_one()+"', fdt_ll_five='"+fdt.getLl_five()+"', "+
-			       "fdt_rl_one='"+fdt.getRl_one()+"', fdt_rl_five='"+fdt.getRl_five()+"' ";
+			       "fdt_rl_one='"+fdt.getRl_one()+"', fdt_rl_five='"+fdt.getRl_five()+"', fdt_abnormal='"+fdt.getAbnormal()+"' ";
 
 		if(user.getAccess() == 0) {
 			query += " WHERE id='"+fdt.getId()+"'";
