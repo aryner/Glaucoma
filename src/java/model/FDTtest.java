@@ -397,6 +397,32 @@ public class FDTtest {
 		return result;
 	}
 
+	public static Vector<String> getCSVFinishedLines() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM FDTtest WHERE confirmed=2 GROUP BY pictureName";
+		Vector<FDTtest> fdts = SQLCommands.queryFDTtest(query);
+
+		String currLine = "picture, adjudicatorID, fdt_dur, fdt_targ, fdt_targ_oth, fdt_fixerr_num, "+
+				  "fdt_fixerr_den, fdt_fp_num, fdt_fp_den, fdt_fn_num, fdt_fn_den, fdt_test, fdt_test_oth, fdt_speed, "+
+				  "fdt_speed_oth, fdt_pupil, fdt_va_num, fdt_va_den, fdt_mdsign, fdt_mddb, fdt_mdp, fdt_psdsign, "+
+				  "fdt_psdb, fdt_psdp, fdt_lu_one, fdt_lu_five, fdt_ru_one, fdt_ru_five, fdt_ll_one, fdt_ll_five, " +
+				  "fdt_rl_one, fdt_rl_five, fdt_abnormal";
+		result.add(currLine);
+
+		for(FDTtest fdt : fdts) {
+			currLine = fdt.getPictureName()+", "+fdt.getAdjudicatorID()+", "+
+				   fdt.getDur()+", "+fdt.getTarg()+", "+fdt.getTarg_oth()+", "+fdt.getFixerr_num()+", "+fdt.getFixerr_den()+", "+
+				   fdt.getFp_num()+", "+fdt.getFp_den()+", "+fdt.getFn_num()+", "+fdt.getFn_den()+", "+fdt.getTest()+", "+
+				   fdt.getTest_oth()+", "+fdt.getSpeed()+", "+fdt.getSpeed_oth()+", "+fdt.getPupil()+", "+fdt.getVa_num()+", "+
+				   fdt.getVa_den()+", "+fdt.getMdsign()+", "+fdt.getMddb()+", "+fdt.getPsdsign()+", "+fdt.getPsdb()+", "+
+				   fdt.getPsdp()+", "+fdt.getLu_one()+", "+fdt.getLu_five()+", "+fdt.getRu_one()+", "+fdt.getRu_five()+", "+
+				   fdt.getLl_one()+", "+fdt.getLl_five()+", "+fdt.getRl_one()+", "+fdt.getRl_five()+", "+fdt.getAbnormal();
+			result.add(currLine);
+		}
+
+		return result;
+	}
+
 	/**
 	 * @return the id
 	 */

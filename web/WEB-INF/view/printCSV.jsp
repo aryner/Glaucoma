@@ -17,6 +17,10 @@ Vector<String> nethra = (Vector)request.getAttribute("nethra");
 	<input type ="submit" value="Print CSVs to your Desktop" class="btn">
 </form>
 <br><br>
+<form action="printFinishedCSVs" method="POST">
+	<input type ="submit" value="Print CSVs of finished records to your Desktop" class="btn">
+</form>
+<br><br>
 <%
 for(int i=0; i<fdt.size(); i++) {
 	out.print(fdt.get(i)+"<br>");

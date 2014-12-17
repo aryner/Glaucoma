@@ -418,6 +418,33 @@ public class OCTtest {
 		return result;
 	}
 
+	public static Vector<String> getCSVFinishedLines() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM OCTtest WHERE confirmed=2 GROUP BY pictureName";
+		Vector<OCTtest> octs = SQLCommands.queryOCTtest(query);
+		
+		String currLine = "picture, adjudicatorID, oct_length, oct_type, oct_type_oth, "+
+				  "oct_snum, oct_scol, oct_nnum, oct_ncol, oct_inum, oct_icol, oct_tnum, oct_tcol, "+
+				  "oct_sig, oct_isnum, oct_iscol, oct_sinum, oct_sicol, oct_stnum, oct_stcol, oct_itnum, "+
+				  "oct_itcol, oct_snnum, oct_sncol, oct_mmnum, oct_mmcol, oct_smaxnum, oct_smaxcol, "+
+				  "oct_savgnum, oct_savgcol, oct_iavgnum, oct_iavgcol, oct_atnum, oct_atcol";
+		result.add(currLine);
+
+		for(OCTtest oct : octs) {
+			currLine = oct.getPictureName()+", "+oct.getAdjudicatorID()+", "+
+				   oct.getLength()+", "+oct.getType()+", "+oct.getType_oth()+", "+oct.getSnum()+", "+oct.getScol()+", "+
+				   oct.getNnum()+", "+oct.getNcol()+", "+oct.getInum()+", "+oct.getIcol()+", "+oct.getTnum()+", "+
+				   oct.getTcol()+", "+oct.getSig()+", "+oct.getIsnum()+", "+oct.getIscol()+", "+oct.getSinum()+", "+
+				   oct.getSicol()+", "+oct.getStnum()+", "+oct.getStcol()+", "+oct.getItnum()+", "+oct.getItcol()+", "+
+				   oct.getSnnum()+", "+oct.getSncol()+", "+oct.getMmnum()+", "+oct.getMmcol()+", "+oct.getSmaxnum()+", "+
+				   oct.getSmaxcol()+", "+oct.getSavgnum()+", "+oct.getSavgcol()+", "+oct.getIavgnum()+", "+
+				   oct.getIavgcol()+", "+oct.getAtnum()+", "+oct.getAtcol();
+			result.add(currLine);
+		}
+
+		return result;
+	}
+
 	/**
 	 * @return the id
 	 */

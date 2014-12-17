@@ -832,6 +832,53 @@ public class HVFtest {
 		return result;
 	}
 
+	public static Vector<String> getFinishedCSVLines() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM HVFtest WHERE opthCheck != 0 AND confirmed >=2 GROUP BY pictureName";
+		Vector<HVFtest> hvf = SQLCommands.queryHVFtestMaster(query);
+
+		String currLine = "opthID, adjudicatorID, picture, hvf_mon, hvf_mon_oth2_c74, hvf_tar, hvf_tar_oth, "+
+				  "hvf_lossnum, hvf_lossden, hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, "+
+				  "hvf_stimcol_oth, hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, "+
+				  "hvf_sph_sign, hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, "+
+				  "hvf_mddb, hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_central_15, hvf_central_0, hvf_sup_hem, "+
+				  "hvf_inf_hem, hvf_sup_hem2, hvf_inf_hem2, hvf_pts_five, hvf_pts_contig, hvf_pts_one, hvf_cluster, "+
+				  "hvf_glau, hvf_severe, hvf_reliable_review, hvf_vf_loss, hvf_vf_defect1, hvf_vf_defect2, hvf_vf_defect3, "+
+				  "hvf_vf_defect4, hvf_vf_defect5, hvf_vf_defect6, hvf_vf_defect7, hvf_vf_defect_oth";
+		result.add(currLine);
+		String defects;
+
+		for(int i=0; i<hvf.size(); i++) {
+			defects = hvf.get(i).getVf_defect();
+			int index = 1;
+			while(index < defects.length()) {
+				defects = defects.substring(0,index)+","+defects.substring(index,defects.length());
+				index += 2;
+			}
+			defects.replace(",", ", ");
+			currLine = 
+				hvf.get(i).getOpthCheck()+", "+hvf.get(i).getAdjudicatorID()+", "+hvf.get(i).getPictureName()+", "+
+				hvf.get(i).getMon()+", "+hvf.get(i).getMon_oth2_c74()+", "+hvf.get(i).getTar()+", "+
+				hvf.get(i).getTar_oth()+", "+hvf.get(i).getLossnum()+", "+hvf.get(i).getLossden()+", "+
+				hvf.get(i).getFp()+", "+hvf.get(i).getFn()+", "+hvf.get(i).getDur()+", "+hvf.get(i).getFov()+", "+
+				hvf.get(i).getStimintens()+", "+hvf.get(i).getStimcol()+", "+hvf.get(i).getStimcol_oth()+", "+
+				hvf.get(i).getBack()+", "+hvf.get(i).getStrategy()+", "+hvf.get(i).getStrategy_oth()+", "+
+				hvf.get(i).getPup()+", "+hvf.get(i).getVanum()+", "+hvf.get(i).getVaden()+", "+hvf.get(i).getSph_sign()+", "+
+				hvf.get(i).getSph_num()+", "+hvf.get(i).getCyl_sign()+", "+hvf.get(i).getCyl_num()+", "+
+				hvf.get(i).getAxis()+", "+hvf.get(i).getGht()+", "+hvf.get(i).getVfi()+", "+hvf.get(i).getMdsign()+", "+
+				hvf.get(i).getMddb()+", "+hvf.get(i).getMdp()+", "+hvf.get(i).getPsdsign()+", "+hvf.get(i).getPsddb()+", "+
+				hvf.get(i).getPsdp()+", "+hvf.get(i).getCentral_15()+", "+hvf.get(i).getCentral_0()+", "+
+				hvf.get(i).getSup_hem()+", "+hvf.get(i).getInf_hem()+", "+hvf.get(i).getSup_hem2()+", "+
+				hvf.get(i).getInf_hem2()+", "+hvf.get(i).getPts_five()+", "+hvf.get(i).getPts_contig()+", "+
+				hvf.get(i).getPts_one()+", "+hvf.get(i).getCluster()+", "+hvf.get(i).getHvf_glau()+", "+
+				hvf.get(i).getSevere()+", "+hvf.get(i).getReliable_review()+", "+hvf.get(i).getVf_loss()+", "+
+				defects+", "+hvf.get(i).getVf_defect_oth();
+			result.add(currLine);
+		}
+
+		return result;
+	}
+
 	public static void readCSV(String fileName) {
 		String query = "SELECT * FROM HVFtest";
 

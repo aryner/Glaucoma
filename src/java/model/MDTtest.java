@@ -299,6 +299,27 @@ public class MDTtest {
 		return result;
 	}
 
+	public static Vector<String> getCSVFinishedLines() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM MDTtest WHERE confirmed=2 GROUP BY pictureName";
+		Vector<MDTtest> mdts = SQLCommands.queryMDTtest(query);
+		
+		String currLine = "picture, adjudicatorID, mdt_late, mdt_fp, mdt_lens, "+
+				  "mdt_lens_y, mdt_dur, mdt_ptd, mdt_lu_one, mdt_ru_one, mdt_ll_one, "+
+				  "mdt_rl_one, mdt_abnormal";
+		result.add(currLine);
+
+		for(MDTtest mdt : mdts) {
+			currLine = mdt.getPictureName()+", "+mdt.getAdjudicatorID()+", "+
+				   mdt.getLate()+", "+mdt.getFp()+", "+mdt.getLens()+", "+mdt.getLens_y()+", "+mdt.getDur()+", "+
+				   mdt.getPtd()+", "+mdt.getLu_one()+", "+mdt.getRu_one()+", "+mdt.getLl_one()+", "+mdt.getRl_one()+", "+
+				   mdt.getAbnormal();
+			result.add(currLine);
+		}
+
+		return result;
+	}
+
 	/**
 	 * @return the id
 	 */

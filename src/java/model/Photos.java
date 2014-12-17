@@ -414,6 +414,54 @@ public class Photos {
 		return result;
 	}
 
+	public static Vector<String> getFinishedStereoCSVLines() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM Photos WHERE type="+STEREO+" AND confirmed=2 GROUP BY pictureName";
+		Vector<Photos> photos = SQLCommands.queryPhotos(query);
+		
+		String currLine = "picture, adjudicatorID, type, photo_qual, photo_cdr, "+
+				  "photo_notch, notch_hrs_one, notch_hrs_two, photo_erosion, eros_hrs_one, "+
+				  "eros_hrs_two, photo_disc, disc_hrs_one, disc_hrs_two, photo_rnfl, "+
+				  "rnfl_hrs_one, rnfl_hrs_two";
+		result.add(currLine);
+
+		for(Photos photo : photos) {
+			currLine = photo.getPictureName()+", "+photo.getAdjudicatorID()+", "+
+				   photo.getType()+", "+photo.getQual()+", "+photo.getCdr()+", "+photo.getNotch()+", "+
+				   photo.getNotch_hrs_one()+", "+photo.getNotch_hrs_two()+", "+photo.getErosion()+", "+
+				   photo.getEros_hrs_one()+", "+photo.getEros_hrs_two()+", "+photo.getDisc()+", "+
+				   photo.getDisc_hrs_one()+", "+photo.getDisc_hrs_two()+", "+photo.getRnfl()+", "+
+				   photo.getRnfl_hrs_one()+", "+photo.getRnfl_hrs_two();
+			result.add(currLine);
+		}
+
+		return result;
+	}
+
+	public static Vector<String> getFinishedNethraCSVLines() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM Photos WHERE type="+NETHRA+" AND confirmed=2 GROUP BY pictureName";
+		Vector<Photos> photos = SQLCommands.queryPhotos(query);
+		
+		String currLine = "picture, adjudicatorID, type, photo_qual, photo_cdr, "+
+				  "photo_notch, notch_hrs_one, notch_hrs_two, photo_erosion, eros_hrs_one, "+
+				  "eros_hrs_two, photo_disc, disc_hrs_one, disc_hrs_two, photo_rnfl, "+
+				  "rnfl_hrs_one, rnfl_hrs_two";
+		result.add(currLine);
+
+		for(Photos photo : photos) {
+			currLine = photo.getPictureName()+", "+photo.getAdjudicatorID()+", "+
+				   photo.getType()+", "+photo.getQual()+", "+photo.getCdr()+", "+photo.getNotch()+", "+
+				   photo.getNotch_hrs_one()+", "+photo.getNotch_hrs_two()+", "+photo.getErosion()+", "+
+				   photo.getEros_hrs_one()+", "+photo.getEros_hrs_two()+", "+photo.getDisc()+", "+
+				   photo.getDisc_hrs_one()+", "+photo.getDisc_hrs_two()+", "+photo.getRnfl()+", "+
+				   photo.getRnfl_hrs_one()+", "+photo.getRnfl_hrs_two();
+			result.add(currLine);
+		}
+
+		return result;
+	}
+
 	/**
 	 * @return the id
 	 */

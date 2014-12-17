@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author aryner
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload", "/uploadPictures", "/img", "/pdf", "/assignHVF", "/OpHVFtest", "/OpReviewHVF", "/printCSV", "/printCSVs", "/uploadData", "/dataUpload", "/assignFDT", "/assignMDT", "/assignOCT", "/assign3Nethra", "/assignStereo"})
+@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload", "/uploadPictures", "/img", "/pdf", "/assignHVF", "/OpHVFtest", "/OpReviewHVF", "/printCSV", "/printCSVs", "/uploadData", "/dataUpload", "/assignFDT", "/assignMDT", "/assignOCT", "/assign3Nethra", "/assignStereo", "/printFinishedCSVs"})
 public class Controller extends HttpServlet {
 	private final String slash = System.getProperty("file.separator");
 	/**
@@ -501,7 +501,25 @@ public class Controller extends HttpServlet {
 		else if(userPath.equals("/printCSVs")) {
 
 //			Tools.createCSV(Picture.getCSVLines(),"hvf_pictures");
-			Tools.createCSV(HVFtest.getCSVLines(),"hvf_grades");
+//			Tools.createCSV(HVFtest.getCSVLines(),"hvf_grades");
+			Tools.createCSV(FDTtest.getCSVLines(),"fdt_grades");
+			Tools.createCSV(MDTtest.getCSVLines(),"mdt_grades");
+			Tools.createCSV(OCTtest.getCSVLines(),"oct_grades");
+			Tools.createCSV(Photos.getStereoCSVLines(),"stereo_grades");
+			Tools.createCSV(Photos.getNethraCSVLines(),"3nethra_grades");
+			response.sendRedirect("/Glaucoma/home"); 
+			return;
+		}
+
+		else if(userPath.equals("/printFinishedCSVs")) {
+
+//			Tools.createCSV(Picture.getCSVLines(),"hvf_pictures");
+			Tools.createCSV(HVFtest.getFinishedCSVLines(),"hvf_completed_grades");
+			Tools.createCSV(FDTtest.getCSVFinishedLines(),"fdt_completed_grades");
+			Tools.createCSV(MDTtest.getCSVFinishedLines(),"mdt_completed_grades");
+			Tools.createCSV(OCTtest.getCSVFinishedLines(),"oct_completed_grades");
+			Tools.createCSV(Photos.getFinishedStereoCSVLines(),"stereo_completed_grades");
+			Tools.createCSV(Photos.getFinishedNethraCSVLines(),"3nethra_completed_grades");
 			response.sendRedirect("/Glaucoma/home"); 
 			return;
 		}

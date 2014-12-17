@@ -10,7 +10,7 @@
 <form action='uploadPictures' method="POST" enctype="multipart/form-data">
 	Choose which section to add to
 	<select name="type" class="btn bigBtn"> 
-<!--		<option value="HVF">HVF</option> -->
+		<option value="HVF">HVF</option>
 <!--		<option value="grading">Grading Chart</option> -->
 <!--		<option value="severity">Glaucoma Severity Chart</option> -->
 		<option value="FDT">FDT</option>
