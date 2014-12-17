@@ -53,6 +53,7 @@ if(pic == null) {
 <form action="assignStereo" method="POST">
 	<input type="hidden" name="pictureName" value="<%out.print(pic.getName());%>" autocomplete="off">
 	<input type="hidden" name="alreadyConfirmed" value="<%out.print((request.getAttribute("confirmed")!=null)?"true":"false");%>">
+	<input type="hidden" name="type" value="<%out.print(Photos.STEREO);%>">
 
 <%
 	int v1 = -1;

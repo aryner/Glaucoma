@@ -43,11 +43,11 @@ public class Photos {
 		pictureName = npictureName;
 	}
 
-	public Photos(String npictureName, int nuserID) {
-		String query = "INSERT INTO Photos (pictureName, userID) VALUES ('"+npictureName+"', '"+nuserID+"')";
+	public Photos(String npictureName, int nuserID, int type) {
+		String query = "INSERT INTO Photos (pictureName, userID, type) VALUES ('"+npictureName+"', '"+nuserID+"', '"+type+"')";
 		SQLCommands.update(query);
 
-		query = "SELECT * FROM Photos WHERE pictureName='"+npictureName+"' AND userID="+nuserID;
+		query = "SELECT * FROM Photos WHERE pictureName='"+npictureName+"' AND userID="+nuserID+" AND type="+type;
 		Vector<Integer> data = SQLCommands.queryNewGrade(query);
 
 		pictureName = npictureName;
@@ -87,7 +87,7 @@ public class Photos {
 		if (user.getAccess() == 0) {
 			query = "SELECT * FROM picture WHERE name NOT IN (SELECT "+
 				" pictureName FROM Photos WHERE userID="+user.getID()+" AND type="+STEREO+") AND type='stereo'"+
-				" AND name NOT IN (SELECT pictureName FROM Photos GROUP BY pictureName HAVING COUNT(*)>=2)";
+				" AND name NOT IN (SELECT pictureName FROM Photos WHERE type="+STEREO+" GROUP BY pictureName HAVING COUNT(*)>=2)";
 		}
 		else if (user.getAccess() == 1) {
 			query = "SELECT * FROM picture WHERE name IN (SELECT pictureName FROM "+
@@ -113,7 +113,7 @@ public class Photos {
 		if (user.getAccess() == 0) {
 			query = "SELECT * FROM picture WHERE name NOT IN (SELECT "+
 				" pictureName FROM Photos WHERE userID="+user.getID()+" AND type="+NETHRA+") AND type='3Nethra'"+
-				" AND name NOT IN (SELECT pictureName FROM Photos GROUP BY pictureName HAVING COUNT(*)>=2)";
+				" AND name NOT IN (SELECT pictureName FROM Photos WHERE type="+NETHRA+" GROUP BY pictureName HAVING COUNT(*)>=2)";
 		}
 		else if (user.getAccess() == 1) {
 			query = "SELECT * FROM picture WHERE name IN (SELECT pictureName FROM "+
@@ -180,25 +180,124 @@ public class Photos {
 		String picName = request.getParameter("pictureName");
 		Photos photo = null;
 		if(user.getAccess() == 0) {
-			photo = new Photos(picName, uID);
+			photo = new Photos(picName, uID, type);
 		}
 		else if (user.getAccess() == 1) {
 			photo = new Photos(picName);
 		}
 
+		String attr = request.getParameter("qual");
+		photo.setQual(Integer.parseInt(attr));
+		attr = request.getParameter("cdr");
+		photo.setCdr(attr);
+		attr = request.getParameter("notch");
+		photo.setNotch(Integer.parseInt(attr));
+		attr = request.getParameter("notch_hrs_one");
+		photo.setNotch_hrs_one(attr);
+		attr = request.getParameter("notch_hrs_two");
+		photo.setNotch_hrs_two(attr);
+		attr = request.getParameter("erosion");
+		photo.setErosion(Integer.parseInt(attr));
+		attr = request.getParameter("eros_hrs_one");
+		photo.setEros_hrs_one(attr);
+		attr = request.getParameter("eros_hrs_two");
+		photo.setEros_hrs_two(attr);
+		attr = request.getParameter("disc");
+		photo.setDisc(Integer.parseInt(attr));
+		attr = request.getParameter("disc_hrs_one");
+		photo.setDisc_hrs_one(attr);
+		attr = request.getParameter("disc_hrs_two");
+		photo.setDisc_hrs_two(attr);
+		attr = request.getParameter("rnfl");
+		photo.setRnfl(Integer.parseInt(attr));
+		attr = request.getParameter("rnfl_hrs_one");
+		photo.setRnfl_hrs_one(attr);
+		attr = request.getParameter("rnfl_hrs_two");
+		photo.setRnfl_hrs_two(attr);
+
+		String query = "UPDATE Photos SET photo_qual='"+photo.getQual()+"', photo_cdr='"+photo.getCdr()+"', "+
+			 	"photo_notch='"+photo.getNotch()+"', notch_hrs_one='"+photo.getNotch_hrs_one()+"', "+
+				"notch_hrs_two='"+photo.getNotch_hrs_two()+"', photo_erosion='"+photo.getErosion()+"', "+
+				"eros_hrs_one='"+photo.getEros_hrs_one()+"', eros_hrs_two='"+photo.getEros_hrs_two()+"', "+
+				"photo_disc='"+photo.getDisc()+"', disc_hrs_one='"+photo.getDisc_hrs_one()+"', "+
+				"disc_hrs_two='"+photo.getDisc_hrs_two()+"', photo_rnfl='"+photo.getRnfl()+"', "+
+				"rnfl_hrs_one='"+photo.getRnfl_hrs_one()+"', rnfl_hrs_two='"+photo.getRnfl_hrs_two()+"' ";
+
+		if(user.getAccess() == 0) {
+			query += " WHERE id='"+photo.getId()+"'";
+		} else if(user.getAccess() ==1) { 
+			query += ", confirmed=2, adjudicatorID="+user.getID()+" WHERE pictureName='"+request.getParameter("pictureName")+"'"+
+				 " AND type='"+type+"' ";
+			if(request.getParameter("alreadyConfirmed").equals("true")) {
+				result = 2;
+			}
+		}
+		SQLCommands.update(query);
+		if(user.getAccess() == 0) {
+			setForAdjudication(picName, type);
+		}
+
 		return result;
+	}
+
+	public static void setForAdjudication(String picName, int type) {
+		String query = "SELECT * FROM Photos WHERE pictureName='"+picName+"' AND type='"+type+"'";
+		Vector<Photos> photos = SQLCommands.queryPhotos(query);
+
+		if(photos.size() > 1) {
+			//get the ones that don't need adjudication
+			query = "SELECT * FROM Photos WHERE type='"+type+"' GROUP BY pictureName, "+
+				"photo_qual, photo_cdr, " +
+				"photo_notch, notch_hrs_one, notch_hrs_two, photo_erosion, eros_hrs_one, "+
+				"eros_hrs_two, photo_disc, disc_hrs_one, disc_hrs_two, photo_rnfl, "+
+				"rnfl_hrs_one, rnfl_hrs_two " +
+				"HAVING COUNT(*)=2";
+			Vector<Photos> set = SQLCommands.queryPhotos(query);
+			//get the ones that need adjudication
+			query = "SELECT * FROM Photos WHERE type='"+type+"' GROUP BY pictureName, "+
+				"photo_qual, photo_cdr, " +
+				"photo_notch, notch_hrs_one, notch_hrs_two, photo_erosion, eros_hrs_one, "+
+				"eros_hrs_two, photo_disc, disc_hrs_one, disc_hrs_two, photo_rnfl, "+
+				"rnfl_hrs_one, rnfl_hrs_two " +
+				"HAVING COUNT(*)=1";
+			Vector<Photos> notSet = SQLCommands.queryPhotos(query);
+
+			for(int i=set.size()-1; i>=0; i--) {
+				if (!set.get(i).getPictureName().equals(picName)) {
+					set.remove(i);
+				}
+			}
+			for(int i=notSet.size()-1; i>=0; i--) {
+				if (!notSet.get(i).getPictureName().equals(picName)) {
+					notSet.remove(i);
+				}
+			}
+			
+			//update the confirmed ones
+			query = "UPDATE Photos SET confirmed=2";
+			query += " WHERE pictureName='"+picName+"' AND type='"+type+"'";
+			if(set.size() > 0) {
+				SQLCommands.update(query);
+			}
+
+			//update the ones that need confirming
+			query = "UPDATE Photos SET confirmed=1 WHERE pictureName='"+picName+"' AND type='"+type+"'";
+			if(notSet.size() > 0) {
+				SQLCommands.update(query);
+			}
+		}
 	}
 
 	public static Vector<String> getUngradedNames() {
 		Vector<String> result = new Vector<String>();
-		String query = "SELECT * FROM picture WHERE name NOT IN (SELECT pictureName FROM Photos) AND type='stereo'";
+		String query = "SELECT * FROM picture WHERE name NOT IN (SELECT pictureName FROM Photos WHERE type="+STEREO+") AND type='stereo'";
 		Vector<Picture> pictures = SQLCommands.queryPictures(query);
 
 		for(int i=0; i<pictures.size(); i++) {
 			result.add("Stereo - " + pictures.get(i).getName());
 		}
 
-		query = "SELECT * FROM picture WHERE name NOT IN (SELECT pictureName FROM Photos) AND type='3Nethra'";
+		query = "SELECT * FROM picture WHERE name NOT IN (SELECT pictureName FROM Photos WHERE type="+NETHRA+") AND type='3Nethra'";
 		pictures = SQLCommands.queryPictures(query);
 
 		for(int i=0; i<pictures.size(); i++) {
