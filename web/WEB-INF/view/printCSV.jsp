@@ -6,7 +6,11 @@
 <%@page import="java.util.*"%>
 
 <%
-Vector<String> hvf = (Vector)request.getAttribute("hvf");
+Vector<String> fdt = (Vector)request.getAttribute("fdt");
+Vector<String> mdt = (Vector)request.getAttribute("mdt");
+Vector<String> oct = (Vector)request.getAttribute("oct");
+Vector<String> stereo = (Vector)request.getAttribute("stereo");
+Vector<String> nethra = (Vector)request.getAttribute("nethra");
 %>
 
 <form action="printCSVs" method="POST">
@@ -14,7 +18,31 @@ Vector<String> hvf = (Vector)request.getAttribute("hvf");
 </form>
 <br><br>
 <%
-for(int i=0; i<hvf.size(); i++) {
-	out.print(hvf.get(i)+"<br>");
+for(int i=0; i<fdt.size(); i++) {
+	out.print(fdt.get(i)+"<br>");
+}
+%>
+<br><br>
+<%
+for(int i=0; i<mdt.size(); i++) {
+	out.print(mdt.get(i)+"<br>");
+}
+%>
+<br><br>
+<%
+for(int i=0; i<oct.size(); i++) {
+	out.print(oct.get(i)+"<br>");
+}
+%>
+<br><br>
+<%
+for(int i=0; i<stereo.size(); i++) {
+	out.print(stereo.get(i)+"<br>");
+}
+%>
+<br><br>
+<%
+for(int i=0; i<nethra.size(); i++) {
+	out.print(nethra.get(i)+"<br>");
 }
 %>

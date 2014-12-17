@@ -68,7 +68,7 @@ public class SQLCommands {
 
 			while(resultSet.next()) {
 				result.add(new FDTtest(resultSet.getInt("id"),resultSet.getInt("confirmed"),resultSet.getString("pictureName"),
-					   resultSet.getInt("userID"),resultSet.getString("fdt_dur"),resultSet.getInt("fdt_targ"),
+					   resultSet.getInt("userID"),resultSet.getInt("adjudicatorID"),resultSet.getString("fdt_dur"),resultSet.getInt("fdt_targ"),
 					   resultSet.getString("fdt_targ_oth"),resultSet.getInt("fdt_fixerr_num"),resultSet.getInt("fdt_fixerr_den"),
 					   resultSet.getInt("fdt_fp_num"),resultSet.getInt("fdt_fp_den"),resultSet.getInt("fdt_fn_num"),resultSet.getInt("fdt_fn_den"),
 					   resultSet.getInt("fdt_test"),resultSet.getString("fdt_test_oth"),
@@ -110,7 +110,7 @@ public class SQLCommands {
 
 			while(resultSet.next()) {
 				result.add(new MDTtest(resultSet.getInt("id"),resultSet.getInt("confirmed"),resultSet.getString("pictureName"),
-						       resultSet.getInt("userID"),resultSet.getString("mdt_late"),resultSet.getString("mdt_fp"),
+						       resultSet.getInt("userID"),resultSet.getInt("adjudicatorID"),resultSet.getString("mdt_late"),resultSet.getString("mdt_fp"),
 						       resultSet.getInt("mdt_lens"),resultSet.getString("mdt_lens_y"),resultSet.getString("mdt_dur"),
 						       resultSet.getString("mdt_ptd"),resultSet.getString("mdt_lu_one"),resultSet.getString("mdt_ru_one"),
 						       resultSet.getString("mdt_ll_one"),resultSet.getString("mdt_rl_one"),resultSet.getInt("mdt_abnormal")));
@@ -145,7 +145,7 @@ public class SQLCommands {
 
 			while(resultSet.next()) {
 				result.add(new OCTtest(resultSet.getInt("id"),resultSet.getInt("confirmed"),resultSet.getString("pictureName"),
-						       resultSet.getInt("userID"),resultSet.getString("oct_length"),resultSet.getInt("oct_type"),
+						       resultSet.getInt("userID"),resultSet.getInt("adjudicatorID"),resultSet.getString("oct_length"),resultSet.getInt("oct_type"),
 						       resultSet.getString("oct_type_oth"),resultSet.getString("oct_snum"),resultSet.getInt("oct_scol"),
 						       resultSet.getString("oct_nnum"),resultSet.getInt("oct_ncol"),resultSet.getString("oct_inum"),
 						       resultSet.getInt("oct_icol"),resultSet.getString("oct_tnum"),resultSet.getInt("oct_tcol"),
@@ -188,7 +188,7 @@ public class SQLCommands {
 
 			while(resultSet.next()) {
 				result.add(new Photos(resultSet.getInt("id"),resultSet.getInt("confirmed"),resultSet.getString("pictureName"),
-						      resultSet.getInt("userID"),resultSet.getInt("type"),resultSet.getInt("photo_qual"),
+						      resultSet.getInt("userID"),resultSet.getInt("adjudicatorID"),resultSet.getInt("type"),resultSet.getInt("photo_qual"),
 						      resultSet.getString("photo_cdr"),resultSet.getInt("photo_notch"),resultSet.getString("notch_hrs_one"),
 						      resultSet.getString("notch_hrs_two"),resultSet.getInt("photo_erosion"),resultSet.getString("eros_hrs_one"),
 						      resultSet.getString("eros_hrs_two"),resultSet.getInt("photo_disc"),resultSet.getString("disc_hrs_one"),

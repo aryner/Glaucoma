@@ -294,8 +294,11 @@ public class Controller extends HttpServlet {
 		}
 
 		else if (userPath.equals("/printCSV")){
-			request.setAttribute("pics", Picture.getCSVLines());
-			request.setAttribute("hvf", HVFtest.getCSVLines());
+			request.setAttribute("fdt", FDTtest.getCSVLines());
+			request.setAttribute("mdt", MDTtest.getCSVLines());
+			request.setAttribute("oct", OCTtest.getCSVLines());
+			request.setAttribute("stereo", Photos.getStereoCSVLines());
+			request.setAttribute("nethra", Photos.getNethraCSVLines());
 		}
 
 		else if (userPath.equals("/pdf")) {

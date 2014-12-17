@@ -19,6 +19,7 @@ public class MDTtest {
 	private int confirmed;
 	private String pictureName;
 	private int userID;
+	private int adjudicatorID;
 	private String late;
 	private String fp;
 	private int lens;
@@ -49,7 +50,7 @@ public class MDTtest {
 		id = data.get(1);	
 	}
 
-	public MDTtest(int id, int confirmed, String pictureName, int userID, String late, String fp,
+	public MDTtest(int id, int confirmed, String pictureName, int userID, int adjudicatorID, String late, String fp,
 		       int lens, String lens_y, String dur, String ptd, String lu_one, String ru_one,
 		       String ll_one, String rl_one, int abnormal) 
 	{
@@ -57,6 +58,7 @@ public class MDTtest {
 		this.confirmed = confirmed;
 		this.pictureName = pictureName;
 		this.userID = userID;
+		this.adjudicatorID = adjudicatorID;
 		this.late = late;
 		this.fp = fp;
 		this.lens = lens;
@@ -276,6 +278,27 @@ public class MDTtest {
 		return result;
 	}
 
+	public static Vector<String> getCSVLines() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM MDTtest";
+		Vector<MDTtest> mdts = SQLCommands.queryMDTtest(query);
+		
+		String currLine = "confirmed, picture, userID, adjudicatorID, mdt_late, mdt_fp, mdt_lens, "+
+				  "mdt_lens_y, mdt_dur, mdt_ptd, mdt_lu_one, mdt_ru_one, mdt_ll_one, "+
+				  "mdt_rl_one, mdt_abnormal";
+		result.add(currLine);
+
+		for(MDTtest mdt : mdts) {
+			currLine = mdt.getConfirmed()+", "+mdt.getPictureName()+", "+mdt.getUserID()+", "+mdt.getAdjudicatorID()+", "+
+				   mdt.getLate()+", "+mdt.getFp()+", "+mdt.getLens()+", "+mdt.getLens_y()+", "+mdt.getDur()+", "+
+				   mdt.getPtd()+", "+mdt.getLu_one()+", "+mdt.getRu_one()+", "+mdt.getLl_one()+", "+mdt.getRl_one()+", "+
+				   mdt.getAbnormal();
+			result.add(currLine);
+		}
+
+		return result;
+	}
+
 	/**
 	 * @return the id
 	 */
@@ -484,6 +507,20 @@ public class MDTtest {
 	 */
 	public void setAbnormal(int abnormal) {
 		this.abnormal = abnormal;
+	}
+
+	/**
+	 * @return the adjudicatorID
+	 */
+	public int getAdjudicatorID() {
+		return adjudicatorID;
+	}
+
+	/**
+	 * @param adjudicatorID the adjudicatorID to set
+	 */
+	public void setAdjudicatorID(int adjudicatorID) {
+		this.adjudicatorID = adjudicatorID;
 	}
 	
 }

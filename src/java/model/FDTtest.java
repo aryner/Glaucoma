@@ -19,6 +19,7 @@ public class FDTtest {
 	private int confirmed;
 	private String pictureName;
 	private int userID;
+	private int adjudicatorID;
 	private String dur;
 	private int targ;
 	private String targ_oth;
@@ -69,7 +70,7 @@ public class FDTtest {
 		id = data.get(1);	
 	}
 
-	public FDTtest(int id, int confirmed, String pictureName, int userID, String dur, int targ,
+	public FDTtest(int id, int confirmed, String pictureName, int userID, int adjudicatorID, String dur, int targ,
 		       String targ_oth, int fixerr_num, int fixerr_den, int fp_num, int fp_den, int fn_num, int fn_den , int test,
 		       String test_oth, int speed, String speed_oth, String pupil, String va_num, String va_den,
 		       int mdsign, String mddb, String mdp, int psdisgn, String psdb, String psdp, String lu_one,
@@ -80,6 +81,7 @@ public class FDTtest {
 		this.confirmed = confirmed;
 		this.pictureName = pictureName;
 		this.userID = userID;
+		this.adjudicatorID = adjudicatorID;
 		this.dur = dur;
 		this.targ = targ;
 		this.targ_oth = targ_oth;
@@ -364,6 +366,32 @@ public class FDTtest {
 
 		for(int i=0; i<fdt.size(); i++) {
 			result.add("FDT - " + fdt.get(i));
+		}
+
+		return result;
+	}
+
+	public static Vector<String> getCSVLines() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM FDTtest";
+		Vector<FDTtest> fdts = SQLCommands.queryFDTtest(query);
+
+		String currLine = "confirmed, picture, userID, adjudicatorID, fdt_dur, fdt_targ, fdt_targ_oth, fdt_fixerr_num, "+
+				  "fdt_fixerr_den, fdt_fp_num, fdt_fp_den, fdt_fn_num, fdt_fn_den, fdt_test, fdt_test_oth, fdt_speed, "+
+				  "fdt_speed_oth, fdt_pupil, fdt_va_num, fdt_va_den, fdt_mdsign, fdt_mddb, fdt_mdp, fdt_psdsign, "+
+				  "fdt_psdb, fdt_psdp, fdt_lu_one, fdt_lu_five, fdt_ru_one, fdt_ru_five, fdt_ll_one, fdt_ll_five, " +
+				  "fdt_rl_one, fdt_rl_five, fdt_abnormal";
+		result.add(currLine);
+
+		for(FDTtest fdt : fdts) {
+			currLine = fdt.getConfirmed()+", "+fdt.getPictureName()+", "+fdt.getUserID()+", "+fdt.getAdjudicatorID()+", "+
+				   fdt.getDur()+", "+fdt.getTarg()+", "+fdt.getTarg_oth()+", "+fdt.getFixerr_num()+", "+fdt.getFixerr_den()+", "+
+				   fdt.getFp_num()+", "+fdt.getFp_den()+", "+fdt.getFn_num()+", "+fdt.getFn_den()+", "+fdt.getTest()+", "+
+				   fdt.getTest_oth()+", "+fdt.getSpeed()+", "+fdt.getSpeed_oth()+", "+fdt.getPupil()+", "+fdt.getVa_num()+", "+
+				   fdt.getVa_den()+", "+fdt.getMdsign()+", "+fdt.getMddb()+", "+fdt.getPsdsign()+", "+fdt.getPsdb()+", "+
+				   fdt.getPsdp()+", "+fdt.getLu_one()+", "+fdt.getLu_five()+", "+fdt.getRu_one()+", "+fdt.getRu_five()+", "+
+				   fdt.getLl_one()+", "+fdt.getLl_five()+", "+fdt.getRl_one()+", "+fdt.getRl_five()+", "+fdt.getAbnormal();
+			result.add(currLine);
 		}
 
 		return result;
@@ -857,6 +885,20 @@ public class FDTtest {
 	 */
 	public void setAbnormal(int abnormal) {
 		this.abnormal = abnormal;
+	}
+
+	/**
+	 * @return the adjudicatorID
+	 */
+	public int getAdjudicatorID() {
+		return adjudicatorID;
+	}
+
+	/**
+	 * @param adjudicatorID the adjudicatorID to set
+	 */
+	public void setAdjudicatorID(int adjudicatorID) {
+		this.adjudicatorID = adjudicatorID;
 	}
 	
 	

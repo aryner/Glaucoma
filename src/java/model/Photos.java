@@ -19,6 +19,7 @@ public class Photos {
 	private int confirmed;
 	private String pictureName;
 	private int userID;
+	private int adjudicatorID;
 	private int type;
 	private int qual;
 	private String cdr;
@@ -55,7 +56,7 @@ public class Photos {
 		id = data.get(1);	
 	}
 
-	public Photos(int id, int confirmed, String pictureName, int userID, int type, int qual,
+	public Photos(int id, int confirmed, String pictureName, int userID, int adjudicatorID, int type, int qual,
 		      String cdr, int notch, String notch_hrs_one, String notch_hrs_two, int erosion,
 		      String eros_hrs_one, String eros_hrs_two, int disc, String disc_hrs_one,
 		      String disc_hrs_two, int rnfl, String rnfl_hrs_one, String rnfl_hrs_two) 
@@ -64,6 +65,7 @@ public class Photos {
 		this.confirmed = confirmed;
 		this.pictureName = pictureName;
 		this.userID = userID;
+		this.adjudicatorID = adjudicatorID;
 		this.type = type;
 		this.qual = qual;
 		this.cdr = cdr; 
@@ -364,6 +366,54 @@ public class Photos {
 		return result;
 	}
 
+	public static Vector<String> getStereoCSVLines() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM Photos WHERE type="+STEREO;
+		Vector<Photos> photos = SQLCommands.queryPhotos(query);
+		
+		String currLine = "confirmed, picture, userID, adjudicatorID, type, photo_qual, photo_cdr, "+
+				  "photo_notch, notch_hrs_one, notch_hrs_two, photo_erosion, eros_hrs_one, "+
+				  "eros_hrs_two, photo_disc, disc_hrs_one, disc_hrs_two, photo_rnfl, "+
+				  "rnfl_hrs_one, rnfl_hrs_two";
+		result.add(currLine);
+
+		for(Photos photo : photos) {
+			currLine = photo.getConfirmed()+", "+photo.getPictureName()+", "+photo.getUserID()+", "+photo.getAdjudicatorID()+", "+
+				   photo.getType()+", "+photo.getQual()+", "+photo.getCdr()+", "+photo.getNotch()+", "+
+				   photo.getNotch_hrs_one()+", "+photo.getNotch_hrs_two()+", "+photo.getErosion()+", "+
+				   photo.getEros_hrs_one()+", "+photo.getEros_hrs_two()+", "+photo.getDisc()+", "+
+				   photo.getDisc_hrs_one()+", "+photo.getDisc_hrs_two()+", "+photo.getRnfl()+", "+
+				   photo.getRnfl_hrs_one()+", "+photo.getRnfl_hrs_two();
+			result.add(currLine);
+		}
+
+		return result;
+	}
+
+	public static Vector<String> getNethraCSVLines() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM Photos WHERE type="+NETHRA;
+		Vector<Photos> photos = SQLCommands.queryPhotos(query);
+		
+		String currLine = "confirmed, picture, userID, adjudicatorID, type, photo_qual, photo_cdr, "+
+				  "photo_notch, notch_hrs_one, notch_hrs_two, photo_erosion, eros_hrs_one, "+
+				  "eros_hrs_two, photo_disc, disc_hrs_one, disc_hrs_two, photo_rnfl, "+
+				  "rnfl_hrs_one, rnfl_hrs_two";
+		result.add(currLine);
+
+		for(Photos photo : photos) {
+			currLine = photo.getConfirmed()+", "+photo.getPictureName()+", "+photo.getUserID()+", "+photo.getAdjudicatorID()+", "+
+				   photo.getType()+", "+photo.getQual()+", "+photo.getCdr()+", "+photo.getNotch()+", "+
+				   photo.getNotch_hrs_one()+", "+photo.getNotch_hrs_two()+", "+photo.getErosion()+", "+
+				   photo.getEros_hrs_one()+", "+photo.getEros_hrs_two()+", "+photo.getDisc()+", "+
+				   photo.getDisc_hrs_one()+", "+photo.getDisc_hrs_two()+", "+photo.getRnfl()+", "+
+				   photo.getRnfl_hrs_one()+", "+photo.getRnfl_hrs_two();
+			result.add(currLine);
+		}
+
+		return result;
+	}
+
 	/**
 	 * @return the id
 	 */
@@ -628,6 +678,20 @@ public class Photos {
 	 */
 	public void setRnfl_hrs_two(String rnfl_hrs_two) {
 		this.rnfl_hrs_two = rnfl_hrs_two;
+	}
+
+	/**
+	 * @return the adjudicatorID
+	 */
+	public int getAdjudicatorID() {
+		return adjudicatorID;
+	}
+
+	/**
+	 * @param adjudicatorID the adjudicatorID to set
+	 */
+	public void setAdjudicatorID(int adjudicatorID) {
+		this.adjudicatorID = adjudicatorID;
 	}
 	
 }

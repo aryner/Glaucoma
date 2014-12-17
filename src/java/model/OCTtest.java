@@ -19,6 +19,7 @@ public class OCTtest {
 	private int confirmed;
 	private String pictureName;
 	private int userID;
+	private int adjudicatorID;
 	private String length;
 	private int type;
 	private String type_oth;
@@ -72,7 +73,7 @@ public class OCTtest {
 		id = data.get(1);	
 	}
 
-	public OCTtest(int id, int confirmed, String pictureName, int userID, String length,
+	public OCTtest(int id, int confirmed, String pictureName, int userID, int adjudicatorID, String length,
 		       int type, String type_oth, String snum, int scol, String nnum, int ncol,
 		       String inum, int icol, String tnum, int tcol, String sig, String isnum,
 		       int iscol, String sinum, int sicol, String stnum, int stcol, String itnum,
@@ -84,6 +85,7 @@ public class OCTtest {
 		this.confirmed = confirmed;
 		this.pictureName = pictureName;
 		this.userID = userID;
+		this.adjudicatorID = adjudicatorID;
 		this.length = length;
 		this.type = type;
 		this.type_oth = type_oth;
@@ -389,6 +391,33 @@ public class OCTtest {
 		return result;
 	}
 
+	public static Vector<String> getCSVLines() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM OCTtest";
+		Vector<OCTtest> octs = SQLCommands.queryOCTtest(query);
+		
+		String currLine = "confirmed, picture, userID, adjudicatorID, oct_length, oct_type, oct_type_oth, "+
+				  "oct_snum, oct_scol, oct_nnum, oct_ncol, oct_inum, oct_icol, oct_tnum, oct_tcol, "+
+				  "oct_sig, oct_isnum, oct_iscol, oct_sinum, oct_sicol, oct_stnum, oct_stcol, oct_itnum, "+
+				  "oct_itcol, oct_snnum, oct_sncol, oct_mmnum, oct_mmcol, oct_smaxnum, oct_smaxcol, "+
+				  "oct_savgnum, oct_savgcol, oct_iavgnum, oct_iavgcol, oct_atnum, oct_atcol";
+		result.add(currLine);
+
+		for(OCTtest oct : octs) {
+			currLine = oct.getConfirmed()+", "+oct.getPictureName()+", "+oct.getUserID()+", "+oct.getAdjudicatorID()+", "+
+				   oct.getLength()+", "+oct.getType()+", "+oct.getType_oth()+", "+oct.getSnum()+", "+oct.getScol()+", "+
+				   oct.getNnum()+", "+oct.getNcol()+", "+oct.getInum()+", "+oct.getIcol()+", "+oct.getTnum()+", "+
+				   oct.getTcol()+", "+oct.getSig()+", "+oct.getIsnum()+", "+oct.getIscol()+", "+oct.getSinum()+", "+
+				   oct.getSicol()+", "+oct.getStnum()+", "+oct.getStcol()+", "+oct.getItnum()+", "+oct.getItcol()+", "+
+				   oct.getSnnum()+", "+oct.getSncol()+", "+oct.getMmnum()+", "+oct.getMmcol()+", "+oct.getSmaxnum()+", "+
+				   oct.getSmaxcol()+", "+oct.getSavgnum()+", "+oct.getSavgcol()+", "+oct.getIavgnum()+", "+
+				   oct.getIavgcol()+", "+oct.getAtnum()+", "+oct.getAtcol();
+			result.add(currLine);
+		}
+
+		return result;
+	}
+
 	/**
 	 * @return the id
 	 */
@@ -404,16 +433,16 @@ public class OCTtest {
 	}
 
 	/**
-	 * @return the confrimed
+	 * @return the confirmed
 	 */
-	public int getConfrimed() {
+	public int getConfirmed() {
 		return confirmed;
 	}
 
 	/**
-	 * @param confrimed the confrimed to set
+	 * @param confrimed the confirmed to set
 	 */
-	public void setConfrimed(int confrimed) {
+	public void setConfirmed(int confrimed) {
 		this.confirmed = confrimed;
 	}
 
@@ -919,5 +948,19 @@ public class OCTtest {
 	 */
 	public void setAtcol(int atcol) {
 		this.atcol = atcol;
+	}
+
+	/**
+	 * @return the adjudicatorID
+	 */
+	public int getAdjudicatorID() {
+		return adjudicatorID;
+	}
+
+	/**
+	 * @param adjudicatorID the adjudicatorID to set
+	 */
+	public void setAdjudicatorID(int adjudicatorID) {
+		this.adjudicatorID = adjudicatorID;
 	}
 }
