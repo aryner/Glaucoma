@@ -400,7 +400,7 @@ public class OCTtest {
 				  "oct_snum, oct_scol, oct_nnum, oct_ncol, oct_inum, oct_icol, oct_tnum, oct_tcol, "+
 				  "oct_sig, oct_isnum, oct_iscol, oct_sinum, oct_sicol, oct_stnum, oct_stcol, oct_itnum, "+
 				  "oct_itcol, oct_snnum, oct_sncol, oct_mmnum, oct_mmcol, oct_smaxnum, oct_smaxcol, "+
-				  "oct_savgnum, oct_savgcol, oct_iavgnum, oct_iavgcol, oct_atnum, oct_atcol";
+				  "imaxnum, imaxcol, oct_savgnum, oct_savgcol, oct_iavgnum, oct_iavgcol, oct_atnum, oct_atcol";
 		result.add(currLine);
 
 		for(OCTtest oct : octs) {
@@ -410,8 +410,8 @@ public class OCTtest {
 				   oct.getTcol()+", "+oct.getSig()+", "+oct.getIsnum()+", "+oct.getIscol()+", "+oct.getSinum()+", "+
 				   oct.getSicol()+", "+oct.getStnum()+", "+oct.getStcol()+", "+oct.getItnum()+", "+oct.getItcol()+", "+
 				   oct.getSnnum()+", "+oct.getSncol()+", "+oct.getMmnum()+", "+oct.getMmcol()+", "+oct.getSmaxnum()+", "+
-				   oct.getSmaxcol()+", "+oct.getSavgnum()+", "+oct.getSavgcol()+", "+oct.getIavgnum()+", "+
-				   oct.getIavgcol()+", "+oct.getAtnum()+", "+oct.getAtcol();
+				   oct.getSmaxcol()+", "+oct.getImaxnum()+", "+oct.getImaxcol()+", "+oct.getSavgnum()+", "+oct.getSavgcol()+", "+
+				   oct.getIavgnum()+", "+oct.getIavgcol()+", "+oct.getAtnum()+", "+oct.getAtcol();
 			result.add(currLine);
 		}
 
@@ -427,7 +427,7 @@ public class OCTtest {
 				  "oct_snum, oct_scol, oct_nnum, oct_ncol, oct_inum, oct_icol, oct_tnum, oct_tcol, "+
 				  "oct_sig, oct_isnum, oct_iscol, oct_sinum, oct_sicol, oct_stnum, oct_stcol, oct_itnum, "+
 				  "oct_itcol, oct_snnum, oct_sncol, oct_mmnum, oct_mmcol, oct_smaxnum, oct_smaxcol, "+
-				  "oct_savgnum, oct_savgcol, oct_iavgnum, oct_iavgcol, oct_atnum, oct_atcol";
+				  "imaxnum, imaxcol, oct_savgnum, oct_savgcol, oct_iavgnum, oct_iavgcol, oct_atnum, oct_atcol";
 		result.add(currLine);
 
 		for(OCTtest oct : octs) {
@@ -437,8 +437,8 @@ public class OCTtest {
 				   oct.getTcol()+", "+oct.getSig()+", "+oct.getIsnum()+", "+oct.getIscol()+", "+oct.getSinum()+", "+
 				   oct.getSicol()+", "+oct.getStnum()+", "+oct.getStcol()+", "+oct.getItnum()+", "+oct.getItcol()+", "+
 				   oct.getSnnum()+", "+oct.getSncol()+", "+oct.getMmnum()+", "+oct.getMmcol()+", "+oct.getSmaxnum()+", "+
-				   oct.getSmaxcol()+", "+oct.getSavgnum()+", "+oct.getSavgcol()+", "+oct.getIavgnum()+", "+
-				   oct.getIavgcol()+", "+oct.getAtnum()+", "+oct.getAtcol();
+				   oct.getSmaxcol()+", "+oct.getImaxnum()+", "+oct.getImaxcol()+", "+oct.getSavgnum()+", "+oct.getSavgcol()+", "+
+				   oct.getIavgnum()+", "+oct.getIavgcol()+", "+oct.getAtnum()+", "+oct.getAtcol();
 			result.add(currLine);
 		}
 

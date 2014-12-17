@@ -394,7 +394,7 @@ public class FDTtest {
 				   fdt.getDur()+", "+fdt.getTarg()+", "+fdt.getTarg_oth()+", "+fdt.getFixerr_num()+", "+fdt.getFixerr_den()+", "+
 				   fdt.getFp_num()+", "+fdt.getFp_den()+", "+fdt.getFn_num()+", "+fdt.getFn_den()+", "+fdt.getTest()+", "+
 				   fdt.getTest_oth()+", "+fdt.getSpeed()+", "+fdt.getSpeed_oth()+", "+fdt.getPupil()+", "+fdt.getVa_num()+", "+
-				   fdt.getVa_den()+", "+fdt.getMdsign()+", "+fdt.getMddb()+", "+fdt.getPsdsign()+", "+fdt.getPsdb()+", "+
+				   fdt.getVa_den()+", "+fdt.getMdsign()+", "+fdt.getMddb()+", "+fdt.getMdp()+", "+fdt.getPsdsign()+", "+fdt.getPsdb()+", "+
 				   fdt.getPsdp()+", "+fdt.getLu_one()+", "+fdt.getLu_five()+", "+fdt.getRu_one()+", "+fdt.getRu_five()+", "+
 				   fdt.getLl_one()+", "+fdt.getLl_five()+", "+fdt.getRl_one()+", "+fdt.getRl_five()+", "+fdt.getAbnormal();
 			result.add(currLine);
@@ -420,7 +420,7 @@ public class FDTtest {
 				   fdt.getDur()+", "+fdt.getTarg()+", "+fdt.getTarg_oth()+", "+fdt.getFixerr_num()+", "+fdt.getFixerr_den()+", "+
 				   fdt.getFp_num()+", "+fdt.getFp_den()+", "+fdt.getFn_num()+", "+fdt.getFn_den()+", "+fdt.getTest()+", "+
 				   fdt.getTest_oth()+", "+fdt.getSpeed()+", "+fdt.getSpeed_oth()+", "+fdt.getPupil()+", "+fdt.getVa_num()+", "+
-				   fdt.getVa_den()+", "+fdt.getMdsign()+", "+fdt.getMddb()+", "+fdt.getPsdsign()+", "+fdt.getPsdb()+", "+
+				   fdt.getVa_den()+", "+fdt.getMdsign()+", "+fdt.getMddb()+", "+fdt.getMdp()+", "+fdt.getPsdsign()+", "+fdt.getPsdb()+", "+
 				   fdt.getPsdp()+", "+fdt.getLu_one()+", "+fdt.getLu_five()+", "+fdt.getRu_one()+", "+fdt.getRu_five()+", "+
 				   fdt.getLl_one()+", "+fdt.getLl_five()+", "+fdt.getRl_one()+", "+fdt.getRl_five()+", "+fdt.getAbnormal();
 			result.add(currLine);
