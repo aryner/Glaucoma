@@ -6,92 +6,180 @@
 
 
 $(document).ready(function() {
+	var notch = false;
+	var erosion = false;
+	var disc = false;
+	var rnfl = false;
+
+	$('input[type=radio][name=notch]').on('change', function() {
+		var value = this.value;
+		notch = (value === "2" ? false : true);
+
+		if(!notch) {
+			console.log("in not notch");
+			$('input[type=text][name=notch_hrs_one]').val("");
+			$('input[type=text][name=notch_hrs_two]').val("");
+		}
+	});
 	$('input[type=text][name=notch_hrs_one]').on('input', function() {
-		if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
-			this.value = this.value.replace(/[^0-9^:]/g, '');
-		} 
-		if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
-			var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
-			if(second.indexOf(":") >= 0) {
-				this.value = this.value.substring(0,this.value.length-1);
+		if(notch) {
+			if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
+				this.value = this.value.replace(/[^0-9^:]/g, '');
+			} 
+			if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
+				var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
+				if(second.indexOf(":") >= 0) {
+					this.value = this.value.substring(0,this.value.length-1);
+				}
 			}
+		}
+		else {
+			this.value = "";
 		}
 	});
 	$('input[type=text][name=notch_hrs_two]').on('input', function() {
-		if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
-			this.value = this.value.replace(/[^0-9^:]/g, '');
-		} 
-		if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
-			var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
-			if(second.indexOf(":") >= 0) {
-				this.value = this.value.substring(0,this.value.length-1);
+		if(notch) {
+			if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
+				this.value = this.value.replace(/[^0-9^:]/g, '');
+			} 
+			if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
+				var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
+				if(second.indexOf(":") >= 0) {
+					this.value = this.value.substring(0,this.value.length-1);
+				}
 			}
+		}
+		else {
+			this.value = "";
+		}
+	});
+
+	$('input[type=radio][name=erosion]').on('change', function() {
+		var value = this.value;
+		erosion = (value === "2" ? false : true);
+
+		if(!erosion) {
+			console.log("in not notch");
+			$('input[type=text][name=eros_hrs_one]').val("");
+			$('input[type=text][name=eros_hrs_two]').val("");
 		}
 	});
 	$('input[type=text][name=eros_hrs_one]').on('input', function() {
-		if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
-			this.value = this.value.replace(/[^0-9^:]/g, '');
-		} 
-		if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
-			var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
-			if(second.indexOf(":") >= 0) {
-				this.value = this.value.substring(0,this.value.length-1);
+		if(erosion) {
+			if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
+				this.value = this.value.replace(/[^0-9^:]/g, '');
+			} 
+			if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
+				var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
+				if(second.indexOf(":") >= 0) {
+					this.value = this.value.substring(0,this.value.length-1);
+				}
 			}
+		}
+		else {
+			this.value = "";
 		}
 	});
 	$('input[type=text][name=eros_hrs_two]').on('input', function() {
-		if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
-			this.value = this.value.replace(/[^0-9^:]/g, '');
-		} 
-		if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
-			var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
-			if(second.indexOf(":") >= 0) {
-				this.value = this.value.substring(0,this.value.length-1);
+		if(erosion) {
+			if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
+				this.value = this.value.replace(/[^0-9^:]/g, '');
+			} 
+			if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
+				var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
+				if(second.indexOf(":") >= 0) {
+					this.value = this.value.substring(0,this.value.length-1);
+				}
 			}
+		}
+		else {
+			this.value = "";
+		}
+	});
+
+	$('input[type=radio][name=disc]').on('change', function() {
+		var value = this.value;
+		disc = (value === "2" ? false : true);
+
+		if(!disc) {
+			console.log("in not notch");
+			$('input[type=text][name=disc_hrs_one]').val("");
+			$('input[type=text][name=disc_hrs_two]').val("");
 		}
 	});
 	$('input[type=text][name=disc_hrs_one]').on('input', function() {
-		if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
-			this.value = this.value.replace(/[^0-9^:]/g, '');
-		} 
-		if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
-			var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
-			if(second.indexOf(":") >= 0) {
-				this.value = this.value.substring(0,this.value.length-1);
+		if(disc) {
+			if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
+				this.value = this.value.replace(/[^0-9^:]/g, '');
+			} 
+			if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
+				var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
+				if(second.indexOf(":") >= 0) {
+					this.value = this.value.substring(0,this.value.length-1);
+				}
 			}
+		}
+		else {
+			this.value = "";
 		}
 	});
 	$('input[type=text][name=disc_hrs_two]').on('input', function() {
-		if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
-			this.value = this.value.replace(/[^0-9^:]/g, '');
-		} 
-		if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
-			var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
-			if(second.indexOf(":") >= 0) {
-				this.value = this.value.substring(0,this.value.length-1);
+		if(disc) {
+			if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
+				this.value = this.value.replace(/[^0-9^:]/g, '');
+			} 
+			if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
+				var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
+				if(second.indexOf(":") >= 0) {
+					this.value = this.value.substring(0,this.value.length-1);
+				}
 			}
+		} 
+		else {
+			this.value = "";
+		}
+	});
+
+	$('input[type=radio][name=rnfl]').on('change', function() {
+		var value = this.value;
+		rnfl = (value === "2" ? false : true);
+
+		if(!rnfl) {
+			console.log("in not notch");
+			$('input[type=text][name=rnfl_hrs_one]').val("");
+			$('input[type=text][name=rnfl_hrs_two]').val("");
 		}
 	});
 	$('input[type=text][name=rnfl_hrs_one]').on('input', function() {
-		if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
-			this.value = this.value.replace(/[^0-9^:]/g, '');
-		} 
-		if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
-			var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
-			if(second.indexOf(":") >= 0) {
-				this.value = this.value.substring(0,this.value.length-1);
+		if(rnfl) {
+			if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
+				this.value = this.value.replace(/[^0-9^:]/g, '');
+			} 
+			if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
+				var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
+				if(second.indexOf(":") >= 0) {
+					this.value = this.value.substring(0,this.value.length-1);
+				}
 			}
+		}
+		else {
+			this.value = "";
 		}
 	});
 	$('input[type=text][name=rnfl_hrs_two]').on('input', function() {
-		if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
-			this.value = this.value.replace(/[^0-9^:]/g, '');
-		} 
-		if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
-			var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
-			if(second.indexOf(":") >= 0) {
-				this.value = this.value.substring(0,this.value.length-1);
+		if(rnfl) {
+			if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
+				this.value = this.value.replace(/[^0-9^:]/g, '');
+			} 
+			if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
+				var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
+				if(second.indexOf(":") >= 0) {
+					this.value = this.value.substring(0,this.value.length-1);
+				}
 			}
+		}
+		else {
+			this.value = "";
 		}
 	});
 

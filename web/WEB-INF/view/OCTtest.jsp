@@ -54,28 +54,9 @@ if(pic == null) {
 	<input type="hidden" name="pictureName" value="<%out.print(pic.getName());%>" autocomplete="off">
 	<input type="hidden" name="alreadyConfirmed" value="<%out.print((request.getAttribute("confirmed")!=null)?"true":"false");%>">
 <%
-	String s1 = "";
-	String s2 = "";
-	boolean diff = false;
-	if(a) {
-		s1 = OCT.get(0).getLength()+"";
-		s2 = OCT.get(1).getLength()+"";
-		if(s1.equals(s2)) {
-			diff = false;
-		}
-		else {
-			diff = true;
-		}
-	}
-%>
-<span id="length">Scan Length(mm): </span>
-<input type="text" name="length" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
-<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
-<br><br>
-
-<%
 	int v1 = -1;
 	int v2 = -1;
+	boolean diff = false;
 	if(a) {
 		v1 = OCT.get(0).getType();
 		v2 = OCT.get(1).getType();
@@ -98,8 +79,8 @@ if(pic == null) {
 <input type="radio" name="type" value="5"<%if(a && !diff && v1==5){out.print(" checked='true'");}%>><span id='type_oth'>Other : </span>
 <%if((a&&diff)&&((v1==5)||(v2==5))){%><span class='highlight'>***</span><%}%>
 <%
-	s1 = "";
-	s2 = "";
+	String s1 = "";
+	String s2 = "";
 	if(a) {
 		s1 = OCT.get(0).getType_oth()+"";
 		s2 = OCT.get(1).getType_oth()+"";
@@ -114,6 +95,25 @@ if(pic == null) {
 <input type="text" name="type_oth" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 <br><br>
+<%
+	s1 = "";
+	s2 = "";
+	if(a) {
+		s1 = OCT.get(0).getLength()+"";
+		s2 = OCT.get(1).getLength()+"";
+		if(s1.equals(s2)) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+<span id="length">Scan Length(mm): </span>
+<input type="text" name="length" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<br><br>
+
 
 <%
 	s1 = "";

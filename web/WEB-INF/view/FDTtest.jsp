@@ -190,7 +190,7 @@ if(pic == null) {
 	}
 %>
 <span id='test'>Test Algorithm</span><br>
-<input type="radio" name="test" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>N-20-F-FDT Threshold<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="test" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>24-2-FDT Threshold<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
 <input type="radio" name="test" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>><span id='targ_oth'>Other : </span>
 <%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%>
 <%
