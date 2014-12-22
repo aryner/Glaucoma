@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author aryner
  */
-public class OCTtest {
+public class OCTtest implements BaseTest {
 	private int id;
 	private int confirmed;
 	private String pictureName;
@@ -393,6 +393,10 @@ public class OCTtest {
 		}
 
 		return result;
+	}
+	public static Vector<BaseTest> getBaseTest() {
+		String query = "SELECT * FROM OCTtest WHERE confirmed='2'";
+		return SQLCommands.queryBaseTest(query,  BaseTest.OCT);
 	}
 
 	public static Vector<String> getCSVLines() {

@@ -200,4 +200,14 @@ public class Tools {
 
 		return result;
 	}
+
+	public static Vector<BaseTest> getBaseTests() {
+		Vector<BaseTest> result = new Vector<BaseTest>();
+		result.addAll(FDTtest.getBaseTest());
+		result.addAll(MDTtest.getBaseTest());
+		result.addAll(OCTtest.getBaseTest());
+		result.addAll(Photos.getBaseTest());
+
+		return result;
+	}
 }

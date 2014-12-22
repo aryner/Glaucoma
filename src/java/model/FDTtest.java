@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author aryner
  */
-public class FDTtest {
+public class FDTtest implements BaseTest {
 	private int id;
 	private int confirmed;
 	private String pictureName;
@@ -379,6 +379,10 @@ public class FDTtest {
 		}
 
 		return result;
+	}
+	public static Vector<BaseTest> getBaseTest() {
+		String query = "SELECT * FROM FDTtest WHERE confirmed='2'";
+		return SQLCommands.queryBaseTest(query,  BaseTest.FDT);
 	}
 
 	public static Vector<String> getCSVLines() {

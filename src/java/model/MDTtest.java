@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author aryner
  */
-public class MDTtest {
+public class MDTtest implements BaseTest {
 	private int id;
 	private int confirmed;
 	private String pictureName;
@@ -283,6 +283,10 @@ public class MDTtest {
 		}
 
 		return result;
+	}
+	public static Vector<BaseTest> getBaseTest() {
+		String query = "SELECT * FROM MDTtest WHERE confirmed='2'";
+		return SQLCommands.queryBaseTest(query,  BaseTest.MDT);
 	}
 
 	public static Vector<String> getCSVLines() {

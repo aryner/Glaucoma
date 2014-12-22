@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author aryner
  */
-public class Photos {
+public class Photos implements BaseTest {
 	private int id;
 	private int confirmed;
 	private String pictureName;
@@ -362,6 +362,15 @@ public class Photos {
 		for(int i=0; i<photos.size(); i++) {
 			result.add("3Nethra - " + photos.get(i));
 		}
+
+		return result;
+	}
+	public static Vector<BaseTest> getBaseTest() {
+		String query = "SELECT * FROM Photos WHERE confirmed='2' AND type='"+STEREO+"'";
+		Vector<BaseTest> result = SQLCommands.queryBaseTest(query,  BaseTest.STEREO);
+
+		query = "SELECT * FROM Photos WHERE confirmed='2' AND type='"+NETHRA+"'";
+		result.addAll(SQLCommands.queryBaseTest(query, BaseTest.NETHRA));
 
 		return result;
 	}

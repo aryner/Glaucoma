@@ -71,6 +71,7 @@ public class Controller extends HttpServlet {
 				request.setAttribute("adjudicatedBy", HVFtest.getAdjudicatedBy(user.getID()));
 			}
 
+			request.setAttribute("baseTests", Tools.getBaseTests());
 			request.setAttribute("ungraded",ungraded);
 			request.setAttribute("gradedOnce",onceGraded);
 			request.setAttribute("adjudicated", adjudicated);
