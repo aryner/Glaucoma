@@ -23,8 +23,8 @@ $(document).ready(function() {
 	});
 	$('input[type=text][name=notch_hrs_one]').on('input', function() {
 		if(notch) {
-			if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
-				this.value = this.value.replace(/[^0-9^:]/g, '');
+			if(this.value != this.value.replace(/[^0-9-^:]/g, '')) {
+				this.value = this.value.replace(/[^0-9-^:]/g, '');
 			} 
 			if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
 				var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
@@ -39,8 +39,8 @@ $(document).ready(function() {
 	});
 	$('input[type=text][name=notch_hrs_two]').on('input', function() {
 		if(notch) {
-			if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
-				this.value = this.value.replace(/[^0-9^:]/g, '');
+			if(this.value != this.value.replace(/[^0-9-^:]/g, '')) {
+				this.value = this.value.replace(/[^0-9-^:]/g, '');
 			} 
 			if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
 				var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
@@ -66,8 +66,8 @@ $(document).ready(function() {
 	});
 	$('input[type=text][name=eros_hrs_one]').on('input', function() {
 		if(erosion) {
-			if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
-				this.value = this.value.replace(/[^0-9^:]/g, '');
+			if(this.value != this.value.replace(/[^0-9-^:]/g, '')) {
+				this.value = this.value.replace(/[^0-9-^:]/g, '');
 			} 
 			if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
 				var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
@@ -82,8 +82,8 @@ $(document).ready(function() {
 	});
 	$('input[type=text][name=eros_hrs_two]').on('input', function() {
 		if(erosion) {
-			if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
-				this.value = this.value.replace(/[^0-9^:]/g, '');
+			if(this.value != this.value.replace(/[^0-9-^:]/g, '')) {
+				this.value = this.value.replace(/[^0-9-^:]/g, '');
 			} 
 			if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
 				var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
@@ -109,8 +109,8 @@ $(document).ready(function() {
 	});
 	$('input[type=text][name=disc_hrs_one]').on('input', function() {
 		if(disc) {
-			if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
-				this.value = this.value.replace(/[^0-9^:]/g, '');
+			if(this.value != this.value.replace(/[^0-9-^:]/g, '')) {
+				this.value = this.value.replace(/[^0-9-^:]/g, '');
 			} 
 			if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
 				var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
@@ -125,8 +125,8 @@ $(document).ready(function() {
 	});
 	$('input[type=text][name=disc_hrs_two]').on('input', function() {
 		if(disc) {
-			if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
-				this.value = this.value.replace(/[^0-9^:]/g, '');
+			if(this.value != this.value.replace(/[^0-9-^:]/g, '')) {
+				this.value = this.value.replace(/[^0-9-^:]/g, '');
 			} 
 			if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
 				var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
@@ -152,8 +152,8 @@ $(document).ready(function() {
 	});
 	$('input[type=text][name=rnfl_hrs_one]').on('input', function() {
 		if(rnfl) {
-			if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
-				this.value = this.value.replace(/[^0-9^:]/g, '');
+			if(this.value != this.value.replace(/[^0-9-^:]/g, '')) {
+				this.value = this.value.replace(/[^0-9-^:]/g, '');
 			} 
 			if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
 				var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
@@ -168,8 +168,8 @@ $(document).ready(function() {
 	});
 	$('input[type=text][name=rnfl_hrs_two]').on('input', function() {
 		if(rnfl) {
-			if(this.value != this.value.replace(/[^0-9^:]/g, '')) {
-				this.value = this.value.replace(/[^0-9^:]/g, '');
+			if(this.value != this.value.replace(/[^0-9-^:]/g, '')) {
+				this.value = this.value.replace(/[^0-9-^:]/g, '');
 			} 
 			if(this.value.indexOf(":") >= 0 && this.value.indexOf(":") < this.value.length) { 
 				var second = this.value.substring(this.value.indexOf(":")+1, this.value.length); 
