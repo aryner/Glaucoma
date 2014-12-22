@@ -250,6 +250,7 @@ $(document).ready(function() {
 		var pupil = $('input[type=text][name=pupil]').val().length > 0;
 		var va_num = $('input[type=text][name=va_num]').val().length > 0;
 		var va_den = $('input[type=text][name=va_den]').val().length > 0;
+		var rx = $('input[type=text][name=rx]').val().length > 0;
 
 		var mdsign = $('input[type=radio][name=mdsign][value=1]').prop('checked')
 			|| $('input[type=radio][name=mdsign][value=2]').prop('checked');
@@ -415,6 +416,15 @@ $(document).ready(function() {
 			}
 		} else {
 			$('#va').removeClass('highlight');
+		} if(!rx) {
+			$('#rx').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=rx]').focus();
+			}
+		} else {
+			$('#rx').removeClass('highlight');
 		} if(!mdsign) {
 			$('#mdsign').addClass('highlight');
 			if(!focused) {

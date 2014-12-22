@@ -368,7 +368,7 @@ public class Photos {
 
 	public static Vector<String> getStereoCSVLines() {
 		Vector<String> result = new Vector<String>();
-		String query = "SELECT * FROM Photos WHERE type="+STEREO;
+		String query = "SELECT * FROM Photos WHERE type="+STEREO+" ORDER BY pictureName";
 		Vector<Photos> photos = SQLCommands.queryPhotos(query);
 		
 		String currLine = "confirmed, picture, userID, adjudicatorID, type, photo_qual, photo_cdr, "+
@@ -392,7 +392,7 @@ public class Photos {
 
 	public static Vector<String> getNethraCSVLines() {
 		Vector<String> result = new Vector<String>();
-		String query = "SELECT * FROM Photos WHERE type="+NETHRA;
+		String query = "SELECT * FROM Photos WHERE type="+NETHRA+" ORDER BY pictureName";
 		Vector<Photos> photos = SQLCommands.queryPhotos(query);
 		
 		String currLine = "confirmed, picture, userID, adjudicatorID, type, photo_qual, photo_cdr, "+

@@ -783,6 +783,28 @@ if(pic == null) {
 <input type="radio" name="atcol" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%>
 <br><br>
 
+<%
+	v1 = -1;
+	v2 = -1;
+	if(a) {
+		v1 = Integer.parseInt(OCT.get(0).getEye());
+		v2 = Integer.parseInt(OCT.get(1).getEye());
+		if(v1 == v2) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+		if(diff) {
+
+		}
+	}
+%>
+<span id='eye'>Eye : </span><br>
+<input type="radio" name="eye" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>OD<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="eye" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>OS<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%>
+<br><br>
+
 <input type="submit" value="Submit" class="btn">
 
 </form>

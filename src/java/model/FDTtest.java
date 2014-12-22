@@ -383,7 +383,7 @@ public class FDTtest {
 
 	public static Vector<String> getCSVLines() {
 		Vector<String> result = new Vector<String>();
-		String query = "SELECT * FROM FDTtest";
+		String query = "SELECT * FROM FDTtest ORDER BY pictureName";
 		Vector<FDTtest> fdts = SQLCommands.queryFDTtest(query);
 
 		String currLine = "confirmed, picture, userID, adjudicatorID, fdt_dur, fdt_targ, fdt_targ_oth, fdt_fixerr_num, "+

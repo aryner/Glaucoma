@@ -287,7 +287,7 @@ public class MDTtest {
 
 	public static Vector<String> getCSVLines() {
 		Vector<String> result = new Vector<String>();
-		String query = "SELECT * FROM MDTtest";
+		String query = "SELECT * FROM MDTtest ORDER BY pictureName";
 		Vector<MDTtest> mdts = SQLCommands.queryMDTtest(query);
 		
 		String currLine = "confirmed, picture, userID, adjudicatorID, mdt_late, mdt_fp, mdt_lens, "+

@@ -332,6 +332,9 @@ $(document).ready(function() {
 		var i_iavg = Number($('input[type=text][name=inum]').val()) ===
 			     Number($('input[type=text][name=iavgnum]').val());
 
+		var eye = $('input[type=radio][name=eye][value=1]').prop('checked')
+			|| $('input[type=radio][name=eye][value=2]').prop('checked');
+
 		var focused = false;
 
 		if(!length) {
@@ -656,6 +659,15 @@ $(document).ready(function() {
 			}
 		} else {
 			$('#iavg_inum').addClass('hidden');
+		} if(!eye) {
+			$('#eye').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=radio][name=eye][value=1]').focus();
+			}
+		} else {
+			$('#eye').removeClass('highlight');
 		}
 	});
 });

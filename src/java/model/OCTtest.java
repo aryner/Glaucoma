@@ -54,6 +54,7 @@ public class OCTtest {
 	private int iavgcol;
 	private String atnum;
 	private int atcol;
+	private String eye;
 
 	private static final String slash = System.getProperty("file.separator");
 
@@ -97,7 +98,7 @@ public class OCTtest {
 		this.icol = icol;
 		this.tnum = tnum;
 		this.tcol = tcol;
-		this.sig = sig;
+		this.sig = sig.substring(0,sig.indexOf("|"));
 		this.isnum = isnum;
 		this.iscol = iscol;
 		this.sinum = sinum; 
@@ -120,6 +121,7 @@ public class OCTtest {
 		this.iavgcol = iavgcol;
 		this.atnum = atnum;
 		this.atcol = atcol;
+		this.eye = sig.substring(sig.indexOf("|")+1, sig.length());
 	}
 
 	public static Picture getNext(User user) {
@@ -261,12 +263,14 @@ public class OCTtest {
 		oct.setAtnum(attr);
 		attr = request.getParameter("atcol");
 		oct.setAtcol(Integer.parseInt(attr));
+		attr = request.getParameter("eye");
+		oct.setEye(attr);
 
 		String query = "UPDATE OCTtest SET oct_length='"+oct.getLength()+"', oct_type='"+oct.getType()+"', "+
 				"oct_type_oth='"+oct.getType_oth()+"', oct_snum='"+oct.getSnum()+"', "+
 				"oct_scol='"+oct.getScol()+"', oct_nnum='"+oct.getNnum()+"', oct_ncol='"+oct.getNcol()+"', "+
 				"oct_inum='"+oct.getInum()+"', oct_icol='"+oct.getIcol()+"', oct_tnum='"+oct.getTnum()+"', "+
-				"oct_tcol='"+oct.getTcol()+"', oct_sig='"+oct.getSig()+"', oct_isnum='"+oct.getIsnum()+"', "+
+				"oct_tcol='"+oct.getTcol()+"', oct_sig='"+oct.getSig()+"|"+oct.getEye()+"', oct_isnum='"+oct.getIsnum()+"', "+
 				"oct_iscol='"+oct.getIscol()+"', oct_sinum='"+oct.getSinum()+"', oct_sicol='"+oct.getSicol()+"', "+
 				"oct_stnum='"+oct.getStnum()+"', oct_stcol='"+oct.getStcol()+"', oct_itnum='"+oct.getItnum()+"', "+
 				"oct_itcol='"+oct.getItcol()+"', oct_snnum='"+oct.getSnnum()+"', oct_sncol='"+oct.getSncol()+"', "+
@@ -393,14 +397,14 @@ public class OCTtest {
 
 	public static Vector<String> getCSVLines() {
 		Vector<String> result = new Vector<String>();
-		String query = "SELECT * FROM OCTtest";
+		String query = "SELECT * FROM OCTtest ORDER BY pictureName";
 		Vector<OCTtest> octs = SQLCommands.queryOCTtest(query);
 		
 		String currLine = "confirmed, picture, userID, adjudicatorID, oct_length, oct_type, oct_type_oth, "+
 				  "oct_snum, oct_scol, oct_nnum, oct_ncol, oct_inum, oct_icol, oct_tnum, oct_tcol, "+
 				  "oct_sig, oct_isnum, oct_iscol, oct_sinum, oct_sicol, oct_stnum, oct_stcol, oct_itnum, "+
 				  "oct_itcol, oct_snnum, oct_sncol, oct_mmnum, oct_mmcol, oct_smaxnum, oct_smaxcol, "+
-				  "imaxnum, imaxcol, oct_savgnum, oct_savgcol, oct_iavgnum, oct_iavgcol, oct_atnum, oct_atcol";
+				  "imaxnum, imaxcol, oct_savgnum, oct_savgcol, oct_iavgnum, oct_iavgcol, oct_atnum, oct_atcol, oct_eye";
 		result.add(currLine);
 
 		for(OCTtest oct : octs) {
@@ -411,7 +415,7 @@ public class OCTtest {
 				   oct.getSicol()+", "+oct.getStnum()+", "+oct.getStcol()+", "+oct.getItnum()+", "+oct.getItcol()+", "+
 				   oct.getSnnum()+", "+oct.getSncol()+", "+oct.getMmnum()+", "+oct.getMmcol()+", "+oct.getSmaxnum()+", "+
 				   oct.getSmaxcol()+", "+oct.getImaxnum()+", "+oct.getImaxcol()+", "+oct.getSavgnum()+", "+oct.getSavgcol()+", "+
-				   oct.getIavgnum()+", "+oct.getIavgcol()+", "+oct.getAtnum()+", "+oct.getAtcol();
+				   oct.getIavgnum()+", "+oct.getIavgcol()+", "+oct.getAtnum()+", "+oct.getAtcol()+", "+oct.getEye();
 			result.add(currLine);
 		}
 
@@ -989,5 +993,19 @@ public class OCTtest {
 	 */
 	public void setAdjudicatorID(int adjudicatorID) {
 		this.adjudicatorID = adjudicatorID;
+	}
+
+	/**
+	 * @return the eye
+	 */
+	public String getEye() {
+		return eye;
+	}
+
+	/**
+	 * @param eye the eye to set
+	 */
+	public void setEye(String eye) {
+		this.eye = eye;
 	}
 }
