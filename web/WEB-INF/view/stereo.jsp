@@ -37,7 +37,7 @@ if(pic == null) {
 	}
 } else {
 	String slash = ""+request.getAttribute("slash");
-	String src = "http://localhost:8084/Glaucoma/pdf?type=stereo&name="+pic.getName();
+	String src = "http://localhost:8080/Glaucoma/pdf?type=stereo&name="+pic.getName();
 	boolean a = false;
 	Vector<Photos> photos = null;
 	if(((Integer)request.getAttribute("access"))==1) {
@@ -46,10 +46,10 @@ if(pic == null) {
 	}
 	out.print("<h3 class='picName'>"+pic.getType()+" "+pic.getName()+"</h3>");
 %>
-<iframe src="<%out.print(src);%>" class="HVFimage"></iframe>
+<iframe src="<%out.print(src);%>" class="stereoImage"></iframe>
 
 <!--Questions-->
-<div class="questions">
+<div class="stereoQuestions">
 <form action="assignStereo" method="POST">
 	<input type="hidden" name="pictureName" value="<%out.print(pic.getName());%>" autocomplete="off">
 	<input type="hidden" name="alreadyConfirmed" value="<%out.print((request.getAttribute("confirmed")!=null)?"true":"false");%>">

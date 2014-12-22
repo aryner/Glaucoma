@@ -560,6 +560,15 @@ and scalar of: 0.29411764705882354*/
 	padding-right: 0px;
 	overflow: scroll;
 }
+.stereoImage {
+	width: 55%;
+	height: 800px;
+	float : left;
+	margin-right: 0px;
+	margin-left: 0px;
+	padding-right: 0px;
+	overflow: scroll;
+}
 
 .numBox {
 	width : 20px;
@@ -569,6 +578,12 @@ and scalar of: 0.29411764705882354*/
 	margin : 10px;
 	height : 0800px;
 	width: 45%;
+	overflow: scroll;
+}
+.stereoQuestions {
+	margin : 10px;
+	height : 0800px;
+	width: 35%;
 	overflow: scroll;
 }
 

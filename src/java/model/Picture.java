@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
 import org.apache.commons.fileupload.FileItem; 
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload; 
@@ -80,7 +81,7 @@ public class Picture {
 						extension.equals("gif") || extension.equals("GIF") ||
 						extension.equals("png") || extension.equals("PNG")) {
 
-						Document document = new Document();
+						Document document = (path.equals("stereo")? new Document(PageSize.LEDGER) : new Document());
 						String tempPath = ".."+slash+"webapps"+slash+"Glaucoma"+slash+"tempImg"+slash;
 						String finalPath = ".."+slash+"webapps"+slash+"Glaucoma"+slash + path + slash;
 						new File(finalPath).mkdirs();
