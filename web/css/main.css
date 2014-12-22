@@ -553,7 +553,7 @@ and scalar of: 0.29411764705882354*/
 }
 
 .HVFimage {
-	width: 45%;
+	width: 65%;
 	height: 800px;
 	float : left;
 	margin-right: 0px;
@@ -561,8 +561,8 @@ and scalar of: 0.29411764705882354*/
 	overflow: scroll;
 }
 .stereoImage {
-	width: 55%;
-	height: 800px;
+	width: 80%;
+	height: 900px;
 	float : left;
 	margin-right: 0px;
 	margin-left: 0px;
@@ -576,14 +576,16 @@ and scalar of: 0.29411764705882354*/
 
 .questions {
 	margin : 10px;
+	margin-right : 0px;
 	height : 0800px;
-	width: 45%;
+	width: 25%;
 	overflow: scroll;
 }
 .stereoQuestions {
 	margin : 10px;
+	margin-right: 0px;
 	height : 0800px;
-	width: 35%;
+	width: 15%;
 	overflow: scroll;
 }
 

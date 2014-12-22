@@ -37,7 +37,7 @@ if(pic == null) {
 	}
 } else {
 	String slash = ""+request.getAttribute("slash");
-	String src = "http://localhost:8080/Glaucoma/pdf?type=stereo&name="+pic.getName();
+	String src = "http://localhost:8084/Glaucoma/pdf?type=stereo&name="+pic.getName();
 	boolean a = false;
 	Vector<Photos> photos = null;
 	if(((Integer)request.getAttribute("access"))==1) {
