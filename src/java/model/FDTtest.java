@@ -36,6 +36,7 @@ public class FDTtest {
 	private String pupil;
 	private String va_num;
 	private String va_den;
+	private String rx;
 	private int mdsign;
 	private String mddb;
 	private String mdp;
@@ -82,7 +83,7 @@ public class FDTtest {
 		this.pictureName = pictureName;
 		this.userID = userID;
 		this.adjudicatorID = adjudicatorID;
-		this.dur = dur;
+		this.dur = dur.substring(0, dur.indexOf("|"));
 		this.targ = targ;
 		this.targ_oth = targ_oth;
 		this.fixerr_num = fixerr_num;
@@ -98,6 +99,7 @@ public class FDTtest {
 		this.pupil = pupil;
 		this.va_num = va_num;
 		this.va_den = va_den;
+		this.rx = dur.substring(dur.indexOf("|")+1, dur.length());
 		this.mdsign = mdsign;
 		this.mddb = mddb;
 		this.mdp = mdp;
@@ -218,6 +220,8 @@ public class FDTtest {
 		fdt.setVa_num(attr);
 		attr = request.getParameter("va_den");
 		fdt.setVa_den(attr);
+		attr = request.getParameter("rx");
+		fdt.setRx(attr);
 		attr = request.getParameter("mdsign");
 		fdt.setMdsign(Integer.parseInt(attr));
 		attr = request.getParameter("mddb");
@@ -253,7 +257,7 @@ public class FDTtest {
 				    Integer.parseInt(fdt.getRl_one());
 		fdt.setAbnormal((abnormalCount>=2)?2:1);
 
-		String query = "UPDATE FDTtest SET fdt_dur='"+fdt.getDur()+"', fdt_targ='"+fdt.getTarg()+"', fdt_targ_oth='"+fdt.getTarg_oth()+"', "+
+		String query = "UPDATE FDTtest SET fdt_dur='"+fdt.getDur()+"|"+fdt.getRx()+"', fdt_targ='"+fdt.getTarg()+"', fdt_targ_oth='"+fdt.getTarg_oth()+"', "+
 			       "fdt_fixerr_num='"+fdt.getFixerr_num()+"', fdt_fixerr_den='"+fdt.getFixerr_den()+"', fdt_fp_num='"+fdt.getFp_num()+"', "+
 			       "fdt_fp_den='"+fdt.getFp_den()+"', fdt_fn_num='"+fdt.getFn_num()+"', fdt_fn_den='"+fdt.getFn_den()+"', fdt_test='"+fdt.getTest()+"', "+
 			       "fdt_test_oth='"+fdt.getTest_oth()+"', fdt_speed='"+fdt.getSpeed()+"', fdt_speed_oth='"+fdt.getSpeed_oth()+"', "+
@@ -384,17 +388,18 @@ public class FDTtest {
 
 		String currLine = "confirmed, picture, userID, adjudicatorID, fdt_dur, fdt_targ, fdt_targ_oth, fdt_fixerr_num, "+
 				  "fdt_fixerr_den, fdt_fp_num, fdt_fp_den, fdt_fn_num, fdt_fn_den, fdt_test, fdt_test_oth, fdt_speed, "+
-				  "fdt_speed_oth, fdt_pupil, fdt_va_num, fdt_va_den, fdt_mdsign, fdt_mddb, fdt_mdp, fdt_psdsign, "+
+				  "fdt_speed_oth, fdt_pupil, fdt_va_num, fdt_va_den, fdt_rx, fdt_mdsign, fdt_mddb, fdt_mdp, fdt_psdsign, "+
 				  "fdt_psdb, fdt_psdp, fdt_lu_one, fdt_lu_five, fdt_ru_one, fdt_ru_five, fdt_ll_one, fdt_ll_five, " +
 				  "fdt_rl_one, fdt_rl_five, fdt_abnormal";
 		result.add(currLine);
 
 		for(FDTtest fdt : fdts) {
 			currLine = fdt.getConfirmed()+", "+fdt.getPictureName()+", "+fdt.getUserID()+", "+fdt.getAdjudicatorID()+", "+
-				   fdt.getDur()+", "+fdt.getTarg()+", "+fdt.getTarg_oth()+", "+fdt.getFixerr_num()+", "+fdt.getFixerr_den()+", "+
-				   fdt.getFp_num()+", "+fdt.getFp_den()+", "+fdt.getFn_num()+", "+fdt.getFn_den()+", "+fdt.getTest()+", "+
-				   fdt.getTest_oth()+", "+fdt.getSpeed()+", "+fdt.getSpeed_oth()+", "+fdt.getPupil()+", "+fdt.getVa_num()+", "+
-				   fdt.getVa_den()+", "+fdt.getMdsign()+", "+fdt.getMddb()+", "+fdt.getMdp()+", "+fdt.getPsdsign()+", "+fdt.getPsdb()+", "+
+				   fdt.getDur()+", "+fdt.getTarg()+", "+fdt.getTarg_oth()+", "+
+				   fdt.getFixerr_num()+", "+fdt.getFixerr_den()+", "+ fdt.getFp_num()+", "+fdt.getFp_den()+", "+fdt.getFn_num()+", "+
+				   fdt.getFn_den()+", "+fdt.getTest()+", "+ fdt.getTest_oth()+", "+fdt.getSpeed()+", "+fdt.getSpeed_oth()+", "+
+				   fdt.getPupil()+", "+fdt.getVa_num()+", "+ fdt.getVa_den()+", "+fdt.getRx()+", "+
+				   fdt.getMdsign()+", "+fdt.getMddb()+", "+fdt.getMdp()+", "+fdt.getPsdsign()+", "+fdt.getPsdb()+", "+
 				   fdt.getPsdp()+", "+fdt.getLu_one()+", "+fdt.getLu_five()+", "+fdt.getRu_one()+", "+fdt.getRu_five()+", "+
 				   fdt.getLl_one()+", "+fdt.getLl_five()+", "+fdt.getRl_one()+", "+fdt.getRl_five()+", "+fdt.getAbnormal();
 			result.add(currLine);
@@ -931,6 +936,20 @@ public class FDTtest {
 	 */
 	public void setAdjudicatorID(int adjudicatorID) {
 		this.adjudicatorID = adjudicatorID;
+	}
+
+	/**
+	 * @return the rx
+	 */
+	public String getRx() {
+		return rx;
+	}
+
+	/**
+	 * @param rx the rx to set
+	 */
+	public void setRx(String rx) {
+		this.rx = rx;
 	}
 	
 	

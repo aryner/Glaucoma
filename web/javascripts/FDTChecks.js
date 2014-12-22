@@ -142,6 +142,16 @@ $(document).ready(function() {
 			}
 		}
 	});
+	$('input[type=text]').on('input', function(){
+		if(this.value.length > 20) {
+			this.value = this.value.substring(0,20);
+		}
+	});
+	$('input[type=text][name=rx]').on('input', function() {
+		if(this.value.length > 14) {
+			this.value = this.value.substring(0,14);
+		}
+	});
 	$('input[type=text][name=psdb]').on('input', function() {
 		if(this.value != this.value.replace(/[^0-9^\.]/g, '')) {
 			this.value = this.value.replace(/[^0-9^\.]/g, '');

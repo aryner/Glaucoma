@@ -37,7 +37,7 @@ if(pic == null) {
 	}
 } else {
 	String slash = ""+request.getAttribute("slash");
-	String src = "http://localhost:8080/Glaucoma/pdf?type=FDT&name="+pic.getName();
+	String src = "http://localhost:8084/Glaucoma/pdf?type=FDT&name="+pic.getName();
 	boolean a = false;
 	Vector<FDTtest> FDT = null;
 	if(((Integer)request.getAttribute("access"))==1) {
@@ -287,6 +287,24 @@ if(pic == null) {
 <span id='va'>Visual Acuity</span>
 <input type="text" name="va_num" class="numBox" autocomplete="off"<%if(a&&!diff){out.print(" value='"+FDT.get(0).getVa_num()+"'");}%>>
 / <input type="text" name="va_den" class="numBox" autocomplete="off"<%if(a&&!diff){out.print(" value='"+FDT.get(0).getVa_den()+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<br><br>
+<%
+	s1 = "";
+	s2 = "";
+	if(a) {
+		s1 = FDT.get(0).getRx();
+		s2 = FDT.get(1).getRx();
+		if(s1.equals(s2)) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+<span id='rx'>RX</span>
+<input type="text" name="rx" autocomplete="off"<%if(a&&!diff){out.print(" value='"+FDT.get(0).getRx()+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 <br><br>
 

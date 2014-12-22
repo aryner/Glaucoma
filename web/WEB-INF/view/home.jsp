@@ -102,9 +102,11 @@ if(session.getAttribute("errors") != null) {
 	<div class="thinColumn">
 		<a href="/Glaucoma/printCSV" class="btn menuBtn">Get CSV files</a>
 	</div>
+	<!--
 	<div class="thinColumn">
 		<a href="/Glaucoma/uploadData" class="btn menuBtn">Upload Data</a>
 	</div>
+ 	-->
 </div>
 
 <div class='container'>

@@ -11,6 +11,11 @@ $(document).ready(function() {
 	var disc = false;
 	var rnfl = false;
 
+	$('input[type=text]').on('input', function(){
+		if(this.value.length > 20) {
+			this.value = this.value.substring(0,20);
+		}
+	});
 	$('input[type=radio][name=notch]').on('change', function() {
 		var value = this.value;
 		notch = (value === "2" ? false : true);
