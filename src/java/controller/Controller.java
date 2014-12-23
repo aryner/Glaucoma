@@ -155,7 +155,7 @@ public class Controller extends HttpServlet {
 			request.setAttribute("missingPics", Tools.needPictures());
 		}
 
-		else if(userPath.equals("/StereoReview")) {
+		else if(userPath.equals("/stereoReview")) {
 			String pictureName = request.getParameter("pictureName");
 			User user = (User)session.getAttribute("user");
 			Picture picture = Picture.getPictureByName(pictureName,BaseTest.STEREO);

@@ -163,7 +163,7 @@ if(session.getAttribute("errors") != null) {
 							   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
 							{
 								match = true;
-								out.print("<a href='#'>");
+								out.print("<a href='stereoReview?pictureName="+baseTests.get(j).getPictureName()+"'>");
 							}
 							break;
 						case BaseTest.NETHRA :
@@ -171,7 +171,7 @@ if(session.getAttribute("errors") != null) {
 							   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
 							{
 								match = true;
-								out.print("<a href='#'>");
+								out.print("<a href='nethraReview?pictureName="+baseTests.get(j).getPictureName()+"'>");
 							}
 							break;
 					}
@@ -222,7 +222,7 @@ if(session.getAttribute("errors") != null) {
 							   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
 							{
 								match = true;
-								out.print("<a href='#'>");
+								out.print("<a href='stereoReview?pictureName="+baseTests.get(j).getPictureName()+"'>");
 							}
 							break;
 						case BaseTest.NETHRA :
@@ -230,7 +230,7 @@ if(session.getAttribute("errors") != null) {
 							   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
 							{
 								match = true;
-								out.print("<a href='#'>");
+								out.print("<a href='nethraReview?pictureName="+baseTests.get(j).getPictureName()+"'>");
 							}
 							break;
 					}
@@ -282,7 +282,7 @@ if(session.getAttribute("errors") != null) {
 								   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
 								{
 									match = true;
-									out.print("<a href='#'>");
+									out.print("<a href='stereoReview?pictureName="+baseTests.get(j).getPictureName()+"'>");
 								}
 								break;
 							case BaseTest.NETHRA :
@@ -290,7 +290,7 @@ if(session.getAttribute("errors") != null) {
 								   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
 								{
 									match = true;
-									out.print("<a href='#'>");
+									out.print("<a href='nethraReview?pictureName="+baseTests.get(j).getPictureName()+"'>");
 								}
 								break;
 						}
