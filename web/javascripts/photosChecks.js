@@ -11,6 +11,24 @@ $(document).ready(function() {
 	var disc = false;
 	var rnfl = false;
 
+	var check = $('input[type=radio][name=notch][value=1]').prop('checked');
+	if(check) {
+		console.log("work");
+		notch = true;
+	}
+	check = $('input[type=radio][name=erosion][value=1]').prop('checked');
+	if(check) {
+		erosion = true;
+	}
+	check = $('input[type=radio][name=disc][value=1]').prop('checked');
+	if(check) {
+		disc = true;
+	}
+	check = $('input[type=radio][name=rnfl][value=1]').prop('checked');
+	if(check) {
+		rnfl = true;
+	}
+
 	$('input[type=text]').on('input', function(){
 		if(this.value.length > 20) {
 			this.value = this.value.substring(0,20);
