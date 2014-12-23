@@ -113,7 +113,13 @@ if(session.getAttribute("errors") != null) {
 	<%Vector<String> ungraded = (Vector)request.getAttribute("ungraded");%>
 	<div class='fifth-column'><h3>Ungraded (<%out.print(ungraded.size());%>)</h3>
 		<%
+			Vector<BaseTest> baseTests = (Vector)request.getAttribute("baseTests");
+			Object temp = request.getAttribute("userID");
+			int userID = (temp != null ? (Integer)temp : -1);
+
 			String name = "";
+			boolean match = false;
+			int type = 0;
 			for(int i=0; i<ungraded.size(); i++) {
 				name = ungraded.get(i);
 				out.print(name.substring(0,name.length()-4)+"<br>");
@@ -126,7 +132,57 @@ if(session.getAttribute("errors") != null) {
 			name = "";
 			for(int i=0; i<gradedOnce.size(); i++) {
 				name = gradedOnce.get(i);
+				for(int j=0; j<baseTests.size() && !match; j++) {
+					switch(baseTests.get(j).getBaseType()) {
+						case BaseTest.FDT :
+							if(name.substring(0,name.indexOf(" ")).equals("FDT") &&
+							   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
+							{
+								match = true;
+								out.print("<a href='FDTReview?pictureName="+baseTests.get(j).getPictureName()+"'>");
+							}
+							break;
+						case BaseTest.MDT :
+							if(name.substring(0,name.indexOf(" ")).equals("MDT") &&
+							   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
+							{
+								match = true;
+								out.print("<a href='#'>");
+							}
+							break;
+						case BaseTest.OCT :
+							System.out.println(name.substring(0,name.indexOf(" "))+ " vs " + baseTests.get(j).getBaseType());
+							System.out.println(name.substring(name.indexOf(" - ")+3, name.length()) + " vs " + baseTests.get(j).getPictureName());
+							if(name.substring(0,name.indexOf(" ")).equals("OCT") &&
+							   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
+							{
+								match = true;
+								out.print("<a href='#'>");
+							}
+							break;
+						case BaseTest.STEREO :
+							if(name.substring(0,name.indexOf(" ")).equals("Stereo") &&
+							   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
+							{
+								match = true;
+								out.print("<a href='#'>");
+							}
+							break;
+						case BaseTest.NETHRA :
+							if(name.substring(0,name.indexOf(" ")).equals("3Nethra") &&
+							   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
+							{
+								match = true;
+								out.print("<a href='#'>");
+							}
+							break;
+					}
+				}
 				out.print(name.substring(0,name.length()-4)+"<br>");
+				if(match) {
+					out.print("</a>");
+				}
+				match = false;
 			}
 		%>
 	</div>
@@ -134,9 +190,60 @@ if(session.getAttribute("errors") != null) {
 	<div class='fifth-column'><h3>Needs Adjudication (<%out.print(needsAdj.size());%>)</h3>
 		<%
 			name = "";
+			match = false;
 			for(int i=0; i<needsAdj.size(); i++) {
 				name = needsAdj.get(i);
+				for(int j=0; j<baseTests.size() && !match; j++) {
+					switch(baseTests.get(j).getBaseType()) {
+						case BaseTest.FDT :
+							if(name.substring(0,name.indexOf(" ")).equals("FDT") &&
+							   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
+							{
+								match = true;
+								out.print("<a href='FDTReview?pictureName="+baseTests.get(j).getPictureName()+"'>");
+							}
+							break;
+						case BaseTest.MDT :
+							if(name.substring(0,name.indexOf(" ")).equals("MDT") &&
+							   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
+							{
+								match = true;
+								out.print("<a href='#'>");
+							}
+							break;
+						case BaseTest.OCT :
+							System.out.println(name.substring(0,name.indexOf(" "))+ " vs " + baseTests.get(j).getBaseType());
+							System.out.println(name.substring(name.indexOf(" - ")+3, name.length()) + " vs " + baseTests.get(j).getPictureName());
+							if(name.substring(0,name.indexOf(" ")).equals("OCT") &&
+							   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
+							{
+								match = true;
+								out.print("<a href='#'>");
+							}
+							break;
+						case BaseTest.STEREO :
+							if(name.substring(0,name.indexOf(" ")).equals("Stereo") &&
+							   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
+							{
+								match = true;
+								out.print("<a href='#'>");
+							}
+							break;
+						case BaseTest.NETHRA :
+							if(name.substring(0,name.indexOf(" ")).equals("3Nethra") &&
+							   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
+							{
+								match = true;
+								out.print("<a href='#'>");
+							}
+							break;
+					}
+				}
 				out.print(name.substring(0,name.length()-4)+"<br>");
+				if(match) {
+					out.print("</a>");
+				}
+				match = false;
 			}
 		%>
 	</div>
@@ -144,9 +251,60 @@ if(session.getAttribute("errors") != null) {
 	<div class='fifth-column'><h3>Adjudicated (<%out.print(adjudicated.size());%>)</h3>
 		<%
 			name = "";
+			match = false;
 			for(int i=0; i<adjudicated.size(); i++) {
 				name = adjudicated.get(i);
+				if(access == 1) {
+					for(int j=0; j<baseTests.size() && !match; j++) {
+						switch(baseTests.get(j).getBaseType()) {
+							case BaseTest.FDT :
+								if(name.substring(0,name.indexOf(" ")).equals("FDT") &&
+								   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
+								{
+									match = true;
+									out.print("<a href='FDTReview?pictureName="+baseTests.get(j).getPictureName()+"'>");
+								}
+								break;
+							case BaseTest.MDT :
+								if(name.substring(0,name.indexOf(" ")).equals("MDT") &&
+								   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
+								{
+									match = true;
+									out.print("<a href='#'>");
+								}
+								break;
+							case BaseTest.OCT :
+								if(name.substring(0,name.indexOf(" ")).equals("OCT") &&
+								   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
+								{
+									match = true;
+									out.print("<a href='#'>");
+								}
+								break;
+							case BaseTest.STEREO :
+								if(name.substring(0,name.indexOf(" ")).equals("Stereo") &&
+								   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
+								{
+									match = true;
+									out.print("<a href='#'>");
+								}
+								break;
+							case BaseTest.NETHRA :
+								if(name.substring(0,name.indexOf(" ")).equals("3Nethra") &&
+								   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
+								{
+									match = true;
+									out.print("<a href='#'>");
+								}
+								break;
+						}
+					}
+				}
 				out.print(name.substring(0,name.length()-4)+"<br>");
+				if(match) {
+					out.print("</a>");
+				}
+				match = false;
 			}
 		%>
 	</div>

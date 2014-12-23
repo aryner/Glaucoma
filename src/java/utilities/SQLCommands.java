@@ -35,10 +35,11 @@ public class SQLCommands {
 
 			resultSet = stmt.executeQuery(query); 
 
+			BaseTest current;
 			while(resultSet.next()) {
 				switch (type) {
 					case BaseTest.FDT :
-						   result.add(new FDTtest(resultSet.getInt("id"),resultSet.getInt("confirmed"),resultSet.getString("pictureName"),
+						   current = new FDTtest(resultSet.getInt("id"),resultSet.getInt("confirmed"),resultSet.getString("pictureName"),
 						   resultSet.getInt("userID"),resultSet.getInt("adjudicatorID"),resultSet.getString("fdt_dur"),resultSet.getInt("fdt_targ"),
 						   resultSet.getString("fdt_targ_oth"),resultSet.getInt("fdt_fixerr_num"),resultSet.getInt("fdt_fixerr_den"),
 						   resultSet.getInt("fdt_fp_num"),resultSet.getInt("fdt_fp_den"),resultSet.getInt("fdt_fn_num"),resultSet.getInt("fdt_fn_den"),
@@ -49,17 +50,21 @@ public class SQLCommands {
 						   resultSet.getString("fdt_psdb"),resultSet.getString("fdt_psdp"),resultSet.getString("fdt_lu_one"),
 						   resultSet.getString("fdt_lu_five"),resultSet.getString("fdt_ru_one"),resultSet.getString("fdt_ru_five"),
 						   resultSet.getString("fdt_ll_one"),resultSet.getString("fdt_ll_five"),resultSet.getString("fdt_rl_one"),
-						   resultSet.getString("fdt_rl_five"),resultSet.getInt("fdt_abnormal")));
+						   resultSet.getString("fdt_rl_five"),resultSet.getInt("fdt_abnormal"));
+						   current.setBaseType(BaseTest.FDT);
+						   result.add(current);
 						break;
 					case BaseTest.MDT :
-						result.add(new MDTtest(resultSet.getInt("id"),resultSet.getInt("confirmed"),resultSet.getString("pictureName"),
+						current = new MDTtest(resultSet.getInt("id"),resultSet.getInt("confirmed"),resultSet.getString("pictureName"),
 						       resultSet.getInt("userID"),resultSet.getInt("adjudicatorID"),resultSet.getString("mdt_late"),resultSet.getString("mdt_fp"),
 						       resultSet.getInt("mdt_lens"),resultSet.getString("mdt_lens_y"),resultSet.getString("mdt_dur"),
 						       resultSet.getString("mdt_ptd"),resultSet.getString("mdt_lu_one"),resultSet.getString("mdt_ru_one"),
-						       resultSet.getString("mdt_ll_one"),resultSet.getString("mdt_rl_one"),resultSet.getInt("mdt_abnormal")));
+						       resultSet.getString("mdt_ll_one"),resultSet.getString("mdt_rl_one"),resultSet.getInt("mdt_abnormal"));
+						current.setBaseType(BaseTest.MDT);
+						result.add(current);
 						break;
 					case BaseTest.OCT :
-						result.add(new OCTtest(resultSet.getInt("id"),resultSet.getInt("confirmed"),resultSet.getString("pictureName"),
+						current = new OCTtest(resultSet.getInt("id"),resultSet.getInt("confirmed"),resultSet.getString("pictureName"),
 						       resultSet.getInt("userID"),resultSet.getInt("adjudicatorID"),resultSet.getString("oct_length"),resultSet.getInt("oct_type"),
 						       resultSet.getString("oct_type_oth"),resultSet.getString("oct_snum"),resultSet.getInt("oct_scol"),
 						       resultSet.getString("oct_nnum"),resultSet.getInt("oct_ncol"),resultSet.getString("oct_inum"),
@@ -71,25 +76,31 @@ public class SQLCommands {
 						       resultSet.getInt("oct_mmcol"),resultSet.getString("oct_smaxnum"),resultSet.getInt("oct_smaxcol"),
 						       resultSet.getString("oct_imaxnum"),resultSet.getInt("oct_imaxcol"),resultSet.getString("oct_savgnum"),
 						       resultSet.getInt("oct_savgcol"),resultSet.getString("oct_iavgnum"),resultSet.getInt("oct_iavgcol"),
-						       resultSet.getString("oct_atnum"),resultSet.getInt("oct_atcol")));
+						       resultSet.getString("oct_atnum"),resultSet.getInt("oct_atcol"));
+						current.setBaseType(BaseTest.OCT);
+						result.add(current);
 						break;
 					case BaseTest.STEREO :
-						result.add(new Photos(resultSet.getInt("id"),resultSet.getInt("confirmed"),resultSet.getString("pictureName"),
+						current = new Photos(resultSet.getInt("id"),resultSet.getInt("confirmed"),resultSet.getString("pictureName"),
 						      resultSet.getInt("userID"),resultSet.getInt("adjudicatorID"),resultSet.getInt("type"),resultSet.getInt("photo_qual"),
 						      resultSet.getString("photo_cdr"),resultSet.getInt("photo_notch"),resultSet.getString("notch_hrs_one"),
 						      resultSet.getString("notch_hrs_two"),resultSet.getInt("photo_erosion"),resultSet.getString("eros_hrs_one"),
 						      resultSet.getString("eros_hrs_two"),resultSet.getInt("photo_disc"),resultSet.getString("disc_hrs_one"),
 						      resultSet.getString("disc_hrs_two"),resultSet.getInt("photo_rnfl"),resultSet.getString("rnfl_hrs_one"),
-						      resultSet.getString("rnfl_hrs_two")));
+						      resultSet.getString("rnfl_hrs_two"));
+						current.setBaseType(BaseTest.STEREO);
+						result.add(current);
 						break;
 					case BaseTest.NETHRA : 
-						result.add(new Photos(resultSet.getInt("id"),resultSet.getInt("confirmed"),resultSet.getString("pictureName"),
+						current = new Photos(resultSet.getInt("id"),resultSet.getInt("confirmed"),resultSet.getString("pictureName"),
 						      resultSet.getInt("userID"),resultSet.getInt("adjudicatorID"),resultSet.getInt("type"),resultSet.getInt("photo_qual"),
 						      resultSet.getString("photo_cdr"),resultSet.getInt("photo_notch"),resultSet.getString("notch_hrs_one"),
 						      resultSet.getString("notch_hrs_two"),resultSet.getInt("photo_erosion"),resultSet.getString("eros_hrs_one"),
 						      resultSet.getString("eros_hrs_two"),resultSet.getInt("photo_disc"),resultSet.getString("disc_hrs_one"),
 						      resultSet.getString("disc_hrs_two"),resultSet.getInt("photo_rnfl"),resultSet.getString("rnfl_hrs_one"),
-						      resultSet.getString("rnfl_hrs_two")));
+						      resultSet.getString("rnfl_hrs_two"));
+						current.setBaseType(BaseTest.NETHRA);
+						result.add(current);
 						break;
 				}
 			}

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author aryner
  */
 public class OCTtest implements BaseTest {
+	private int baseType;
 	private int id;
 	private int confirmed;
 	private String pictureName;
@@ -150,6 +151,17 @@ public class OCTtest implements BaseTest {
 		return result;
 	}
 
+	public static OCTtest getSingle(String name, int id, int access) {
+		String query;
+		if(access == 0) {
+			query = "SELECT * FROM OCTtest WHERE pictureName='"+name+"' AND userID="+id;
+		}
+		else {
+			query = "SELECT * FROM OCTtest WHERE pictureName='"+name+"' AND adjudicatorID="+id;
+		}
+		return SQLCommands.queryOCTtest(query).get(0);
+	}
+
 	public static int getNeedToPairCount() {
 		String query = "SELECT * FROM OCTtest GROUP BY pictureName HAVING COUNT(*)=1";
 		return SQLCommands.getCount(query);
@@ -180,6 +192,114 @@ public class OCTtest implements BaseTest {
 		}
 
 		return needPics;
+	}
+
+	public static int updateOCT(HttpServletRequest request, User user) {
+		int result = 0;
+
+		int uID = user.getID();
+		String picName = request.getParameter("pictureName");
+		OCTtest oct = null;
+		oct = new OCTtest(picName);
+
+		String attr = request.getParameter("length");
+		oct.setLength(attr);
+		attr = request.getParameter("type");
+		oct.setType(Integer.parseInt(attr));
+		attr = request.getParameter("type_oth");
+		oct.setType_oth(attr);
+		attr = request.getParameter("snum");
+		oct.setSnum(attr);
+		attr = request.getParameter("scol");
+		oct.setScol(Integer.parseInt(attr));
+		attr = request.getParameter("nnum");
+		oct.setNnum(attr);
+		attr = request.getParameter("ncol");
+		oct.setNcol(Integer.parseInt(attr));
+		attr = request.getParameter("inum");
+		oct.setInum(attr);
+		attr = request.getParameter("icol");
+		oct.setIcol(Integer.parseInt(attr));
+		attr = request.getParameter("tnum");
+		oct.setTnum(attr);
+		attr = request.getParameter("tcol");
+		oct.setTcol(Integer.parseInt(attr));
+		attr = request.getParameter("sig");
+		oct.setSig(attr);
+		attr = request.getParameter("isnum");
+		oct.setIsnum(attr);
+		attr = request.getParameter("iscol");
+		oct.setIscol(Integer.parseInt(attr));
+		attr = request.getParameter("sinum");
+		oct.setSinum(attr);
+		attr = request.getParameter("sicol");
+		oct.setSicol(Integer.parseInt(attr));
+		attr = request.getParameter("stnum");
+		oct.setStnum(attr);
+		attr = request.getParameter("stcol");
+		oct.setStcol(Integer.parseInt(attr));
+		attr = request.getParameter("itnum");
+		oct.setItnum(attr);
+		attr = request.getParameter("itcol");
+		oct.setItcol(Integer.parseInt(attr));
+		attr = request.getParameter("snnum");
+		oct.setSnnum(attr);
+		attr = request.getParameter("sncol");
+		oct.setSncol(Integer.parseInt(attr));
+		attr = request.getParameter("mmnum");
+		oct.setMmnum(attr);
+		attr = request.getParameter("mmcol");
+		oct.setMmcol(Integer.parseInt(attr));
+		attr = request.getParameter("smaxnum");
+		oct.setSmaxnum(attr);
+		attr = request.getParameter("smaxcol");
+		oct.setSmaxcol(Integer.parseInt(attr));
+		attr = request.getParameter("imaxnum");
+		oct.setImaxnum(attr);
+		attr = request.getParameter("imaxcol");
+		oct.setImaxcol(Integer.parseInt(attr));
+		attr = request.getParameter("savgnum");
+		oct.setSavgnum(attr);
+		attr = request.getParameter("savgcol");
+		oct.setSavgcol(Integer.parseInt(attr));
+		attr = request.getParameter("iavgnum");
+		oct.setIavgnum(attr);
+		attr = request.getParameter("iavgcol");
+		oct.setIavgcol(Integer.parseInt(attr));
+		attr = request.getParameter("atnum");
+		oct.setAtnum(attr);
+		attr = request.getParameter("atcol");
+		oct.setAtcol(Integer.parseInt(attr));
+		attr = request.getParameter("eye");
+		oct.setEye(attr);
+
+		String query = "UPDATE OCTtest SET oct_length='"+oct.getLength()+"', oct_type='"+oct.getType()+"', "+
+				"oct_type_oth='"+oct.getType_oth()+"', oct_snum='"+oct.getSnum()+"', "+
+				"oct_scol='"+oct.getScol()+"', oct_nnum='"+oct.getNnum()+"', oct_ncol='"+oct.getNcol()+"', "+
+				"oct_inum='"+oct.getInum()+"', oct_icol='"+oct.getIcol()+"', oct_tnum='"+oct.getTnum()+"', "+
+				"oct_tcol='"+oct.getTcol()+"', oct_sig='"+oct.getSig()+"|"+oct.getEye()+"', oct_isnum='"+oct.getIsnum()+"', "+
+				"oct_iscol='"+oct.getIscol()+"', oct_sinum='"+oct.getSinum()+"', oct_sicol='"+oct.getSicol()+"', "+
+				"oct_stnum='"+oct.getStnum()+"', oct_stcol='"+oct.getStcol()+"', oct_itnum='"+oct.getItnum()+"', "+
+				"oct_itcol='"+oct.getItcol()+"', oct_snnum='"+oct.getSnnum()+"', oct_sncol='"+oct.getSncol()+"', "+
+				"oct_mmnum='"+oct.getMmnum()+"', oct_mmcol='"+oct.getMmcol()+"', oct_smaxnum='"+oct.getSmaxnum()+"', "+
+				"oct_smaxcol='"+oct.getSmaxcol()+"', oct_imaxnum='"+oct.getImaxnum()+"', oct_imaxcol='"+oct.getImaxcol()+"', "+
+				"oct_savgnum='"+oct.getSavgnum()+"', oct_savgcol='"+oct.getSavgcol()+"', oct_iavgnum='"+oct.getIavgnum()+"', "+
+				"oct_iavgcol='"+oct.getIavgcol()+"', oct_atnum='"+oct.getAtnum()+"', oct_atcol='"+oct.getAtcol()+"' ";
+
+		if(user.getAccess() == 0) {
+			query += " WHERE id='"+oct.getId()+"' AND userID='"+user.getID()+"'";
+		} else if(user.getAccess() ==1) { 
+			query += " WHERE pictureName='"+request.getParameter("pictureName")+"' AND adjudicatorID='"+user.getID()+"'";
+			if(request.getParameter("alreadyConfirmed").equals("true")) {
+				result = 2;
+			}
+		}
+		SQLCommands.update(query);
+		if(user.getAccess() == 0) {
+			setForAdjudication(picName);
+		}
+
+		return result;
 	}
 
 	public static int assignOCT(HttpServletRequest request, User user) {
@@ -394,8 +514,8 @@ public class OCTtest implements BaseTest {
 
 		return result;
 	}
-	public static Vector<BaseTest> getBaseTest() {
-		String query = "SELECT * FROM OCTtest WHERE confirmed='2'";
+	public static Vector<BaseTest> getBaseTest(int id) {
+		String query = "SELECT * FROM OCTtest WHERE (userID="+id+" OR adjudicatorID="+id+")";
 		return SQLCommands.queryBaseTest(query,  BaseTest.OCT);
 	}
 
@@ -451,6 +571,13 @@ public class OCTtest implements BaseTest {
 		}
 
 		return result;
+	}
+
+	public int getBaseType() {
+		return baseType;
+	}
+	public void setBaseType(int type) {
+		baseType = type;
 	}
 
 	/**

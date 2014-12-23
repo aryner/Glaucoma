@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author aryner
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload", "/uploadPictures", "/img", "/pdf", "/assignHVF", "/OpHVFtest", "/OpReviewHVF", "/printCSV", "/printCSVs", "/uploadData", "/dataUpload", "/assignFDT", "/assignMDT", "/assignOCT", "/assign3Nethra", "/assignStereo", "/printFinishedCSVs"})
+@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload", "/uploadPictures", "/img", "/pdf", "/assignHVF", "/OpHVFtest", "/OpReviewHVF", "/printCSV", "/printCSVs", "/uploadData", "/dataUpload", "/assignFDT", "/assignMDT", "/assignOCT", "/assign3Nethra", "/assignStereo", "/printFinishedCSVs", "/FDTReview", "/updateFDT", "/MDTReview", "/updateMDT", "/OCTReview", "/updateOCT", "/stereoReview", "/updateStereo", "/nethraReview", "/updateNethra"})
 public class Controller extends HttpServlet {
 	private final String slash = System.getProperty("file.separator");
 	/**
@@ -71,7 +71,8 @@ public class Controller extends HttpServlet {
 				request.setAttribute("adjudicatedBy", HVFtest.getAdjudicatedBy(user.getID()));
 			}
 
-			request.setAttribute("baseTests", Tools.getBaseTests());
+			request.setAttribute("baseTests", Tools.getBaseTests(user.getID()));
+			request.setAttribute("userID", user.getID());
 			request.setAttribute("ungraded",ungraded);
 			request.setAttribute("gradedOnce",onceGraded);
 			request.setAttribute("adjudicated", adjudicated);
@@ -109,6 +110,19 @@ public class Controller extends HttpServlet {
 				request.setAttribute("pair",pair);
 			}
 
+			request.setAttribute("access", user.getAccess());
+			request.setAttribute("slash",slash);
+			request.setAttribute("picture",picture);
+			request.setAttribute("missingPics", Tools.needPictures());
+		}
+
+		else if(userPath.equals("/FDTReview")) {
+			String pictureName = request.getParameter("pictureName");
+			User user = (User)session.getAttribute("user");
+			Picture picture = Picture.getPictureByName(pictureName);
+			request.setAttribute("confirmed", "true");
+
+			request.setAttribute("fdt", FDTtest.getSingle(pictureName, user.getID(), user.getAccess()));
 			request.setAttribute("access", user.getAccess());
 			request.setAttribute("slash",slash);
 			request.setAttribute("picture",picture);
@@ -432,6 +446,18 @@ public class Controller extends HttpServlet {
 			}
 		
 			response.sendRedirect("/Glaucoma/FDTtest"); 
+			return;
+		}
+		else if(userPath.equals("/updateFDT")) {
+			User user = (User)session.getAttribute("user");
+			int returnType = FDTtest.updateFDT(request, user);
+
+			if(returnType == 2) {
+				response.sendRedirect("/Glaucoma/home"); 
+				return;
+			}
+		
+			response.sendRedirect("/Glaucoma/home"); 
 			return;
 		}
 

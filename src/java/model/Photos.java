@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author aryner
  */
 public class Photos implements BaseTest {
+	private int baseType;
 	private int id;
 	private int confirmed;
 	private String pictureName;
@@ -81,6 +82,17 @@ public class Photos implements BaseTest {
 		this.rnfl = rnfl;
 		this.rnfl_hrs_one = rnfl_hrs_one;
 		this.rnfl_hrs_two = rnfl_hrs_two;
+	}
+
+	public static Photos getSingle(String name, int id, int access, int type) {
+		String query;
+		if(access == 0) {
+			query = "SELECT * FROM Photos WHERE pictureName='"+name+"' AND userID="+id+" AND type='"+type+"'";
+		}
+		else {
+			query = "SELECT * FROM Photos WHERE pictureName='"+name+"' AND adjudicatorID="+id+" AND type='"+type+"'";
+		}
+		return SQLCommands.queryPhotos(query).get(0);
 	}
 
 	public static Picture getNextStereo(User user) {
@@ -173,6 +185,68 @@ public class Photos implements BaseTest {
 		}
 
 		return needPics;
+	}
+
+	public static int updatePhoto(HttpServletRequest request, User user, int type) {
+		int result = 0;
+
+		int uID = user.getID();
+		String picName = request.getParameter("pictureName");
+		Photos photo = null;
+		photo = new Photos(picName);
+
+		String attr = request.getParameter("qual");
+		photo.setQual(Integer.parseInt(attr));
+		attr = request.getParameter("cdr");
+		photo.setCdr(attr);
+		attr = request.getParameter("notch");
+		photo.setNotch(Integer.parseInt(attr));
+		attr = request.getParameter("notch_hrs_one");
+		photo.setNotch_hrs_one(attr);
+		attr = request.getParameter("notch_hrs_two");
+		photo.setNotch_hrs_two(attr);
+		attr = request.getParameter("erosion");
+		photo.setErosion(Integer.parseInt(attr));
+		attr = request.getParameter("eros_hrs_one");
+		photo.setEros_hrs_one(attr);
+		attr = request.getParameter("eros_hrs_two");
+		photo.setEros_hrs_two(attr);
+		attr = request.getParameter("disc");
+		photo.setDisc(Integer.parseInt(attr));
+		attr = request.getParameter("disc_hrs_one");
+		photo.setDisc_hrs_one(attr);
+		attr = request.getParameter("disc_hrs_two");
+		photo.setDisc_hrs_two(attr);
+		attr = request.getParameter("rnfl");
+		photo.setRnfl(Integer.parseInt(attr));
+		attr = request.getParameter("rnfl_hrs_one");
+		photo.setRnfl_hrs_one(attr);
+		attr = request.getParameter("rnfl_hrs_two");
+		photo.setRnfl_hrs_two(attr);
+
+		String query = "UPDATE Photos SET photo_qual='"+photo.getQual()+"', photo_cdr='"+photo.getCdr()+"', "+
+			 	"photo_notch='"+photo.getNotch()+"', notch_hrs_one='"+photo.getNotch_hrs_one()+"', "+
+				"notch_hrs_two='"+photo.getNotch_hrs_two()+"', photo_erosion='"+photo.getErosion()+"', "+
+				"eros_hrs_one='"+photo.getEros_hrs_one()+"', eros_hrs_two='"+photo.getEros_hrs_two()+"', "+
+				"photo_disc='"+photo.getDisc()+"', disc_hrs_one='"+photo.getDisc_hrs_one()+"', "+
+				"disc_hrs_two='"+photo.getDisc_hrs_two()+"', photo_rnfl='"+photo.getRnfl()+"', "+
+				"rnfl_hrs_one='"+photo.getRnfl_hrs_one()+"', rnfl_hrs_two='"+photo.getRnfl_hrs_two()+"' ";
+
+		if(user.getAccess() == 0) {
+			query += " WHERE id='"+photo.getId()+"' AND userID='"+user.getID()+"'";
+		} else if(user.getAccess() ==1) { 
+			query += " WHERE pictureName='"+request.getParameter("pictureName")+"'"+
+				 " AND type='"+type+"' AND adjudicatorID='"+user.getID()+"'";
+			if(request.getParameter("alreadyConfirmed").equals("true")) {
+				result = 2;
+			}
+		}
+		SQLCommands.update(query);
+		if(user.getAccess() == 0) {
+			setForAdjudication(picName, type);
+		}
+
+		return result;
 	}
 
 	public static int assignPhoto(HttpServletRequest request, User user, int type) {
@@ -365,11 +439,11 @@ public class Photos implements BaseTest {
 
 		return result;
 	}
-	public static Vector<BaseTest> getBaseTest() {
-		String query = "SELECT * FROM Photos WHERE confirmed='2' AND type='"+STEREO+"'";
+	public static Vector<BaseTest> getBaseTest(int id) {
+		String query = "SELECT * FROM Photos WHERE type='"+STEREO+"' AND (userID="+id+" OR adjudicatorID="+id+")";
 		Vector<BaseTest> result = SQLCommands.queryBaseTest(query,  BaseTest.STEREO);
 
-		query = "SELECT * FROM Photos WHERE confirmed='2' AND type='"+NETHRA+"'";
+		query = "SELECT * FROM Photos WHERE type='"+NETHRA+"' AND (userID="+id+" OR adjudicatorID="+id+")";
 		result.addAll(SQLCommands.queryBaseTest(query, BaseTest.NETHRA));
 
 		return result;
@@ -449,7 +523,7 @@ public class Photos implements BaseTest {
 
 	public static Vector<String> getFinishedNethraCSVLines() {
 		Vector<String> result = new Vector<String>();
-		String query = "SELECT * FROM Photos WHERE type="+NETHRA+" AND confirmed=2 GROUP BY pictureName";
+		String query = "SELECT * FROM Photos WHERE type="+NETHRA+" confirmed=2 GROUP BY pictureName";
 		Vector<Photos> photos = SQLCommands.queryPhotos(query);
 		
 		String currLine = "picture, adjudicatorID, photo_qual, photo_cdr, "+
@@ -469,6 +543,13 @@ public class Photos implements BaseTest {
 		}
 
 		return result;
+	}
+
+	public int getBaseType() {
+		return (type == STEREO ? BaseTest.STEREO : BaseTest.NETHRA);
+	}
+	public void setBaseType(int type) {
+		baseType = type;
 	}
 
 	/**

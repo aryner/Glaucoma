@@ -27,4 +27,6 @@ public interface BaseTest {
 	public void setConfirmed(int confimred);
 	public int getId();
 	public void setId(int id);
+	public int getBaseType();
+	public void setBaseType(int type);
 }

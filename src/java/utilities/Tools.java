@@ -201,12 +201,12 @@ public class Tools {
 		return result;
 	}
 
-	public static Vector<BaseTest> getBaseTests() {
+	public static Vector<BaseTest> getBaseTests(int id) {
 		Vector<BaseTest> result = new Vector<BaseTest>();
-		result.addAll(FDTtest.getBaseTest());
-		result.addAll(MDTtest.getBaseTest());
-		result.addAll(OCTtest.getBaseTest());
-		result.addAll(Photos.getBaseTest());
+		result.addAll(FDTtest.getBaseTest(id));
+		result.addAll(MDTtest.getBaseTest(id));
+		result.addAll(OCTtest.getBaseTest(id));
+		result.addAll(Photos.getBaseTest(id));
 
 		return result;
 	}

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author aryner
  */
 public class FDTtest implements BaseTest {
+	private int baseType;
 	private int id;
 	private int confirmed;
 	private String pictureName;
@@ -117,6 +118,17 @@ public class FDTtest implements BaseTest {
 		this.abnormal = abnormal;
 	}
 
+	public static FDTtest getSingle(String name, int id, int access) {
+		String query;
+		if(access == 0) {
+			query = "SELECT * FROM FDTtest WHERE pictureName='"+name+"' AND userID="+id;
+		}
+		else {
+			query = "SELECT * FROM FDTtest WHERE pictureName='"+name+"' AND adjudicatorID="+id;
+		}
+		return SQLCommands.queryFDTtest(query).get(0);
+	}
+
 	public static Picture getNext(User user) {
 		Picture result = null;
 		String query = "";
@@ -173,6 +185,109 @@ public class FDTtest implements BaseTest {
 		}
 
 		return needPics;
+	}
+
+	public static int updateFDT(HttpServletRequest request, User user) {
+		int result = 0;
+
+		int uID = user.getID();
+		String picName = request.getParameter("pictureName");
+		FDTtest fdt = null;
+		fdt = new FDTtest(picName);
+
+		String attr = request.getParameter("dur");
+		fdt.setDur(attr);
+		attr = request.getParameter("targ");
+		fdt.setTarg(Integer.parseInt(attr));
+		attr = request.getParameter("targ_oth");
+		fdt.setTarg_oth(attr);
+		attr = request.getParameter("fixerr_num");
+		fdt.setFixerr_num(Integer.parseInt(attr));
+		attr = request.getParameter("fixerr_den");
+		fdt.setFixerr_den(Integer.parseInt(attr));
+		attr = request.getParameter("fp_num");
+		fdt.setFp_num(Integer.parseInt(attr));
+		attr = request.getParameter("fp_den");
+		fdt.setFp_den(Integer.parseInt(attr));
+		attr = request.getParameter("fn_num");
+		fdt.setFn_num(Integer.parseInt(attr));
+		attr = request.getParameter("fn_den");
+		fdt.setFn_den(Integer.parseInt(attr));
+		attr = request.getParameter("test");
+		fdt.setTest(Integer.parseInt(attr));
+		attr = request.getParameter("test_oth");
+		fdt.setTest_oth(attr);
+		attr = request.getParameter("speed");
+		fdt.setSpeed(Integer.parseInt(attr));
+		attr = request.getParameter("speed_oth");
+		fdt.setSpeed_oth(attr);
+		attr = request.getParameter("pupil");
+		fdt.setPupil(attr);
+		attr = request.getParameter("va_num");
+		fdt.setVa_num(attr);
+		attr = request.getParameter("va_den");
+		fdt.setVa_den(attr);
+		attr = request.getParameter("rx");
+		fdt.setRx(attr);
+		attr = request.getParameter("mdsign");
+		fdt.setMdsign(Integer.parseInt(attr));
+		attr = request.getParameter("mddb");
+		fdt.setMddb(attr);
+		attr = request.getParameter("mdp");
+		fdt.setMdp(attr);
+		attr = request.getParameter("psdsign");
+		fdt.setPsdsign(Integer.parseInt(attr));
+		attr = request.getParameter("psdb");
+		fdt.setPsdb(attr);
+		attr = request.getParameter("psdp");
+		fdt.setPsdp(attr);
+		attr = request.getParameter("lu_one");
+		fdt.setLu_one(attr);
+		attr = request.getParameter("lu_five");
+		fdt.setLu_five(attr);
+		attr = request.getParameter("ru_one");
+		fdt.setRu_one(attr);
+		attr = request.getParameter("ru_five");
+		fdt.setRu_five(attr);
+		attr = request.getParameter("ll_one");
+		fdt.setLl_one(attr);
+		attr = request.getParameter("ll_five");
+		fdt.setLl_five(attr);
+		attr = request.getParameter("rl_one");
+		fdt.setRl_one(attr);
+		attr = request.getParameter("rl_five");
+		fdt.setRl_five(attr);
+
+		int abnormalCount = Integer.parseInt(fdt.getLu_one())+
+				    Integer.parseInt(fdt.getRu_one())+
+				    Integer.parseInt(fdt.getLl_one())+
+				    Integer.parseInt(fdt.getRl_one());
+		fdt.setAbnormal((abnormalCount>=2)?2:1);
+
+		String query = "UPDATE FDTtest SET fdt_dur='"+fdt.getDur()+"|"+fdt.getRx()+"', fdt_targ='"+fdt.getTarg()+"', fdt_targ_oth='"+fdt.getTarg_oth()+"', "+
+			       "fdt_fixerr_num='"+fdt.getFixerr_num()+"', fdt_fixerr_den='"+fdt.getFixerr_den()+"', fdt_fp_num='"+fdt.getFp_num()+"', "+
+			       "fdt_fp_den='"+fdt.getFp_den()+"', fdt_fn_num='"+fdt.getFn_num()+"', fdt_fn_den='"+fdt.getFn_den()+"', fdt_test='"+fdt.getTest()+"', "+
+			       "fdt_test_oth='"+fdt.getTest_oth()+"', fdt_speed='"+fdt.getSpeed()+"', fdt_speed_oth='"+fdt.getSpeed_oth()+"', "+
+			       "fdt_pupil='"+fdt.getPupil()+"', fdt_va_num='"+fdt.getVa_num()+"', fdt_va_den='"+fdt.getVa_den()+"', fdt_mdsign='"+fdt.getMdsign()+"', "+
+			       "fdt_mddb='"+fdt.getMddb()+"', fdt_mdp='"+fdt.getMdp()+"', fdt_psdsign='"+fdt.getPsdsign()+"', fdt_psdb='"+fdt.getPsdb()+"', "+
+			       "fdt_psdp='"+fdt.getPsdp()+"', fdt_lu_one='"+fdt.getLu_one()+"', fdt_lu_five='"+fdt.getLu_five()+"', fdt_ru_one='"+fdt.getRu_one()+"', "+
+			       "fdt_ru_five='"+fdt.getRu_five()+"', fdt_ll_one='"+fdt.getLl_one()+"', fdt_ll_five='"+fdt.getLl_five()+"', "+
+			       "fdt_rl_one='"+fdt.getRl_one()+"', fdt_rl_five='"+fdt.getRl_five()+"', fdt_abnormal='"+fdt.getAbnormal()+"' ";
+
+		if(user.getAccess() == 0) {
+			query += " WHERE pictureName='"+fdt.getPictureName()+"' AND userID='"+user.getID()+"'";
+		} else if(user.getAccess() ==1) { 
+			query += " WHERE pictureName='"+request.getParameter("pictureName")+"' AND adjudicatorID='"+user.getID()+"'";
+			if(request.getParameter("alreadyConfirmed").equals("true")) {
+				result = 2;
+			}
+		}
+		SQLCommands.update(query);
+		if(user.getAccess() == 0) {
+			setForAdjudication(picName);
+		}
+
+		return result;
 	}
 
 	public static int assignFDT(HttpServletRequest request, User user) {
@@ -380,8 +495,8 @@ public class FDTtest implements BaseTest {
 
 		return result;
 	}
-	public static Vector<BaseTest> getBaseTest() {
-		String query = "SELECT * FROM FDTtest WHERE confirmed='2'";
+	public static Vector<BaseTest> getBaseTest(int id) {
+		String query = "SELECT * FROM FDTtest WHERE (userID="+id+" OR adjudicatorID="+id+")";
 		return SQLCommands.queryBaseTest(query,  BaseTest.FDT);
 	}
 
@@ -436,6 +551,13 @@ public class FDTtest implements BaseTest {
 		}
 
 		return result;
+	}
+
+	public int getBaseType() {
+		return BaseTest.FDT;
+	}
+	public void setBaseType(int type) {
+		baseType = type;
 	}
 
 	/**
