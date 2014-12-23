@@ -155,7 +155,7 @@ if(session.getAttribute("errors") != null) {
 							   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
 							{
 								match = true;
-								out.print("<a href='#'>");
+								out.print("<a href='OCTReview?pictureName="+baseTests.get(j).getPictureName()+"'>");
 							}
 							break;
 						case BaseTest.STEREO :
@@ -214,7 +214,7 @@ if(session.getAttribute("errors") != null) {
 							   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
 							{
 								match = true;
-								out.print("<a href='#'>");
+								out.print("<a href='OCTReview?pictureName="+baseTests.get(j).getPictureName()+"'>");
 							}
 							break;
 						case BaseTest.STEREO :
@@ -274,7 +274,7 @@ if(session.getAttribute("errors") != null) {
 								   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
 								{
 									match = true;
-									out.print("<a href='#'>");
+									out.print("<a href='OCTReview?pictureName="+baseTests.get(j).getPictureName()+"'>");
 								}
 								break;
 							case BaseTest.STEREO :

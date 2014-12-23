@@ -148,7 +148,7 @@ public class Controller extends HttpServlet {
 			Picture picture = Picture.getPictureByName(pictureName,BaseTest.OCT);
 			request.setAttribute("confirmed", "true");
 
-			request.setAttribute("odt", OCTtest.getSingle(pictureName, user.getID(), user.getAccess()));
+			request.setAttribute("oct", OCTtest.getSingle(pictureName, user.getID(), user.getAccess()));
 			request.setAttribute("access", user.getAccess());
 			request.setAttribute("slash",slash);
 			request.setAttribute("picture",picture);
