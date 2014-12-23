@@ -233,7 +233,7 @@ public class Photos implements BaseTest {
 				"rnfl_hrs_one='"+photo.getRnfl_hrs_one()+"', rnfl_hrs_two='"+photo.getRnfl_hrs_two()+"' ";
 
 		if(user.getAccess() == 0) {
-			query += " WHERE id='"+photo.getId()+"' AND userID='"+user.getID()+"'";
+			query += " WHERE pictureName='"+photo.getPictureName()+"' AND userID='"+user.getID()+"'";
 		} else if(user.getAccess() ==1) { 
 			query += " WHERE pictureName='"+request.getParameter("pictureName")+"'"+
 				 " AND type='"+type+"' AND adjudicatorID='"+user.getID()+"'";

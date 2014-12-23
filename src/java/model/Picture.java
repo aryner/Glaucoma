@@ -36,8 +36,25 @@ public class Picture {
 		type = ntype;
 	}
 
-	public static Picture getPictureByName(String picName) {
-		String query = "SELECT * FROM picture WHERE name='"+picName+"'";
+	public static Picture getPictureByName(String picName, int type) {
+		String query = "SELECT * FROM picture WHERE name='"+picName+"' AND type='";
+		switch(type) {
+			case BaseTest.FDT :
+				query+= "FDT'";
+				break;
+			case BaseTest.MDT :
+				query+= "MDT'";
+				break;
+			case BaseTest.OCT :
+				query+= "OCT'";
+				break;
+			case BaseTest.STEREO:
+				query+= "stereo'";
+				break;
+			case BaseTest.NETHRA:
+				query+= "3Nethra'";
+				break;
+		}
 		Vector<Picture> pics = SQLCommands.queryPictures(query);
 
 		if(pics == null || pics.size() == 0 ) {

@@ -287,7 +287,7 @@ public class OCTtest implements BaseTest {
 				"oct_iavgcol='"+oct.getIavgcol()+"', oct_atnum='"+oct.getAtnum()+"', oct_atcol='"+oct.getAtcol()+"' ";
 
 		if(user.getAccess() == 0) {
-			query += " WHERE id='"+oct.getId()+"' AND userID='"+user.getID()+"'";
+			query += " WHERE pictureName='"+oct.getPictureName()+"' AND userID='"+user.getID()+"'";
 		} else if(user.getAccess() ==1) { 
 			query += " WHERE pictureName='"+request.getParameter("pictureName")+"' AND adjudicatorID='"+user.getID()+"'";
 			if(request.getParameter("alreadyConfirmed").equals("true")) {

@@ -147,12 +147,10 @@ if(session.getAttribute("errors") != null) {
 							   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
 							{
 								match = true;
-								out.print("<a href='#'>");
+								out.print("<a href='MDTReview?pictureName="+baseTests.get(j).getPictureName()+"'>");
 							}
 							break;
 						case BaseTest.OCT :
-							System.out.println(name.substring(0,name.indexOf(" "))+ " vs " + baseTests.get(j).getBaseType());
-							System.out.println(name.substring(name.indexOf(" - ")+3, name.length()) + " vs " + baseTests.get(j).getPictureName());
 							if(name.substring(0,name.indexOf(" ")).equals("OCT") &&
 							   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
 							{
@@ -208,12 +206,10 @@ if(session.getAttribute("errors") != null) {
 							   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
 							{
 								match = true;
-								out.print("<a href='#'>");
+								out.print("<a href='MDTReview?pictureName="+baseTests.get(j).getPictureName()+"'>");
 							}
 							break;
 						case BaseTest.OCT :
-							System.out.println(name.substring(0,name.indexOf(" "))+ " vs " + baseTests.get(j).getBaseType());
-							System.out.println(name.substring(name.indexOf(" - ")+3, name.length()) + " vs " + baseTests.get(j).getPictureName());
 							if(name.substring(0,name.indexOf(" ")).equals("OCT") &&
 							   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
 							{
@@ -270,7 +266,7 @@ if(session.getAttribute("errors") != null) {
 								   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
 								{
 									match = true;
-									out.print("<a href='#'>");
+									out.print("<a href='MDTReview?pictureName="+baseTests.get(j).getPictureName()+"'>");
 								}
 								break;
 							case BaseTest.OCT :

@@ -92,7 +92,7 @@ public class Controller extends HttpServlet {
 			Picture picture;
 
 			if(pictureName != null && pictureName.length() > 0) {
-				picture = Picture.getPictureByName(pictureName);
+				picture = Picture.getPictureByName(pictureName,BaseTest.FDT);
 				request.setAttribute("confirmed", "true");
 			}
 			else {
@@ -119,10 +119,62 @@ public class Controller extends HttpServlet {
 		else if(userPath.equals("/FDTReview")) {
 			String pictureName = request.getParameter("pictureName");
 			User user = (User)session.getAttribute("user");
-			Picture picture = Picture.getPictureByName(pictureName);
+			Picture picture = Picture.getPictureByName(pictureName,BaseTest.FDT);
 			request.setAttribute("confirmed", "true");
 
 			request.setAttribute("fdt", FDTtest.getSingle(pictureName, user.getID(), user.getAccess()));
+			request.setAttribute("access", user.getAccess());
+			request.setAttribute("slash",slash);
+			request.setAttribute("picture",picture);
+			request.setAttribute("missingPics", Tools.needPictures());
+		}
+
+		else if(userPath.equals("/MDTReview")) {
+			String pictureName = request.getParameter("pictureName");
+			User user = (User)session.getAttribute("user");
+			Picture picture = Picture.getPictureByName(pictureName,BaseTest.MDT);
+			request.setAttribute("confirmed", "true");
+
+			request.setAttribute("mdt", MDTtest.getSingle(pictureName, user.getID(), user.getAccess()));
+			request.setAttribute("access", user.getAccess());
+			request.setAttribute("slash",slash);
+			request.setAttribute("picture",picture);
+			request.setAttribute("missingPics", Tools.needPictures());
+		}
+
+		else if(userPath.equals("/OCTReview")) {
+			String pictureName = request.getParameter("pictureName");
+			User user = (User)session.getAttribute("user");
+			Picture picture = Picture.getPictureByName(pictureName,BaseTest.OCT);
+			request.setAttribute("confirmed", "true");
+
+			request.setAttribute("odt", OCTtest.getSingle(pictureName, user.getID(), user.getAccess()));
+			request.setAttribute("access", user.getAccess());
+			request.setAttribute("slash",slash);
+			request.setAttribute("picture",picture);
+			request.setAttribute("missingPics", Tools.needPictures());
+		}
+
+		else if(userPath.equals("/StereoReview")) {
+			String pictureName = request.getParameter("pictureName");
+			User user = (User)session.getAttribute("user");
+			Picture picture = Picture.getPictureByName(pictureName,BaseTest.STEREO);
+			request.setAttribute("confirmed", "true");
+
+			request.setAttribute("stereo", Photos.getSingle(pictureName, user.getID(), user.getAccess(),Photos.STEREO));
+			request.setAttribute("access", user.getAccess());
+			request.setAttribute("slash",slash);
+			request.setAttribute("picture",picture);
+			request.setAttribute("missingPics", Tools.needPictures());
+		}
+
+		else if(userPath.equals("/nethraReview")) {
+			String pictureName = request.getParameter("pictureName");
+			User user = (User)session.getAttribute("user");
+			Picture picture = Picture.getPictureByName(pictureName,BaseTest.NETHRA);
+			request.setAttribute("confirmed", "true");
+
+			request.setAttribute("nethra", Photos.getSingle(pictureName, user.getID(), user.getAccess(),Photos.NETHRA));
 			request.setAttribute("access", user.getAccess());
 			request.setAttribute("slash",slash);
 			request.setAttribute("picture",picture);
@@ -135,7 +187,7 @@ public class Controller extends HttpServlet {
 			Picture picture;
 
 			if(pictureName != null && pictureName.length() > 0) {
-				picture = Picture.getPictureByName(pictureName);
+				picture = Picture.getPictureByName(pictureName,BaseTest.MDT);
 				request.setAttribute("confirmed", "true");
 			}
 			else {
@@ -165,7 +217,7 @@ public class Controller extends HttpServlet {
 			Picture picture;
 
 			if(pictureName != null && pictureName.length() > 0) {
-				picture = Picture.getPictureByName(pictureName);
+				picture = Picture.getPictureByName(pictureName, BaseTest.OCT);
 				request.setAttribute("confirmed", "true");
 			}
 			else {
@@ -195,7 +247,7 @@ public class Controller extends HttpServlet {
 			Picture picture;
 
 			if(pictureName != null && pictureName.length() > 0) {
-				picture = Picture.getPictureByName(pictureName);
+				picture = Picture.getPictureByName(pictureName, BaseTest.STEREO);
 				request.setAttribute("confirmed", "true");
 			}
 			else {
@@ -224,7 +276,7 @@ public class Controller extends HttpServlet {
 			Picture picture;
 
 			if(pictureName != null && pictureName.length() > 0) {
-				picture = Picture.getPictureByName(pictureName);
+				picture = Picture.getPictureByName(pictureName,BaseTest.NETHRA);
 				request.setAttribute("confirmed", "true");
 			}
 			else {
@@ -254,7 +306,7 @@ public class Controller extends HttpServlet {
 			Picture picture = null;
 
 			if(pictureName != null && pictureName.length() > 0) {
-				picture = Picture.getPictureByName(pictureName);
+				picture = Picture.getPictureByName(pictureName,0);
 				request.setAttribute("confirmed","true");
 			}
 			else {
@@ -292,7 +344,7 @@ public class Controller extends HttpServlet {
 			String pictureName = request.getParameter("pictureName");
 
 			if (pictureName != null && pictureName.length() > 0) {
-				picture = Picture.getPictureByName(pictureName);
+				picture = Picture.getPictureByName(pictureName, 0);
 			} 
 			else {
 				User user = (User)session.getAttribute("user");
@@ -451,6 +503,54 @@ public class Controller extends HttpServlet {
 		else if(userPath.equals("/updateFDT")) {
 			User user = (User)session.getAttribute("user");
 			int returnType = FDTtest.updateFDT(request, user);
+
+			if(returnType == 2) {
+				response.sendRedirect("/Glaucoma/home"); 
+				return;
+			}
+		
+			response.sendRedirect("/Glaucoma/home"); 
+			return;
+		}
+		else if(userPath.equals("/updateMDT")) {
+			User user = (User)session.getAttribute("user");
+			int returnType = MDTtest.updateMDT(request, user);
+
+			if(returnType == 2) {
+				response.sendRedirect("/Glaucoma/home"); 
+				return;
+			}
+		
+			response.sendRedirect("/Glaucoma/home"); 
+			return;
+		}
+		else if(userPath.equals("/updateOCT")) {
+			User user = (User)session.getAttribute("user");
+			int returnType = OCTtest.updateOCT(request, user);
+
+			if(returnType == 2) {
+				response.sendRedirect("/Glaucoma/home"); 
+				return;
+			}
+		
+			response.sendRedirect("/Glaucoma/home"); 
+			return;
+		}
+		else if(userPath.equals("/updateStereo")) {
+			User user = (User)session.getAttribute("user");
+			int returnType = Photos.updatePhoto(request, user, Photos.STEREO);
+
+			if(returnType == 2) {
+				response.sendRedirect("/Glaucoma/home"); 
+				return;
+			}
+		
+			response.sendRedirect("/Glaucoma/home"); 
+			return;
+		}
+		else if(userPath.equals("/updateNethra")) {
+			User user = (User)session.getAttribute("user");
+			int returnType = Photos.updatePhoto(request, user, Photos.NETHRA);
 
 			if(returnType == 2) {
 				response.sendRedirect("/Glaucoma/home"); 

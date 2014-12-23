@@ -185,7 +185,7 @@ public class MDTtest implements BaseTest {
 				"', mdt_abnormal='"+mdt.getAbnormal()+"' ";
 
 		if(user.getAccess() == 0) {
-			query += " WHERE id='"+mdt.getId()+"' AND userID='"+user.getID()+"'";
+			query += " WHERE pictureName='"+mdt.getPictureName()+"' AND userID='"+user.getID()+"'";
 		} else if(user.getAccess() ==1) { 
 			query += " WHERE pictureName='"+request.getParameter("pictureName")+"' AND adjudicatorID='"+user.getID()+"'";
 			if(request.getParameter("alreadyConfirmed").equals("true")) {
