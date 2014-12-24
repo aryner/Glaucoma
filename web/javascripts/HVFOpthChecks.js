@@ -5,6 +5,28 @@
  */
 
 $(document).ready(function(){
+	updateTotals();
+	$('input[name=pts_five_top]').change(function() {
+		updateTotals();
+		colorPts();
+		determineSeverity();
+	});
+	$('input[name=pts_five_bot]').change(function() {
+		updateTotals();
+		colorPts();
+		determineSeverity();
+	});
+	$('input[name=pts_one_top]').change(function() {
+		updateTotals();
+		colorPts();
+		determineSeverity();
+	});
+	$('input[name=pts_one_bot]').change(function() {
+		updateTotals();
+		colorPts();
+		determineSeverity();
+	});
+
 	$('input[name=ght]').change(function(){
 		validateGlaucoma();
 	});
@@ -26,12 +48,22 @@ $(document).ready(function(){
 			}
 		}
 	});
-	$('input[type=text][name=pts_five]').on('input', function() {
+	$('input[type=text][name=pts_five_top]').on('input', function() {
 		if(this.value != this.value.replace(/[^0-9]/g, '')) {
 			this.value = this.value.replace(/[^0-9]/g, '');
 		}
 	});
-	$('input[type=text][name=pts_one]').on('input', function() {
+	$('input[type=text][name=pts_five_bot]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=pts_one_top]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=pts_one_bot]').on('input', function() {
 		if(this.value != this.value.replace(/[^0-9]/g, '')) {
 			this.value = this.value.replace(/[^0-9]/g, '');
 		}
@@ -74,14 +106,6 @@ $(document).ready(function(){
 	});
 	$('input[name=central_15]').change(function(){
 		colorCentral();
-		determineSeverity();
-	});
-	$('input[name=pts_five]').change(function() {
-		colorPts();
-		determineSeverity();
-	});
-	$('input[name=pts_one]').change(function() {
-		colorPts();
 		determineSeverity();
 	});
 	$('input[name=sup_hem]').change(function() {
@@ -222,8 +246,10 @@ $(document).ready(function(){
 		var inf_hem = $('input[type=radio][name=inf_hem][value=0]').prop('checked')
 			|| $('input[type=radio][name=inf_hem][value=1]').prop('checked')
 			|| $('input[type=radio][name=inf_hem][value=2]').prop('checked');
-		var pts_five = $('input[type=text][name=pts_five]').val().length > 0; 
-		var pts_one = $('input[type=text][name=pts_one]').val().length > 0; 
+		var pts_five = $('input[type=text][name=pts_five_top]').val().length > 0
+			&& $('input[type=text][name=pts_five_bot]').val().length > 0; 
+		var pts_one = $('input[type=text][name=pts_one_top]').val().length > 0
+			&& $('input[type=text][name=pts_one_bot]').val().length > 0; 
 
 		var severe = $('input[type=radio][name=severe][value=0]').prop('checked')
 			|| $('input[type=radio][name=severe][value=1]').prop('checked') 
@@ -306,10 +332,10 @@ $(document).ready(function(){
 			$('input[type=text][name=inf_hem]').focus();
 		} else if(!pts_five) {
 			e.preventDefault(); 
-			$('input[type=text][name=pts_five]').focus();
+			$('input[type=text][name=pts_five_top]').focus();
 		} else if(!pts_one) {
 			e.preventDefault(); 
-			$('input[type=text][name=pts_one]').focus();
+			$('input[type=text][name=pts_one_top]').focus();
 		} else if(!severe) {
 			e.preventDefault(); 
 			$('input[type=radio][name=severe][value=1]').focus();
@@ -457,8 +483,8 @@ function colorCentral()  {
 
 function colorPts() {
 	var pts = $('#pts');
-	var one = Number($('input[name=pts_one]').val());
-	var five = Number($('input[name=pts_five]').val());
+	var one = Number($('input[name=pts_one_top]').val())+Number($('input[name=pts_one_bot]').val());
+	var five = Number($('input[name=pts_five_top]').val())+Number($('input[name=pts_five_bot]').val());
 
 	pts.removeClass('noGlau');
 	pts.removeClass('earlyGlau');
@@ -608,4 +634,14 @@ function determineSeverity() {
 			$('input[name=severe][value=4]').prop('checked',true);
 		}
 	}
+}
+
+function updateTotals() {
+	var top = +$('input[name=pts_five_top]').val()
+	var bot = +$('input[name=pts_five_bot]').val()
+	$('#pts_five_total').text(top+bot);
+
+	var top = +$('input[name=pts_one_top]').val()
+	var bot = +$('input[name=pts_one_bot]').val()
+	$('#pts_one_total').text(top+bot);
 }

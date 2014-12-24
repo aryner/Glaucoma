@@ -146,10 +146,12 @@ MD - dB <input type="text" name="mddb" <%out.print("value='"+hvf.getMddb()+"'");
 	# points depressed < 5% level on Pattern Deviation Plot <br>
 	Top <input type="text" class='numBox' name="pts_five_top" <%out.print("value='"+hvf.getPts_five_top()+"'");%>>
 	Bot <input type="text" class='numBox' name="pts_five_bot" <%out.print("value='"+hvf.getPts_five_bot()+"'");%>>
+	Total: <span id='pts_five_total'></span>
 	<br>
 	# points depressed < 1% level on Pattern Deviation Plot <br>
 	Top <input type="text" class='numBox' name="pts_one_top" <%out.print("value='"+hvf.getPts_one_top()+"'");%>>
 	Bot <input type="text" class='numBox' name="pts_one_bot" <%out.print("value='"+hvf.getPts_one_bot()+"'");%>>
+	Total: <span id='pts_one_total'></span>
 	<br>
 </div>
 <!--
