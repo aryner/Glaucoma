@@ -339,8 +339,9 @@ public class SQLCommands {
 					resultSet.getInt("hvf_psdsign"),resultSet.getString("hvf_psddb"),resultSet.getInt("hvf_psdp"),
 					resultSet.getInt("hvf_central_15"),resultSet.getInt("hvf_central_0"),resultSet.getInt("hvf_sup_hem"),
 					resultSet.getInt("hvf_inf_hem"),resultSet.getInt("hvf_sup_hem2"),resultSet.getInt("hvf_inf_hem2"),
-					resultSet.getInt("hvf_pts_five"),resultSet.getInt("hvf_pts_contig"),resultSet.getInt("hvf_pts_one"),
-					resultSet.getInt("hvf_cluster"),resultSet.getInt("hvf_severe"),resultSet.getInt("hvf_reliable_review")
+					resultSet.getInt("hvf_pts_five_top"),resultSet.getInt("hvf_pts_five_bot"),resultSet.getInt("hvf_pts_contig"),
+					resultSet.getInt("hvf_pts_one_top"),resultSet.getInt("hvf_pts_one_bot"),resultSet.getInt("hvf_cluster"),
+					resultSet.getInt("hvf_severe"),resultSet.getInt("hvf_reliable_review")
 				));
 			}
 		} catch (SQLException ex) {

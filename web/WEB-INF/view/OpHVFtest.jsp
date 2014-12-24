@@ -128,13 +128,13 @@ MD - dB <input type="text" name="mddb" <%out.print("value='"+hvf.getMddb()+"'");
 
 <%
 	severity = "";
-	if(hvf.getPts_five() >= 56 || hvf.getPts_one() >= 37) {
+	if((hvf.getPts_five_top()+hvf.getPts_five_bot()) >= 56 || (hvf.getPts_one_top()+hvf.getPts_one_bot()) >= 37) {
 		severity = "class='severeGlau' style='border:solid;border-bottom:none' ";
 	}
-	else if(hvf.getPts_five() >= 37 && hvf.getPts_one() >= 19) {
+	else if((hvf.getPts_five_top()+hvf.getPts_five_bot()) >= 37 && (hvf.getPts_one_top()+hvf.getPts_one_bot()) >= 19) {
 		severity = "class='advGlau' style='border:solid;border-bottom:none' ";
 	}
-	else if(hvf.getPts_five() >= 19 && hvf.getPts_one() >= 12) {
+	else if((hvf.getPts_five_top()+hvf.getPts_five_bot()) >= 19 && (hvf.getPts_one_top()+hvf.getPts_one_bot()) >= 12) {
 		severity = "class='modGlau' style='border:solid;border-bottom:none'";
 	}
 	else {
@@ -143,8 +143,14 @@ MD - dB <input type="text" name="mddb" <%out.print("value='"+hvf.getMddb()+"'");
 
 %>
 <div id="pts" <%out.print(severity);%>>
-# points depressed < 5% level on Pattern Deviation Plot <input type="text" name="pts_five" <%out.print("value='"+hvf.getPts_five()+"'");%>><br>
-# points depressed < 1% level on Pattern Deviation Plot <input type="text" name="pts_one" <%out.print("value='"+hvf.getPts_one()+"'");%>><br>
+	# points depressed < 5% level on Pattern Deviation Plot <br>
+	Top <input type="text" class='numBox' name="pts_five_top" <%out.print("value='"+hvf.getPts_five_top()+"'");%>>
+	Bot <input type="text" class='numBox' name="pts_five_bot" <%out.print("value='"+hvf.getPts_five_bot()+"'");%>>
+	<br>
+	# points depressed < 1% level on Pattern Deviation Plot <br>
+	Top <input type="text" class='numBox' name="pts_one_top" <%out.print("value='"+hvf.getPts_one_top()+"'");%>>
+	Bot <input type="text" class='numBox' name="pts_one_bot" <%out.print("value='"+hvf.getPts_one_bot()+"'");%>>
+	<br>
 </div>
 <!--
 # contiguous points < 5% level on Pattern Deviation Plot <input type="text" name="pts_contig" <%out.print("value='"+hvf.getPts_contig()+"'");%>><br><br>

@@ -54,6 +54,9 @@ public class Picture {
 			case BaseTest.NETHRA:
 				query+= "3Nethra'";
 				break;
+			case BaseTest.HVF:
+				query+= "HVF'";
+				break;
 		}
 		Vector<Picture> pics = SQLCommands.queryPictures(query);
 

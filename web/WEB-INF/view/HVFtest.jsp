@@ -701,11 +701,10 @@ if(pic == null) {
 <input type="radio" name="inf_hem" value="2"<%if(a && !diff && s1.equals("2")){out.print(" checked='true'");}%>>2<%if((a&&diff)&&((s1.equals("2"))||(s2.equals("2")))){%><span class='highlight'> ***</span><%}%><br>
 <br>
 
-
 <%
 	if(a) {
-		s1 = HVF.get(0).getPts_five()+"";
-		s2 = HVF.get(1).getPts_five()+"";
+		s1 = HVF.get(0).getPts_five_top()+"";
+		s2 = HVF.get(1).getPts_five_top()+"";
 		if(s1.equals(s2)) {
 			diff = false;
 		}
@@ -714,15 +713,29 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='pts_five'># points depressed < 5% level on Pattern Deviation Plot</span>
-<input type="text" name="pts_five" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<span id='pts_five'># points depressed < 5% level on Pattern Deviation Plot</span><br>
+Top <input type="text" name="pts_five_top" class='numBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>> 
 <%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
+<%
+	if(a) {
+		s1 = HVF.get(0).getPts_five_bot()+"";
+		s2 = HVF.get(1).getPts_five_bot()+"";
+		if(s1.equals(s2)) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+ Bot <input type="text" name="pts_five_bot" class='numBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%><br>
 <br>
 
 <%
 	if(a) {
-		s1 = HVF.get(0).getPts_one()+"";
-		s2 = HVF.get(1).getPts_one()+"";
+		s1 = HVF.get(0).getPts_one_top()+"";
+		s2 = HVF.get(1).getPts_one_top()+"";
 		if(s1.equals(s2)) {
 			diff = false;
 		}
@@ -731,8 +744,22 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='pts_one'># points depressed < 1% level on Pattern Deviation Plot </span>
-<input type="text" name="pts_one" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<span id='pts_one'># points depressed < 1% level on Pattern Deviation Plot </span><br>
+Top <input type="text" name="pts_one_top" class='numBox' autocomplete="off" <%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
+<%
+	if(a) {
+		s1 = HVF.get(0).getPts_one_bot()+"";
+		s2 = HVF.get(1).getPts_one_bot()+"";
+		if(s1.equals(s2)) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+Bot <input type="text" name="pts_one_bot" class='numBox' autocomplete="off" <%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
 <br><br>
 

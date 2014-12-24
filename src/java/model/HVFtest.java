@@ -8,14 +8,14 @@ package model;
 
 import java.util.*; 
 import java.io.*;
-import utilities.SQLCommands;
+import utilities.*;
 import javax.servlet.http.HttpServletRequest;
 
 /**
  *
  * @author aryner
  */
-public class HVFtest {
+public class HVFtest implements BaseTest{
 	private int id;
 	private String opthName;
 	private int adjudicatorID;
@@ -66,14 +66,18 @@ public class HVFtest {
 	private int inf_hem;
 	private int sup_hem2;
 	private int inf_hem2;
-	private int pts_five;
+	private int pts_five_top;
+	private int pts_five_bot;
 	private int pts_contig;
-	private int pts_one;
+	private int pts_one_top;
+	private int pts_one_bot;
 	private int cluster;
 	private int severe;
 	private int reliable_review;
 	private String vf_loss;
 	private String vf_defect;
+	private int baseType;
+
 	private static final String slash = System.getProperty("file.separator");
 
 	public HVFtest(String npictureName) {
@@ -100,8 +104,8 @@ public class HVFtest {
 		String npup, int nvanum, int nvaden, int nsph_sign, String nsph_num, int ncyl_sign, String ncyl_num,
 		int naxis, int nght, String nvfi, int nmdsign, String nmddb, int nmdp, int npsdsign, String npsddb,
 		int npsdp, int ncentral_15, int ncentral_0, int nsup_hem, int ninf_hem, int nsup_hem2, 
-		int ninf_hem2, int npts_five, int npts_contig, int npts_one, int ncluster, int nsevere,
-		int nreliable_review
+		int ninf_hem2, int npts_five_top, int npts_five_bot, int npts_contig, int npts_one_top, int npts_one_bot, 
+		int ncluster, int nsevere, int nreliable_review
 	){
 		id = nid;
 		opthName = nopthName;
@@ -155,9 +159,11 @@ public class HVFtest {
 		inf_hem = ninf_hem;
 		sup_hem2 = nsup_hem2;
 		inf_hem2 = ninf_hem2;
-		pts_five = npts_five;
+		pts_five_top = npts_five_top;
+		pts_five_bot = npts_five_bot;
 		pts_contig = npts_contig;
-		pts_one = npts_one;
+		pts_one_top = npts_one_top;
+		pts_one_bot = npts_one_bot;
 		cluster = ncluster;
 		severe = nsevere;
 		reliable_review = nreliable_review;
@@ -262,10 +268,14 @@ public class HVFtest {
 		hvf.setSup_hem(Integer.parseInt(attr));
 		attr = request.getParameter("inf_hem");
 		hvf.setInf_hem(Integer.parseInt(attr));
-		attr = request.getParameter("pts_five");
-		hvf.setPts_five(Integer.parseInt(attr));
-		attr = request.getParameter("pts_one");
-		hvf.setPts_one(Integer.parseInt(attr));
+		attr = request.getParameter("pts_five_top");
+		hvf.setPts_five_top(Integer.parseInt(attr));
+		attr = request.getParameter("pts_five_bot");
+		hvf.setPts_five_bot(Integer.parseInt(attr));
+		attr = request.getParameter("pts_one_top");
+		hvf.setPts_one_top(Integer.parseInt(attr));
+		attr = request.getParameter("pts_one_bot");
+		hvf.setPts_one_bot(Integer.parseInt(attr));
 		attr = request.getParameter("cluster");
 		hvf.setCluster(Integer.parseInt(attr));
 		if(hvf.getCluster() == 1) {
@@ -296,8 +306,8 @@ public class HVFtest {
 				md = 4;
 			}
 
-			int ptsFive = hvf.getPts_five();
-			int ptsOne = hvf.getPts_one();
+			int ptsFive = hvf.getPts_five_top() + hvf.getPts_five_bot();
+			int ptsOne = hvf.getPts_one_top() + hvf.getPts_one_bot();
 			if((ptsFive >= 19 && ptsFive <=36) && (ptsOne >= 12 && ptsOne <= 18)) {
 				moderate++;
 			}
@@ -358,8 +368,9 @@ public class HVFtest {
 			"hvf_psdsign='"+hvf.getPsdsign()+"', hvf_psddb='"+hvf.getPsddb()+"', hvf_psdp='"+hvf.getPsdp()+"', "+
 			"hvf_central_15='"+hvf.getCentral_15()+"', hvf_central_0='"+hvf.getCentral_0()+"', hvf_sup_hem='"+hvf.getSup_hem()+"', "+
 			"hvf_inf_hem='"+hvf.getInf_hem()+"', hvf_sup_hem2='"+hvf.getSup_hem2()+"', hvf_inf_hem2='"+hvf.getInf_hem2()+"', "+
-			"hvf_pts_five='"+hvf.getPts_five()+"', "+ "hvf_pts_contig='"+hvf.getPts_contig()+"', hvf_pts_one='"+hvf.getPts_one()+"', "+
-			"hvf_cluster='"+hvf.getCluster()+"', hvf_notes='"+hvf.getNotes()+"', hvf_notes_other='"+hvf.getNotes_other()+"' ";
+			"hvf_pts_five_top='"+hvf.getPts_five_top()+"', hvf_pts_five_bot='"+hvf.getPts_five_bot()+"', hvf_pts_contig='"+hvf.getPts_contig()+"', "+
+			"hvf_pts_one_top='"+hvf.getPts_one_top()+"', hvf_pts_one_bot='"+hvf.getPts_one_bot()+"', hvf_cluster='"+hvf.getCluster()+"', "+
+			"hvf_notes='"+hvf.getNotes()+"', hvf_notes_other='"+hvf.getNotes_other()+"'";
 
 		if(glaucoma) {
 			query += ", hvf_glau='1'";
@@ -424,6 +435,7 @@ public class HVFtest {
 				result = 2;
 			}
 		}
+
 		SQLCommands.update(query);
 		if(user.getAccess() == 0) {
 			setForAdjudication(picName);
@@ -467,12 +479,16 @@ public class HVFtest {
 //		hvf.setSup_hem2(Integer.parseInt(attr));
 //		attr = request.getParameter("inf_hem2");
 //		hvf.setInf_hem2(Integer.parseInt(attr));
-		attr = request.getParameter("pts_five");
-		hvf.setPts_five(Integer.parseInt(attr));
+		attr = request.getParameter("pts_five_top");
+		hvf.setPts_five_top(Integer.parseInt(attr));
+		attr = request.getParameter("pts_five_bot");
+		hvf.setPts_five_bot(Integer.parseInt(attr));
 //		attr = request.getParameter("pts_contig");
 //		hvf.setPts_contig(Integer.parseInt(attr));
-		attr = request.getParameter("pts_one");
-		hvf.setPts_one(Integer.parseInt(attr));
+		attr = request.getParameter("pts_one_top");
+		hvf.setPts_one_top(Integer.parseInt(attr));
+		attr = request.getParameter("pts_one_bot");
+		hvf.setPts_one_bot(Integer.parseInt(attr));
 		attr = request.getParameter("severe");
 		hvf.setSevere(Integer.parseInt(attr));
 		attr = request.getParameter("reliable_review");
@@ -503,14 +519,13 @@ public class HVFtest {
 
 		String query = "UPDATE HVFtest SET hvf_fp='"+hvf.getFp()+"', hvf_fn='"+hvf.getFn()+"', hvf_ght='"+hvf.getGht()+"', "+
 				"hvf_psdp='"+hvf.getPsdp()+"', hvf_cluster='"+hvf.getCluster()+"', hvf_glau='"+hvf.getHvf_glau()+"', "+
-				"hvf_mdsign='"+hvf.getMdsign()+"', hvf_mddb='"+hvf.getMddb()+"', "+
-				"hvf_central_15='"+hvf.getCentral_15()+"', hvf_central_0='"+hvf.getCentral_0()+"', hvf_sup_hem='"+hvf.getSup_hem()+"', "+
-				"hvf_inf_hem='"+hvf.getInf_hem()+"', "+
-				"hvf_pts_five='"+hvf.getPts_five()+"', hvf_pts_one='"+hvf.getPts_one()+"', "+
-				"hvf_severe='"+hvf.getSevere()+"', hvf_reliable_review='"+hvf.getReliable_review()+"', hvf_vf_loss='"+hvf.getVf_loss()+"', "+
-				"hvf_vf_loss_oth='"+hvf.getVf_loss_oth()+"', hvf_vf_defect='"+hvf.getVf_defect()+"', hvf_vf_defect_oth='"+hvf.getVf_defect_oth()+
-				"', opthCheck='"+user.getID()+"', opthName='"+user.getUserName()+"', hvf_notes='"+hvf.getNotes()+"', hvf_notes_other='"+
-				hvf.getNotes_other()+"' WHERE pictureName='"+picName+"'";
+				"hvf_mdsign='"+hvf.getMdsign()+"', hvf_mddb='"+hvf.getMddb()+"', hvf_central_15='"+hvf.getCentral_15()+"', "+
+				"hvf_central_0='"+hvf.getCentral_0()+"', hvf_sup_hem='"+hvf.getSup_hem()+"', hvf_inf_hem='"+hvf.getInf_hem()+"', "+
+				"hvf_pts_five_top='"+hvf.getPts_five_top()+"', hvf_pts_five_bot='"+hvf.getPts_five_bot()+"', hvf_pts_one_top='"+hvf.getPts_one_top()+"', "+
+				"hvf_pts_one_bot='"+hvf.getPts_one_bot()+"', hvf_severe='"+hvf.getSevere()+"', hvf_reliable_review='"+hvf.getReliable_review()+"', "+
+				"hvf_vf_loss='"+hvf.getVf_loss()+"', hvf_vf_loss_oth='"+hvf.getVf_loss_oth()+"', hvf_vf_defect='"+hvf.getVf_defect()+"', "+
+				"hvf_vf_defect_oth='"+hvf.getVf_defect_oth()+"', opthCheck='"+user.getID()+"', opthName='"+user.getUserName()+"', "+
+				"hvf_notes='"+hvf.getNotes()+"', hvf_notes_other='"+hvf.getNotes_other()+"' WHERE pictureName='"+picName+"'";
 		SQLCommands.update(query);
 
 		if(request.getParameter("reviewedAgain").equals("true")) {
@@ -626,8 +641,8 @@ public class HVFtest {
 				"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
 				"hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
 				"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_sup_hem, hvf_inf_hem, "+
-				"hvf_pts_five, hvf_pts_one, hvf_cluster, hvf_notes, hvf_notes_other "+
-				"HAVING COUNT(*)=2";
+				"hvf_pts_five_top, hvf_pts_five_bot, hvf_pts_one_top, hvf_pts_one_bot, "+
+				"hvf_cluster, hvf_notes, hvf_notes_other HAVING COUNT(*)=2";
 			Vector<HVFtest> set = SQLCommands.queryHVFtestMaster(query);
 			//get the ones that need adjudication
 			query = "SELECT * FROM HVFtest GROUP BY pictureName, "+
@@ -636,8 +651,8 @@ public class HVFtest {
 				"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
 				"hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
 				"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_sup_hem, hvf_inf_hem, "+
-				"hvf_pts_five, hvf_pts_one, hvf_cluster, hvf_notes, hvf_notes_other "+
-				"HAVING COUNT(*)=1";
+				"hvf_pts_five_top, hvf_pts_five_bot, hvf_pts_one_top, hvf_pts_one_bot, "+
+				"hvf_cluster, hvf_notes, hvf_notes_other HAVING COUNT(*)=1";
 			Vector<HVFtest> notSet = SQLCommands.queryHVFtest(query);
 
 			for(int i=set.size()-1; i>=0; i--) {
@@ -678,7 +693,8 @@ public class HVFtest {
 			"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
 			"hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
 			"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, "+
-			"hvf_inf_hem2, hvf_pts_five, hvf_pts_contig, hvf_pts_one, hvf_cluster, hvf_notes, hvf_notes_other "+
+			"hvf_inf_hem2, hvf_pts_five_top, hvf_pts_five_bot, hvf_pts_contig, hvf_pts_one_top, hvf_pts_bot, "+
+			"hvf_cluster, hvf_notes, hvf_notes_other "+
 			"HAVING COUNT(*)=2";
 		Vector<HVFtest> set = SQLCommands.queryHVFtest(query);
 		//get the ones that need adjudication
@@ -688,7 +704,8 @@ public class HVFtest {
 			"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
 			"hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
 			"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, "+
-			"hvf_inf_hem2, hvf_pts_five, hvf_pts_contig, hvf_pts_one, hvf_cluster, hvf_notes, hvf_notes_other "+
+			"hvf_inf_hem2, hvf_pts_five_top, hvf_pts_five_bot, hvf_pts_contig, hvf_pts_one_top, hvf_pts_one_bot, "+
+			"hvf_cluster, hvf_notes, hvf_notes_other "+
 			"HAVING COUNT(*)=1";
 		Vector<HVFtest> notSet = SQLCommands.queryHVFtest(query);
 		
@@ -822,7 +839,8 @@ public class HVFtest {
 				hvf.get(i).getPsdsign()+", "+hvf.get(i).getPsddb()+", "+hvf.get(i).getPsdp()+", "+
 				hvf.get(i).getCentral_15()+", "+hvf.get(i).getCentral_0()+", "+hvf.get(i).getSup_hem()+", "+
 				hvf.get(i).getInf_hem()+", "+hvf.get(i).getSup_hem2()+", "+hvf.get(i).getInf_hem2()+", "+
-				hvf.get(i).getPts_five()+", "+hvf.get(i).getPts_contig()+", "+hvf.get(i).getPts_one()+", "+
+				(hvf.get(i).getPts_five_top()+hvf.get(i).getPts_five_bot())+", "+hvf.get(i).getPts_contig()+", "+
+				(hvf.get(i).getPts_one_top()+hvf.get(i).getPts_one_bot())+", "+
 				hvf.get(i).getCluster()+", "+hvf.get(i).getSevere()+", "+hvf.get(i).getReliable_review()+", "+
 				hvf.get(i).getNotes()+", "+hvf.get(i).getNotes_other()+", "+
 				hvf.get(i).getOpthName()+", "+hvf.get(i).getAdjudicatorID();
@@ -869,10 +887,10 @@ public class HVFtest {
 				hvf.get(i).getMddb()+", "+hvf.get(i).getMdp()+", "+hvf.get(i).getPsdsign()+", "+hvf.get(i).getPsddb()+", "+
 				hvf.get(i).getPsdp()+", "+hvf.get(i).getCentral_15()+", "+hvf.get(i).getCentral_0()+", "+
 				hvf.get(i).getSup_hem()+", "+hvf.get(i).getInf_hem()+", "+hvf.get(i).getSup_hem2()+", "+
-				hvf.get(i).getInf_hem2()+", "+hvf.get(i).getPts_five()+", "+hvf.get(i).getPts_contig()+", "+
-				hvf.get(i).getPts_one()+", "+hvf.get(i).getCluster()+", "+hvf.get(i).getHvf_glau()+", "+
-				hvf.get(i).getSevere()+", "+hvf.get(i).getReliable_review()+", "+hvf.get(i).getVf_loss()+", "+
-				defects+", "+hvf.get(i).getVf_defect_oth();
+				hvf.get(i).getInf_hem2()+", "+(hvf.get(i).getPts_five_top()+hvf.get(i).getPts_five_bot())+", "+
+				hvf.get(i).getPts_contig()+", "+(hvf.get(i).getPts_one_top()+hvf.get(i).getPts_one_bot())+", "+
+				hvf.get(i).getCluster()+", "+hvf.get(i).getHvf_glau()+", "+hvf.get(i).getSevere()+", "+
+				hvf.get(i).getReliable_review()+", "+hvf.get(i).getVf_loss()+", "+defects+", "+hvf.get(i).getVf_defect_oth();
 			result.add(currLine);
 		}
 
@@ -941,14 +959,17 @@ public class HVFtest {
 				line = fileReader.readLine();
 			}
 
+			Tools.splitCounts(newLines, BaseTest.HVF);
+			Tools.splitCounts(updateLines, BaseTest.HVF);
+
 			//Add new records
 			query = "INSERT INTO HVFtest (confirmed, opthCheck, pictureName, userID, hvf_vf_loss, "+
 				"hvf_vf_defect, hvf_glau, hvf_vf_loss_oth, hvf_vf_defect_oth, hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, "+
 				"hvf_lossnum, hvf_lossden, hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, hvf_back, "+
 				"hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, "+
 				"hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_central_15, hvf_central_0, "+
-				"hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, hvf_inf_hem2, hvf_pts_five, hvf_pts_contig, hvf_pts_one, hvf_cluster, "+
-				"hvf_severe, hvf_reliable_review, hvf_notes, hvf_notes_other, opthName, adjudicatorID) VALUES ";
+				"hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, hvf_inf_hem2, hvf_pts_five_top, hvf_pts_five_bot, hvf_pts_contig, hvf_pts_one_top, "+
+				"hvf_pts_one_bot, hvf_cluster, hvf_severe, hvf_reliable_review, hvf_notes, hvf_notes_other, opthName, adjudicatorID) VALUES ";
 			for(int i=0; i<newLines.size(); i++) {
 				if(i > 0) { query += ", "; }
 				query += "("+newLines.get(i)+")";
@@ -973,8 +994,8 @@ public class HVFtest {
 				"hvf_lossnum, hvf_lossden, hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, hvf_back, "+
 				"hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, "+
 				"hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_central_15, hvf_central_0, "+
-				"hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, hvf_inf_hem2, hvf_pts_five, hvf_pts_contig, hvf_pts_one, hvf_cluster, "+
-				"hvf_severe, hvf_reliable_review, hvf_notes, hvf_notes_other, opthName, adjudicatorID) VALUES ";
+				"hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, hvf_inf_hem2, hvf_pts_five_top, hvf_pst_five_bot, hvf_pts_contig, hvf_pts_one, "+
+				"hvf_pts_one_bot, hvf_cluster, hvf_severe, hvf_reliable_review, hvf_notes, hvf_notes_other, opthName, adjudicatorID) VALUES ";
 			for(int i=0; i<updateLines.size(); i++) {
 				if(i>0) { query += ", "; }
 				query += "("+updateLines.get(i)+")";
@@ -1016,6 +1037,19 @@ public class HVFtest {
 		}
 
 		return needPics;
+	}
+
+	public static String splitCount(String [] fields) {
+		String result = "";
+		for(int i=0; i<48; i++) {
+			result += fields[i]+", ";
+		}
+		result += "0, " + fields[48] + ", " + fields[49] + ", 0, ";
+		for(int i=50; i<fields.length; i++) {
+			result += fields[i]+", ";
+		}
+
+		return result;
 	}
 
 	/**
@@ -1525,15 +1559,15 @@ public class HVFtest {
 	/**
 	 * @return the pts_five
 	 */
-	public int getPts_five() {
-		return pts_five;
+	public int getPts_five_top() {
+		return pts_five_top;
 	}
 
 	/**
 	 * @param pts_five the pts_five to set
 	 */
-	public void setPts_five(int pts_five) {
-		this.pts_five = pts_five;
+	public void setPts_five_top(int pts_five_top) {
+		this.pts_five_top = pts_five_top;
 	}
 
 	/**
@@ -1553,15 +1587,15 @@ public class HVFtest {
 	/**
 	 * @return the pts_one
 	 */
-	public int getPts_one() {
-		return pts_one;
+	public int getPts_one_top() {
+		return pts_one_top;
 	}
 
 	/**
 	 * @param pts_one the pts_one to set
 	 */
-	public void setPts_one(int pts_one) {
-		this.pts_one = pts_one;
+	public void setPts_one_top(int pts_one_top) {
+		this.pts_one_top = pts_one_top;
 	}
 
 	/**
@@ -1842,6 +1876,48 @@ public class HVFtest {
 	 */
 	public void setNotes_other(String notes_other) {
 		this.notes_other = notes_other;
+	}
+
+	/**
+	 * @return the pts_five_bot
+	 */
+	public int getPts_five_bot() {
+		return pts_five_bot;
+	}
+
+	/**
+	 * @param pts_five_bot the pts_five_bot to set
+	 */
+	public void setPts_five_bot(int pts_five_bot) {
+		this.pts_five_bot = pts_five_bot;
+	}
+
+	/**
+	 * @return the pts_one_bot
+	 */
+	public int getPts_one_bot() {
+		return pts_one_bot;
+	}
+
+	/**
+	 * @param pts_one_bot the pts_one_bot to set
+	 */
+	public void setPts_one_bot(int pts_one_bot) {
+		this.pts_one_bot = pts_one_bot;
+	}
+
+	/**
+	 * @return the baseType
+	 */
+	public int getBaseType() {
+		return baseType;
+	}
+
+	/**
+	 * @param baseType the baseType to set
+	 */
+	public void setBaseType(int baseType) {
+		this.baseType = baseType;
 	}
 
 }

@@ -210,4 +210,19 @@ public class Tools {
 
 		return result;
 	}
+
+	public static void splitCounts(ArrayList<String> csvLines, int type) {
+		switch (type) {
+			case BaseTest.HVF :
+				String [] fields = csvLines.get(0).split(", ");
+				if(fields.length == 59) {
+					return;
+				}
+				for(int i=0; i<csvLines.size(); i++) {
+					fields = csvLines.get(i).split(", ");
+					csvLines.set(i, HVFtest.splitCount(fields));
+				}
+				break;
+		}
+	}
 }

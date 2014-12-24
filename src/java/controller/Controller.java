@@ -306,7 +306,7 @@ public class Controller extends HttpServlet {
 			Picture picture = null;
 
 			if(pictureName != null && pictureName.length() > 0) {
-				picture = Picture.getPictureByName(pictureName,0);
+				picture = Picture.getPictureByName(pictureName,BaseTest.HVF);
 				request.setAttribute("confirmed","true");
 			}
 			else {
@@ -344,7 +344,7 @@ public class Controller extends HttpServlet {
 			String pictureName = request.getParameter("pictureName");
 
 			if (pictureName != null && pictureName.length() > 0) {
-				picture = Picture.getPictureByName(pictureName, 0);
+				picture = Picture.getPictureByName(pictureName, BaseTest.HVF);
 			} 
 			else {
 				User user = (User)session.getAttribute("user");
