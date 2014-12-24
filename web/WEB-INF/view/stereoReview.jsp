@@ -326,6 +326,30 @@ if(pic == null) {
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 <br><br>
 
+<%
+	v1 = -1;
+	v2 = -1;
+	if(a) {
+		v1 = stereo.getGlau();
+		v2 = stereo.getGlau();
+		if(v1 == v2) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+		if(diff) {
+
+		}
+	}
+%>
+<span id='glau'>Glaucoma presence</span><br>
+<input type="radio" name="glau" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>Definite glaucoma<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="glau" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Probable glaucoma<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="glau" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>No glaucoma<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="glau" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>Indeterminate<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%><br>
+<br>
+
 <input type="submit" value="Submit" class="btn">
 
 </form>

@@ -653,3 +653,7 @@ a:visited.opthReviewed {
 .hidden {
 	display: none;
 }
+
+.topScrollWrapper {
+	width: 75%;
+}

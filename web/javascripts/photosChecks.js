@@ -275,6 +275,11 @@ $(document).ready(function() {
 		var rnfl_hrs_two = !$('input[type=radio][name=rnfl][value=1]').prop('checked') 
 			|| thing.length > 0;
 
+		var glau = $('input[type=radio][name=glau][value=1]').prop('checked')
+			|| $('input[type=radio][name=glau][value=2]').prop('checked')
+			|| $('input[type=radio][name=glau][value=3]').prop('checked')
+			|| $('input[type=radio][name=glau][value=4]').prop('checked');
+
 		var focused = false;
 
 		if(!qual) {
@@ -401,6 +406,15 @@ $(document).ready(function() {
 			}
 		} else {
 			$('#rnfl_hrs_two').removeClass('highlight');
+		} if(!glau) {
+			$('#glau').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=radio][name=glau][value=1]').focus();
+			}
+		} else {
+			$('#glau').removeClass('highlight');
 		}
 	});
 });

@@ -46,6 +46,9 @@ if(pic == null) {
 	}
 	out.print("<h3 class='picName'>"+pic.getType()+" "+pic.getName()+"</h3>");
 %>
+<div class="topScrollWrapper">
+	<div class="topScroll"></div>
+</div>
 <iframe src="<%out.print(src);%>" class="HVFimage"></iframe>
 
 <!--Questions-->

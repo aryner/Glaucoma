@@ -87,7 +87,7 @@ public class SQLCommands {
 						      resultSet.getString("notch_hrs_two"),resultSet.getInt("photo_erosion"),resultSet.getString("eros_hrs_one"),
 						      resultSet.getString("eros_hrs_two"),resultSet.getInt("photo_disc"),resultSet.getString("disc_hrs_one"),
 						      resultSet.getString("disc_hrs_two"),resultSet.getInt("photo_rnfl"),resultSet.getString("rnfl_hrs_one"),
-						      resultSet.getString("rnfl_hrs_two"));
+						      resultSet.getString("rnfl_hrs_two"),resultSet.getInt("photo_glau"));
 						current.setBaseType(BaseTest.STEREO);
 						result.add(current);
 						break;
@@ -98,7 +98,7 @@ public class SQLCommands {
 						      resultSet.getString("notch_hrs_two"),resultSet.getInt("photo_erosion"),resultSet.getString("eros_hrs_one"),
 						      resultSet.getString("eros_hrs_two"),resultSet.getInt("photo_disc"),resultSet.getString("disc_hrs_one"),
 						      resultSet.getString("disc_hrs_two"),resultSet.getInt("photo_rnfl"),resultSet.getString("rnfl_hrs_one"),
-						      resultSet.getString("rnfl_hrs_two"));
+						      resultSet.getString("rnfl_hrs_two"),resultSet.getInt("photo_glau"));
 						current.setBaseType(BaseTest.NETHRA);
 						result.add(current);
 						break;
@@ -289,7 +289,7 @@ public class SQLCommands {
 						      resultSet.getString("notch_hrs_two"),resultSet.getInt("photo_erosion"),resultSet.getString("eros_hrs_one"),
 						      resultSet.getString("eros_hrs_two"),resultSet.getInt("photo_disc"),resultSet.getString("disc_hrs_one"),
 						      resultSet.getString("disc_hrs_two"),resultSet.getInt("photo_rnfl"),resultSet.getString("rnfl_hrs_one"),
-						      resultSet.getString("rnfl_hrs_two")));
+						      resultSet.getString("rnfl_hrs_two"),resultSet.getInt("photo_glau")));
 			}
 		} catch (SQLException ex) {
 			Logger.getLogger(SQLCommands.class.getName()).log(Level.SEVERE,null,ex); 

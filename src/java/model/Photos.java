@@ -36,6 +36,7 @@ public class Photos implements BaseTest {
 	private int rnfl;
 	private String rnfl_hrs_one;
 	private String rnfl_hrs_two;
+	private int glau;
 
 	private static final String slash = System.getProperty("file.separator");
 	public static final int STEREO = 1;
@@ -60,7 +61,7 @@ public class Photos implements BaseTest {
 	public Photos(int id, int confirmed, String pictureName, int userID, int adjudicatorID, int type, int qual,
 		      String cdr, int notch, String notch_hrs_one, String notch_hrs_two, int erosion,
 		      String eros_hrs_one, String eros_hrs_two, int disc, String disc_hrs_one,
-		      String disc_hrs_two, int rnfl, String rnfl_hrs_one, String rnfl_hrs_two) 
+		      String disc_hrs_two, int rnfl, String rnfl_hrs_one, String rnfl_hrs_two, int glau) 
 	{
 		this.id = id;
 		this.confirmed = confirmed;
@@ -82,6 +83,7 @@ public class Photos implements BaseTest {
 		this.rnfl = rnfl;
 		this.rnfl_hrs_one = rnfl_hrs_one;
 		this.rnfl_hrs_two = rnfl_hrs_two;
+		this.glau = glau;
 	}
 
 	public static Photos getSingle(String name, int id, int access, int type) {
@@ -223,6 +225,8 @@ public class Photos implements BaseTest {
 		photo.setRnfl_hrs_one(attr);
 		attr = request.getParameter("rnfl_hrs_two");
 		photo.setRnfl_hrs_two(attr);
+		attr = request.getParameter("glau");
+		photo.setGlau(Integer.parseInt(attr));
 
 		String query = "UPDATE Photos SET photo_qual='"+photo.getQual()+"', photo_cdr='"+photo.getCdr()+"', "+
 			 	"photo_notch='"+photo.getNotch()+"', notch_hrs_one='"+photo.getNotch_hrs_one()+"', "+
@@ -230,7 +234,8 @@ public class Photos implements BaseTest {
 				"eros_hrs_one='"+photo.getEros_hrs_one()+"', eros_hrs_two='"+photo.getEros_hrs_two()+"', "+
 				"photo_disc='"+photo.getDisc()+"', disc_hrs_one='"+photo.getDisc_hrs_one()+"', "+
 				"disc_hrs_two='"+photo.getDisc_hrs_two()+"', photo_rnfl='"+photo.getRnfl()+"', "+
-				"rnfl_hrs_one='"+photo.getRnfl_hrs_one()+"', rnfl_hrs_two='"+photo.getRnfl_hrs_two()+"' ";
+				"rnfl_hrs_one='"+photo.getRnfl_hrs_one()+"', rnfl_hrs_two='"+photo.getRnfl_hrs_two()+"', "+
+				"photo_glau='"+photo.getGlau()+"' ";
 
 		if(user.getAccess() == 0) {
 			query += " WHERE pictureName='"+photo.getPictureName()+"' AND userID='"+user.getID()+"'";
@@ -290,6 +295,8 @@ public class Photos implements BaseTest {
 		photo.setRnfl_hrs_one(attr);
 		attr = request.getParameter("rnfl_hrs_two");
 		photo.setRnfl_hrs_two(attr);
+		attr = request.getParameter("glau");
+		photo.setGlau(Integer.parseInt(attr));
 
 		String query = "UPDATE Photos SET photo_qual='"+photo.getQual()+"', photo_cdr='"+photo.getCdr()+"', "+
 			 	"photo_notch='"+photo.getNotch()+"', notch_hrs_one='"+photo.getNotch_hrs_one()+"', "+
@@ -297,7 +304,8 @@ public class Photos implements BaseTest {
 				"eros_hrs_one='"+photo.getEros_hrs_one()+"', eros_hrs_two='"+photo.getEros_hrs_two()+"', "+
 				"photo_disc='"+photo.getDisc()+"', disc_hrs_one='"+photo.getDisc_hrs_one()+"', "+
 				"disc_hrs_two='"+photo.getDisc_hrs_two()+"', photo_rnfl='"+photo.getRnfl()+"', "+
-				"rnfl_hrs_one='"+photo.getRnfl_hrs_one()+"', rnfl_hrs_two='"+photo.getRnfl_hrs_two()+"' ";
+				"rnfl_hrs_one='"+photo.getRnfl_hrs_one()+"', rnfl_hrs_two='"+photo.getRnfl_hrs_two()+"', "+
+				"photo_glau='"+photo.getGlau()+"' ";
 
 		if(user.getAccess() == 0) {
 			query += " WHERE id='"+photo.getId()+"'";
@@ -326,7 +334,7 @@ public class Photos implements BaseTest {
 				"photo_qual, photo_cdr, " +
 				"photo_notch, notch_hrs_one, notch_hrs_two, photo_erosion, eros_hrs_one, "+
 				"eros_hrs_two, photo_disc, disc_hrs_one, disc_hrs_two, photo_rnfl, "+
-				"rnfl_hrs_one, rnfl_hrs_two " +
+				"rnfl_hrs_one, rnfl_hrs_two, photo_glau " +
 				"HAVING COUNT(*)=2";
 			Vector<Photos> set = SQLCommands.queryPhotos(query);
 			//get the ones that need adjudication
@@ -334,7 +342,7 @@ public class Photos implements BaseTest {
 				"photo_qual, photo_cdr, " +
 				"photo_notch, notch_hrs_one, notch_hrs_two, photo_erosion, eros_hrs_one, "+
 				"eros_hrs_two, photo_disc, disc_hrs_one, disc_hrs_two, photo_rnfl, "+
-				"rnfl_hrs_one, rnfl_hrs_two " +
+				"rnfl_hrs_one, rnfl_hrs_two, photo_glau " +
 				"HAVING COUNT(*)=1";
 			Vector<Photos> notSet = SQLCommands.queryPhotos(query);
 
@@ -457,7 +465,7 @@ public class Photos implements BaseTest {
 		String currLine = "confirmed, picture, userID, adjudicatorID, type, photo_qual, photo_cdr, "+
 				  "photo_notch, notch_hrs_one, notch_hrs_two, photo_erosion, eros_hrs_one, "+
 				  "eros_hrs_two, photo_disc, disc_hrs_one, disc_hrs_two, photo_rnfl, "+
-				  "rnfl_hrs_one, rnfl_hrs_two";
+				  "rnfl_hrs_one, rnfl_hrs_two, photo_glau";
 		result.add(currLine);
 
 		for(Photos photo : photos) {
@@ -466,7 +474,7 @@ public class Photos implements BaseTest {
 				   photo.getNotch_hrs_one()+", "+photo.getNotch_hrs_two()+", "+photo.getErosion()+", "+
 				   photo.getEros_hrs_one()+", "+photo.getEros_hrs_two()+", "+photo.getDisc()+", "+
 				   photo.getDisc_hrs_one()+", "+photo.getDisc_hrs_two()+", "+photo.getRnfl()+", "+
-				   photo.getRnfl_hrs_one()+", "+photo.getRnfl_hrs_two();
+				   photo.getRnfl_hrs_one()+", "+photo.getRnfl_hrs_two()+", "+photo.getGlau();
 			result.add(currLine);
 		}
 
@@ -481,7 +489,7 @@ public class Photos implements BaseTest {
 		String currLine = "confirmed, picture, userID, adjudicatorID, type, photo_qual, photo_cdr, "+
 				  "photo_notch, notch_hrs_one, notch_hrs_two, photo_erosion, eros_hrs_one, "+
 				  "eros_hrs_two, photo_disc, disc_hrs_one, disc_hrs_two, photo_rnfl, "+
-				  "rnfl_hrs_one, rnfl_hrs_two";
+				  "rnfl_hrs_one, rnfl_hrs_two, photo_glau";
 		result.add(currLine);
 
 		for(Photos photo : photos) {
@@ -490,7 +498,7 @@ public class Photos implements BaseTest {
 				   photo.getNotch_hrs_one()+", "+photo.getNotch_hrs_two()+", "+photo.getErosion()+", "+
 				   photo.getEros_hrs_one()+", "+photo.getEros_hrs_two()+", "+photo.getDisc()+", "+
 				   photo.getDisc_hrs_one()+", "+photo.getDisc_hrs_two()+", "+photo.getRnfl()+", "+
-				   photo.getRnfl_hrs_one()+", "+photo.getRnfl_hrs_two();
+				   photo.getRnfl_hrs_one()+", "+photo.getRnfl_hrs_two()+", "+photo.getGlau();
 			result.add(currLine);
 		}
 
@@ -505,7 +513,7 @@ public class Photos implements BaseTest {
 		String currLine = "picture, adjudicatorID, photo_qual, photo_cdr, "+
 				  "photo_notch, notch_hrs_one, notch_hrs_two, photo_erosion, eros_hrs_one, "+
 				  "eros_hrs_two, photo_disc, disc_hrs_one, disc_hrs_two, photo_rnfl, "+
-				  "rnfl_hrs_one, rnfl_hrs_two";
+				  "rnfl_hrs_one, rnfl_hrs_two, photo_glau";
 		result.add(currLine);
 
 		for(Photos photo : photos) {
@@ -514,7 +522,7 @@ public class Photos implements BaseTest {
 				   photo.getNotch_hrs_one()+", "+photo.getNotch_hrs_two()+", "+photo.getErosion()+", "+
 				   photo.getEros_hrs_one()+", "+photo.getEros_hrs_two()+", "+photo.getDisc()+", "+
 				   photo.getDisc_hrs_one()+", "+photo.getDisc_hrs_two()+", "+photo.getRnfl()+", "+
-				   photo.getRnfl_hrs_one()+", "+photo.getRnfl_hrs_two();
+				   photo.getRnfl_hrs_one()+", "+photo.getRnfl_hrs_two()+", "+photo.getGlau();
 			result.add(currLine);
 		}
 
@@ -529,7 +537,7 @@ public class Photos implements BaseTest {
 		String currLine = "picture, adjudicatorID, photo_qual, photo_cdr, "+
 				  "photo_notch, notch_hrs_one, notch_hrs_two, photo_erosion, eros_hrs_one, "+
 				  "eros_hrs_two, photo_disc, disc_hrs_one, disc_hrs_two, photo_rnfl, "+
-				  "rnfl_hrs_one, rnfl_hrs_two";
+				  "rnfl_hrs_one, rnfl_hrs_two, photo_glau";
 		result.add(currLine);
 
 		for(Photos photo : photos) {
@@ -538,7 +546,7 @@ public class Photos implements BaseTest {
 				   photo.getNotch_hrs_one()+", "+photo.getNotch_hrs_two()+", "+photo.getErosion()+", "+
 				   photo.getEros_hrs_one()+", "+photo.getEros_hrs_two()+", "+photo.getDisc()+", "+
 				   photo.getDisc_hrs_one()+", "+photo.getDisc_hrs_two()+", "+photo.getRnfl()+", "+
-				   photo.getRnfl_hrs_one()+", "+photo.getRnfl_hrs_two();
+				   photo.getRnfl_hrs_one()+", "+photo.getRnfl_hrs_two()+", "+photo.getGlau();
 			result.add(currLine);
 		}
 
@@ -830,6 +838,20 @@ public class Photos implements BaseTest {
 	 */
 	public void setAdjudicatorID(int adjudicatorID) {
 		this.adjudicatorID = adjudicatorID;
+	}
+
+	/**
+	 * @return the glau
+	 */
+	public int getGlau() {
+		return glau;
+	}
+
+	/**
+	 * @param glau the glau to set
+	 */
+	public void setGlau(int glau) {
+		this.glau = glau;
 	}
 	
 }
