@@ -23,59 +23,8 @@ import utilities.SQLCommands;
 public class Tools {
 	private static final String slash = System.getProperty("file.separator");
 
-	public static void createCSV(Vector<String> lines, String fileName) {
-		Date date = new Date(System.currentTimeMillis());
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-
-		int day = cal.get(Calendar.DAY_OF_MONTH);
-		if(day < 10) {
-			fileName += "0";
-		}
-		fileName += day;
-
-		int month = cal.get(Calendar.MONTH);
-
-		switch (month) {
-			case 0:
-				fileName += "jan";
-				break;
-			case 1:
-				fileName += "feb";
-				break;
-			case 2:
-				fileName += "mar";
-				break;
-			case 3:
-				fileName += "apr";
-				break;
-			case 4:
-				fileName += "may";
-				break;
-			case 5:
-				fileName += "jun";
-				break;
-			case 6:
-				fileName += "jul";
-				break;
-			case 7:
-				fileName += "aug";
-				break;
-			case 8:
-				fileName += "sep";
-				break;
-			case 9:
-				fileName += "oct";
-				break;
-			case 10:
-				fileName += "nov";
-				break;
-			case 11:
-				fileName += "dec";
-				break;
-		}
-
-		fileName += cal.get(Calendar.YEAR);
+	public static void createCSVs(Vector<String> lines, String fileName) {
+		fileName += getFormattedDate();
 		String slash = System.getProperty("file.separator");
 		new File(System.getProperty("user.home")+slash+"Desktop"+slash+fileName+".csv").delete();
 
@@ -90,6 +39,87 @@ public class Tools {
 			fileOut.close();
 		}
 		catch(Exception e) { e.printStackTrace(); }
+	}
+
+	public static void createCSV(int type) {
+		switch(type) {
+			case BaseTest.HVF:
+				createCSVs(HVFtest.getCSVLines(), "hvf_grades");
+				break;
+			case BaseTest.FDT:
+				createCSVs(FDTtest.getCSVLines(), "fdt_grades");
+				break;
+			case BaseTest.MDT:
+				createCSVs(MDTtest.getCSVLines(), "mdt_grades");
+				break;
+			case BaseTest.OCT:
+				createCSVs(OCTtest.getCSVLines(), "oct_grades");
+				break;
+			case BaseTest.STEREO:
+				createCSVs(Photos.getStereoCSVLines(), "stereo_grades");
+				break;
+			case BaseTest.NETHRA:
+				createCSVs(Photos.getNethraCSVLines(), "3Nethra_grades");
+				break;
+		}
+	}
+
+	public static String getFormattedDate() {
+		String result = "";
+		Date date = new Date(System.currentTimeMillis());
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+
+		int day = cal.get(Calendar.DAY_OF_MONTH);
+		if(day < 10) {
+			result += "0";
+		}
+		result += day;
+
+		int month = cal.get(Calendar.MONTH);
+
+		switch (month) {
+			case 0:
+				result += "jan";
+				break;
+			case 1:
+				result += "feb";
+				break;
+			case 2:
+				result += "mar";
+				break;
+			case 3:
+				result += "apr";
+				break;
+			case 4:
+				result += "may";
+				break;
+			case 5:
+				result += "jun";
+				break;
+			case 6:
+				result += "jul";
+				break;
+			case 7:
+				result += "aug";
+				break;
+			case 8:
+				result += "sep";
+				break;
+			case 9:
+				result += "oct";
+				break;
+			case 10:
+				result += "nov";
+				break;
+			case 11:
+				result += "dec";
+				break;
+		}
+
+		result += cal.get(Calendar.YEAR);
+
+		return result;
 	}
 
 	public static Vector<String> readCSVs(HttpServletRequest request) {

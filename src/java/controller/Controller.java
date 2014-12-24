@@ -361,6 +361,7 @@ public class Controller extends HttpServlet {
 		}
 
 		else if (userPath.equals("/printCSV")){
+			request.setAttribute("hvf", HVFtest.getCSVLines());
 			request.setAttribute("fdt", FDTtest.getCSVLines());
 			request.setAttribute("mdt", MDTtest.getCSVLines());
 			request.setAttribute("oct", OCTtest.getCSVLines());
@@ -627,13 +628,15 @@ public class Controller extends HttpServlet {
 
 		else if(userPath.equals("/printCSVs")) {
 
-//			Tools.createCSV(Picture.getCSVLines(),"hvf_pictures");
-//			Tools.createCSV(HVFtest.getCSVLines(),"hvf_grades");
-			Tools.createCSV(FDTtest.getCSVLines(),"fdt_grades");
-			Tools.createCSV(MDTtest.getCSVLines(),"mdt_grades");
-			Tools.createCSV(OCTtest.getCSVLines(),"oct_grades");
-			Tools.createCSV(Photos.getStereoCSVLines(),"stereo_grades");
-			Tools.createCSV(Photos.getNethraCSVLines(),"3nethra_grades");
+			Tools.createCSV(Integer.parseInt(request.getParameter("type")));
+			/*
+			Tools.createCSVs(HVFtest.getCSVLines(),"hvf_grades");
+			Tools.createCSVs(FDTtest.getCSVLines(),"fdt_grades");
+			Tools.createCSVs(MDTtest.getCSVLines(),"mdt_grades");
+			Tools.createCSVs(OCTtest.getCSVLines(),"oct_grades");
+			Tools.createCSVs(Photos.getStereoCSVLines(),"stereo_grades");
+			Tools.createCSVs(Photos.getNethraCSVLines(),"3nethra_grades");
+			*/
 			response.sendRedirect("/Glaucoma/home"); 
 			return;
 		}
@@ -641,12 +644,12 @@ public class Controller extends HttpServlet {
 		else if(userPath.equals("/printFinishedCSVs")) {
 
 //			Tools.createCSV(Picture.getCSVLines(),"hvf_pictures");
-			Tools.createCSV(HVFtest.getFinishedCSVLines(),"hvf_completed_grades");
-			Tools.createCSV(FDTtest.getCSVFinishedLines(),"fdt_completed_grades");
-			Tools.createCSV(MDTtest.getCSVFinishedLines(),"mdt_completed_grades");
-			Tools.createCSV(OCTtest.getCSVFinishedLines(),"oct_completed_grades");
-			Tools.createCSV(Photos.getFinishedStereoCSVLines(),"stereo_completed_grades");
-			Tools.createCSV(Photos.getFinishedNethraCSVLines(),"3nethra_completed_grades");
+			Tools.createCSVs(HVFtest.getFinishedCSVLines(),"hvf_completed_grades");
+			Tools.createCSVs(FDTtest.getCSVFinishedLines(),"fdt_completed_grades");
+			Tools.createCSVs(MDTtest.getCSVFinishedLines(),"mdt_completed_grades");
+			Tools.createCSVs(OCTtest.getCSVFinishedLines(),"oct_completed_grades");
+			Tools.createCSVs(Photos.getFinishedStereoCSVLines(),"stereo_completed_grades");
+			Tools.createCSVs(Photos.getFinishedNethraCSVLines(),"3nethra_completed_grades");
 			response.sendRedirect("/Glaucoma/home"); 
 			return;
 		}
