@@ -741,7 +741,7 @@ public class HVFtest implements BaseTest{
 		Vector<Picture> pictures = SQLCommands.queryPictures(query);
 
 		for(int i=0; i<pictures.size(); i++) {
-			result.add(pictures.get(i).getName());
+			result.add("HVF - " + pictures.get(i).getName());
 		}
 
 		return result;
@@ -753,7 +753,7 @@ public class HVFtest implements BaseTest{
 		Vector<HVFtest> hvf = SQLCommands.queryHVFtest(query);
 
 		for(int i=0; i<hvf.size(); i++) {
-			result.add(hvf.get(i).getPictureName());
+			result.add("HVF - " + hvf.get(i).getPictureName());
 		}
 
 		return result;
@@ -765,7 +765,7 @@ public class HVFtest implements BaseTest{
 		Vector<HVFtest> hvf = SQLCommands.queryHVFtest(query);
 
 		for(int i=0; i<hvf.size(); i++) {
-			result.add(hvf.get(i).getPictureName());
+			result.add("HVF - " + hvf.get(i).getPictureName());
 		}
 
 		return result;
@@ -777,7 +777,7 @@ public class HVFtest implements BaseTest{
 		Vector<HVFtest> hvf = SQLCommands.queryHVFtest(query);
 
 		for(int i=0; i<hvf.size(); i++) {
-			result.add(hvf.get(i).getPictureName());
+			result.add("HVF - " + hvf.get(i).getPictureName());
 		}
 
 		return result;
@@ -789,7 +789,7 @@ public class HVFtest implements BaseTest{
 		Vector<HVFtest> hvf = SQLCommands.queryHVFtest(query);
 
 		for(int i=0; i<hvf.size(); i++) {
-			result.add(hvf.get(i).getPictureName());
+			result.add("HVF - " + hvf.get(i).getPictureName());
 		}
 
 		return result;

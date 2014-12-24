@@ -163,6 +163,7 @@ public class Tools {
 
 	public static Vector<String> getUngradedNames() {
 		Vector<String> result = new Vector<String>();
+		result.addAll(HVFtest.getUngradedNames());
 		result.addAll(FDTtest.getUngradedNames());
 		result.addAll(MDTtest.getUngradedNames());
 		result.addAll(OCTtest.getUngradedNames());
@@ -173,6 +174,7 @@ public class Tools {
 
 	public static Vector<String> getGradedOnceNames() {
 		Vector<String> result = new Vector<String>();
+		result.addAll(HVFtest.getGradedOnceNames());
 		result.addAll(FDTtest.getGradedOnceNames());
 		result.addAll(MDTtest.getGradedOnceNames());
 		result.addAll(OCTtest.getGradedOnceNames());
@@ -183,6 +185,7 @@ public class Tools {
 
 	public static Vector<String> getNeedsAdjudication() {
 		Vector<String> result = new Vector<String>();
+		result.addAll(HVFtest.getNeedsAdjudication());
 		result.addAll(FDTtest.getNeedsAdjudication());
 		result.addAll(MDTtest.getNeedsAdjudication());
 		result.addAll(OCTtest.getNeedsAdjudication());

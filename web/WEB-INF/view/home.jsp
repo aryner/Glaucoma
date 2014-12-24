@@ -271,16 +271,16 @@ if(session.getAttribute("errors") != null) {
 				boolean link = false;
 				if(reviewedBy != null) {
 					for(int j=0; j<reviewedBy.size(); j++) {
-						if(reviewedBy.get(j).getPictureName().equals(name)) {
-							out.print("<a class='opthReviewed' href='OpHVFtest?pictureName="+name+"'>");
+						if(("HVF - "+reviewedBy.get(j).getPictureName()).equals(name)) {
+							out.print("<a class='opthReviewed' href='OpHVFtest?pictureName="+reviewedBy.get(j).getPictureName()+"'>");
 							link = true;
 						}
 					}
 				}
 				if(!link && adjudicatedBy != null) {
 					for(int j=0; j<adjudicatedBy.size(); j++) {
-						if(adjudicatedBy.get(j).getPictureName().equals(name)) {
-							out.print("<a class='opthReviewed' href='HVFtest?pictureName="+name+"'>");
+						if(("HVF - "+adjudicatedBy.get(j).getPictureName()).equals(name)) {
+							out.print("<a class='opthReviewed' href='HVFtest?pictureName="+reviewedBy.get(j).getPictureName()+"'>");
 							link = true;
 						}
 					}
