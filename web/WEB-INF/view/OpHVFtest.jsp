@@ -58,7 +58,7 @@ PSD - P-value: <br>
 <input type="radio" name="psdp" value="5"<%if(hvf.getPsdp()==5) {out.print(" checked");}%>><10%<br>
 <input type="radio" name="psdp" value="999"<%if(hvf.getPsdp()==999) {out.print(" checked");}%>>Blank<br><br>
 
-Cluster of >= 3 non-edge points that are all significant<br> at p < 5% with >= 1 point
+Cluster of >= 3 points that are all significant<br> at p < 5% with >= 1 point
 being significant at p < 1%<br>
 <input type="radio" name="cluster" value="1"<%if(hvf.getCluster()==1) {out.print(" checked");}%>><span style='color:darkorange;'>Yes</span>
 <input type="radio" name="cluster" value="2"<%if(hvf.getCluster()==2) {out.print(" checked");}%>>No 

@@ -40,11 +40,9 @@ if(session.getAttribute("errors") != null) {
 <%
 	if(access == 2){
 %>
-<!--
 	<div class="thinColumn">
 		<a href="/Glaucoma/OpHVFtest" class="btn menuBtn">HVF test</a>
 	</div>
--->
 
 <%
 	}
@@ -57,11 +55,9 @@ if(session.getAttribute("errors") != null) {
 	}
 	if (access == 0 || (access == 1)) {
 %>
-<!--
 	<div class="thinColumn">
 		<a href="/Glaucoma/HVFtest" class="btn menuBtn">HVF test</a> 
 	</div>
--->
 <%
 	}
 	if (access == 0|| access == 1) {
@@ -102,11 +98,9 @@ if(session.getAttribute("errors") != null) {
 	<div class="thinColumn">
 		<a href="/Glaucoma/printCSV" class="btn menuBtn">Get CSV files</a>
 	</div>
-	<!--
 	<div class="thinColumn">
 		<a href="/Glaucoma/uploadData" class="btn menuBtn">Upload Data</a>
 	</div>
- 	-->
 </div>
 
 <div class='container'>
@@ -243,8 +237,31 @@ if(session.getAttribute("errors") != null) {
 			}
 		%>
 	</div>
+	<%Vector<String> needsReview = (Vector)request.getAttribute("needsReview");%>
+	<div class='fifth-column'><h3>Needs review (<%out.print(needsReview.size());%>)</h3>
+		<%
+			Vector<HVFtest> adjudicatedBy = (Vector)request.getAttribute("adjudicatedBy");
+			name = "";
+			for(int i=0; i<needsReview.size(); i++) {
+				name = needsReview.get(i);
+				boolean link = false;
+				if(adjudicatedBy != null) {
+					for(int j=0; j<adjudicatedBy.size(); j++) {
+						if(adjudicatedBy.get(j).getPictureName().equals(name)) {
+							out.print("<a class='opthReviewed' href='HVFtest?pictureName="+name+"'>");
+							link = true;
+						}
+					}
+				}
+				out.print(name.substring(0,name.length()-4)+"<br>");
+				if(link) {
+					out.print("</a>");
+				}
+			}
+		%>
+	</div>
 	<%Vector<String> adjudicated = (Vector)request.getAttribute("adjudicated");%>
-	<div class='fifth-column'><h3>Adjudicated (<%out.print(adjudicated.size());%>)</h3>
+	<div class='fifth-column'><h3>Reviewed / Adjudicated (<%out.print(adjudicated.size());%>)</h3>
 		<%
 			name = "";
 			match = false;
@@ -305,29 +322,6 @@ if(session.getAttribute("errors") != null) {
 		%>
 	</div>
 	<!--
-	<%Vector<String> needsReview = (Vector)request.getAttribute("needsReview");%>
-	<div class='fifth-column'><h3>Needs review (<%out.print(needsReview.size());%>)</h3>
-		<%
-			Vector<HVFtest> adjudicatedBy = (Vector)request.getAttribute("adjudicatedBy");
-			name = "";
-			for(int i=0; i<needsReview.size(); i++) {
-				name = needsReview.get(i);
-				boolean link = false;
-				if(adjudicatedBy != null) {
-					for(int j=0; j<adjudicatedBy.size(); j++) {
-						if(adjudicatedBy.get(j).getPictureName().equals(name)) {
-							out.print("<a class='opthReviewed' href='HVFtest?pictureName="+name+"'>");
-							link = true;
-						}
-					}
-				}
-				out.print(name.substring(0,name.length()-4)+"<br>");
-				if(link) {
-					out.print("</a>");
-				}
-			}
-		%>
-	</div>
 	<%Vector<String> reviewed = (Vector)request.getAttribute("reviewed");%>
 	<div class='fifth-column'><h3>Reviewed / Not glaucoma (<%out.print(reviewed.size());%>)</h3>
 		<%
