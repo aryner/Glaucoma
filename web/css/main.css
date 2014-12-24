@@ -155,12 +155,12 @@ a {
 }
 
 .column {
-	width: 16dp;
+	width: 12%;
 	float: left; 
 	text-align:center;
 }
 .thinColumn {
-	width: 16dp;
+	width: 8%;
 	float: left; 
 	text-align:center;
 }
@@ -443,7 +443,7 @@ and scalar of: 0.29411764705882354*/
 }
 
 .big {
-	postition: fixed;
+	position: fixed;
 	width: 850px;
 	height:850px;
 }

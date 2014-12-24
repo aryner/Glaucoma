@@ -149,7 +149,12 @@ $(document).ready(function(){
 			this.value = this.value.replace(/[^0-9]/g, '');
 		}
 	});
-	$('input[type=text][name=pts_five]').on('input', function() {
+	$('input[type=text][name=pts_five_top]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=pts_five_bot]').on('input', function() {
 		if(this.value != this.value.replace(/[^0-9]/g, '')) {
 			this.value = this.value.replace(/[^0-9]/g, '');
 		}
@@ -159,7 +164,12 @@ $(document).ready(function(){
 			this.value = this.value.replace(/[^0-9]/g, '');
 		}
 	});
-	$('input[type=text][name=pts_one]').on('input', function() {
+	$('input[type=text][name=pts_one_top]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=pts_one_bot]').on('input', function() {
 		if(this.value != this.value.replace(/[^0-9]/g, '')) {
 			this.value = this.value.replace(/[^0-9]/g, '');
 		}
@@ -323,8 +333,10 @@ $(document).ready(function(){
 		var inf_hem = $('input[type=radio][name=inf_hem][value=0]').prop('checked')
 			|| $('input[type=radio][name=inf_hem][value=1]').prop('checked')
 			|| $('input[type=radio][name=inf_hem][value=2]').prop('checked');
-		var pts_five = $('input[type=text][name=pts_five]').val().length > 0; 
-		var pts_one = $('input[type=text][name=pts_one]').val().length > 0; 
+		var pts_five = $('input[type=text][name=pts_five_top]').val().length > 0
+			&& $('input[type=text][name=pts_five_bot]').val().length > 0; 
+		var pts_one = $('input[type=text][name=pts_one_top]').val().length > 0
+			&& $('input[type=text][name=pts_one_bot]').val().length > 0; 
 
 		var cluster = $('input[type=radio][name=cluster][value=1]').prop('checked')
 			|| $('input[type=radio][name=cluster][value=2]').prop('checked') 
@@ -665,7 +677,7 @@ $(document).ready(function(){
 			if(!focused) {
 				focused = true;
 				e.preventDefault(); 
-				$('input[type=text][name=pts_five]').focus();
+				$('input[type=text][name=pts_five_top]').focus();
 			}
 		} else {
 			$('#pts_five').removeClass('highlight');
@@ -674,7 +686,7 @@ $(document).ready(function(){
 			if(!focused) {
 				focused = true;
 				e.preventDefault(); 
-				$('input[type=text][name=pts_one]').focus();
+				$('input[type=text][name=pts_one_top]').focus();
 			}
 		} else {
 			$('#pts_one').removeClass('highlight');
