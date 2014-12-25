@@ -223,7 +223,7 @@ False NEG Errors (%) <input type="text" name="fn" class="numBox" <%out.print("va
 <input type="radio" name="vf_loss" value="3"<%if(reviewed && hvf.getVf_loss().equals("3")){out.print(" checked");}%>>nonspecific change<br>
 <input type="radio" name="vf_loss" value="4"<%if(reviewed && hvf.getVf_loss().equals("4")){out.print(" checked");}%>>could not determine (unreliable field)<br>
 <input type="radio" name="vf_loss" value="5"<%if(reviewed && hvf.getVf_loss().equals("5")){out.print(" checked");}%>><span id='vf_loss_oth'>other:</span>
-<input type="text" name="vf_loss_oth">
+<input type="text" name="vf_loss_oth"<%if(reviewed && hvf.getVf_loss_oth()!=null){out.print("value='"+hvf.getVf_loss_oth()+"'");}%>>
 <br><br>
 <%
 String result = "";

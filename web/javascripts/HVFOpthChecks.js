@@ -117,53 +117,50 @@ $(document).ready(function(){
 		determineSeverity();
 	});
 
-	var glauCount = 0;
+	var glauCount = getGlauCount();
 	var severeGlau = false;
 	var lossGlau = false;
 	if($('input[name=glau][value=1]').prop('checked')) {
-		glauCount++;
+//		glauCount++;
 	}
 	if(!$('input[name=severe][value=0]').prop('checked')) {
-		glauCount++;
+//		glauCount++;
 		severeGlau = true;
 	}
 	if($('input[name=vf_loss][value=1]').prop('checked')) {
-		glauCount++;
+//		glauCount++;
 		lossGlau = true;
-		$('#vf_defectInvis').removeClass('invis');
-	}
-	else {
-		$('#vf_defectInvis').addClass('invis');
 	}
 
 	$('input[name=glau]').change(function() {
+		glauCount = getGlauCount();
 		if($('input[name=glau][value=1]').prop('checked')) {
-			glauCount++;
+//			glauCount++;
 		}
 		else {
-			glauCount--;
+//			glauCount--;
 		}
 	});
 	$('input[name=severe]').change(function() {
+		glauCount = getGlauCount();
 		if(!$('input[name=severe][value=0]').prop('checked') && !severeGlau) {
-			glauCount++;
+//			glauCount++;
 			severeGlau = true;
 		}
 		else if($('input[name=severe][value=0]').prop('checked') && severeGlau){
-			glauCount--;
-			severeGlau = false;
+//			glauCount--;
+//			severeGlau = false;
 		}
 	});
 	$('input[name=vf_loss]').change(function() {
+		glauCount = getGlauCount();
 		if($('input[name=vf_loss][value=1]').prop('checked') && !lossGlau) {
-			glauCount++;
+//			glauCount++;
 			lossGlau = true;
-			$('#vf_defectInvis').removeClass('invis');
 		}
 		else if(!$('input[name=vf_loss][value=1]').prop('checked') && lossGlau) {
-			glauCount--;
+//			glauCount--;
 			lossGlau = false;
-			$('#vf_defectInvis').addClass('invis');
 			clearDefect();
 		}
 	});
@@ -637,11 +634,34 @@ function determineSeverity() {
 }
 
 function updateTotals() {
-	var top = +$('input[name=pts_five_top]').val()
-	var bot = +$('input[name=pts_five_bot]').val()
+	var top = +$('input[name=pts_five_top]').val();
+	var bot = +$('input[name=pts_five_bot]').val();
 	$('#pts_five_total').text(top+bot);
 
-	var top = +$('input[name=pts_one_top]').val()
-	var bot = +$('input[name=pts_one_bot]').val()
+	var top = +$('input[name=pts_one_top]').val();
+	var bot = +$('input[name=pts_one_bot]').val();
 	$('#pts_one_total').text(top+bot);
+}
+
+function getGlauCount() {
+	var count;
+	var glau = $('input[name=glau][value=1]').prop('checked');
+	var severity = !$('input[name=severe][value=0]').prop('checked');
+	var vf_glau = $('input[name=vf_loss][value=1]').prop('checked');
+	var vf_other = $('input[name=vf_loss][value=5]').prop('checked');
+
+	if(glau && severity && (vf_glau || vf_other)) {
+		count = 3;
+		$('#vf_defectInvis').removeClass('invis');
+	}
+	else if(!glau && !severity && !vf_glau) {
+		count = 0;
+		$('#vf_defectInvis').addClass('invis');
+	}
+	else {
+		count = 1;
+		$('#vf_defectInvis').addClass('invis');
+	}
+
+	return count;
 }
