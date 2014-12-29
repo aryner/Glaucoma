@@ -313,12 +313,14 @@ $(document).ready(function(){
 			|| $('input[type=radio][name=psdp][value=6]').prop('checked')
 			|| $('input[type=radio][name=psdp][value=999]').prop('checked');
 
+/*
 		var central_15 = $('input[type=radio][name=central_15][value=0]').prop('checked')
 			|| $('input[type=radio][name=central_15][value=1]').prop('checked')
 			|| $('input[type=radio][name=central_15][value=2]').prop('checked')
 			|| $('input[type=radio][name=central_15][value=3]').prop('checked')
 			|| $('input[type=radio][name=central_15][value=4]').prop('checked')
 			|| $('input[type=radio][name=central_15][value=999]').prop('checked');
+*/
 
 		var central_0 = $('input[type=radio][name=central_0][value=0]').prop('checked')
 			|| $('input[type=radio][name=central_0][value=1]').prop('checked')
@@ -636,7 +638,7 @@ $(document).ready(function(){
 			}
 		} else {
 			$('#psdp').removeClass('highlight');
-		} if(!central_15) {
+/*		} if(!central_15) {
 			$('#central_15').addClass('highlight');
 			if(!focused) {
 				focused = true;
@@ -645,6 +647,7 @@ $(document).ready(function(){
 			}
 		} else {
 			$('#central_15').removeClass('highlight');
+*/
 		} if(!central_0) {
 			$('#central_0').addClass('highlight');
 			if(!focused) {

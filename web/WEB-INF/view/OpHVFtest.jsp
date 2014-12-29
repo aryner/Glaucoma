@@ -143,14 +143,20 @@ MD - dB <input type="text" name="mddb" <%out.print("value='"+hvf.getMddb()+"'");
 
 %>
 <div id="pts" <%out.print(severity);%>>
-	# points depressed < 5% level on Pattern Deviation Plot <br>
-	Top <input type="text" class='numBox' name="pts_five_top" <%out.print("value='"+hvf.getPts_five_top()+"'");%>>
-	Bot <input type="text" class='numBox' name="pts_five_bot" <%out.print("value='"+hvf.getPts_five_bot()+"'");%>>
-	Total: <span id='pts_five_total'></span>
+	# points depressed < 5% level on Pattern Deviation Plot in the superior hemifield<br>
+	<input type="text" class='' name="pts_five_top" <%out.print("value='"+hvf.getPts_five_top()+"'");%>>
 	<br>
-	# points depressed < 1% level on Pattern Deviation Plot <br>
-	Top <input type="text" class='numBox' name="pts_one_top" <%out.print("value='"+hvf.getPts_one_top()+"'");%>>
-	Bot <input type="text" class='numBox' name="pts_one_bot" <%out.print("value='"+hvf.getPts_one_bot()+"'");%>>
+	# points depressed < 5% level on Pattern Deviation Plot in the inferior hemifield<br>
+	<input type="text" class='' name="pts_five_bot" <%out.print("value='"+hvf.getPts_five_bot()+"'");%>>
+	<br>
+	Total: <span id='pts_five_total'></span>
+	<br><br>
+	# points depressed < 1% level on Pattern Deviation Plot in the superior hemifield<br>
+	<input type="text" class='' name="pts_one_top" <%out.print("value='"+hvf.getPts_one_top()+"'");%>>
+	<br>
+	# points depressed < 1% level on Pattern Deviation Plot in the inferior hemifield<br>
+	<input type="text" class='' name="pts_one_bot" <%out.print("value='"+hvf.getPts_one_bot()+"'");%>>
+	<br>
 	Total: <span id='pts_one_total'></span>
 	<br>
 </div>

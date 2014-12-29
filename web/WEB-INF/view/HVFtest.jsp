@@ -633,6 +633,7 @@ if(pic == null) {
 	}
 %>
 <br><b>Central 5% of fixation = the 4 points directly surrounding central fixation</b><br><br>
+<!--
 <span id='central_15'># of points within central 5 degrees with sensitivity < 15 dB (top left graph):</span><br>
 <input type="radio" name="central_15" value="0"<%if(a && !diff && v1==0){out.print(" checked='true'");}%>>0<%if((a&&diff)&&((v1==0)||(v2==0))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="central_15" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>1<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'> ***</span><%}%><br>
@@ -641,6 +642,7 @@ if(pic == null) {
 <input type="radio" name="central_15" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>4<%if((a&&diff)&&((v1==4)||(v2==5))){%><span class='highlight'> ***</span><%}%><br>
 <input type="radio" name="central_15" value="999"<%if(a && !diff && v1==999){out.print(" checked='true'");}%>>Blank<%if((a&&diff)&&((v1==999)||(v2==999))){%><span class='highlight'> ***</span><%}%><br>
 <br>
+-->
 
 <%
 	v1 = -1;
@@ -713,9 +715,10 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='pts_five'># points depressed < 5% level on Pattern Deviation Plot</span><br>
-Top <input type="text" name="pts_five_top" class='numBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>> 
-<%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
+<span id='pts_five'># points depressed < 5% level on Pattern Deviation Plot in the superior hemifield</span><br>
+<input type="text" name="pts_five_top" class='' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>> 
+<%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%><br><br>
+
 <%
 	if(a) {
 		s1 = HVF.get(0).getPts_five_bot()+"";
@@ -728,7 +731,8 @@ Top <input type="text" name="pts_five_top" class='numBox' autocomplete="off"<%if
 		}
 	}
 %>
- Bot <input type="text" name="pts_five_bot" class='numBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<span id='pts_five'># points depressed < 5% level on Pattern Deviation Plot in the inferior hemifield</span><br>
+<input type="text" name="pts_five_bot" class='' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%><br>
 <br>
 
@@ -744,9 +748,10 @@ Top <input type="text" name="pts_five_top" class='numBox' autocomplete="off"<%if
 		}
 	}
 %>
-<span id='pts_one'># points depressed < 1% level on Pattern Deviation Plot </span><br>
-Top <input type="text" name="pts_one_top" class='numBox' autocomplete="off" <%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
-<%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
+<span id='pts_one'># points depressed < 1% level on Pattern Deviation Plot in the superior hemifield</span><br>
+<input type="text" name="pts_one_top" class='' autocomplete="off" <%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%><br><br>
+
 <%
 	if(a) {
 		s1 = HVF.get(0).getPts_one_bot()+"";
@@ -759,7 +764,8 @@ Top <input type="text" name="pts_one_top" class='numBox' autocomplete="off" <%if
 		}
 	}
 %>
-Bot <input type="text" name="pts_one_bot" class='numBox' autocomplete="off" <%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<span id='pts_one'># points depressed < 1% level on Pattern Deviation Plot in the inferior hemifield</span><br>
+<input type="text" name="pts_one_bot" class='' autocomplete="off" <%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'>  "+s1+" | "+s2+"</span>");}%>
 <br><br>
 

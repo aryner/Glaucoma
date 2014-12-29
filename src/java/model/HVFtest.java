@@ -260,8 +260,8 @@ public class HVFtest implements BaseTest{
 		if(hvf.getPsdp() <= 4) {
 			glaucoma = true;
 		}
-		attr = request.getParameter("central_15");
-		hvf.setCentral_15(Integer.parseInt(attr));
+//		attr = request.getParameter("central_15");
+//		hvf.setCentral_15(Integer.parseInt(attr));
 		attr = request.getParameter("central_0");
 		hvf.setCentral_0(Integer.parseInt(attr));
 		attr = request.getParameter("sup_hem");
@@ -285,6 +285,7 @@ public class HVFtest implements BaseTest{
 		hvf.setNotes(Integer.parseInt(attr));
 		attr = request.getParameter("notes_other");
 		hvf.setNotes_other(attr);
+		hvf.setCentral_15(hvf.getSup_hem()+hvf.getInf_hem());
 		
 		//check for severity if glaucoma
 		if(glaucoma) {
