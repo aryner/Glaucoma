@@ -347,11 +347,12 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='glau'>Glaucoma presence</span><br>
-<input type="radio" name="glau" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>Definite glaucoma<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="glau" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Probable glaucoma<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="glau" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>No glaucoma<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="glau" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>Indeterminate<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%><br>
+<span id='glau'>Glaucomatous optic nerve</span><br>
+<input type="radio" name="glau" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>Definite glaucomatous nerve<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="glau" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Probable glaucomatous nerve<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="glau" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Possible glaucomatous nerve<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="glau" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>Not a glaucomatous nerve<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="glau" value="5"<%if(a && !diff && v1==5){out.print(" checked='true'");}%>>Indeterminate<%if((a&&diff)&&((v1==5)||(v2==5))){%><span class='highlight'>***</span><%}%><br>
 <br>
 
 <input type="submit" value="Submit" class="btn">
