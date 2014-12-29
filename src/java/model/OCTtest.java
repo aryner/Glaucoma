@@ -55,7 +55,37 @@ public class OCTtest implements BaseTest {
 	private int iavgcol;
 	private String atnum;
 	private int atcol;
-	private String eye;
+	private String snum_os;
+	private int scol_os;
+	private String nnum_os;
+	private int ncol_os;
+	private String inum_os;
+	private int icol_os;
+	private String tnum_os;
+	private int tcol_os;
+	private String sig_os;
+	private String isnum_os;
+	private int iscol_os;
+	private String sinum_os;
+	private int sicol_os;
+	private String stnum_os;
+	private int stcol_os;
+	private String itnum_os;
+	private int itcol_os;
+	private String snnum_os;
+	private int sncol_os;
+	private String mmnum_os;
+	private int mmcol_os;
+	private String smaxnum_os;
+	private int smaxcol_os;
+	private String imaxnum_os;
+	private int imaxcol_os;
+	private String savgnum_os;
+	private int savgcol_os;
+	private String iavgnum_os;
+	private int iavgcol_os;
+	private String atnum_os;
+	private int atcol_os;
 
 	private static final String slash = System.getProperty("file.separator");
 
@@ -76,12 +106,15 @@ public class OCTtest implements BaseTest {
 	}
 
 	public OCTtest(int id, int confirmed, String pictureName, int userID, int adjudicatorID, String length,
-		       int type, String type_oth, String snum, int scol, String nnum, int ncol,
-		       String inum, int icol, String tnum, int tcol, String sig, String isnum,
-		       int iscol, String sinum, int sicol, String stnum, int stcol, String itnum,
-		       int itcol, String snnum, int sncol, String mmnum, int mmcol, String smaxnum,
-		       int smaxcol, String imaxnum, int imaxcol, String savgnum, int savgcol, 
-		       String iavgnum, int iavgcol, String atnum, int atcol)
+		       int type, String type_oth, String snum, String snum_os, int scol, int scol_os, String nnum, String nnum_os, int ncol,
+		       int ncol_os, String inum, String inum_os, int icol, int icol_os, String tnum, String tnum_os, int tcol, 
+		       int tcol_os, String sig, String sig_os, String isnum, String isnum_os, int iscol, int iscol_os,
+		       String sinum, String sinum_os, int sicol, int sicol_os, String stnum, String stnum_os, int stcol, 
+		       int stcol_os, String itnum, String itnum_os, int itcol, int itcol_os, String snnum, String snnum_os,
+		       int sncol, int sncol_os, String mmnum, String mmnum_os, int mmcol, int mmcol_os, String smaxnum, String smaxnum_os,
+		       int smaxcol, int smaxcol_os, String imaxnum, String imaxnum_os, int imaxcol, int imaxcol_os, String savgnum, 
+		       String savgnum_os, int savgcol, int savgcol_os, String iavgnum, 
+		       String iavgnum_os, int iavgcol, int iavgcol_os, String atnum, String atnum_os, int atcol, int atcol_os)
 	{
 		this.id = id;
 		this.confirmed = confirmed;
@@ -92,37 +125,67 @@ public class OCTtest implements BaseTest {
 		this.type = type;
 		this.type_oth = type_oth;
 		this.snum = snum;
+		this.snum_os = snum_os;
 		this.scol = scol;
+		this.scol_os = scol_os;
 		this.nnum = nnum;
+		this.nnum_os = nnum_os;
 		this.ncol = ncol;
+		this.ncol_os = ncol_os;
 		this.inum = inum; 
+		this.inum_os = inum_os; 
 		this.icol = icol;
+		this.icol_os = icol_os;
 		this.tnum = tnum;
+		this.tnum_os = tnum_os;
 		this.tcol = tcol;
-		this.sig = sig.substring(0,sig.indexOf("|"));
+		this.tcol_os = tcol_os;
+		this.sig = sig;
+		this.sig_os = sig_os;
 		this.isnum = isnum;
+		this.isnum_os = isnum_os;
 		this.iscol = iscol;
+		this.iscol_os = iscol_os;
 		this.sinum = sinum; 
+		this.sinum_os = sinum_os; 
 		this.sicol = sicol;
+		this.sicol_os = sicol_os;
 		this.stnum = stnum;
+		this.stnum_os = stnum_os;
 		this.stcol  = stcol;
+		this.stcol_os  = stcol_os;
 		this.itnum = itnum;
+		this.itnum_os = itnum_os;
 		this.itcol = itcol;
+		this.itcol_os = itcol_os;
 		this.snnum = snnum;
+		this.snnum_os = snnum_os;
 		this.sncol = sncol;
+		this.sncol_os = sncol_os;
 		this.mmnum = mmnum;
+		this.mmnum_os = mmnum_os;
 		this.mmcol = mmcol;
+		this.mmcol_os = mmcol_os;
 		this.smaxnum = smaxnum;
+		this.smaxnum_os = smaxnum_os;
 		this.smaxcol = smaxcol;
+		this.smaxcol_os = smaxcol_os;
 		this.imaxnum = imaxnum;
+		this.imaxnum_os = imaxnum_os;
 		this.imaxcol = imaxcol;
+		this.imaxcol_os = imaxcol_os;
 		this.savgnum = savgnum;
+		this.savgnum_os = savgnum_os;
 		this.savgcol = savgcol;
+		this.savgcol_os = savgcol_os;
 		this.iavgnum = iavgnum;
+		this.iavgnum_os = iavgnum_os;
 		this.iavgcol = iavgcol;
+		this.iavgcol_os = iavgcol_os;
 		this.atnum = atnum;
+		this.atnum_os = atnum_os;
 		this.atcol = atcol;
-		this.eye = sig.substring(sig.indexOf("|")+1, sig.length());
+		this.atcol_os = atcol_os;
 	}
 
 	public static Picture getNext(User user) {
@@ -270,21 +333,93 @@ public class OCTtest implements BaseTest {
 		oct.setAtnum(attr);
 		attr = request.getParameter("atcol");
 		oct.setAtcol(Integer.parseInt(attr));
-		attr = request.getParameter("eye");
-		oct.setEye(attr);
+
+		attr = request.getParameter("snum_os");
+		oct.setSnum_os(attr);
+		attr = request.getParameter("scol_os");
+		oct.setScol_os(Integer.parseInt(attr));
+		attr = request.getParameter("nnum_os");
+		oct.setNnum_os(attr);
+		attr = request.getParameter("ncol_os");
+		oct.setNcol_os(Integer.parseInt(attr));
+		attr = request.getParameter("inum_os");
+		oct.setInum_os(attr);
+		attr = request.getParameter("icol_os");
+		oct.setIcol_os(Integer.parseInt(attr));
+		attr = request.getParameter("tnum_os");
+		oct.setTnum_os(attr);
+		attr = request.getParameter("tcol_os");
+		oct.setTcol_os(Integer.parseInt(attr));
+		attr = request.getParameter("sig_os");
+		oct.setSig_os(attr);
+		attr = request.getParameter("isnum_os");
+		oct.setIsnum_os(attr);
+		attr = request.getParameter("iscol_os");
+		oct.setIscol_os(Integer.parseInt(attr));
+		attr = request.getParameter("sinum_os");
+		oct.setSinum_os(attr);
+		attr = request.getParameter("sicol_os");
+		oct.setSicol_os(Integer.parseInt(attr));
+		attr = request.getParameter("stnum_os");
+		oct.setStnum_os(attr);
+		attr = request.getParameter("stcol_os");
+		oct.setStcol_os(Integer.parseInt(attr));
+		attr = request.getParameter("itnum_os");
+		oct.setItnum_os(attr);
+		attr = request.getParameter("itcol_os");
+		oct.setItcol_os(Integer.parseInt(attr));
+		attr = request.getParameter("snnum_os");
+		oct.setSnnum_os(attr);
+		attr = request.getParameter("sncol_os");
+		oct.setSncol_os(Integer.parseInt(attr));
+		attr = request.getParameter("mmnum_os");
+		oct.setMmnum_os(attr);
+		attr = request.getParameter("mmcol_os");
+		oct.setMmcol_os(Integer.parseInt(attr));
+		attr = request.getParameter("smaxnum_os");
+		oct.setSmaxnum_os(attr);
+		attr = request.getParameter("smaxcol_os");
+		oct.setSmaxcol_os(Integer.parseInt(attr));
+		attr = request.getParameter("imaxnum_os");
+		oct.setImaxnum_os(attr);
+		attr = request.getParameter("imaxcol_os");
+		oct.setImaxcol_os(Integer.parseInt(attr));
+		attr = request.getParameter("savgnum_os");
+		oct.setSavgnum_os(attr);
+		attr = request.getParameter("savgcol_os");
+		oct.setSavgcol_os(Integer.parseInt(attr));
+		attr = request.getParameter("iavgnum_os");
+		oct.setIavgnum_os(attr);
+		attr = request.getParameter("iavgcol_os");
+		oct.setIavgcol_os(Integer.parseInt(attr));
+		attr = request.getParameter("atnum_os");
+		oct.setAtnum_os(attr);
+		attr = request.getParameter("atcol_os");
+		oct.setAtcol_os(Integer.parseInt(attr));
 
 		String query = "UPDATE OCTtest SET oct_length='"+oct.getLength()+"', oct_type='"+oct.getType()+"', "+
 				"oct_type_oth='"+oct.getType_oth()+"', oct_snum='"+oct.getSnum()+"', "+
 				"oct_scol='"+oct.getScol()+"', oct_nnum='"+oct.getNnum()+"', oct_ncol='"+oct.getNcol()+"', "+
 				"oct_inum='"+oct.getInum()+"', oct_icol='"+oct.getIcol()+"', oct_tnum='"+oct.getTnum()+"', "+
-				"oct_tcol='"+oct.getTcol()+"', oct_sig='"+oct.getSig()+"|"+oct.getEye()+"', oct_isnum='"+oct.getIsnum()+"', "+
+				"oct_tcol='"+oct.getTcol()+"', oct_sig='"+oct.getSig()+"', oct_isnum='"+oct.getIsnum()+"', "+
 				"oct_iscol='"+oct.getIscol()+"', oct_sinum='"+oct.getSinum()+"', oct_sicol='"+oct.getSicol()+"', "+
 				"oct_stnum='"+oct.getStnum()+"', oct_stcol='"+oct.getStcol()+"', oct_itnum='"+oct.getItnum()+"', "+
 				"oct_itcol='"+oct.getItcol()+"', oct_snnum='"+oct.getSnnum()+"', oct_sncol='"+oct.getSncol()+"', "+
 				"oct_mmnum='"+oct.getMmnum()+"', oct_mmcol='"+oct.getMmcol()+"', oct_smaxnum='"+oct.getSmaxnum()+"', "+
 				"oct_smaxcol='"+oct.getSmaxcol()+"', oct_imaxnum='"+oct.getImaxnum()+"', oct_imaxcol='"+oct.getImaxcol()+"', "+
 				"oct_savgnum='"+oct.getSavgnum()+"', oct_savgcol='"+oct.getSavgcol()+"', oct_iavgnum='"+oct.getIavgnum()+"', "+
-				"oct_iavgcol='"+oct.getIavgcol()+"', oct_atnum='"+oct.getAtnum()+"', oct_atcol='"+oct.getAtcol()+"' ";
+				"oct_iavgcol='"+oct.getIavgcol()+"', oct_atnum='"+oct.getAtnum()+"', oct_atcol='"+oct.getAtcol()+"', "+
+				"oct_snum_os='"+oct.getSnum_os()+"', "+
+				"oct_scol_os='"+oct.getScol_os()+"', oct_nnum_os='"+oct.getNnum_os()+"', oct_ncol_os='"+oct.getNcol_os()+"', "+
+				"oct_inum_os='"+oct.getInum_os()+"', oct_icol_os='"+oct.getIcol_os()+"', oct_tnum_os='"+oct.getTnum_os()+"', "+
+				"oct_tcol_os='"+oct.getTcol_os()+"', oct_sig_os='"+oct.getSig_os()+"', oct_isnum_os='"+oct.getIsnum_os()+"', "+
+				"oct_iscol_os='"+oct.getIscol_os()+"', oct_sinum_os='"+oct.getSinum_os()+"', oct_sicol_os='"+oct.getSicol_os()+"', "+
+				"oct_stnum_os='"+oct.getStnum_os()+"', oct_stcol_os='"+oct.getStcol_os()+"', oct_itnum_os='"+oct.getItnum_os()+"', "+
+				"oct_itcol_os='"+oct.getItcol_os()+"', oct_snnum_os='"+oct.getSnnum_os()+"', oct_sncol_os='"+oct.getSncol_os()+"', "+
+				"oct_mmnum_os='"+oct.getMmnum_os()+"', oct_mmcol_os='"+oct.getMmcol_os()+"', oct_smaxnum_os='"+oct.getSmaxnum_os()+"', "+
+				"oct_smaxcol_os='"+oct.getSmaxcol_os()+"', oct_imaxnum_os='"+oct.getImaxnum_os()+"', oct_imaxcol_os='"+oct.getImaxcol_os()+"', "+
+				"oct_savgnum_os='"+oct.getSavgnum_os()+"', oct_savgcol_os='"+oct.getSavgcol_os()+"', oct_iavgnum_os='"+oct.getIavgnum_os()+"', "+
+				"oct_iavgcol_os='"+oct.getIavgcol_os()+"', oct_atnum_os='"+oct.getAtnum_os()+"', oct_atcol_os='"+oct.getAtcol_os()+"' ";
 
 		if(user.getAccess() == 0) {
 			query += " WHERE pictureName='"+oct.getPictureName()+"' AND userID='"+user.getID()+"'";
@@ -383,21 +518,93 @@ public class OCTtest implements BaseTest {
 		oct.setAtnum(attr);
 		attr = request.getParameter("atcol");
 		oct.setAtcol(Integer.parseInt(attr));
-		attr = request.getParameter("eye");
-		oct.setEye(attr);
+
+		attr = request.getParameter("snum_os");
+		oct.setSnum_os(attr);
+		attr = request.getParameter("scol_os");
+		oct.setScol_os(Integer.parseInt(attr));
+		attr = request.getParameter("nnum_os");
+		oct.setNnum_os(attr);
+		attr = request.getParameter("ncol_os");
+		oct.setNcol_os(Integer.parseInt(attr));
+		attr = request.getParameter("inum_os");
+		oct.setInum_os(attr);
+		attr = request.getParameter("icol_os");
+		oct.setIcol_os(Integer.parseInt(attr));
+		attr = request.getParameter("tnum_os");
+		oct.setTnum_os(attr);
+		attr = request.getParameter("tcol_os");
+		oct.setTcol_os(Integer.parseInt(attr));
+		attr = request.getParameter("sig_os");
+		oct.setSig_os(attr);
+		attr = request.getParameter("isnum_os");
+		oct.setIsnum_os(attr);
+		attr = request.getParameter("iscol_os");
+		oct.setIscol_os(Integer.parseInt(attr));
+		attr = request.getParameter("sinum_os");
+		oct.setSinum_os(attr);
+		attr = request.getParameter("sicol_os");
+		oct.setSicol_os(Integer.parseInt(attr));
+		attr = request.getParameter("stnum_os");
+		oct.setStnum_os(attr);
+		attr = request.getParameter("stcol_os");
+		oct.setStcol_os(Integer.parseInt(attr));
+		attr = request.getParameter("itnum_os");
+		oct.setItnum_os(attr);
+		attr = request.getParameter("itcol_os");
+		oct.setItcol_os(Integer.parseInt(attr));
+		attr = request.getParameter("snnum_os");
+		oct.setSnnum_os(attr);
+		attr = request.getParameter("sncol_os");
+		oct.setSncol_os(Integer.parseInt(attr));
+		attr = request.getParameter("mmnum_os");
+		oct.setMmnum_os(attr);
+		attr = request.getParameter("mmcol_os");
+		oct.setMmcol_os(Integer.parseInt(attr));
+		attr = request.getParameter("smaxnum_os");
+		oct.setSmaxnum_os(attr);
+		attr = request.getParameter("smaxcol_os");
+		oct.setSmaxcol_os(Integer.parseInt(attr));
+		attr = request.getParameter("imaxnum_os");
+		oct.setImaxnum_os(attr);
+		attr = request.getParameter("imaxcol_os");
+		oct.setImaxcol_os(Integer.parseInt(attr));
+		attr = request.getParameter("savgnum_os");
+		oct.setSavgnum_os(attr);
+		attr = request.getParameter("savgcol_os");
+		oct.setSavgcol_os(Integer.parseInt(attr));
+		attr = request.getParameter("iavgnum_os");
+		oct.setIavgnum_os(attr);
+		attr = request.getParameter("iavgcol_os");
+		oct.setIavgcol_os(Integer.parseInt(attr));
+		attr = request.getParameter("atnum_os");
+		oct.setAtnum_os(attr);
+		attr = request.getParameter("atcol_os");
+		oct.setAtcol_os(Integer.parseInt(attr));
 
 		String query = "UPDATE OCTtest SET oct_length='"+oct.getLength()+"', oct_type='"+oct.getType()+"', "+
 				"oct_type_oth='"+oct.getType_oth()+"', oct_snum='"+oct.getSnum()+"', "+
 				"oct_scol='"+oct.getScol()+"', oct_nnum='"+oct.getNnum()+"', oct_ncol='"+oct.getNcol()+"', "+
 				"oct_inum='"+oct.getInum()+"', oct_icol='"+oct.getIcol()+"', oct_tnum='"+oct.getTnum()+"', "+
-				"oct_tcol='"+oct.getTcol()+"', oct_sig='"+oct.getSig()+"|"+oct.getEye()+"', oct_isnum='"+oct.getIsnum()+"', "+
+				"oct_tcol='"+oct.getTcol()+"', oct_sig='"+oct.getSig()+"', oct_isnum='"+oct.getIsnum()+"', "+
 				"oct_iscol='"+oct.getIscol()+"', oct_sinum='"+oct.getSinum()+"', oct_sicol='"+oct.getSicol()+"', "+
 				"oct_stnum='"+oct.getStnum()+"', oct_stcol='"+oct.getStcol()+"', oct_itnum='"+oct.getItnum()+"', "+
 				"oct_itcol='"+oct.getItcol()+"', oct_snnum='"+oct.getSnnum()+"', oct_sncol='"+oct.getSncol()+"', "+
 				"oct_mmnum='"+oct.getMmnum()+"', oct_mmcol='"+oct.getMmcol()+"', oct_smaxnum='"+oct.getSmaxnum()+"', "+
 				"oct_smaxcol='"+oct.getSmaxcol()+"', oct_imaxnum='"+oct.getImaxnum()+"', oct_imaxcol='"+oct.getImaxcol()+"', "+
 				"oct_savgnum='"+oct.getSavgnum()+"', oct_savgcol='"+oct.getSavgcol()+"', oct_iavgnum='"+oct.getIavgnum()+"', "+
-				"oct_iavgcol='"+oct.getIavgcol()+"', oct_atnum='"+oct.getAtnum()+"', oct_atcol='"+oct.getAtcol()+"' ";
+				"oct_iavgcol='"+oct.getIavgcol()+"', oct_atnum='"+oct.getAtnum()+"', oct_atcol='"+oct.getAtcol()+"', "+
+				"oct_snum_os='"+oct.getSnum_os()+"', "+
+				"oct_scol_os='"+oct.getScol_os()+"', oct_nnum_os='"+oct.getNnum_os()+"', oct_ncol_os='"+oct.getNcol_os()+"', "+
+				"oct_inum_os='"+oct.getInum_os()+"', oct_icol_os='"+oct.getIcol_os()+"', oct_tnum_os='"+oct.getTnum_os()+"', "+
+				"oct_tcol_os='"+oct.getTcol_os()+"', oct_sig_os='"+oct.getSig_os()+"', oct_isnum_os='"+oct.getIsnum_os()+"', "+
+				"oct_iscol_os='"+oct.getIscol_os()+"', oct_sinum_os='"+oct.getSinum_os()+"', oct_sicol_os='"+oct.getSicol_os()+"', "+
+				"oct_stnum_os='"+oct.getStnum_os()+"', oct_stcol_os='"+oct.getStcol_os()+"', oct_itnum_os='"+oct.getItnum_os()+"', "+
+				"oct_itcol_os='"+oct.getItcol_os()+"', oct_snnum_os='"+oct.getSnnum_os()+"', oct_sncol_os='"+oct.getSncol_os()+"', "+
+				"oct_mmnum_os='"+oct.getMmnum_os()+"', oct_mmcol_os='"+oct.getMmcol_os()+"', oct_smaxnum_os='"+oct.getSmaxnum_os()+"', "+
+				"oct_smaxcol_os='"+oct.getSmaxcol_os()+"', oct_imaxnum_os='"+oct.getImaxnum_os()+"', oct_imaxcol_os='"+oct.getImaxcol_os()+"', "+
+				"oct_savgnum_os='"+oct.getSavgnum_os()+"', oct_savgcol_os='"+oct.getSavgcol_os()+"', oct_iavgnum_os='"+oct.getIavgnum_os()+"', "+
+				"oct_iavgcol_os='"+oct.getIavgcol_os()+"', oct_atnum_os='"+oct.getAtnum_os()+"', oct_atcol_os='"+oct.getAtcol_os()+"' ";
 
 		if(user.getAccess() == 0) {
 			query += " WHERE id='"+oct.getId()+"'";
@@ -422,12 +629,19 @@ public class OCTtest implements BaseTest {
 		if(oct.size() > 1) {
 			//get the ones that don't need adjudication
 			query = "SELECT * FROM OCTtest GROUP BY pictureName, "+
-				"oct_length, oct_type, oct_type_oth, oct_snum, oct_scol, " +
+				"oct_length, oct_type, oct_type_oth, "+
+				"oct_snum, oct_scol, " +
 				"oct_nnum, oct_ncol, oct_inum, oct_icol, oct_tnum, oct_tcol, " +
 				"oct_sig, oct_isnum, oct_iscol, oct_sinum, oct_sicol, oct_stnum, " +
 				"oct_stcol, oct_itnum, oct_itcol, oct_snnum, oct_sncol, oct_mmnum, " +
 				"oct_mmcol, oct_smaxnum, oct_smaxcol, oct_imaxnum, oct_imaxcol, " +
-				"oct_savgnum, oct_savgcol, oct_iavgnum, oct_iavgcol, oct_atnum, oct_atcol " +
+				"oct_savgnum, oct_savgcol, oct_iavgnum, oct_iavgcol, oct_atnum, oct_atcol, " +
+				"oct_snum_os, oct_scol_os, " +
+				"oct_nnum_os, oct_ncol_os, oct_inum_os, oct_icol_os, oct_tnum_os, oct_tcol_os, " +
+				"oct_sig_os, oct_isnum_os, oct_iscol_os, oct_sinum_os, oct_sicol_os, oct_stnum_os, " +
+				"oct_stcol_os, oct_itnum_os, oct_itcol_os, oct_snnum_os, oct_sncol_os, oct_mmnum_os, " +
+				"oct_mmcol_os, oct_smaxnum_os, oct_smaxcol_os, oct_imaxnum_os, oct_imaxcol_os, " +
+				"oct_savgnum_os, oct_savgcol_os, oct_iavgnum_os, oct_iavgcol_os, oct_atnum_os, oct_atcol_os " +
 				"HAVING COUNT(*)=2";
 			Vector<OCTtest> set = SQLCommands.queryOCTtest(query);
 			//get the ones that need adjudication
@@ -437,7 +651,13 @@ public class OCTtest implements BaseTest {
 				"oct_sig, oct_isnum, oct_iscol, oct_sinum, oct_sicol, oct_stnum, " +
 				"oct_stcol, oct_itnum, oct_itcol, oct_snnum, oct_sncol, oct_mmnum, " +
 				"oct_mmcol, oct_smaxnum, oct_smaxcol, oct_imaxnum, oct_imaxcol, " +
-				"oct_savgnum, oct_savgcol, oct_iavgnum, oct_iavgcol, oct_atnum, oct_atcol " +
+				"oct_savgnum, oct_savgcol, oct_iavgnum, oct_iavgcol, oct_atnum, oct_atcol, " +
+				"oct_snum_os, oct_scol_os, " +
+				"oct_nnum_os, oct_ncol_os, oct_inum_os, oct_icol_os, oct_tnum_os, oct_tcol_os, " +
+				"oct_sig_os, oct_isnum_os, oct_iscol_os, oct_sinum_os, oct_sicol_os, oct_stnum_os, " +
+				"oct_stcol_os, oct_itnum_os, oct_itcol_os, oct_snnum_os, oct_sncol_os, oct_mmnum_os, " +
+				"oct_mmcol_os, oct_smaxnum_os, oct_smaxcol_os, oct_imaxnum_os, oct_imaxcol_os, " +
+				"oct_savgnum_os, oct_savgcol_os, oct_iavgnum_os, oct_iavgcol_os, oct_atnum_os, oct_atcol_os " +
 				"HAVING COUNT(*)=1";
 			Vector<OCTtest> notSet = SQLCommands.queryOCTtest(query);
 
@@ -528,7 +748,7 @@ public class OCTtest implements BaseTest {
 				  "oct_snum, oct_scol, oct_nnum, oct_ncol, oct_inum, oct_icol, oct_tnum, oct_tcol, "+
 				  "oct_sig, oct_isnum, oct_iscol, oct_sinum, oct_sicol, oct_stnum, oct_stcol, oct_itnum, "+
 				  "oct_itcol, oct_snnum, oct_sncol, oct_mmnum, oct_mmcol, oct_smaxnum, oct_smaxcol, "+
-				  "imaxnum, imaxcol, oct_savgnum, oct_savgcol, oct_iavgnum, oct_iavgcol, oct_atnum, oct_atcol, oct_eye";
+				  "imaxnum, imaxcol, oct_savgnum, oct_savgcol, oct_iavgnum, oct_iavgcol, oct_atnum, oct_atcol, ";
 		result.add(currLine);
 
 		for(OCTtest oct : octs) {
@@ -539,7 +759,7 @@ public class OCTtest implements BaseTest {
 				   oct.getSicol()+", "+oct.getStnum()+", "+oct.getStcol()+", "+oct.getItnum()+", "+oct.getItcol()+", "+
 				   oct.getSnnum()+", "+oct.getSncol()+", "+oct.getMmnum()+", "+oct.getMmcol()+", "+oct.getSmaxnum()+", "+
 				   oct.getSmaxcol()+", "+oct.getImaxnum()+", "+oct.getImaxcol()+", "+oct.getSavgnum()+", "+oct.getSavgcol()+", "+
-				   oct.getIavgnum()+", "+oct.getIavgcol()+", "+oct.getAtnum()+", "+oct.getAtcol()+", "+oct.getEye();
+				   oct.getIavgnum()+", "+oct.getIavgcol()+", "+oct.getAtnum()+", "+oct.getAtcol();
 			result.add(currLine);
 		}
 
@@ -1127,16 +1347,436 @@ public class OCTtest implements BaseTest {
 	}
 
 	/**
-	 * @return the eye
+	 * @return the snum_os
 	 */
-	public String getEye() {
-		return eye;
+	public String getSnum_os() {
+		return snum_os;
 	}
 
 	/**
-	 * @param eye the eye to set
+	 * @param snum_os the snum_os to set
 	 */
-	public void setEye(String eye) {
-		this.eye = eye;
+	public void setSnum_os(String snum_os) {
+		this.snum_os = snum_os;
+	}
+
+	/**
+	 * @return the scol_os
+	 */
+	public int getScol_os() {
+		return scol_os;
+	}
+
+	/**
+	 * @param scol_os the scol_os to set
+	 */
+	public void setScol_os(int scol_os) {
+		this.scol_os = scol_os;
+	}
+
+	/**
+	 * @return the nnum_os
+	 */
+	public String getNnum_os() {
+		return nnum_os;
+	}
+
+	/**
+	 * @param nnum_os the nnum_os to set
+	 */
+	public void setNnum_os(String nnum_os) {
+		this.nnum_os = nnum_os;
+	}
+
+	/**
+	 * @return the ncol_os
+	 */
+	public int getNcol_os() {
+		return ncol_os;
+	}
+
+	/**
+	 * @param ncol_os the ncol_os to set
+	 */
+	public void setNcol_os(int ncol_os) {
+		this.ncol_os = ncol_os;
+	}
+
+	/**
+	 * @return the inum_os
+	 */
+	public String getInum_os() {
+		return inum_os;
+	}
+
+	/**
+	 * @param inum_os the inum_os to set
+	 */
+	public void setInum_os(String inum_os) {
+		this.inum_os = inum_os;
+	}
+
+	/**
+	 * @return the icol_os
+	 */
+	public int getIcol_os() {
+		return icol_os;
+	}
+
+	/**
+	 * @param icol_os the icol_os to set
+	 */
+	public void setIcol_os(int icol_os) {
+		this.icol_os = icol_os;
+	}
+
+	/**
+	 * @return the tnum_os
+	 */
+	public String getTnum_os() {
+		return tnum_os;
+	}
+
+	/**
+	 * @param tnum_os the tnum_os to set
+	 */
+	public void setTnum_os(String tnum_os) {
+		this.tnum_os = tnum_os;
+	}
+
+	/**
+	 * @return the tcol_os
+	 */
+	public int getTcol_os() {
+		return tcol_os;
+	}
+
+	/**
+	 * @param tcol_os the tcol_os to set
+	 */
+	public void setTcol_os(int tcol_os) {
+		this.tcol_os = tcol_os;
+	}
+
+	/**
+	 * @return the sig_os
+	 */
+	public String getSig_os() {
+		return sig_os;
+	}
+
+	/**
+	 * @param sig_os the sig_os to set
+	 */
+	public void setSig_os(String sig_os) {
+		this.sig_os = sig_os;
+	}
+
+	/**
+	 * @return the isnum_os
+	 */
+	public String getIsnum_os() {
+		return isnum_os;
+	}
+
+	/**
+	 * @param isnum_os the isnum_os to set
+	 */
+	public void setIsnum_os(String isnum_os) {
+		this.isnum_os = isnum_os;
+	}
+
+	/**
+	 * @return the iscol_os
+	 */
+	public int getIscol_os() {
+		return iscol_os;
+	}
+
+	/**
+	 * @param iscol_os the iscol_os to set
+	 */
+	public void setIscol_os(int iscol_os) {
+		this.iscol_os = iscol_os;
+	}
+
+	/**
+	 * @return the sinum_os
+	 */
+	public String getSinum_os() {
+		return sinum_os;
+	}
+
+	/**
+	 * @param sinum_os the sinum_os to set
+	 */
+	public void setSinum_os(String sinum_os) {
+		this.sinum_os = sinum_os;
+	}
+
+	/**
+	 * @return the sicol_os
+	 */
+	public int getSicol_os() {
+		return sicol_os;
+	}
+
+	/**
+	 * @param sicol_os the sicol_os to set
+	 */
+	public void setSicol_os(int sicol_os) {
+		this.sicol_os = sicol_os;
+	}
+
+	/**
+	 * @return the stnum_os
+	 */
+	public String getStnum_os() {
+		return stnum_os;
+	}
+
+	/**
+	 * @param stnum_os the stnum_os to set
+	 */
+	public void setStnum_os(String stnum_os) {
+		this.stnum_os = stnum_os;
+	}
+
+	/**
+	 * @return the stcol_os
+	 */
+	public int getStcol_os() {
+		return stcol_os;
+	}
+
+	/**
+	 * @param stcol_os the stcol_os to set
+	 */
+	public void setStcol_os(int stcol_os) {
+		this.stcol_os = stcol_os;
+	}
+
+	/**
+	 * @return the itnum_os
+	 */
+	public String getItnum_os() {
+		return itnum_os;
+	}
+
+	/**
+	 * @param itnum_os the itnum_os to set
+	 */
+	public void setItnum_os(String itnum_os) {
+		this.itnum_os = itnum_os;
+	}
+
+	/**
+	 * @return the itcol_os
+	 */
+	public int getItcol_os() {
+		return itcol_os;
+	}
+
+	/**
+	 * @param itcol_os the itcol_os to set
+	 */
+	public void setItcol_os(int itcol_os) {
+		this.itcol_os = itcol_os;
+	}
+
+	/**
+	 * @return the snnum_os
+	 */
+	public String getSnnum_os() {
+		return snnum_os;
+	}
+
+	/**
+	 * @param snnum_os the snnum_os to set
+	 */
+	public void setSnnum_os(String snnum_os) {
+		this.snnum_os = snnum_os;
+	}
+
+	/**
+	 * @return the sncol_os
+	 */
+	public int getSncol_os() {
+		return sncol_os;
+	}
+
+	/**
+	 * @param sncol_os the sncol_os to set
+	 */
+	public void setSncol_os(int sncol_os) {
+		this.sncol_os = sncol_os;
+	}
+
+	/**
+	 * @return the mmnum_os
+	 */
+	public String getMmnum_os() {
+		return mmnum_os;
+	}
+
+	/**
+	 * @param mmnum_os the mmnum_os to set
+	 */
+	public void setMmnum_os(String mmnum_os) {
+		this.mmnum_os = mmnum_os;
+	}
+
+	/**
+	 * @return the mmcol_os
+	 */
+	public int getMmcol_os() {
+		return mmcol_os;
+	}
+
+	/**
+	 * @param mmcol_os the mmcol_os to set
+	 */
+	public void setMmcol_os(int mmcol_os) {
+		this.mmcol_os = mmcol_os;
+	}
+
+	/**
+	 * @return the smaxnum_os
+	 */
+	public String getSmaxnum_os() {
+		return smaxnum_os;
+	}
+
+	/**
+	 * @param smaxnum_os the smaxnum_os to set
+	 */
+	public void setSmaxnum_os(String smaxnum_os) {
+		this.smaxnum_os = smaxnum_os;
+	}
+
+	/**
+	 * @return the smaxcol_os
+	 */
+	public int getSmaxcol_os() {
+		return smaxcol_os;
+	}
+
+	/**
+	 * @param smaxcol_os the smaxcol_os to set
+	 */
+	public void setSmaxcol_os(int smaxcol_os) {
+		this.smaxcol_os = smaxcol_os;
+	}
+
+	/**
+	 * @return the imaxnum_os
+	 */
+	public String getImaxnum_os() {
+		return imaxnum_os;
+	}
+
+	/**
+	 * @param imaxnum_os the imaxnum_os to set
+	 */
+	public void setImaxnum_os(String imaxnum_os) {
+		this.imaxnum_os = imaxnum_os;
+	}
+
+	/**
+	 * @return the imaxcol_os
+	 */
+	public int getImaxcol_os() {
+		return imaxcol_os;
+	}
+
+	/**
+	 * @param imaxcol_os the imaxcol_os to set
+	 */
+	public void setImaxcol_os(int imaxcol_os) {
+		this.imaxcol_os = imaxcol_os;
+	}
+
+	/**
+	 * @return the savgnum_os
+	 */
+	public String getSavgnum_os() {
+		return savgnum_os;
+	}
+
+	/**
+	 * @param savgnum_os the savgnum_os to set
+	 */
+	public void setSavgnum_os(String savgnum_os) {
+		this.savgnum_os = savgnum_os;
+	}
+
+	/**
+	 * @return the savgcol_os
+	 */
+	public int getSavgcol_os() {
+		return savgcol_os;
+	}
+
+	/**
+	 * @param savgcol_os the savgcol_os to set
+	 */
+	public void setSavgcol_os(int savgcol_os) {
+		this.savgcol_os = savgcol_os;
+	}
+
+	/**
+	 * @return the iavgnum_os
+	 */
+	public String getIavgnum_os() {
+		return iavgnum_os;
+	}
+
+	/**
+	 * @param iavgnum_os the iavgnum_os to set
+	 */
+	public void setIavgnum_os(String iavgnum_os) {
+		this.iavgnum_os = iavgnum_os;
+	}
+
+	/**
+	 * @return the iavgcol_os
+	 */
+	public int getIavgcol_os() {
+		return iavgcol_os;
+	}
+
+	/**
+	 * @param iavgcol_os the iavgcol_os to set
+	 */
+	public void setIavgcol_os(int iavgcol_os) {
+		this.iavgcol_os = iavgcol_os;
+	}
+
+	/**
+	 * @return the atnum_os
+	 */
+	public String getAtnum_os() {
+		return atnum_os;
+	}
+
+	/**
+	 * @param atnum_os the atnum_os to set
+	 */
+	public void setAtnum_os(String atnum_os) {
+		this.atnum_os = atnum_os;
+	}
+
+	/**
+	 * @return the atcol_os
+	 */
+	public int getAtcol_os() {
+		return atcol_os;
+	}
+
+	/**
+	 * @param atcol_os the atcol_os to set
+	 */
+	public void setAtcol_os(int atcol_os) {
+		this.atcol_os = atcol_os;
 	}
 }
