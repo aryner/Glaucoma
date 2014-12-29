@@ -113,6 +113,42 @@ if(pic == null) {
 <input type="text" name="length" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 <br><br>
+<%
+	s1 = "";
+	s2 = "";
+	if(a) {
+		s1 = OCT.get(0).getSig()+"";
+		s2 = OCT.get(1).getSig()+"";
+		if(s1.equals(s2)) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+<span id="sig">(OD) Signal Strength (Max 10)</span>
+<input type="text" name="sig" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<br><br>
+<%
+	s1 = "";
+	s2 = "";
+	if(a) {
+		s1 = OCT.get(0).getSig_os()+"";
+		s2 = OCT.get(1).getSig_os()+"";
+		if(s1.equals(s2)) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+<span id="sig_os">(OS) Signal Strength (Max 10)</span>
+<input type="text" name="sig_os" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<br><br>
 
 
 <%
@@ -129,12 +165,20 @@ if(pic == null) {
 		}
 	}
 %>
-<span id="savg_snum" class="error hidden">S-Number and Savg - Number must match</span><br>
-<span id="snum">S - Number: </span>
-<input type="text" name="snum" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
-<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
-<br>
 
+<table border='1'>
+	<tr>
+		<td>Name </td>
+		<td>OD number/color</td>
+		<td>OS number/color</td>
+	</tr>
+	<tr>
+		<td>
+<span id="snum">S </span>
+		</td>
+		<td id='sOD'>
+<input type="text" name="snum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 <%
 	v1 = -1;
 	v2 = -1;
@@ -152,13 +196,58 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='scol'>S - Color: </span><br>
-<input type="radio" name="scol" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="scol" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="scol" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="scol" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%>
-<br><br>
+<select name='scol' >
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+</select>
+		</td>
+		<td id='sOS'>
+<%
+	s1 = "";
+	s2 = "";
+	if(a) {
+		s1 = OCT.get(0).getSnum_os()+"";
+		s2 = OCT.get(1).getSnum_os()+"";
+		if(s1.equals(s2)) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+<input type="text" name="snum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<%
+	v1 = -1;
+	v2 = -1;
+	if(a) {
+		v1 = OCT.get(0).getScol_os();
+		v2 = OCT.get(1).getScol_os();
+		if(v1 == v2) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+		if(diff) {
 
+		}
+	}
+%>
+<select name='scol_os'> 
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+</select>
+		</td>
+	</tr>
+	<tr>
 <%
 	s1 = "";
 	s2 = "";
@@ -173,10 +262,12 @@ if(pic == null) {
 		}
 	}
 %>
-<span id="nnum">N - Number: </span>
-<input type="text" name="nnum" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<td>
+	<span id="nnum">N </span>
+</td>
+<td>
+<input type="text" name="nnum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
-<br>
 
 <%
 	v1 = -1;
@@ -195,13 +286,59 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='ncol'>N - Color: </span><br>
-<input type="radio" name="ncol" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="ncol" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="ncol" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="ncol" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%>
-<br><br>
+<select name='ncol'>
+	<option value='0'></option>
+	<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
+	<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
+	<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
+	<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+</select>
+</td>
+<%
+	s1 = "";
+	s2 = "";
+	if(a) {
+		s1 = OCT.get(0).getNnum_os()+"";
+		s2 = OCT.get(1).getNnum_os()+"";
+		if(s1.equals(s2)) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+<td>
+<input type="text" name="nnum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
+<%
+	v1 = -1;
+	v2 = -1;
+	if(a) {
+		v1 = OCT.get(0).getNcol_os();
+		v2 = OCT.get(1).getNcol_os();
+		if(v1 == v2) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+		if(diff) {
+
+		}
+	}
+%>
+<select name='ncol_os'>
+	<option value='0'></option>
+	<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
+	<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
+	<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
+	<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+</select>
+</td>
+	</tr>
+	<tr>
 <%
 	s1 = "";
 	s2 = "";
@@ -216,12 +353,12 @@ if(pic == null) {
 		}
 	}
 %>
-<span id="iavg_inum" class="error hidden">I-Number and Iavg-Number must match</span><br>
-<span id="inum">I - Number: </span>
-<input type="text" name="inum" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<td>
+<span id="inum">I</span>
+</td>
+<td>
+<input type="text" name="inum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
-<br>
-
 <%
 	v1 = -1;
 	v2 = -1;
@@ -239,13 +376,58 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='icol'>I - Color: </span><br>
-<input type="radio" name="icol" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="icol" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="icol" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="icol" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%>
-<br><br>
+<select name='icol'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+<%
+	s1 = "";
+	s2 = "";
+	if(a) {
+		s1 = OCT.get(0).getInum_os()+"";
+		s2 = OCT.get(1).getInum_os()+"";
+		if(s1.equals(s2)) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+<td>
+<input type="text" name="inum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<%
+	v1 = -1;
+	v2 = -1;
+	if(a) {
+		v1 = OCT.get(0).getIcol_os();
+		v2 = OCT.get(1).getIcol_os();
+		if(v1 == v2) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+		if(diff) {
 
+		}
+	}
+%>
+<select name='icol_os'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+
+	<tr>
 <%
 	s1 = "";
 	s2 = "";
@@ -260,10 +442,12 @@ if(pic == null) {
 		}
 	}
 %>
-<span id="tnum">T - Number: </span>
-<input type="text" name="tnum" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<td>
+<span id="tnum">T</span>
+</td>
+<td>
+<input type="text" name="tnum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
-<br>
 
 <%
 	v1 = -1;
@@ -282,19 +466,20 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='tcol'>T - Color: </span><br>
-<input type="radio" name="tcol" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="tcol" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="tcol" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="tcol" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%>
-<br><br>
-
+<select name='tcol'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
 <%
 	s1 = "";
 	s2 = "";
 	if(a) {
-		s1 = OCT.get(0).getSig()+"";
-		s2 = OCT.get(1).getSig()+"";
+		s1 = OCT.get(0).getTnum_os()+"";
+		s2 = OCT.get(1).getTnum_os()+"";
 		if(s1.equals(s2)) {
 			diff = false;
 		}
@@ -303,10 +488,37 @@ if(pic == null) {
 		}
 	}
 %>
-<span id="sig">Signal Strength (Max 10)</span>
-<input type="text" name="sig" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<td>
+<input type="text" name="tnum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
-<br><br>
+
+<%
+	v1 = -1;
+	v2 = -1;
+	if(a) {
+		v1 = OCT.get(0).getTcol_os();
+		v2 = OCT.get(1).getTcol_os();
+		if(v1 == v2) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+		if(diff) {
+
+		}
+	}
+%>
+<select name='tcol_os'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+
+	<tr>
 
 <%
 	s1 = "";
@@ -322,10 +534,12 @@ if(pic == null) {
 		}
 	}
 %>
-<span id="isnum">Imax/Smax - Number: </span>
-<input type="text" name="isnum" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<td>
+<span id="isnum">Imax/Smax</span>
+</td>
+<td>
+<input type="text" name="isnum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
-<br>
 
 <%
 	v1 = -1;
@@ -344,13 +558,58 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='iscol'>Imax/Smax - Color: </span><br>
-<input type="radio" name="iscol" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="iscol" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="iscol" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="iscol" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%>
-<br><br>
+<select name='iscol'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+<td>
+<%
+	s1 = "";
+	s2 = "";
+	if(a) {
+		s1 = OCT.get(0).getIsnum_os()+"";
+		s2 = OCT.get(1).getIsnum_os()+"";
+		if(s1.equals(s2)) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+<input type="text" name="isnum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
+<%
+	v1 = -1;
+	v2 = -1;
+	if(a) {
+		v1 = OCT.get(0).getIscol_os();
+		v2 = OCT.get(1).getIscol_os();
+		if(v1 == v2) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+		if(diff) {
+
+		}
+	}
+%>
+<select name='iscol_os'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+	<tr>
 <%
 	s1 = "";
 	s2 = "";
@@ -365,10 +624,12 @@ if(pic == null) {
 		}
 	}
 %>
-<span id="sinum">Smax/Imax - Number: </span>
-<input type="text" name="sinum" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<td>
+<span id="sinum">Smax/Imax</span>
+</td>
+<td>
+<input type="text" name="sinum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
-<br>
 
 <%
 	v1 = -1;
@@ -387,13 +648,59 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='sicol'>Smax/Imax - Color: </span><br>
-<input type="radio" name="sicol" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="sicol" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="sicol" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="sicol" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%>
-<br><br>
+<select name='sicol'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+<%
+	s1 = "";
+	s2 = "";
+	if(a) {
+		s1 = OCT.get(0).getSinum_os()+"";
+		s2 = OCT.get(1).getSinum_os()+"";
+		if(s1.equals(s2)) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+<td>
+<input type="text" name="sinum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
+<%
+	v1 = -1;
+	v2 = -1;
+	if(a) {
+		v1 = OCT.get(0).getSicol_os();
+		v2 = OCT.get(1).getSicol_os();
+		if(v1 == v2) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+		if(diff) {
+
+		}
+	}
+%>
+<select name='sicol_os'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+	</tr>
+	<tr>
 <%
 	s1 = "";
 	s2 = "";
@@ -408,10 +715,12 @@ if(pic == null) {
 		}
 	}
 %>
-<span id="stnum">Smax/Tavg - Number: </span>
-<input type="text" name="stnum" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<td>
+<span id="stnum">Smax/Tavg</span>
+</td>
+<td>
+<input type="text" name="stnum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
-<br>
 
 <%
 	v1 = -1;
@@ -430,13 +739,60 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='stcol'>Smax/Tavg - Color: </span><br>
-<input type="radio" name="stcol" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="stcol" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="stcol" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="stcol" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%>
-<br><br>
+<select name='stcol'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+<%
+	s1 = "";
+	s2 = "";
+	if(a) {
+		s1 = OCT.get(0).getStnum_os()+"";
+		s2 = OCT.get(1).getStnum_os()+"";
+		if(s1.equals(s2)) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+<td>
+<input type="text" name="stnum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
+<%
+	v1 = -1;
+	v2 = -1;
+	if(a) {
+		v1 = OCT.get(0).getStcol_os();
+		v2 = OCT.get(1).getStcol_os();
+		if(v1 == v2) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+		if(diff) {
+
+		}
+	}
+%>
+<select name='stcol_os'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+	</tr>
+
+	<tr>
 <%
 	s1 = "";
 	s2 = "";
@@ -451,10 +807,12 @@ if(pic == null) {
 		}
 	}
 %>
-<span id="itnum">Imax/Tvag - Number: </span>
-<input type="text" name="itnum" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<td>
+<span id="itnum">Imax/Tvag</span>
+</td>
+<td>
+<input type="text" name="itnum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
-<br>
 
 <%
 	v1 = -1;
@@ -473,13 +831,60 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='itcol'>Imax/Tvag - Color: </span><br>
-<input type="radio" name="itcol" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="itcol" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="itcol" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="itcol" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%>
-<br><br>
+<select name='itcol'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+<%
+	s1 = "";
+	s2 = "";
+	if(a) {
+		s1 = OCT.get(0).getItnum_os()+"";
+		s2 = OCT.get(1).getItnum_os()+"";
+		if(s1.equals(s2)) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+<td>
+<input type="text" name="itnum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
+<%
+	v1 = -1;
+	v2 = -1;
+	if(a) {
+		v1 = OCT.get(0).getItcol_os();
+		v2 = OCT.get(1).getItcol_os();
+		if(v1 == v2) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+		if(diff) {
+
+		}
+	}
+%>
+<select name='itcol_os'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+
+	</tr>
+	<tr>
 <%
 	s1 = "";
 	s2 = "";
@@ -494,10 +899,12 @@ if(pic == null) {
 		}
 	}
 %>
-<span id="snnum">Smax/Navg - Number: </span>
-<input type="text" name="snnum" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<td>
+<span id="snnum">Smax/Navg</span>
+</td>
+<td>
+<input type="text" name="snnum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
-<br>
 
 <%
 	v1 = -1;
@@ -516,13 +923,61 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='sncol'>Smax/Navg - Color: </span><br>
-<input type="radio" name="sncol" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="sncol" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="sncol" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="sncol" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%>
-<br><br>
+<select name='sncol'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+<%
+	s1 = "";
+	s2 = "";
+	if(a) {
+		s1 = OCT.get(0).getSnnum_os()+"";
+		s2 = OCT.get(1).getSnnum_os()+"";
+		if(s1.equals(s2)) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+<td>
+<input type="text" name="snnum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
+<%
+	v1 = -1;
+	v2 = -1;
+	if(a) {
+		v1 = OCT.get(0).getSncol_os();
+		v2 = OCT.get(1).getSncol_os();
+		if(v1 == v2) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+		if(diff) {
+
+		}
+	}
+%>
+<select name='sncol_os'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+
+	</tr>
+
+	<tr>
 <%
 	s1 = "";
 	s2 = "";
@@ -537,10 +992,12 @@ if(pic == null) {
 		}
 	}
 %>
-<span id="mmnum">Max-Min - Number: </span>
-<input type="text" name="mmnum" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<td>
+<span id="mmnum">Max-Min</span>
+</td>
+<td>
+<input type="text" name="mmnum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
-<br>
 
 <%
 	v1 = -1;
@@ -559,13 +1016,60 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='mmcol'>Max-min - Color: </span><br>
-<input type="radio" name="mmcol" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="mmcol" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="mmcol" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="mmcol" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%>
-<br><br>
+<select name='mmcol'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+<%
+	s1 = "";
+	s2 = "";
+	if(a) {
+		s1 = OCT.get(0).getMmnum_os()+"";
+		s2 = OCT.get(1).getMmnum_os()+"";
+		if(s1.equals(s2)) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+<td>
+<input type="text" name="mmnum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
+<%
+	v1 = -1;
+	v2 = -1;
+	if(a) {
+		v1 = OCT.get(0).getMmcol_os();
+		v2 = OCT.get(1).getMmcol_os();
+		if(v1 == v2) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+		if(diff) {
+
+		}
+	}
+%>
+<select name='mmcol_os'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+
+	</tr>
+	<tr>
 <%
 	s1 = "";
 	s2 = "";
@@ -580,10 +1084,12 @@ if(pic == null) {
 		}
 	}
 %>
-<span id="smaxnum">Smax - Number: </span>
-<input type="text" name="smaxnum" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<td>
+<span id="smaxnum">Smax</span>
+</td>
+<td>
+<input type="text" name="smaxnum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
-<br>
 
 <%
 	v1 = -1;
@@ -602,13 +1108,61 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='smaxcol'>Smax - Color</span><br>
-<input type="radio" name="smaxcol" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="smaxcol" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="smaxcol" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="smaxcol" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%>
-<br><br>
+<select name='smaxcol'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+<%
+	s1 = "";
+	s2 = "";
+	if(a) {
+		s1 = OCT.get(0).getSmaxnum_os()+"";
+		s2 = OCT.get(1).getSmaxnum_os()+"";
+		if(s1.equals(s2)) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+<td>
+<input type="text" name="smaxnum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
+<%
+	v1 = -1;
+	v2 = -1;
+	if(a) {
+		v1 = OCT.get(0).getSmaxcol_os();
+		v2 = OCT.get(1).getSmaxcol_os();
+		if(v1 == v2) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+		if(diff) {
+
+		}
+	}
+%>
+<select name='smaxcol_os'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+
+	</tr>
+
+	<tr>
 <%
 	s1 = "";
 	s2 = "";
@@ -623,10 +1177,12 @@ if(pic == null) {
 		}
 	}
 %>
-<span id="imaxnum">Imax - Number: </span>
-<input type="text" name="imaxnum" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<td>
+<span id="imaxnum">Imax</span>
+</td>
+<td>
+<input type="text" name="imaxnum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
-<br>
 
 <%
 	v1 = -1;
@@ -645,13 +1201,60 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='imaxcol'>Imax - Color: </span><br>
-<input type="radio" name="imaxcol" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="imaxcol" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="imaxcol" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="imaxcol" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%>
-<br><br>
+<select name='imaxcol'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+<%
+	s1 = "";
+	s2 = "";
+	if(a) {
+		s1 = OCT.get(0).getImaxnum_os()+"";
+		s2 = OCT.get(1).getImaxnum_os()+"";
+		if(s1.equals(s2)) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+<td>
+<input type="text" name="imaxnum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
+<%
+	v1 = -1;
+	v2 = -1;
+	if(a) {
+		v1 = OCT.get(0).getImaxcol_os();
+		v2 = OCT.get(1).getImaxcol_os();
+		if(v1 == v2) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+		if(diff) {
+
+		}
+	}
+%>
+<select name='imaxcol_os'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+
+	</tr>
+	<tr>
 <%
 	s1 = "";
 	s2 = "";
@@ -666,11 +1269,12 @@ if(pic == null) {
 		}
 	}
 %>
-<span id="savg_snum" class="error hidden">S-Number and Savg - Number must match</span><br>
-<span id="savgnum">Savg - Number: </span>
-<input type="text" name="savgnum" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<td>
+<span id="savgnum">Savg</span>
+</td>
+<td>
+<input type="text" name="savgnum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
-<br>
 
 <%
 	v1 = -1;
@@ -689,13 +1293,60 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='savgcol'>Savg - Color: </span><br>
-<input type="radio" name="savgcol" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="savgcol" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="savgcol" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="savgcol" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%>
-<br><br>
+<select name='savgcol'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+<%
+	s1 = "";
+	s2 = "";
+	if(a) {
+		s1 = OCT.get(0).getSavgnum_os()+"";
+		s2 = OCT.get(1).getSavgnum_os()+"";
+		if(s1.equals(s2)) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+<td>
+<input type="text" name="savgnum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
+<%
+	v1 = -1;
+	v2 = -1;
+	if(a) {
+		v1 = OCT.get(0).getSavgcol_os();
+		v2 = OCT.get(1).getSavgcol_os();
+		if(v1 == v2) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+		if(diff) {
+
+		}
+	}
+%>
+<select name='savgcol_os'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+
+	</tr>
+	<tr>
 <%
 	s1 = "";
 	s2 = "";
@@ -710,11 +1361,12 @@ if(pic == null) {
 		}
 	}
 %>
-<span id="iavg_inum" class="error hidden">I-Number and Iavg-Number must match</span><br>
-<span id="iavgnum">Iavg - Number: </span>
-<input type="text" name="iavgnum" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<td>
+<span id="iavgnum">Iavg</span>
+</td>
+<td>
+<input type="text" name="iavgnum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
-<br>
 
 <%
 	v1 = -1;
@@ -733,13 +1385,60 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='iavgcol'>Iavg - Color: </span><br>
-<input type="radio" name="iavgcol" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="iavgcol" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="iavgcol" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="iavgcol" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%>
-<br><br>
+<select name='iavgcol'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+<%
+	s1 = "";
+	s2 = "";
+	if(a) {
+		s1 = OCT.get(0).getIavgnum_os()+"";
+		s2 = OCT.get(1).getIavgnum_os()+"";
+		if(s1.equals(s2)) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+<td>
+<input type="text" name="iavgnum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
+<%
+	v1 = -1;
+	v2 = -1;
+	if(a) {
+		v1 = OCT.get(0).getIavgcol_os();
+		v2 = OCT.get(1).getIavgcol_os();
+		if(v1 == v2) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+		if(diff) {
+
+		}
+	}
+%>
+<select name='iavgcol_os'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+
+	</tr>
+	<tr>
 <%
 	s1 = "";
 	s2 = "";
@@ -754,10 +1453,12 @@ if(pic == null) {
 		}
 	}
 %>
-<span id="atnum">Avg. Thick - Number: </span>
-<input type="text" name="atnum" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<td>
+<span id="atnum">Avg.Thick</span>
+</td>
+<td>
+<input type="text" name="atnum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
-<br>
 
 <%
 	v1 = -1;
@@ -776,12 +1477,60 @@ if(pic == null) {
 		}
 	}
 %>
-<span id='atcol'>Avg. Thick - Color: </span><br>
-<input type="radio" name="atcol" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="atcol" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="atcol" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
-<input type="radio" name="atcol" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%>
-<br><br>
+<select name='atcol'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+<%
+	s1 = "";
+	s2 = "";
+	if(a) {
+		s1 = OCT.get(0).getAtnum_os()+"";
+		s2 = OCT.get(1).getAtnum_os()+"";
+		if(s1.equals(s2)) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+<td>
+<input type="text" name="atnum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+
+<%
+	v1 = -1;
+	v2 = -1;
+	if(a) {
+		v1 = OCT.get(0).getAtcol_os();
+		v2 = OCT.get(1).getAtcol_os();
+		if(v1 == v2) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+		if(diff) {
+
+		}
+	}
+%>
+<select name='atcol_os'>
+<option value='0'></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
+</select>
+</td>
+	</tr>
+</table>
+<br>
 
 <input type="submit" value="Submit" class="btn">
 
