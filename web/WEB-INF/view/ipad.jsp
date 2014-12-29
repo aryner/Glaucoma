@@ -125,8 +125,8 @@ if(pic == null) {
 		}
 	}
 %>
-<span id="sup_inf"># points in inferior hemifield</span>
-<input type="text" name="sup_inf" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<span id="inf_hem"># points in inferior hemifield</span>
+<input type="text" name="inf_hem" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 <br><br>
 

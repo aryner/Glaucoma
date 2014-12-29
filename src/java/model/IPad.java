@@ -115,7 +115,7 @@ public class IPad implements BaseTest{
 		iPad.setInf_hem(attr);
 
 
-		String query = "UPDATE iPad SET ipad_fp='"+iPad.getFn()+"', ipad_fn='"+iPad.getFp()+"', "+
+		String query = "UPDATE iPad SET ipad_fp='"+iPad.getFp()+"', ipad_fn='"+iPad.getFn()+"', "+
 				"ipad_sup_hem='"+iPad.getSup_hem()+"', ipad_inf_hem='"+iPad.getInf_hem()+"' ";
 
 		if(user.getAccess() == 0) {
@@ -193,7 +193,7 @@ public class IPad implements BaseTest{
 		attr = request.getParameter("inf_hem");
 		iPad.setInf_hem(attr);
 
-		String query = "UPDATE iPad SET ipad_fp='"+iPad.getFn()+"', ipad_fn='"+iPad.getFp()+"', "+
+		String query = "UPDATE iPad SET ipad_fp='"+iPad.getFp()+"', ipad_fn='"+iPad.getFn()+"', "+
 				"ipad_sup_hem='"+iPad.getSup_hem()+"', ipad_inf_hem='"+iPad.getInf_hem()+"' ";
 
 		if(user.getAccess() == 0) {

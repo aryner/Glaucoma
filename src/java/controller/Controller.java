@@ -614,7 +614,7 @@ public class Controller extends HttpServlet {
 				return;
 			}
 		
-			response.sendRedirect("/Glaucoma/IPad"); 
+			response.sendRedirect("/Glaucoma/ipad"); 
 			return;
 		}
 		else if(userPath.equals("/updateIPad")) {
