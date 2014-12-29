@@ -57,6 +57,8 @@ public class Picture {
 			case BaseTest.HVF:
 				query+= "HVF'";
 				break;
+			case BaseTest.IPAD:
+				query+= "iPad'";
 		}
 		Vector<Picture> pics = SQLCommands.queryPictures(query);
 

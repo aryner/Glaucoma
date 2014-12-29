@@ -56,6 +56,17 @@ public class IPad implements BaseTest{
 		this.inf_hem = inf_hem;
 	}
 
+	public static IPad getSingle(String name, int id, int access) {
+		String query;
+		if(access == 0) {
+			query = "SELECT * FROM iPad WHERE pictureName='"+name+"' AND userID="+id;
+		}
+		else {
+			query = "SELECT * FROM iPad WHERE pictureName='"+name+"' AND adjudicatorID="+id;
+		}
+		return SQLCommands.queryIPad(query).get(0);
+	}
+
 	public static Picture getNext(User user) {
 		Picture result = null;
 		String query = "";
@@ -210,6 +221,58 @@ public class IPad implements BaseTest{
 		}
 
 		return result;
+	}
+
+	public static Vector<String> getUngradedNames() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM picture WHERE name NOT IN (SELECT pictureName FROM iPad) AND type='iPad'";
+		Vector<Picture> pictures = SQLCommands.queryPictures(query);
+
+		for(int i=0; i<pictures.size(); i++) {
+			result.add("iPad - " + pictures.get(i).getName());
+		}
+
+		return result;
+	}
+
+	public static Vector<String> getGradedOnceNames() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM iPad GROUP BY pictureName HAVING COUNT(*)=1";
+		Vector<IPad> iPad = SQLCommands.queryIPad(query);
+
+		for(int i=0; i<iPad.size(); i++) {
+			result.add("iPad - " + iPad.get(i).getPictureName());
+		}
+
+		return result;
+	}
+	
+	public static Vector<String> getNeedsAdjudication() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT DISTINCT pictureName FROM iPad WHERE confirmed='1'";
+		Vector<String> iPad = SQLCommands.queryNames(query);
+
+		for(int i=0; i<iPad.size(); i++) {
+			result.add("iPad - " + iPad.get(i));
+		}
+
+		return result;
+	}
+
+	public static Vector<String> getAdjudicated() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT DISTINCT pictureName FROM iPad WHERE confirmed='2'";
+		Vector<String> iPad = SQLCommands.queryNames(query);
+
+		for(int i=0; i<iPad.size(); i++) {
+			result.add("iPad - " + iPad.get(i));
+		}
+
+		return result;
+	}
+	public static Vector<BaseTest> getBaseTest(int id) {
+		String query = "SELECT * FROM iPad WHERE (userID="+id+" OR adjudicatorID="+id+")";
+		return SQLCommands.queryBaseTest(query,  BaseTest.IPAD);
 	}
 
 	/**

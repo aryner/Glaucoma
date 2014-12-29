@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author aryner
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload", "/uploadPictures", "/img", "/pdf", "/assignHVF", "/OpHVFtest", "/OpReviewHVF", "/printCSV", "/printCSVs", "/uploadData", "/dataUpload", "/assignFDT", "/assignMDT", "/assignOCT", "/assign3Nethra", "/assignStereo", "/printFinishedCSVs", "/FDTReview", "/updateFDT", "/MDTReview", "/updateMDT", "/OCTReview", "/updateOCT", "/stereoReview", "/updateStereo", "/nethraReview", "/updateNethra", "/ipad", "/assignIPad", "/updateIPad"})
+@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload", "/uploadPictures", "/img", "/pdf", "/assignHVF", "/OpHVFtest", "/OpReviewHVF", "/printCSV", "/printCSVs", "/uploadData", "/dataUpload", "/assignFDT", "/assignMDT", "/assignOCT", "/assign3Nethra", "/assignStereo", "/printFinishedCSVs", "/FDTReview", "/updateFDT", "/MDTReview", "/updateMDT", "/OCTReview", "/updateOCT", "/stereoReview", "/updateStereo", "/nethraReview", "/updateNethra", "/ipad", "/assignIPad", "/updateIPad", "/ipadReview"})
 public class Controller extends HttpServlet {
 	private final String slash = System.getProperty("file.separator");
 	/**
@@ -205,6 +205,19 @@ public class Controller extends HttpServlet {
 			request.setAttribute("confirmed", "true");
 
 			request.setAttribute("nethra", Photos.getSingle(pictureName, user.getID(), user.getAccess(),Photos.NETHRA));
+			request.setAttribute("access", user.getAccess());
+			request.setAttribute("slash",slash);
+			request.setAttribute("picture",picture);
+			request.setAttribute("missingPics", Tools.needPictures());
+		}
+
+		else if(userPath.equals("/ipadReview")) {
+			String pictureName = request.getParameter("pictureName");
+			User user = (User)session.getAttribute("user");
+			Picture picture = Picture.getPictureByName(pictureName,BaseTest.IPAD);
+			request.setAttribute("confirmed", "true");
+
+			request.setAttribute("iPad", IPad.getSingle(pictureName, user.getID(), user.getAccess()));
 			request.setAttribute("access", user.getAccess());
 			request.setAttribute("slash",slash);
 			request.setAttribute("picture",picture);

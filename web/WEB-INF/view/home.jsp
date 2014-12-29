@@ -175,6 +175,14 @@ if(session.getAttribute("errors") != null) {
 								out.print("<a href='nethraReview?pictureName="+baseTests.get(j).getPictureName()+"'>");
 							}
 							break;
+						case BaseTest.IPAD :
+							if(name.substring(0,name.indexOf(" ")).equals("iPad") &&
+							   name.substring(name.indexOf(" - ")+3, name.length()).equals(baseTests.get(j).getPictureName()))
+							{
+								match = true;
+								out.print("<a href='ipadReview?pictureName="+baseTests.get(j).getPictureName()+"'>");
+							}
+							break;
 					}
 				}
 				out.print(name.substring(0,name.length()-4)+"<br>");
@@ -232,6 +240,14 @@ if(session.getAttribute("errors") != null) {
 							{
 								match = true;
 								out.print("<a href='nethraReview?pictureName="+baseTests.get(j).getPictureName()+"'>");
+							}
+							break;
+						case BaseTest.IPAD:
+							if(name.substring(0,name.indexOf(" ")).equals("iPad") &&
+							   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
+							{
+								match = true;
+								out.print("<a href='ipadReview?pictureName="+baseTests.get(j).getPictureName()+"'>");
 							}
 							break;
 					}
@@ -342,6 +358,14 @@ if(session.getAttribute("errors") != null) {
 								{
 									match = true;
 									out.print("<a href='nethraReview?pictureName="+baseTests.get(j).getPictureName()+"'>");
+								}
+								break;
+							case BaseTest.IPAD:
+								if(name.substring(0,name.indexOf(" ")).equals("iPad") &&
+								   name.substring(name.indexOf(" - ")+3,name.length()).equals(baseTests.get(j).getPictureName())) 
+								{
+									match = true;
+									out.print("<a href='ipadReview?pictureName="+baseTests.get(j).getPictureName()+"'>");
 								}
 								break;
 						}

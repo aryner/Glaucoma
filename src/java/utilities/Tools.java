@@ -198,6 +198,7 @@ public class Tools {
 		result.addAll(MDTtest.getUngradedNames());
 		result.addAll(OCTtest.getUngradedNames());
 		result.addAll(Photos.getUngradedNames());
+		result.addAll(IPad.getUngradedNames());
 
 		return result;
 	}
@@ -209,6 +210,7 @@ public class Tools {
 		result.addAll(MDTtest.getGradedOnceNames());
 		result.addAll(OCTtest.getGradedOnceNames());
 		result.addAll(Photos.getGradedOnceNames());
+		result.addAll(IPad.getGradedOnceNames());
 
 		return result;
 	}
@@ -220,6 +222,7 @@ public class Tools {
 		result.addAll(MDTtest.getNeedsAdjudication());
 		result.addAll(OCTtest.getNeedsAdjudication());
 		result.addAll(Photos.getNeedsAdjudication());
+		result.addAll(IPad.getNeedsAdjudication());
 
 		return result;
 	}
@@ -230,6 +233,7 @@ public class Tools {
 		result.addAll(MDTtest.getAdjudicated());
 		result.addAll(OCTtest.getAdjudicated());
 		result.addAll(Photos.getAdjudicated());
+		result.addAll(IPad.getAdjudicated());
 
 		return result;
 	}
@@ -240,6 +244,7 @@ public class Tools {
 		result.addAll(MDTtest.getBaseTest(id));
 		result.addAll(OCTtest.getBaseTest(id));
 		result.addAll(Photos.getBaseTest(id));
+		result.addAll(IPad.getBaseTest(id));
 
 		return result;
 	}
