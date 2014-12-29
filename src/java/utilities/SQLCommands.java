@@ -102,6 +102,15 @@ public class SQLCommands {
 						current.setBaseType(BaseTest.NETHRA);
 						result.add(current);
 						break;
+					case BaseTest.IPAD :
+						current = new IPad(
+							resultSet.getInt("id"),resultSet.getInt("confirmed"), resultSet.getString("pictureName"),
+							resultSet.getInt("userID"),resultSet.getInt("adjudicatorID"),resultSet.getInt("ipad_fp"),
+							resultSet.getInt("ipad_fn"),resultSet.getString("ipad_sup_hem"),resultSet.getString("ipad_inf_hem")
+						);
+						current.setBaseType(BaseTest.IPAD);
+						result.add(current);
+						break;
 				}
 			}
 		} catch (SQLException ex) {
@@ -133,6 +142,41 @@ public class SQLCommands {
 
 			while(resultSet.next()) {
 				result.add(resultSet.getString("pictureName"));
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(SQLCommands.class.getName()).log(Level.SEVERE,null,ex); 
+		} catch (Exception e) { e.printStackTrace(); } 
+		finally { 
+			if(resultSet != null) try {resultSet.close();} catch(SQLException ignore) {}
+			if(con != null) try {con.close();} catch(SQLException ignore) {}
+			if(stmt != null) try {stmt.close();} catch(SQLException ignore) {}
+		}
+
+		return result;
+	}
+
+	public static Vector<IPad> queryIPad(String query){
+		Vector<IPad> result = new Vector<IPad>();
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet resultSet = null;
+
+		try{
+			InitialContext initialContext = new InitialContext();
+			Context context = (Context)initialContext.lookup("java:comp/env");
+			DataSource dataSource = (DataSource)context.lookup("hvf_grader");
+			con = dataSource.getConnection();
+
+			stmt = con.createStatement();
+
+			resultSet = stmt.executeQuery(query); 
+
+			while(resultSet.next()) {
+				result.add(new IPad(
+					resultSet.getInt("id"),resultSet.getInt("confirmed"), resultSet.getString("pictureName"),
+					resultSet.getInt("userID"),resultSet.getInt("adjudicatorID"),resultSet.getInt("ipad_fp"),
+					resultSet.getInt("ipad_fn"),resultSet.getString("ipad_sup_hem"),resultSet.getString("ipad_inf_hem")
+				));
 			}
 		} catch (SQLException ex) {
 			Logger.getLogger(SQLCommands.class.getName()).log(Level.SEVERE,null,ex); 

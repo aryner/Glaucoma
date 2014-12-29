@@ -17,6 +17,7 @@ public interface BaseTest {
 	public static int STEREO = 4;
 	public static int NETHRA = 5;
 	public static int HVF = 6;
+	public static int IPAD = 7;
 
 	public String getPictureName();
 	public void setPictureName(String pictureName);

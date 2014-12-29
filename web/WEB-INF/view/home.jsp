@@ -88,6 +88,13 @@ if(session.getAttribute("errors") != null) {
 	</div>
 <%
 	} 
+	if (access == 0|| access == 1) {
+%>
+	<div class="thinColumn">
+		<a href="/Glaucoma/ipad" class="btn menuBtn">iPad</a>
+	</div>
+<%
+	} 
 %>
 </div>
 <br>

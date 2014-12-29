@@ -18,6 +18,7 @@
 		<option value="OCT">OCT</option>
 		<option value="stereo">Stereo</option>
 		<option value="3Nethra">3Nethra</option> 
+		<option value="iPad">iPad</option>
 
 	</select>
 	<p>Select which pictures to upload</p>

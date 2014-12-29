@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author aryner
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload", "/uploadPictures", "/img", "/pdf", "/assignHVF", "/OpHVFtest", "/OpReviewHVF", "/printCSV", "/printCSVs", "/uploadData", "/dataUpload", "/assignFDT", "/assignMDT", "/assignOCT", "/assign3Nethra", "/assignStereo", "/printFinishedCSVs", "/FDTReview", "/updateFDT", "/MDTReview", "/updateMDT", "/OCTReview", "/updateOCT", "/stereoReview", "/updateStereo", "/nethraReview", "/updateNethra"})
+@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload", "/uploadPictures", "/img", "/pdf", "/assignHVF", "/OpHVFtest", "/OpReviewHVF", "/printCSV", "/printCSVs", "/uploadData", "/dataUpload", "/assignFDT", "/assignMDT", "/assignOCT", "/assign3Nethra", "/assignStereo", "/printFinishedCSVs", "/FDTReview", "/updateFDT", "/MDTReview", "/updateMDT", "/OCTReview", "/updateOCT", "/stereoReview", "/updateStereo", "/nethraReview", "/updateNethra", "/ipad", "/assignIPad", "/updateIPad"})
 public class Controller extends HttpServlet {
 	private final String slash = System.getProperty("file.separator");
 	/**
@@ -107,6 +107,36 @@ public class Controller extends HttpServlet {
 
 			if(user.getAccess() == 1 && picture != null) {
 				Vector<FDTtest> pair = FDTtest.getPair(picture.getName());
+				request.setAttribute("pair",pair);
+			}
+
+			request.setAttribute("access", user.getAccess());
+			request.setAttribute("slash",slash);
+			request.setAttribute("picture",picture);
+			request.setAttribute("missingPics", Tools.needPictures());
+		}
+
+		else if(userPath.equals("/ipad")) {
+			String pictureName = request.getParameter("pictureName");
+			User user = (User)session.getAttribute("user");
+			Picture picture;
+
+			if(pictureName != null && pictureName.length() > 0) {
+				picture = Picture.getPictureByName(pictureName,BaseTest.MDT);
+				request.setAttribute("confirmed", "true");
+			}
+			else {
+				picture = IPad.getNext(user);
+				if(picture == null) {
+					if(user.getAccess() == 0) {
+						Integer needToPairCount = IPad.getNeedToPairCount();
+						request.setAttribute("needToPairCount", needToPairCount);
+					}
+				}
+			}
+
+			if(user.getAccess() == 1 && picture != null) {
+				Vector<IPad> pair = IPad.getPair(picture.getName());
 				request.setAttribute("pair",pair);
 			}
 
@@ -572,6 +602,31 @@ public class Controller extends HttpServlet {
 			}
 		
 			response.sendRedirect("/Glaucoma/MDTtest"); 
+			return;
+		}
+
+		else if(userPath.equals("/assignIPad")) {
+			User user = (User)session.getAttribute("user");
+			int returnType = IPad.assignIPad(request, user);
+
+			if(returnType == 2) {
+				response.sendRedirect("/Glaucoma/home"); 
+				return;
+			}
+		
+			response.sendRedirect("/Glaucoma/IPad"); 
+			return;
+		}
+		else if(userPath.equals("/updateIPad")) {
+			User user = (User)session.getAttribute("user");
+			int returnType = IPad.updateIPad(request, user);
+
+			if(returnType == 2) {
+				response.sendRedirect("/Glaucoma/home"); 
+				return;
+			}
+		
+			response.sendRedirect("/Glaucoma/home"); 
 			return;
 		}
 
