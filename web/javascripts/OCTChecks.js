@@ -216,6 +216,179 @@ $(document).ready(function() {
 		}
 	});
 
+	$('input[type=text][name=iavgnum_os]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9^\.]/g, '')) {
+			this.value = this.value.replace(/[^0-9^\.]/g, '');
+		}
+		if(this.value.indexOf(".") >= 0 && this.value.indexOf(".") < this.value.length) { 
+			var second = this.value.substring(this.value.indexOf(".")+1, this.value.length); 
+			if(second.indexOf(".") >= 0) {
+				this.value = this.value.substring(0,this.value.length-1);
+			}
+		}
+	});
+	$('input[type=text][name=sig_os]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9^\.]/g, '')) {
+			this.value = this.value.replace(/[^0-9^\.]/g, '');
+		}
+		if(this.value.indexOf(".") >= 0 && this.value.indexOf(".") < this.value.length) { 
+			var second = this.value.substring(this.value.indexOf(".")+1, this.value.length); 
+			if(second.indexOf(".") >= 0) {
+				this.value = this.value.substring(0,this.value.length-1);
+			}
+		}
+		var num = Number(this.value);
+		if(num > 10) {
+			this.value = this.value.substring(0,this.value.length-1);
+		}
+	});
+	$('input[type=text][name=isnum_os]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9^\.]/g, '')) {
+			this.value = this.value.replace(/[^0-9^\.]/g, '');
+		}
+		if(this.value.indexOf(".") >= 0 && this.value.indexOf(".") < this.value.length) { 
+			var second = this.value.substring(this.value.indexOf(".")+1, this.value.length); 
+			if(second.indexOf(".") >= 0) {
+				this.value = this.value.substring(0,this.value.length-1);
+			}
+		}
+	});
+	$('input[type=text][name=sinum_os]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9^\.]/g, '')) {
+			this.value = this.value.replace(/[^0-9^\.]/g, '');
+		}
+		if(this.value.indexOf(".") >= 0 && this.value.indexOf(".") < this.value.length) { 
+			var second = this.value.substring(this.value.indexOf(".")+1, this.value.length); 
+			if(second.indexOf(".") >= 0) {
+				this.value = this.value.substring(0,this.value.length-1);
+			}
+		}
+	});
+	$('input[type=text][name=stnum_os]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9^\.]/g, '')) {
+			this.value = this.value.replace(/[^0-9^\.]/g, '');
+		}
+		if(this.value.indexOf(".") >= 0 && this.value.indexOf(".") < this.value.length) { 
+			var second = this.value.substring(this.value.indexOf(".")+1, this.value.length); 
+			if(second.indexOf(".") >= 0) {
+				this.value = this.value.substring(0,this.value.length-1);
+			}
+		}
+	});
+	$('input[type=text][name=itnum_os]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9^\.]/g, '')) {
+			this.value = this.value.replace(/[^0-9^\.]/g, '');
+		}
+		if(this.value.indexOf(".") >= 0 && this.value.indexOf(".") < this.value.length) { 
+			var second = this.value.substring(this.value.indexOf(".")+1, this.value.length); 
+			if(second.indexOf(".") >= 0) {
+				this.value = this.value.substring(0,this.value.length-1);
+			}
+		}
+	});
+	$('input[type=text][name=snnum_os]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9^\.]/g, '')) {
+			this.value = this.value.replace(/[^0-9^\.]/g, '');
+		}
+		if(this.value.indexOf(".") >= 0 && this.value.indexOf(".") < this.value.length) { 
+			var second = this.value.substring(this.value.indexOf(".")+1, this.value.length); 
+			if(second.indexOf(".") >= 0) {
+				this.value = this.value.substring(0,this.value.length-1);
+			}
+		}
+	});
+	$('input[type=text][name=mmnum_os]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9^\.]/g, '')) {
+			this.value = this.value.replace(/[^0-9^\.]/g, '');
+		}
+		if(this.value.indexOf(".") >= 0 && this.value.indexOf(".") < this.value.length) { 
+			var second = this.value.substring(this.value.indexOf(".")+1, this.value.length); 
+			if(second.indexOf(".") >= 0) {
+				this.value = this.value.substring(0,this.value.length-1);
+			}
+		}
+	});
+	$('input[type=text][name=smaxnum_os]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9^\.]/g, '')) {
+			this.value = this.value.replace(/[^0-9^\.]/g, '');
+		}
+		if(this.value.indexOf(".") >= 0 && this.value.indexOf(".") < this.value.length) { 
+			var second = this.value.substring(this.value.indexOf(".")+1, this.value.length); 
+			if(second.indexOf(".") >= 0) {
+				this.value = this.value.substring(0,this.value.length-1);
+			}
+		}
+	});
+	$('input[type=text][name=imaxnum_os]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9^\.]/g, '')) {
+			this.value = this.value.replace(/[^0-9^\.]/g, '');
+		}
+		if(this.value.indexOf(".") >= 0 && this.value.indexOf(".") < this.value.length) { 
+			var second = this.value.substring(this.value.indexOf(".")+1, this.value.length); 
+			if(second.indexOf(".") >= 0) {
+				this.value = this.value.substring(0,this.value.length-1);
+			}
+		}
+	});
+	$('input[type=text][name=savgnum_os]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9^\.]/g, '')) {
+			this.value = this.value.replace(/[^0-9^\.]/g, '');
+		}
+		if(this.value.indexOf(".") >= 0 && this.value.indexOf(".") < this.value.length) { 
+			var second = this.value.substring(this.value.indexOf(".")+1, this.value.length); 
+			if(second.indexOf(".") >= 0) {
+				this.value = this.value.substring(0,this.value.length-1);
+			}
+		}
+	});
+	$('input[type=text][name=imaxnum_os]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9^\.]/g, '')) {
+			this.value = this.value.replace(/[^0-9^\.]/g, '');
+		}
+		if(this.value.indexOf(".") >= 0 && this.value.indexOf(".") < this.value.length) { 
+			var second = this.value.substring(this.value.indexOf(".")+1, this.value.length); 
+			if(second.indexOf(".") >= 0) {
+				this.value = this.value.substring(0,this.value.length-1);
+			}
+		}
+	});
+	$('input[type=text][name=atnum_os]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9^\.]/g, '')) {
+			this.value = this.value.replace(/[^0-9^\.]/g, '');
+		}
+		if(this.value.indexOf(".") >= 0 && this.value.indexOf(".") < this.value.length) { 
+			var second = this.value.substring(this.value.indexOf(".")+1, this.value.length); 
+			if(second.indexOf(".") >= 0) {
+				this.value = this.value.substring(0,this.value.length-1);
+			}
+		}
+	});
+
+	$('input[type=text][name=snum_os]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+		var num = Number(this.value);
+		if(num > 500) {
+			this.value = this.value.substring(0,this.value.length-1);
+		}
+	});
+	$('input[type=text][name=nnum_os]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=inum_os]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+	$('input[type=text][name=tnum_os]').on('input', function() {
+		if(this.value != this.value.replace(/[^0-9]/g, '')) {
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+	});
+
 	$('input').bind('keypress', function(e){
 		e = e || window.event;
 		var unicode = e.keycode || e.which;
@@ -452,7 +625,7 @@ $(document).ready(function() {
 			}
 		} else {
 			$('#isnum').removeClass('highlight');
-		} if(!sinum || !sinum ||!sinum_os || !sinum_os) {
+		} if(!sinum || !sicol ||!sinum_os || !sicol_os) {
 			$('#sinum').addClass('highlight');
 			if(!focused) {
 				focused = true;
