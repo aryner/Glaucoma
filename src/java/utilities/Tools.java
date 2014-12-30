@@ -139,7 +139,7 @@ public class Tools {
 
 	public static Vector<String> processCSVLine(String line) {
 		int index = 0;
-		String confirmed = line.substring(index+3,line.indexOf(",",index+1)-1);
+		String confirmed = line.substring(index,line.indexOf(","));
 		index = line.indexOf(",", index+1);
 		String picName = line.substring(index+3,line.indexOf(",",index+1)-1);
 
@@ -343,5 +343,22 @@ public class Tools {
 				}
 				break;
 		}
+	}
+
+	public static String joinFields(String line, int type) {
+		switch(type) {
+			case BaseTest.FDT :
+				String firstHalf = line.substring(0,line.indexOf(":")+3);
+				String lastHalf = line;
+				String rx;
+				for(int i=0; i<20; i++) {
+					lastHalf = lastHalf.substring(lastHalf.indexOf(",")+3);
+				}
+				rx = lastHalf.substring(0,lastHalf.indexOf("'"));
+				lastHalf = line.substring(firstHalf.length(), line.indexOf(lastHalf)-1) + lastHalf.substring(rx.length()+3,lastHalf.length());
+				firstHalf += "|"+rx;
+				return firstHalf+lastHalf;
+		}
+		return null;
 	}
 }

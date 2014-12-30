@@ -619,7 +619,7 @@ public class FDTtest implements BaseTest {
 				"fdt_rl_one, fdt_rl_five, fdt_abnormal) VALUES ";
 			for(int i=0; i<newLines.size(); i++) {
 				if(i > 0) { query += ", "; }
-				query += "("+newLines.get(i)+")";
+				query += "("+Tools.joinFields(newLines.get(i),BaseTest.FDT)+")";
 			}
 			if(newLines.size() > 0) {
 				SQLCommands.update(query);
@@ -644,7 +644,7 @@ public class FDTtest implements BaseTest {
 				"fdt_rl_one, fdt_rl_five, fdt_abnormal) VALUES ";
 			for(int i=0; i<updateLines.size(); i++) {
 				if(i>0) {query += ", ";}
-				query += "("+updateLines.get(i)+")";
+				query += "("+Tools.joinFields(updateLines.get(i), BaseTest.FDT)+")";
 			}
 			if(updateLines.size() > 0) {
 				SQLCommands.update(query);
@@ -694,19 +694,19 @@ public class FDTtest implements BaseTest {
 		for(int i=0; i<needDuplicate.size(); i++) {
 			if(i>0) {query += ", ";}
 			FDTtest fdt = needDuplicate.get(i);
-			query += "("+
-				fdt.getConfirmed()+", "+fdt.getPictureName()+", "+fdt.getUserID()+", "+fdt.getAdjudicatorID()+", "+
-				fdt.getDur()+", "+fdt.getTarg()+", "+fdt.getTarg_oth()+", "+fdt.getFixerr_num()+", "+
-				fdt.getFixerr_den()+", "+fdt.getFp_num()+", "+fdt.getFp_den()+", "+fdt.getFn_num()+", "+
-				fdt.getFn_den()+", "+fdt.getTest()+", "+fdt.getTest_oth()+", "+fdt.getSpeed()+", "+
-				fdt.getSpeed_oth()+", "+fdt.getPupil()+", "+fdt.getVa_num()+", "+fdt.getVa_den()+", "+
-				fdt.getMdsign()+", "+fdt.getMddb()+", "+fdt.getMdp()+", "+fdt.getPsdsign()+", "+
-				fdt.getPsdb()+", "+fdt.getPsdp()+", "+fdt.getLu_one()+", "+fdt.getLu_five()+", "+
-				fdt.getRu_one()+", "+fdt.getRu_five()+", "+fdt.getLl_one()+", "+fdt.getLl_five()+", "+
-				fdt.getRl_one()+", "+fdt.getRl_five()+", "+fdt.getAbnormal()+
-				")";
+			query += "('"+
+				fdt.getConfirmed()+"', '"+fdt.getPictureName()+"', '"+fdt.getUserID()+"', '"+fdt.getAdjudicatorID()+"', '"+
+				fdt.getDur()+"|"+fdt.getRx()+"', '"+fdt.getTarg()+"', '"+fdt.getTarg_oth()+"', '"+fdt.getFixerr_num()+"', '"+
+				fdt.getFixerr_den()+"', '"+fdt.getFp_num()+"', '"+fdt.getFp_den()+"', '"+fdt.getFn_num()+"', '"+
+				fdt.getFn_den()+"', '"+fdt.getTest()+"', '"+fdt.getTest_oth()+"', '"+fdt.getSpeed()+"', '"+
+				fdt.getSpeed_oth()+"', '"+fdt.getPupil()+"', '"+fdt.getVa_num()+"', '"+fdt.getVa_den()+"', '"+
+				fdt.getMdsign()+"', '"+fdt.getMddb()+"', '"+fdt.getMdp()+"', '"+fdt.getPsdsign()+"', '"+
+				fdt.getPsdb()+"', '"+fdt.getPsdp()+"', '"+fdt.getLu_one()+"', '"+fdt.getLu_five()+"', '"+
+				fdt.getRu_one()+"', '"+fdt.getRu_five()+"', '"+fdt.getLl_one()+"', '"+fdt.getLl_five()+"', '"+
+				fdt.getRl_one()+"', '"+fdt.getRl_five()+"', '"+fdt.getAbnormal()+
+				"')";
 		}
-
+System.out.println(query);
 		SQLCommands.update(query);
 	}
 
