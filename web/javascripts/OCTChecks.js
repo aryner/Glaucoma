@@ -6,6 +6,10 @@
 
 
 $(document).ready(function() {
+	$('select').on('change', function() {
+
+	});
+
 	$('input[type=text]').on('input', function(){
 		if(this.value.length > 20) {
 			this.value = this.value.substring(0,20);
@@ -235,96 +239,51 @@ $(document).ready(function() {
 			|| thing.length > 0;
 
 		var snum = $('input[type=text][name=snum]').val().length > 0;
-		var scol = $('input[type=radio][name=scol][value=1]').prop('checked')
-			|| $('input[type=radio][name=scol][value=2]').prop('checked')
-			|| $('input[type=radio][name=scol][value=3]').prop('checked')
-			|| $('input[type=radio][name=scol][value=4]').prop('checked');
+		var scol = Number($('select[name=scol]').val()) > 0;
 
 		var nnum = $('input[type=text][name=nnum]').val().length > 0;
-		var ncol = $('input[type=radio][name=ncol][value=1]').prop('checked')
-			|| $('input[type=radio][name=ncol][value=2]').prop('checked')
-			|| $('input[type=radio][name=ncol][value=3]').prop('checked')
-			|| $('input[type=radio][name=ncol][value=4]').prop('checked');
+		var ncol = Number($('select[name=ncol]').val()) > 0;
 
 		var inum = $('input[type=text][name=inum]').val().length > 0;
-		var icol = $('input[type=radio][name=icol][value=1]').prop('checked')
-			|| $('input[type=radio][name=icol][value=2]').prop('checked')
-			|| $('input[type=radio][name=icol][value=3]').prop('checked')
-			|| $('input[type=radio][name=icol][value=4]').prop('checked');
+		var icol = Number($('select[name=icol]').val()) > 0;
 
 		var tnum = $('input[type=text][name=tnum]').val().length > 0;
-		var tcol = $('input[type=radio][name=tcol][value=1]').prop('checked')
-			|| $('input[type=radio][name=tcol][value=2]').prop('checked')
-			|| $('input[type=radio][name=tcol][value=3]').prop('checked')
-			|| $('input[type=radio][name=tcol][value=4]').prop('checked');
+		var tcol = Number($('select[name=tcol]').val()) > 0;
 
 		var sig = $('input[type=text][name=sig]').val().length > 0;
 
 		var isnum = $('input[type=text][name=isnum]').val().length > 0;
-		var iscol = $('input[type=radio][name=iscol][value=1]').prop('checked')
-			|| $('input[type=radio][name=iscol][value=2]').prop('checked')
-			|| $('input[type=radio][name=iscol][value=3]').prop('checked')
-			|| $('input[type=radio][name=iscol][value=4]').prop('checked');
+		var iscol = Number($('select[name=iscol]').val()) > 0;
 
 		var sinum = $('input[type=text][name=sinum]').val().length > 0;
-		var sicol = $('input[type=radio][name=sicol][value=1]').prop('checked')
-			|| $('input[type=radio][name=sicol][value=2]').prop('checked')
-			|| $('input[type=radio][name=sicol][value=3]').prop('checked')
-			|| $('input[type=radio][name=sicol][value=4]').prop('checked');
+		var sicol = Number($('select[name=sicol]').val()) > 0;
 
 		var stnum = $('input[type=text][name=stnum]').val().length > 0;
-		var stcol = $('input[type=radio][name=stcol][value=1]').prop('checked')
-			|| $('input[type=radio][name=stcol][value=2]').prop('checked')
-			|| $('input[type=radio][name=stcol][value=3]').prop('checked')
-			|| $('input[type=radio][name=stcol][value=4]').prop('checked');
+		var stcol = Number($('select[name=stcol]').val()) > 0;
 
 		var itnum = $('input[type=text][name=itnum]').val().length > 0;
-		var itcol = $('input[type=radio][name=itcol][value=1]').prop('checked')
-			|| $('input[type=radio][name=itcol][value=2]').prop('checked')
-			|| $('input[type=radio][name=itcol][value=3]').prop('checked')
-			|| $('input[type=radio][name=itcol][value=4]').prop('checked');
+		var itcol = Number($('select[name=itcol]').val()) > 0;
 
 		var snnum = $('input[type=text][name=snnum]').val().length > 0;
-		var sncol = $('input[type=radio][name=sncol][value=1]').prop('checked')
-			|| $('input[type=radio][name=sncol][value=2]').prop('checked')
-			|| $('input[type=radio][name=sncol][value=3]').prop('checked')
-			|| $('input[type=radio][name=sncol][value=4]').prop('checked');
+		var sncol = Number($('select[name=sncol]').val()) > 0;
 
 		var mmnum = $('input[type=text][name=mmnum]').val().length > 0;
-		var mmcol = $('input[type=radio][name=mmcol][value=1]').prop('checked')
-			|| $('input[type=radio][name=mmcol][value=2]').prop('checked')
-			|| $('input[type=radio][name=mmcol][value=3]').prop('checked')
-			|| $('input[type=radio][name=mmcol][value=4]').prop('checked');
+		var mmcol = Number($('select[name=mmcol]').val()) > 0;
 
 		var smaxnum = $('input[type=text][name=smaxnum]').val().length > 0;
-		var smaxcol = $('input[type=radio][name=smaxcol][value=1]').prop('checked')
-			|| $('input[type=radio][name=smaxcol][value=2]').prop('checked')
-			|| $('input[type=radio][name=smaxcol][value=3]').prop('checked')
-			|| $('input[type=radio][name=smaxcol][value=4]').prop('checked');
+		var smaxcol = Number($('select[name=smaxcol]').val()) > 0;
 
 		var imaxnum = $('input[type=text][name=imaxnum]').val().length > 0;
-		var imaxcol = $('input[type=radio][name=imaxcol][value=1]').prop('checked')
-			|| $('input[type=radio][name=imaxcol][value=2]').prop('checked')
-			|| $('input[type=radio][name=imaxcol][value=3]').prop('checked')
-			|| $('input[type=radio][name=imaxcol][value=4]').prop('checked');
+		var imaxcol = Number($('select[name=imaxcol]').val()) > 0;
 
 		var savgnum = $('input[type=text][name=savgnum]').val().length > 0;
-		var savgcol = $('input[type=radio][name=savgcol][value=1]').prop('checked')
-			|| $('input[type=radio][name=savgcol][value=2]').prop('checked')
-			|| $('input[type=radio][name=savgcol][value=3]').prop('checked')
-			|| $('input[type=radio][name=savgcol][value=4]').prop('checked');
+		var savgcol = Number($('select[name=savgcol]').val()) > 0;
 
 		var iavgnum = $('input[type=text][name=iavgnum]').val().length > 0;
-		var iavgcol = $('input[type=radio][name=iavgcol][value=1]').prop('checked')
-			|| $('input[type=radio][name=iavgcol][value=2]').prop('checked')
-			|| $('input[type=radio][name=iavgcol][value=3]').prop('checked')
-			|| $('input[type=radio][name=iavgcol][value=4]').prop('checked');
+		var iavgcol = Number($('select[name=iavgcol]').val()) > 0;
 
 		var atnum = $('input[type=text][name=atnum]').val().length > 0;
-		var atcol = $('input[type=radio][name=atcol][value=1]').prop('checked')
-			|| $('input[type=radio][name=atcol][value=2]').prop('checked')
-			|| $('input[type=radio][name=atcol][value=3]').prop('checked')
-			|| $('input[type=radio][name=atcol][value=4]').prop('checked');
+		var atcol = Number($('select[name=atcol]').val()) > 0;
 
 		var s_savg = Number($('input[type=text][name=snum]').val()) ===
 			     Number($('input[type=text][name=savgnum]').val());
@@ -332,10 +291,61 @@ $(document).ready(function() {
 		var i_iavg = Number($('input[type=text][name=inum]').val()) ===
 			     Number($('input[type=text][name=iavgnum]').val());
 
-		var eye = $('input[type=radio][name=eye][value=1]').prop('checked')
-			|| $('input[type=radio][name=eye][value=2]').prop('checked');
 
-		var focused = false;
+		var snum_os = $('input[type=text][name=snum_os]').val().length > 0;
+		var scol_os = Number($('select[name=scol_os]').val()) > 0;
+
+		var nnum_os = $('input[type=text][name=nnum_os]').val().length > 0;
+		var ncol_os = Number($('select[name=ncol_os]').val()) > 0;
+
+		var inum_os = $('input[type=text][name=inum_os]').val().length > 0;
+		var icol_os = Number($('select[name=icol_os]').val()) > 0;
+
+		var tnum_os = $('input[type=text][name=tnum_os]').val().length > 0;
+		var tcol_os = Number($('select[name=tcol_os]').val()) > 0;
+
+		var sig_os = $('input[type=text][name=sig_os]').val().length > 0;
+
+		var isnum_os = $('input[type=text][name=isnum_os]').val().length > 0;
+		var iscol_os = Number($('select[name=iscol_os]').val()) > 0;
+
+		var sinum_os = $('input[type=text][name=sinum_os]').val().length > 0;
+		var sicol_os = Number($('select[name=sicol_os]').val()) > 0;
+
+		var stnum_os = $('input[type=text][name=stnum_os]').val().length > 0;
+		var stcol_os = Number($('select[name=stcol_os]').val()) > 0;
+
+		var itnum_os = $('input[type=text][name=itnum_os]').val().length > 0;
+		var itcol_os = Number($('select[name=itcol_os]').val()) > 0;
+
+		var snnum_os = $('input[type=text][name=snnum_os]').val().length > 0;
+		var sncol_os = Number($('select[name=sncol_os]').val()) > 0;
+
+		var mmnum_os = $('input[type=text][name=mmnum_os]').val().length > 0;
+		var mmcol_os = Number($('select[name=mmcol_os]').val()) > 0;
+
+		var smaxnum_os = $('input[type=text][name=smaxnum_os]').val().length > 0;
+		var smaxcol_os = Number($('select[name=smaxcol_os]').val()) > 0;
+
+		var imaxnum_os = $('input[type=text][name=imaxnum_os]').val().length > 0;
+		var imaxcol_os = Number($('select[name=imaxcol_os]').val()) > 0;
+
+		var savgnum_os = $('input[type=text][name=savgnum_os]').val().length > 0;
+		var savgcol_os = Number($('select[name=savgcol_os]').val()) > 0;
+
+		var iavgnum_os = $('input[type=text][name=iavgnum_os]').val().length > 0;
+		var iavgcol_os = Number($('select[name=iavgcol_os]').val()) > 0;
+
+		var atnum_os = $('input[type=text][name=atnum_os]').val().length > 0;
+		var atcol_os = Number($('select[name=atcol_os]').val()) > 0;
+
+		var s_savg_os = Number($('input[type=text][name=snum_os]').val()) ===
+			     Number($('input[type=text][name=savgnum_os]').val());
+
+		var i_iavg_os = Number($('input[type=text][name=inum_os]').val()) ===
+			     Number($('input[type=text][name=iavgnum_os]').val());
+
+		var focused_os = false;
 
 		if(!length) {
 			focused = true;
@@ -362,7 +372,7 @@ $(document).ready(function() {
 			}
 		} else {
 			$('#type_oth').removeClass('highlight');
-		} if(!snum) {
+		} if(!snum || !scol || !snum_os || !scol_os) {
 			$('#snum').addClass('highlight');
 			if(!focused) {
 				focused = true;
@@ -371,16 +381,7 @@ $(document).ready(function() {
 			}
 		} else {
 			$('#snum').removeClass('highlight');
-		} if(!scol) {
-			$('#scol').addClass('highlight');
-			if(!focused) {
-				focused = true;
-				e.preventDefault(); 
-				$('input[type=radio][name=scol][value=1]').focus();
-			}
-		} else {
-			$('#scol').removeClass('highlight');
-		} if(!nnum) {
+		} if(!nnum || !ncol || !nnum_os || !ncol_os) {
 			$('#nnum').addClass('highlight');
 			if(!focused) {
 				focused = true;
@@ -389,16 +390,7 @@ $(document).ready(function() {
 			}
 		} else {
 			$('#nnum').removeClass('highlight');
-		} if(!ncol) {
-			$('#ncol').addClass('highlight');
-			if(!focused) {
-				focused = true;
-				e.preventDefault(); 
-				$('input[type=radio][name=ncol][value=1]').focus();
-			}
-		} else {
-			$('#ncol').removeClass('highlight');
-		} if(!inum) {
+		} if(!inum || !icol ||!inum_os || !icol_os) {
 			$('#inum').addClass('highlight');
 			if(!focused) {
 				focused = true;
@@ -407,16 +399,7 @@ $(document).ready(function() {
 			}
 		} else {
 			$('#inum').removeClass('highlight');
-		} if(!icol) {
-			$('#icol').addClass('highlight');
-			if(!focused) {
-				focused = true;
-				e.preventDefault(); 
-				$('input[type=radio][name=icol][value=1]').focus();
-			}
-		} else {
-			$('#icol').removeClass('highlight');
-		} if(!tnum) {
+		} if(!tnum || !tcol ||!tnum_os || !tcol_os) {
 			$('#tnum').addClass('highlight');
 			if(!focused) {
 				focused = true;
@@ -425,15 +408,6 @@ $(document).ready(function() {
 			}
 		} else {
 			$('#tnum').removeClass('highlight');
-		} if(!tcol) {
-			$('#tcol').addClass('highlight');
-			if(!focused) {
-				focused = true;
-				e.preventDefault(); 
-				$('input[type=radio][name=tcol][value=1]').focus();
-			}
-		} else {
-			$('#tcol').removeClass('highlight');
 		} if(!sig) {
 			$('#sig').addClass('highlight');
 			if(!focused) {
@@ -443,7 +417,16 @@ $(document).ready(function() {
 			}
 		} else {
 			$('#sig').removeClass('highlight');
-		} if(!isnum) {
+		} if(!sig_os) {
+			$('#sig_os').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=sig_os]').focus();
+			}
+		} else {
+			$('#sig_os').removeClass('highlight');
+		} if(!isnum || !iscol ||!isnum_os || !iscol_os) {
 			$('#isnum').addClass('highlight');
 			if(!focused) {
 				focused = true;
@@ -452,16 +435,7 @@ $(document).ready(function() {
 			}
 		} else {
 			$('#isnum').removeClass('highlight');
-		} if(!iscol) {
-			$('#iscol').addClass('highlight');
-			if(!focused) {
-				focused = true;
-				e.preventDefault(); 
-				$('input[type=radio][name=iscol][value=1]').focus();
-			}
-		} else {
-			$('#iscol').removeClass('highlight');
-		} if(!sinum) {
+		} if(!sinum || !sinum ||!sinum_os || !sinum_os) {
 			$('#sinum').addClass('highlight');
 			if(!focused) {
 				focused = true;
@@ -470,16 +444,7 @@ $(document).ready(function() {
 			}
 		} else {
 			$('#sinum').removeClass('highlight');
-		} if(!sicol) {
-			$('#sicol').addClass('highlight');
-			if(!focused) {
-				focused = true;
-				e.preventDefault(); 
-				$('input[type=radio][name=sicol][value=1]').focus();
-			}
-		} else {
-			$('#sicol').removeClass('highlight');
-		} if(!stnum) {
+		} if(!stnum || !stcol ||!stnum_os || !stcol_os) {
 			$('#stnum').addClass('highlight');
 			if(!focused) {
 				focused = true;
@@ -488,16 +453,7 @@ $(document).ready(function() {
 			}
 		} else {
 			$('#stnum').removeClass('highlight');
-		} if(!stcol) {
-			$('#stcol').addClass('highlight');
-			if(!focused) {
-				focused = true;
-				e.preventDefault(); 
-				$('input[type=radio][name=stcol][value=1]').focus();
-			}
-		} else {
-			$('#stcol').removeClass('highlight');
-		} if(!itnum) {
+		} if(!itnum || !itcol || !itnum_os || !itcol_os) {
 			$('#itnum').addClass('highlight');
 			if(!focused) {
 				focused = true;
@@ -506,16 +462,7 @@ $(document).ready(function() {
 			}
 		} else {
 			$('#itnum').removeClass('highlight');
-		} if(!itcol) {
-			$('#itcol').addClass('highlight');
-			if(!focused) {
-				focused = true;
-				e.preventDefault(); 
-				$('input[type=radio][name=itcol][value=1]').focus();
-			}
-		} else {
-			$('#itcol').removeClass('highlight');
-		} if(!snnum) {
+		} if(!snnum || !sncol || !snnum_os || !sncol_os) {
 			$('#snnum').addClass('highlight');
 			if(!focused) {
 				focused = true;
@@ -524,16 +471,7 @@ $(document).ready(function() {
 			}
 		} else {
 			$('#snnum').removeClass('highlight');
-		} if(!sncol) {
-			$('#sncol').addClass('highlight');
-			if(!focused) {
-				focused = true;
-				e.preventDefault(); 
-				$('input[type=radio][name=sncol][value=1]').focus();
-			}
-		} else {
-			$('#sncol').removeClass('highlight');
-		} if(!mmnum) {
+		} if(!mmnum || !mmcol || !mmnum_os || !mmcol_os) {
 			$('#mmnum').addClass('highlight');
 			if(!focused) {
 				focused = true;
@@ -542,16 +480,7 @@ $(document).ready(function() {
 			}
 		} else {
 			$('#mmnum').removeClass('highlight');
-		} if(!mmcol) {
-			$('#mmcol').addClass('highlight');
-			if(!focused) {
-				focused = true;
-				e.preventDefault(); 
-				$('input[type=radio][name=mmcol][value=1]').focus();
-			}
-		} else {
-			$('#mmcol').removeClass('highlight');
-		} if(!smaxnum) {
+		} if(!smaxnum || !smaxcol || !smaxnum_os || !smaxcol_os) {
 			$('#smaxnum').addClass('highlight');
 			if(!focused) {
 				focused = true;
@@ -560,16 +489,7 @@ $(document).ready(function() {
 			}
 		} else {
 			$('#smaxnum').removeClass('highlight');
-		} if(!smaxcol) {
-			$('#smaxcol').addClass('highlight');
-			if(!focused) {
-				focused = true;
-				e.preventDefault(); 
-				$('input[type=radio][name=smaxcol][value=1]').focus();
-			}
-		} else {
-			$('#smaxcol').removeClass('highlight');
-		} if(!imaxnum) {
+		} if(!imaxnum || !imaxcol || !imaxnum_os || !imaxcol_os) {
 			$('#imaxnum').addClass('highlight');
 			if(!focused) {
 				focused = true;
@@ -578,16 +498,7 @@ $(document).ready(function() {
 			}
 		} else {
 			$('#imaxnum').removeClass('highlight');
-		} if(!imaxcol) {
-			$('#imaxcol').addClass('highlight');
-			if(!focused) {
-				focused = true;
-				e.preventDefault(); 
-				$('input[type=radio][name=imaxcol][value=1]').focus();
-			}
-		} else {
-			$('#imaxcol').removeClass('highlight');
-		} if(!savgnum) {
+		} if(!savgnum || !savgcol || !savgnum_os || !savgcol_os) {
 			$('#savgnum').addClass('highlight');
 			if(!focused) {
 				focused = true;
@@ -596,16 +507,7 @@ $(document).ready(function() {
 			}
 		} else {
 			$('#savgnum').removeClass('highlight');
-		} if(!savgcol) {
-			$('#savgcol').addClass('highlight');
-			if(!focused) {
-				focused = true;
-				e.preventDefault(); 
-				$('input[type=radio][name=savgcol][value=1]').focus();
-			}
-		} else {
-			$('#savgcol').removeClass('highlight');
-		} if(!iavgnum) {
+		} if(!iavgnum || !iavgcol || !iavgnum_os || !iavgcol_os) {
 			$('#iavgnum').addClass('highlight');
 			if(!focused) {
 				focused = true;
@@ -614,16 +516,7 @@ $(document).ready(function() {
 			}
 		} else {
 			$('#iavgnum').removeClass('highlight');
-		} if(!iavgcol) {
-			$('#iavgcol').addClass('highlight');
-			if(!focused) {
-				focused = true;
-				e.preventDefault(); 
-				$('input[type=radio][name=iavgcol][value=1]').focus();
-			}
-		} else {
-			$('#iavgcol').removeClass('highlight');
-		} if(!atnum) {
+		} if(!atnum || !atcol || !atnum_os || !atcol_os) {
 			$('#atnum').addClass('highlight');
 			if(!focused) {
 				focused = true;
@@ -632,15 +525,6 @@ $(document).ready(function() {
 			}
 		} else {
 			$('#atnum').removeClass('highlight');
-		} if(!atcol) {
-			$('#atcol').addClass('highlight');
-			if(!focused) {
-				focused = true;
-				e.preventDefault(); 
-				$('input[type=radio][name=atcol][value=1]').focus();
-			}
-		} else {
-			$('#atcol').removeClass('highlight');
 		} if(!s_savg) {
 			$('#savg_snum').removeClass('hidden');
 			if(!focused) {
@@ -659,15 +543,24 @@ $(document).ready(function() {
 			}
 		} else {
 			$('#iavg_inum').addClass('hidden');
-		} if(!eye) {
-			$('#eye').addClass('highlight');
+		} if(!s_savg_os) {
+			$('#savg_snum_os').removeClass('hidden');
 			if(!focused) {
 				focused = true;
 				e.preventDefault(); 
-				$('input[type=radio][name=eye][value=1]').focus();
+				$('input[type=text][name=snum_os]').focus();
 			}
 		} else {
-			$('#eye').removeClass('highlight');
+			$('#savg_snum_os').addClass('hidden');
+		} if(!i_iavg_os) {
+			$('#iavg_inum_os').removeClass('hidden');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=inum_os]').focus();
+			}
+		} else {
+			$('#iavg_inum_os').addClass('hidden');
 		}
 	});
 });
