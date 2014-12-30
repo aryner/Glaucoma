@@ -154,7 +154,7 @@ public class IPad implements BaseTest{
 			query = "SELECT * FROM iPad GROUP BY pictureName, "+
 				"ipad_fp, ipad_fn, ipad_sup_hem, ipad_inf_hem "+
 				"HAVING COUNT(*)=2";
-			Vector<MDTtest> set = SQLCommands.queryMDTtest(query);
+			Vector<IPad> set = SQLCommands.queryIPad(query);
 			//get the ones that need adjudication
 			query = "SELECT * FROM iPad GROUP BY pictureName, "+
 				"ipad_fp, ipad_fn, ipad_sup_hem, ipad_inf_hem "+
@@ -273,6 +273,31 @@ public class IPad implements BaseTest{
 	public static Vector<BaseTest> getBaseTest(int id) {
 		String query = "SELECT * FROM iPad WHERE (userID="+id+" OR adjudicatorID="+id+")";
 		return SQLCommands.queryBaseTest(query,  BaseTest.IPAD);
+	}
+
+	public static Vector<String> getCSVLines() {
+		Vector<String> result = new Vector<String>();
+		String query = "SELECT * FROM iPad ORDER BY pictureName";
+		Vector<IPad> iPadsAll = SQLCommands.queryIPad(query);
+		Vector<IPad> iPads = new Vector<IPad>();
+
+		for(int i=0; i<iPadsAll.size(); i++) {
+			if(i<(iPadsAll.size()-1) && (iPadsAll.get(i).getConfirmed() == 2)) {
+				i++;
+			}
+			iPads.add(iPadsAll.get(i));
+		}
+		
+		String currLine = "confirmed, picture, userID, adjudicatorID, ipad_fp, ipad_fn, ipad_sup_hem, ipad_inf_hem";
+		result.add(currLine);
+
+		for(IPad iPad : iPads) {
+			currLine = iPad.getConfirmed()+", "+iPad.getPictureName()+", "+iPad.getUserID()+", "+iPad.getAdjudicatorID()+", "+
+					iPad.getFp()+", "+iPad.getFn()+", "+iPad.getSup_hem()+", "+iPad.getInf_hem();
+			result.add(currLine);
+		}
+
+		return result;
 	}
 
 	/**

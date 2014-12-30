@@ -813,7 +813,7 @@ public class HVFtest implements BaseTest{
 
 	public static Vector<String> getCSVLines() {
 		Vector<String> result = new Vector<String>();
-		String query = "SELECT * FROM HVFtest";
+		String query = "SELECT * FROM HVFtest ORDER BY pictureName";
 		Vector<HVFtest> hvf = SQLCommands.queryHVFtestMaster(query);
 
 		String currLine = "id, confirmed, opthCheck, pictureName, userID, vf_loss, vf_defect, glau, vf_loss_oth, vf_defect_oth, "+

@@ -61,6 +61,9 @@ public class Tools {
 			case BaseTest.NETHRA:
 				createCSVs(Photos.getNethraCSVLines(), "3Nethra_grades");
 				break;
+			case BaseTest.IPAD:
+				createCSVs(IPad.getCSVLines(), "iPad_grades");
+				break;
 		}
 	}
 

@@ -410,6 +410,7 @@ public class Controller extends HttpServlet {
 			request.setAttribute("oct", OCTtest.getCSVLines());
 			request.setAttribute("stereo", Photos.getStereoCSVLines());
 			request.setAttribute("nethra", Photos.getNethraCSVLines());
+			request.setAttribute("iPad", IPad.getCSVLines());
 		}
 
 		else if (userPath.equals("/pdf")) {

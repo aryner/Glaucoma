@@ -13,6 +13,7 @@ Vector<String> mdt = (Vector)request.getAttribute("mdt");
 Vector<String> oct = (Vector)request.getAttribute("oct");
 Vector<String> stereo = (Vector)request.getAttribute("stereo");
 Vector<String> nethra = (Vector)request.getAttribute("nethra");
+Vector<String> iPad = (Vector)request.getAttribute("iPad");
 %>
 <div class='container'>
 <div class='wide-column'>
@@ -52,6 +53,12 @@ Vector<String> nethra = (Vector)request.getAttribute("nethra");
 	<input type ="submit" value="Print the 3Nethra CSV to your Desktop" class="btn">
 </form>
 </div>
+<div class='wide-column'>
+<form action="printCSVs" method="POST">
+	<input type='hidden' name='type' value='<%out.print(BaseTest.IPAD);%>'>
+	<input type ="submit" value="Print the iPad CSV to your Desktop" class="btn">
+</form>
+</div>
 </div>
 <br><br>
 <%
@@ -87,5 +94,11 @@ for(int i=0; i<stereo.size(); i++) {
 <%
 for(int i=0; i<nethra.size(); i++) {
 	out.print(nethra.get(i)+"<br>");
+}
+%>
+<br><br>
+<%
+for(int i=0; i<iPad.size(); i++) {
+	out.print(iPad.get(i)+"<br>");
 }
 %>

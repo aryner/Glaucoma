@@ -362,7 +362,15 @@ public class MDTtest implements BaseTest {
 	public static Vector<String> getCSVLines() {
 		Vector<String> result = new Vector<String>();
 		String query = "SELECT * FROM MDTtest ORDER BY pictureName";
-		Vector<MDTtest> mdts = SQLCommands.queryMDTtest(query);
+		Vector<MDTtest> mdtsAll = SQLCommands.queryMDTtest(query);
+		Vector<MDTtest> mdts = new Vector<MDTtest>();
+
+		for(int i=0; i<mdtsAll.size(); i++) {
+			if(i<(mdtsAll.size()-1) && (mdtsAll.get(i).getConfirmed() == 2)) {
+				i++;
+			}
+			mdts.add(mdtsAll.get(i));
+		}
 		
 		String currLine = "confirmed, picture, userID, adjudicatorID, mdt_late, mdt_fp, mdt_lens, "+
 				  "mdt_lens_y, mdt_dur, mdt_ptd, mdt_lu_one, mdt_ru_one, mdt_ll_one, "+

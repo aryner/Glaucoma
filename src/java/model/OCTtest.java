@@ -742,7 +742,15 @@ public class OCTtest implements BaseTest {
 	public static Vector<String> getCSVLines() {
 		Vector<String> result = new Vector<String>();
 		String query = "SELECT * FROM OCTtest ORDER BY pictureName";
-		Vector<OCTtest> octs = SQLCommands.queryOCTtest(query);
+		Vector<OCTtest> octsAll = SQLCommands.queryOCTtest(query);
+		Vector<OCTtest> octs = new Vector<OCTtest>();
+
+		for(int i=0; i<octsAll.size(); i++) {
+			if(i<(octsAll.size()-1) && (octsAll.get(i).getConfirmed() == 2)) {
+				i++;
+			}
+			octs.add(octsAll.get(i));
+		}
 		
 		String currLine = "confirmed, picture, userID, adjudicatorID, oct_length, oct_type, oct_type_oth, "+
 				  "oct_snum, oct_scol, oct_nnum, oct_ncol, oct_inum, oct_icol, oct_tnum, oct_tcol, "+

@@ -503,7 +503,15 @@ public class FDTtest implements BaseTest {
 	public static Vector<String> getCSVLines() {
 		Vector<String> result = new Vector<String>();
 		String query = "SELECT * FROM FDTtest ORDER BY pictureName";
-		Vector<FDTtest> fdts = SQLCommands.queryFDTtest(query);
+		Vector<FDTtest> fdtsAll = SQLCommands.queryFDTtest(query);
+		Vector<FDTtest> fdts = new Vector<FDTtest>();
+
+		for(int i=0; i<fdtsAll.size(); i++) {
+			if(i<(fdtsAll.size()-1) && (fdtsAll.get(i).getConfirmed() == 2)) {
+				i++;
+			}
+			fdts.add(fdtsAll.get(i));
+		}
 
 		String currLine = "confirmed, picture, userID, adjudicatorID, fdt_dur, fdt_targ, fdt_targ_oth, fdt_fixerr_num, "+
 				  "fdt_fixerr_den, fdt_fp_num, fdt_fp_den, fdt_fn_num, fdt_fn_den, fdt_test, fdt_test_oth, fdt_speed, "+

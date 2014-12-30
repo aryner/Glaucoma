@@ -460,7 +460,15 @@ public class Photos implements BaseTest {
 	public static Vector<String> getStereoCSVLines() {
 		Vector<String> result = new Vector<String>();
 		String query = "SELECT * FROM Photos WHERE type="+STEREO+" ORDER BY pictureName";
-		Vector<Photos> photos = SQLCommands.queryPhotos(query);
+		Vector<Photos> photosAll = SQLCommands.queryPhotos(query);
+		Vector<Photos> photos = new Vector<Photos>();
+
+		for(int i=0; i<photosAll.size(); i++) {
+			if(i<(photosAll.size()-1) && (photosAll.get(i).getConfirmed() == 2)) {
+				i++;
+			}
+			photos.add(photosAll.get(i));
+		}
 		
 		String currLine = "confirmed, picture, userID, adjudicatorID, type, photo_qual, photo_cdr, "+
 				  "photo_notch, notch_hrs_one, notch_hrs_two, photo_erosion, eros_hrs_one, "+
@@ -484,7 +492,15 @@ public class Photos implements BaseTest {
 	public static Vector<String> getNethraCSVLines() {
 		Vector<String> result = new Vector<String>();
 		String query = "SELECT * FROM Photos WHERE type="+NETHRA+" ORDER BY pictureName";
-		Vector<Photos> photos = SQLCommands.queryPhotos(query);
+		Vector<Photos> photosAll = SQLCommands.queryPhotos(query);
+		Vector<Photos> photos = new Vector<Photos>();
+
+		for(int i=0; i<photosAll.size(); i++) {
+			if(i<(photosAll.size()-1) && (photosAll.get(i).getConfirmed() == 2)) {
+				i++;
+			}
+			photos.add(photosAll.get(i));
+		}
 		
 		String currLine = "confirmed, picture, userID, adjudicatorID, type, photo_qual, photo_cdr, "+
 				  "photo_notch, notch_hrs_one, notch_hrs_two, photo_erosion, eros_hrs_one, "+
