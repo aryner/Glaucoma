@@ -21,6 +21,9 @@ import utilities.SQLCommands;
  * @author aryner
  */
 public class Tools {
+	public static final int CSVCONFIRMED = 0;
+	public static final int CSVPICNAME = 1;
+
 	private static final String slash = System.getProperty("file.separator");
 
 	public static void createCSVs(Vector<String> lines, String fileName) {
@@ -124,6 +127,28 @@ public class Tools {
 
 		return result;
 	}
+	 
+	public static String formatCSVLine(String line) {
+		line = "'"+line+"'";
+		line = line.replaceAll(", ", "', '");
+		line.replaceAll("null", "");
+		line.replaceAll("NULL", "");
+
+		return line;
+	}
+
+	public static Vector<String> processCSVLine(String line) {
+		int index = 0;
+		String confirmed = line.substring(index+3,line.indexOf(",",index+1)-1);
+		index = line.indexOf(",", index+1);
+		String picName = line.substring(index+3,line.indexOf(",",index+1)-1);
+
+		Vector<String> result = new Vector<String>();
+		result.add(confirmed);
+		result.add(picName);
+
+		return result;
+	}
 
 	public static Vector<String> readCSVs(HttpServletRequest request) {
 		Vector<String> errors = new Vector<String>();
@@ -164,8 +189,8 @@ public class Tools {
 					if(extension.equals("csv") || extension.equals("CSV")) {
 						type = fileName.substring(0,index);
 
-						if(type.equals("hvf_grades")) {
-							path = ".."+slash+"webapps"+slash+"HVF"+slash+"temp"+slash;
+						if(type.contains("hvf_grades")) {
+							path = ".."+slash+"webapps"+slash+"Glaucoma"+slash+"temp"+slash;
 							new File(path).mkdirs();
 							File file = new File(path+fileName);
 							item.write(file);
@@ -173,7 +198,60 @@ public class Tools {
 							HVFtest.readCSV(fileName);
 							file.delete();
 						}
-						else if(type.equals("hvf_pictures")) {}
+						else if(type.contains("fdt_grades")) {
+							path = ".."+slash+"webapps"+slash+"Glaucoma"+slash+"temp"+slash;
+							new File(path).mkdirs();
+							File file = new File(path+fileName);
+							item.write(file);
+
+							FDTtest.readCSV(fileName);
+							file.delete();
+						}
+						else if(type.contains("mdt_grades")) {
+							path = ".."+slash+"webapps"+slash+"Glaucoma"+slash+"temp"+slash;
+							new File(path).mkdirs();
+							File file = new File(path+fileName);
+							item.write(file);
+
+							MDTtest.readCSV(fileName);
+							file.delete();
+						}
+						else if(type.contains("oct_grades")) {
+							path = ".."+slash+"webapps"+slash+"Glaucoma"+slash+"temp"+slash;
+							new File(path).mkdirs();
+							File file = new File(path+fileName);
+							item.write(file);
+
+							OCTtest.readCSV(fileName);
+							file.delete();
+						}
+						else if(type.contains("stereo_grades")) {
+							path = ".."+slash+"webapps"+slash+"Glaucoma"+slash+"temp"+slash;
+							new File(path).mkdirs();
+							File file = new File(path+fileName);
+							item.write(file);
+
+							Photos.readCSV(fileName, BaseTest.STEREO);
+							file.delete();
+						}
+						else if(type.contains("3Nethra_grades")) {
+							path = ".."+slash+"webapps"+slash+"Glaucoma"+slash+"temp"+slash;
+							new File(path).mkdirs();
+							File file = new File(path+fileName);
+							item.write(file);
+
+							Photos.readCSV(fileName,BaseTest.NETHRA);
+							file.delete();
+						}
+						else if(type.contains("iPad_grades")) {
+							path = ".."+slash+"webapps"+slash+"Glaucoma"+slash+"temp"+slash;
+							new File(path).mkdirs();
+							File file = new File(path+fileName);
+							item.write(file);
+
+							IPad.readCSV(fileName);
+							file.delete();
+						}
 						else { errors.add(fileName); }
 					}
 					else {

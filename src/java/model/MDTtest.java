@@ -9,6 +9,7 @@ package model;
 import utilities.*;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
+import java.io.*;
 
 /**
  *
@@ -407,6 +408,143 @@ public class MDTtest implements BaseTest {
 		}
 
 		return result;
+	}
+
+	public static void readCSV(String fileName) {
+		String query = "SELECT * FROM MDTtest";
+
+		Vector<MDTtest> alreadyHere = SQLCommands.queryMDTtest(query);
+		ArrayList<String> newLines = new ArrayList<String>();
+		ArrayList<String> updateLines = new ArrayList<String>();
+		ArrayList<String> toBeReplaced = new ArrayList<String>();
+		File file = null;
+		FileReader reader = null;
+		BufferedReader fileReader = null;
+
+		try {
+			file = new File(".."+slash+"webapps"+slash+"Glaucoma"+slash+"temp"+slash+fileName);
+			reader = new FileReader(file);
+			fileReader = new BufferedReader(reader);
+
+			String line = fileReader.readLine();
+			int index;
+			if(line != null && line.length() > 0) {
+				line = fileReader.readLine();
+			}
+
+			while(line != null && line.length() > 0) {
+				line = Tools.formatCSVLine(line);
+				Vector<String> processedLine = Tools.processCSVLine(line);
+
+				boolean duplicate = false;
+				MDTtest oldTest = null;
+				for(int i=0; i<alreadyHere.size() && !duplicate; i++) {
+					if(processedLine.get(Tools.CSVPICNAME).equals(alreadyHere.get(i).getPictureName())) {
+						oldTest = alreadyHere.get(i);
+						duplicate = true;
+					}
+				}
+
+				if(!duplicate) {
+					newLines.add(line);
+				}
+				else {
+					int confirmed = Integer.parseInt(processedLine.get(Tools.CSVCONFIRMED));
+					if(confirmed > oldTest.getConfirmed()) {
+						updateLines.add(line);
+						toBeReplaced.add(oldTest.getPictureName());
+					}
+				}
+				line = fileReader.readLine();
+			}
+
+			//add new records
+			query = "INSERT INTO MDTtest (confirmed, pictureName, userID, adjudicatorID, "+
+				"mdt_late, mdt_fp, mdt_lens, "+
+				"mdt_lens_y, mdt_dur, mdt_ptd, mdt_lu_one, mdt_ru_one, mdt_ll_one, "+
+				"mdt_rl_one, mdt_abnormal) VALUES ";
+			for(int i=0; i<newLines.size(); i++) {
+				if(i > 0) { query += ", "; }
+				query += "("+newLines.get(i)+")";
+			}
+			if(newLines.size() > 0) {
+				SQLCommands.update(query);
+			}
+
+			//delete recors that will be replaced
+			query = "DELETE FROM MDTtest WHERE ";
+			for(int i=0; i<updateLines.size(); i++) {
+				if(i>0) {query+=" OR ";}
+				query += "pictureName'"+toBeReplaced.get(i)+"'";
+			}
+			if(updateLines.size() > 0) {
+				SQLCommands.update(query);
+			}
+
+			//insert records to replace the deleted ones
+			query = "INSERT INTO MDTtest (confirmed, pictureName, userID, adjudicatorID, "+
+				"mdt_late, mdt_fp, mdt_lens, "+
+				"mdt_lens_y, mdt_dur, mdt_ptd, mdt_lu_one, mdt_ru_one, mdt_ll_one, "+
+				"mdt_rl_one, mdt_abnormal) VALUES ";
+			for(int i=0; i<updateLines.size(); i++) {
+				if(i>0) {query += ", ";}
+				query += "("+updateLines.get(i)+")";
+			}
+			if(updateLines.size() > 0) {
+				SQLCommands.update(query);
+			}
+
+		}
+		catch (Exception e) { 
+			e.printStackTrace(); 
+		}
+		finally {
+			try {
+				reader.close();
+				fileReader.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		reduplicate();
+	}
+
+	private static void reduplicate() {
+		String query = "SELECT * FROM MDTtest WHERE confirmed=2";
+		Vector<MDTtest> mdts = SQLCommands.queryMDTtest(query);
+		Vector<MDTtest> needDuplicate = new Vector<MDTtest>();
+
+		outerLoop:
+		for(MDTtest mdt : mdts) {
+			for(MDTtest check : mdts) {
+				if(check.getId() == mdt.getId()) {
+					continue;
+				}
+				if(check.getPictureName().equals(mdt.getPictureName())) {
+					continue outerLoop;
+				}
+			}
+			needDuplicate.add(mdt);
+		}
+
+		if(needDuplicate.size() == 0) return;
+		
+		query = "INSERT INTO MDTtest (confirmed, pictureName, userID, adjudicatorID, "+
+				"mdt_late, mdt_fp, mdt_lens, "+
+				"mdt_lens_y, mdt_dur, mdt_ptd, mdt_lu_one, mdt_ru_one, mdt_ll_one, "+
+				"mdt_rl_one, mdt_abnormal) VALUES ";
+		for(int i=0; i<needDuplicate.size(); i++) {
+			if(i>0) {query += ", ";}
+			MDTtest mdt = needDuplicate.get(i);
+			query += "("+
+				mdt.getConfirmed()+", "+mdt.getPictureName()+", "+mdt.getUserID()+", "+mdt.getAdjudicatorID()+", "+
+				mdt.getLate()+", "+mdt.getFp()+", "+mdt.getLens()+", "+mdt.getLens_y()+", "+mdt.getDur()+", "+
+				mdt.getPtd()+", "+mdt.getLu_one()+", "+mdt.getRu_one()+", "+mdt.getLl_one()+", "+
+				mdt.getRl_one()+", "+mdt.getAbnormal()+
+				")";
+		}
+
+		SQLCommands.update(query);
 	}
 
 	public int getBaseType() {

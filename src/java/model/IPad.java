@@ -9,6 +9,7 @@ package model;
 import utilities.*;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
+import java.io.*;
 
 /**
  *
@@ -26,6 +27,7 @@ public class IPad implements BaseTest{
 	private String inf_hem;
 
 	private int baseType;
+	private static final String slash = System.getProperty("file.separator");
 
 	public IPad(String npictureName) {
 		pictureName = npictureName;
@@ -298,6 +300,138 @@ public class IPad implements BaseTest{
 		}
 
 		return result;
+	}
+
+	public static void readCSV(String fileName) {
+		String query = "SELECT * FROM iPad";
+
+		Vector<IPad> alreadyHere = SQLCommands.queryIPad(query);
+		ArrayList<String> newLines = new ArrayList<String>();
+		ArrayList<String> updateLines = new ArrayList<String>();
+		ArrayList<String> toBeReplaced = new ArrayList<String>();
+		File file = null;
+		FileReader reader = null;
+		BufferedReader fileReader = null;
+
+		try {
+			file = new File(".."+slash+"webapps"+slash+"Glaucoma"+slash+"temp"+slash+fileName);
+			reader = new FileReader(file);
+			fileReader = new BufferedReader(reader);
+
+			String line = fileReader.readLine();
+			int index;
+			if(line != null && line.length() > 0) {
+				line = fileReader.readLine();
+			}
+
+			while(line != null && line.length() > 0) {
+				line = Tools.formatCSVLine(line);
+				Vector<String> processedLine = Tools.processCSVLine(line);
+
+				boolean duplicate = false;
+				IPad oldTest = null;
+				for(int i=0; i<alreadyHere.size() && !duplicate; i++) {
+					if(processedLine.get(Tools.CSVPICNAME).equals(alreadyHere.get(i).getPictureName())) {
+						oldTest = alreadyHere.get(i);
+						duplicate = true;
+					}
+				}
+
+				if(!duplicate) {
+					newLines.add(line);
+				}
+				else {
+					int confirmed = Integer.parseInt(processedLine.get(Tools.CSVCONFIRMED));
+					if(confirmed > oldTest.getConfirmed()) {
+						updateLines.add(line);
+						toBeReplaced.add(oldTest.getPictureName());
+					}
+				}
+				line = fileReader.readLine();
+			}
+
+			//add new records
+			query = "INSERT INTO iPad (confirmed, pictureName, userID, adjudicatorID, "+
+				"adjudicatorID, ipad_fp, ipad_fn, ipad_sup_hem, ipad_inf_hem"+
+				") VALUES ";
+			for(int i=0; i<newLines.size(); i++) {
+				if(i > 0) { query += ", "; }
+				query += "("+newLines.get(i)+")";
+			}
+			if(newLines.size() > 0) {
+				SQLCommands.update(query);
+			}
+
+			//delete recors that will be replaced
+			query = "DELETE FROM iPad WHERE ";
+			for(int i=0; i<updateLines.size(); i++) {
+				if(i>0) {query+=" OR ";}
+				query += "pictureName'"+toBeReplaced.get(i)+"'";
+			}
+			if(updateLines.size() > 0) {
+				SQLCommands.update(query);
+			}
+
+			//insert records to replace the deleted ones
+			query = "INSERT INTO iPad (confirmed, pictureName, userID, adjudicatorID, "+
+				"adjudicatorID, ipad_fp, ipad_fn, ipad_sup_hem, ipad_inf_hem"+
+				") VALUES ";
+			for(int i=0; i<updateLines.size(); i++) {
+				if(i>0) {query += ", ";}
+				query += "("+updateLines.get(i)+")";
+			}
+			if(updateLines.size() > 0) {
+				SQLCommands.update(query);
+			}
+
+		}
+		catch (Exception e) { 
+			e.printStackTrace(); 
+		}
+		finally {
+			try {
+				reader.close();
+				fileReader.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		reduplicate();
+	}
+
+	private static void reduplicate() {
+		String query = "SELECT * FROM iPad WHERE confirmed=2";
+		Vector<IPad> iPads = SQLCommands.queryIPad(query);
+		Vector<IPad> needDuplicate = new Vector<IPad>();
+
+		outerLoop:
+		for(IPad iPad: iPads) {
+			for(IPad check : iPads) {
+				if(check.getId() == iPad.getId()) {
+					continue;
+				}
+				if(check.getPictureName().equals(iPad.getPictureName())) {
+					continue outerLoop;
+				}
+			}
+			needDuplicate.add(iPad);
+		}
+
+		if(needDuplicate.size() == 0) return;
+		
+		query = "INSERT INTO iPad (confirmed, pictureName, userID, adjudicatorID, "+
+				"ipad_fp, ipad_fn, ipad_sup_hem, ipad_inf_hem"+
+				") VALUES ";
+		for(int i=0; i<needDuplicate.size(); i++) {
+			if(i>0) {query += ", ";}
+			IPad iPad = needDuplicate.get(i);
+			query += "("+
+				iPad.getConfirmed()+", "+iPad.getPictureName()+", "+iPad.getUserID()+", "+iPad.getAdjudicatorID()+", "+
+				iPad.getFp()+", "+iPad.getFn()+", "+iPad.getSup_hem()+", "+iPad.getInf_hem()+
+				")";
+		}
+
+		SQLCommands.update(query);
 	}
 
 	/**

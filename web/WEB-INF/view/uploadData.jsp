@@ -6,7 +6,7 @@
 
 <h3>Upload CSV files of data</h3>
 <p style="width:25%;text-align:center;">
-Make sure to also upload the PDFs that go with the CSV files you are uploading 
+Make sure to also upload the pictures that go with the CSV files you are uploading 
 in the upload pictures page if you haven't already.
 </p>
 

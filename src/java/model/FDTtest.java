@@ -9,6 +9,7 @@ package model;
 import utilities.*;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
+import java.io.*;
 
 /**
  *
@@ -559,6 +560,154 @@ public class FDTtest implements BaseTest {
 		}
 
 		return result;
+	}
+
+	public static void readCSV(String fileName) {
+		String query = "SELECT * FROM FDTtest";
+
+		Vector<FDTtest> alreadyHere = SQLCommands.queryFDTtest(query);
+		ArrayList<String> newLines = new ArrayList<String>();
+		ArrayList<String> updateLines = new ArrayList<String>();
+		ArrayList<String> toBeReplaced = new ArrayList<String>();
+		File file = null;
+		FileReader reader = null;
+		BufferedReader fileReader = null;
+
+		try {
+			file = new File(".."+slash+"webapps"+slash+"Glaucoma"+slash+"temp"+slash+fileName);
+			reader = new FileReader(file);
+			fileReader = new BufferedReader(reader);
+
+			String line = fileReader.readLine();
+			int index;
+			if(line != null && line.length() > 0) {
+				line = fileReader.readLine();
+			}
+
+			while(line != null && line.length() > 0) {
+				line = Tools.formatCSVLine(line);
+				Vector<String> processedLine = Tools.processCSVLine(line);
+
+				boolean duplicate = false;
+				FDTtest oldTest = null;
+				for(int i=0; i<alreadyHere.size() && !duplicate; i++) {
+					if(processedLine.get(Tools.CSVPICNAME).equals(alreadyHere.get(i).getPictureName())) {
+						oldTest = alreadyHere.get(i);
+						duplicate = true;
+					}
+				}
+
+				if(!duplicate) {
+					newLines.add(line);
+				}
+				else {
+					int confirmed = Integer.parseInt(processedLine.get(Tools.CSVCONFIRMED));
+					if(confirmed > oldTest.getConfirmed()) {
+						updateLines.add(line);
+						toBeReplaced.add(oldTest.getPictureName());
+					}
+				}
+				line = fileReader.readLine();
+			}
+
+			//add new records
+			query = "INSERT INTO FDTtest (confirmed, pictureName, userID, adjudicatorID, "+
+				"fdt_dur, fdt_targ, fdt_targ_oth, fdt_fixerr_num, "+
+				"fdt_fixerr_den, fdt_fp_num, fdt_fp_den, fdt_fn_num, fdt_fn_den, fdt_test, fdt_test_oth, fdt_speed, "+
+				"fdt_speed_oth, fdt_pupil, fdt_va_num, fdt_va_den, fdt_mdsign, fdt_mddb, fdt_mdp, fdt_psdsign, "+
+				"fdt_psdb, fdt_psdp, fdt_lu_one, fdt_lu_five, fdt_ru_one, fdt_ru_five, fdt_ll_one, fdt_ll_five, " +
+				"fdt_rl_one, fdt_rl_five, fdt_abnormal) VALUES ";
+			for(int i=0; i<newLines.size(); i++) {
+				if(i > 0) { query += ", "; }
+				query += "("+newLines.get(i)+")";
+			}
+			if(newLines.size() > 0) {
+				SQLCommands.update(query);
+			}
+
+			//delete recors that will be replaced
+			query = "DELETE FROM FDTtest WHERE ";
+			for(int i=0; i<updateLines.size(); i++) {
+				if(i>0) {query+=" OR ";}
+				query += "pictureName'"+toBeReplaced.get(i)+"'";
+			}
+			if(updateLines.size() > 0) {
+				SQLCommands.update(query);
+			}
+
+			//insert records to replace the deleted ones
+			query = "INSERT INTO FDTtest (confirmed, pictureName, userID, adjudicatorID, "+
+				"fdt_dur, fdt_targ, fdt_targ_oth, fdt_fixerr_num, "+
+				"fdt_fixerr_den, fdt_fp_num, fdt_fp_den, fdt_fn_num, fdt_fn_den, fdt_test, fdt_test_oth, fdt_speed, "+
+				"fdt_speed_oth, fdt_pupil, fdt_va_num, fdt_va_den, fdt_mdsign, fdt_mddb, fdt_mdp, fdt_psdsign, "+
+				"fdt_psdb, fdt_psdp, fdt_lu_one, fdt_lu_five, fdt_ru_one, fdt_ru_five, fdt_ll_one, fdt_ll_five, " +
+				"fdt_rl_one, fdt_rl_five, fdt_abnormal) VALUES ";
+			for(int i=0; i<updateLines.size(); i++) {
+				if(i>0) {query += ", ";}
+				query += "("+updateLines.get(i)+")";
+			}
+			if(updateLines.size() > 0) {
+				SQLCommands.update(query);
+			}
+
+		}
+		catch (Exception e) { 
+			e.printStackTrace(); 
+		}
+		finally {
+			try {
+				reader.close();
+				fileReader.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		reduplicate();
+	}
+
+	private static void reduplicate() {
+		String query = "SELECT * FROM FDTtest WHERE confirmed=2";
+		Vector<FDTtest> fdts = SQLCommands.queryFDTtest(query);
+		Vector<FDTtest> needDuplicate = new Vector<FDTtest>();
+
+		outerLoop:
+		for(FDTtest fdt : fdts) {
+			for(FDTtest check : fdts) {
+				if(check.getId() == fdt.getId()) {
+					continue;
+				}
+				if(check.getPictureName().equals(fdt.getPictureName())) {
+					continue outerLoop;
+				}
+			}
+			needDuplicate.add(fdt);
+		}
+
+		if(needDuplicate.size() == 0) return;
+		
+		query = "INSERT INTO FDTtest (confirmed, pictureName, userID, adjudicatorID, "+
+			"fdt_dur, fdt_targ, fdt_targ_oth, fdt_fixerr_num, "+
+			"fdt_fixerr_den, fdt_fp_num, fdt_fp_den, fdt_fn_num, fdt_fn_den, fdt_test, fdt_test_oth, fdt_speed, "+
+			"fdt_speed_oth, fdt_pupil, fdt_va_num, fdt_va_den, fdt_mdsign, fdt_mddb, fdt_mdp, fdt_psdsign, "+
+			"fdt_psdb, fdt_psdp, fdt_lu_one, fdt_lu_five, fdt_ru_one, fdt_ru_five, fdt_ll_one, fdt_ll_five, " +
+			"fdt_rl_one, fdt_rl_five, fdt_abnormal) VALUES ";
+		for(int i=0; i<needDuplicate.size(); i++) {
+			if(i>0) {query += ", ";}
+			FDTtest fdt = needDuplicate.get(i);
+			query += "("+
+				fdt.getConfirmed()+", "+fdt.getPictureName()+", "+fdt.getUserID()+", "+fdt.getAdjudicatorID()+", "+
+				fdt.getDur()+", "+fdt.getTarg()+", "+fdt.getTarg_oth()+", "+fdt.getFixerr_num()+", "+
+				fdt.getFixerr_den()+", "+fdt.getFp_num()+", "+fdt.getFp_den()+", "+fdt.getFn_num()+", "+
+				fdt.getFn_den()+", "+fdt.getTest()+", "+fdt.getTest_oth()+", "+fdt.getSpeed()+", "+
+				fdt.getSpeed_oth()+", "+fdt.getPupil()+", "+fdt.getVa_num()+", "+fdt.getVa_den()+", "+
+				fdt.getMdsign()+", "+fdt.getMddb()+", "+fdt.getMdp()+", "+fdt.getPsdsign()+", "+
+				fdt.getPsdb()+", "+fdt.getPsdp()+", "+fdt.getLu_one()+", "+fdt.getLu_five()+", "+
+				fdt.getRu_one()+", "+fdt.getRu_five()+", "+fdt.getLl_one()+", "+fdt.getLl_five()+", "+
+				fdt.getRl_one()+", "+fdt.getRl_five()+", "+fdt.getAbnormal()+
+				")";
+		}
+
+		SQLCommands.update(query);
 	}
 
 	public int getBaseType() {

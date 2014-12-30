@@ -9,6 +9,7 @@ package model;
 import java.util.*;
 import utilities.*;
 import javax.servlet.http.HttpServletRequest;
+import java.io.*;
 
 /**
  *
@@ -502,7 +503,8 @@ public class Photos implements BaseTest {
 			photos.add(photosAll.get(i));
 		}
 		
-		String currLine = "confirmed, picture, userID, adjudicatorID, type, photo_qual, photo_cdr, "+
+		String currLine = "confirmed, picture, userID, adjudicatorID, type, "+
+				  "photo_qual, photo_cdr, "+
 				  "photo_notch, notch_hrs_one, notch_hrs_two, photo_erosion, eros_hrs_one, "+
 				  "eros_hrs_two, photo_disc, disc_hrs_one, disc_hrs_two, photo_rnfl, "+
 				  "rnfl_hrs_one, rnfl_hrs_two, photo_glau";
@@ -567,6 +569,151 @@ public class Photos implements BaseTest {
 		}
 
 		return result;
+	}
+
+	public static void readCSV(String fileName, int type) {
+		String query = "SELECT * FROM Photos WHERE type='"+type+"'";
+
+		Vector<Photos> alreadyHere = SQLCommands.queryPhotos(query);
+		ArrayList<String> newLines = new ArrayList<String>();
+		ArrayList<String> updateLines = new ArrayList<String>();
+		ArrayList<String> toBeReplaced = new ArrayList<String>();
+		File file = null;
+		FileReader reader = null;
+		BufferedReader fileReader = null;
+
+		try {
+			file = new File(".."+slash+"webapps"+slash+"Glaucoma"+slash+"temp"+slash+fileName);
+			reader = new FileReader(file);
+			fileReader = new BufferedReader(reader);
+
+			String line = fileReader.readLine();
+			int index;
+			if(line != null && line.length() > 0) {
+				line = fileReader.readLine();
+			}
+
+			while(line != null && line.length() > 0) {
+				line = Tools.formatCSVLine(line);
+				Vector<String> processedLine = Tools.processCSVLine(line);
+
+				boolean duplicate = false;
+				Photos oldTest = null;
+				for(int i=0; i<alreadyHere.size() && !duplicate; i++) {
+					if(processedLine.get(Tools.CSVPICNAME).equals(alreadyHere.get(i).getPictureName())) {
+						oldTest = alreadyHere.get(i);
+						duplicate = true;
+					}
+				}
+
+				if(!duplicate) {
+					newLines.add(line);
+				}
+				else {
+					int confirmed = Integer.parseInt(processedLine.get(Tools.CSVCONFIRMED));
+					if(confirmed > oldTest.getConfirmed()) {
+						updateLines.add(line);
+						toBeReplaced.add(oldTest.getPictureName());
+					}
+				}
+				line = fileReader.readLine();
+			}
+
+			//add new records
+			query = "INSERT INTO Photos (confirmed, pictureName, userID, adjudicatorID, type, "+
+				"photo_qual, photo_cdr, "+
+				"photo_notch, notch_hrs_one, notch_hrs_two, photo_erosion, eros_hrs_one, "+
+				"eros_hrs_two, photo_disc, disc_hrs_one, disc_hrs_two, photo_rnfl, "+
+				"rnfl_hrs_one, rnfl_hrs_two, photo_glau"+
+				") VALUES ";
+			for(int i=0; i<newLines.size(); i++) {
+				if(i > 0) { query += ", "; }
+				query += "("+newLines.get(i)+")";
+			}
+			if(newLines.size() > 0) {
+				SQLCommands.update(query);
+			}
+
+			//delete recors that will be replaced
+			query = "DELETE FROM Photos WHERE ";
+			for(int i=0; i<updateLines.size(); i++) {
+				if(i>0) {query+=" OR ";}
+				query += "pictureName'"+toBeReplaced.get(i)+"'";
+			}
+			if(updateLines.size() > 0) {
+				SQLCommands.update(query);
+			}
+
+			//insert records to replace the deleted ones
+			query = "INSERT INTO Photos (confirmed, pictureName, userID, adjudicatorID, type, "+
+				"photo_qual, photo_cdr, "+
+				"photo_notch, notch_hrs_one, notch_hrs_two, photo_erosion, eros_hrs_one, "+
+				"eros_hrs_two, photo_disc, disc_hrs_one, disc_hrs_two, photo_rnfl, "+
+				"rnfl_hrs_one, rnfl_hrs_two, photo_glau"+
+				") VALUES ";
+			for(int i=0; i<updateLines.size(); i++) {
+				if(i>0) {query += ", ";}
+				query += "("+updateLines.get(i)+")";
+			}
+			if(updateLines.size() > 0) {
+				SQLCommands.update(query);
+			}
+
+		}
+		catch (Exception e) { 
+			e.printStackTrace(); 
+		}
+		finally {
+			try {
+				reader.close();
+				fileReader.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		reduplicate(type);
+	}
+
+	private static void reduplicate(int type) {
+		String query = "SELECT * FROM Photos WHERE confirmed=2 AND type="+type;
+		Vector<Photos> photos = SQLCommands.queryPhotos(query);
+		Vector<Photos> needDuplicate = new Vector<Photos>();
+
+		outerLoop:
+		for(Photos photo: photos) {
+			for(Photos check : photos) {
+				if(check.getId() == photo.getId()) {
+					continue;
+				}
+				if(check.getPictureName().equals(photo.getPictureName())) {
+					continue outerLoop;
+				}
+			}
+			needDuplicate.add(photo);
+		}
+
+		if(needDuplicate.size() == 0) return;
+		
+		query = "INSERT INTO Photos (confirmed, pictureName, userID, adjudicatorID, type, "+
+				"photo_qual, photo_cdr, "+
+				"photo_notch, notch_hrs_one, notch_hrs_two, photo_erosion, eros_hrs_one, "+
+				"eros_hrs_two, photo_disc, disc_hrs_one, disc_hrs_two, photo_rnfl, "+
+				"rnfl_hrs_one, rnfl_hrs_two, photo_glau"+
+				") VALUES ";
+		for(int i=0; i<needDuplicate.size(); i++) {
+			if(i>0) {query += ", ";}
+			Photos photo = needDuplicate.get(i);
+			query += "("+
+				photo.getConfirmed()+", "+photo.getPictureName()+", "+photo.getUserID()+", "+photo.getAdjudicatorID()+", "+
+				photo.getType()+", "+photo.getQual()+", "+photo.getCdr()+", "+photo.getNotch()+", "+
+				photo.getNotch_hrs_one()+", "+photo.getNotch_hrs_two()+", "+photo.getErosion()+", "+
+				photo.getEros_hrs_one()+", "+photo.getEros_hrs_two()+", "+photo.getDisc()+", "+
+				photo.getDisc_hrs_one()+", "+photo.getDisc_hrs_two()+", "+photo.getRnfl()+", "+
+				photo.getRnfl_hrs_one()+", "+photo.getRnfl_hrs_two()+", "+photo.getGlau()+
+				")";
+		}
+
+		SQLCommands.update(query);
 	}
 
 	public int getBaseType() {
