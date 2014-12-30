@@ -176,7 +176,7 @@ if(pic == null) {
 		<td>
 <span id="snum">S </span>
 		</td>
-		<td id='sOD'>
+		<td id='scol'>
 <input type="text" name="snum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 <%
@@ -204,7 +204,7 @@ if(pic == null) {
 <option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
 </select>
 		</td>
-		<td id='sOS'>
+		<td id='scol_os'>
 <%
 	s1 = "";
 	s2 = "";
@@ -265,7 +265,7 @@ if(pic == null) {
 <td>
 	<span id="nnum">N </span>
 </td>
-<td>
+<td id='ncol'>
 <input type="text" name="nnum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
@@ -308,7 +308,7 @@ if(pic == null) {
 		}
 	}
 %>
-<td>
+<td id='ncol_os'>
 <input type="text" name="nnum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
@@ -356,7 +356,7 @@ if(pic == null) {
 <td>
 <span id="inum">I</span>
 </td>
-<td>
+<td id='icol'>
 <input type="text" name="inum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 <%
@@ -398,7 +398,7 @@ if(pic == null) {
 		}
 	}
 %>
-<td>
+<td id='icol_os'>
 <input type="text" name="inum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 <%
@@ -445,7 +445,7 @@ if(pic == null) {
 <td>
 <span id="tnum">T</span>
 </td>
-<td>
+<td id='tcol'>
 <input type="text" name="tnum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
@@ -488,7 +488,7 @@ if(pic == null) {
 		}
 	}
 %>
-<td>
+<td id='tcol_os'>
 <input type="text" name="tnum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
@@ -537,7 +537,7 @@ if(pic == null) {
 <td>
 <span id="isnum">Imax/Smax</span>
 </td>
-<td>
+<td id='iscol'>
 <input type="text" name="isnum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
@@ -566,7 +566,7 @@ if(pic == null) {
 <option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option
 </select>
 </td>
-<td>
+<td id='iscol_os'>
 <%
 	s1 = "";
 	s2 = "";
@@ -627,7 +627,7 @@ if(pic == null) {
 <td>
 <span id="sinum">Smax/Imax</span>
 </td>
-<td>
+<td id='sicol'>
 <input type="text" name="sinum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
@@ -670,7 +670,7 @@ if(pic == null) {
 		}
 	}
 %>
-<td>
+<td id='sicol_os'>
 <input type="text" name="sinum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
@@ -718,7 +718,7 @@ if(pic == null) {
 <td>
 <span id="stnum">Smax/Tavg</span>
 </td>
-<td>
+<td id='stcol'>
 <input type="text" name="stnum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
@@ -761,7 +761,7 @@ if(pic == null) {
 		}
 	}
 %>
-<td>
+<td id='stcol_os'>
 <input type="text" name="stnum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
@@ -810,7 +810,7 @@ if(pic == null) {
 <td>
 <span id="itnum">Imax/Tvag</span>
 </td>
-<td>
+<td id='itcol'>
 <input type="text" name="itnum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
@@ -853,7 +853,7 @@ if(pic == null) {
 		}
 	}
 %>
-<td>
+<td id='itcol_os'>
 <input type="text" name="itnum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
@@ -902,7 +902,7 @@ if(pic == null) {
 <td>
 <span id="snnum">Smax/Navg</span>
 </td>
-<td>
+<td id='sncol'>
 <input type="text" name="snnum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
@@ -945,7 +945,7 @@ if(pic == null) {
 		}
 	}
 %>
-<td>
+<td id='sncol_os'>
 <input type="text" name="snnum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
@@ -995,7 +995,7 @@ if(pic == null) {
 <td>
 <span id="mmnum">Max-Min</span>
 </td>
-<td>
+<td id='mmcol'>
 <input type="text" name="mmnum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
@@ -1038,7 +1038,7 @@ if(pic == null) {
 		}
 	}
 %>
-<td>
+<td id='mmcol_os'>
 <input type="text" name="mmnum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
@@ -1087,7 +1087,7 @@ if(pic == null) {
 <td>
 <span id="smaxnum">Smax</span>
 </td>
-<td>
+<td id='smaxcol'>
 <input type="text" name="smaxnum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
@@ -1130,7 +1130,7 @@ if(pic == null) {
 		}
 	}
 %>
-<td>
+<td id='smaxcol_os'>
 <input type="text" name="smaxnum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
@@ -1180,7 +1180,7 @@ if(pic == null) {
 <td>
 <span id="imaxnum">Imax</span>
 </td>
-<td>
+<td id='imaxcol'>
 <input type="text" name="imaxnum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
@@ -1223,7 +1223,7 @@ if(pic == null) {
 		}
 	}
 %>
-<td>
+<td id='imaxcol_os'>
 <input type="text" name="imaxnum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
@@ -1272,7 +1272,7 @@ if(pic == null) {
 <td>
 <span id="savgnum">Savg</span>
 </td>
-<td>
+<td id='savgcol'>
 <input type="text" name="savgnum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
@@ -1315,7 +1315,7 @@ if(pic == null) {
 		}
 	}
 %>
-<td>
+<td id='savgcol_os'>
 <input type="text" name="savgnum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
@@ -1364,7 +1364,7 @@ if(pic == null) {
 <td>
 <span id="iavgnum">Iavg</span>
 </td>
-<td>
+<td id='iavgcol'>
 <input type="text" name="iavgnum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
@@ -1407,7 +1407,7 @@ if(pic == null) {
 		}
 	}
 %>
-<td>
+<td id='iavgcol_os'>
 <input type="text" name="iavgnum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
@@ -1456,7 +1456,7 @@ if(pic == null) {
 <td>
 <span id="atnum">Avg.Thick</span>
 </td>
-<td>
+<td id='atcol'>
 <input type="text" name="atnum" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 
@@ -1499,7 +1499,7 @@ if(pic == null) {
 		}
 	}
 %>
-<td>
+<td id='atcol_os'>
 <input type="text" name="atnum_os" class='bigNumBox' autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 

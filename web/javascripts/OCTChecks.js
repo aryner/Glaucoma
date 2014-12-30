@@ -7,7 +7,24 @@
 
 $(document).ready(function() {
 	$('select').on('change', function() {
+		clearColors(this.name);
+		var colorNum = Number(this.value);
+		var numName = this.name.substring(0, this.name.length-3)+"num";
 
+		switch(colorNum) {
+			case 1:
+				$('td[id='+this.name+']').addClass('white');
+				break;
+			case 2:
+				$('td[id='+this.name+']').addClass('green');
+				break;
+			case 3:
+				$('td[id='+this.name+']').addClass('yellow');
+				break;
+			case 4:
+				$('td[id='+this.name+']').addClass('red');
+				break;
+		}
 	});
 
 	$('input[type=text]').on('input', function(){
@@ -564,3 +581,10 @@ $(document).ready(function() {
 		}
 	});
 });
+
+function clearColors(id) {
+	$('td[id='+id+']').removeClass('white');
+	$('td[id='+id+']').removeClass('green');
+	$('td[id='+id+']').removeClass('yellow');
+	$('td[id='+id+']').removeClass('red');
+}
