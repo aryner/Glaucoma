@@ -6,10 +6,30 @@
 
 
 $(document).ready(function() {
+	var selectors = $('select');
+	for(var i=0; i<selectors.length; i++){
+		clearColors(selectors[i].name);
+		var colorNum = Number(selectors[i].value);
+
+		switch(colorNum) {
+			case 1:
+				$('td[id='+selectors[i].name+']').addClass('white');
+				break;
+			case 2:
+				$('td[id='+selectors[i].name+']').addClass('green');
+				break;
+			case 3:
+				$('td[id='+selectors[i].name+']').addClass('yellow');
+				break;
+			case 4:
+				$('td[id='+selectors[i].name+']').addClass('red');
+				break;
+		}
+	}
+
 	$('select').on('change', function() {
 		clearColors(this.name);
 		var colorNum = Number(this.value);
-		var numName = this.name.substring(0, this.name.length-3)+"num";
 
 		switch(colorNum) {
 			case 1:
@@ -535,7 +555,7 @@ $(document).ready(function() {
 		var i_iavg_os = Number($('input[type=text][name=inum_os]').val()) ===
 			     Number($('input[type=text][name=iavgnum_os]').val());
 
-		var focused_os = false;
+		var focused = false;
 
 		if(!length) {
 			focused = true;

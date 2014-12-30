@@ -77,7 +77,7 @@ if(pic == null) {
 <input type="radio" name="type" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>RNFL thickness(2.27 x disk)<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
 <input type="radio" name="type" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>>RNFL map<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%><br>
 <input type="radio" name="type" value="5"<%if(a && !diff && v1==5){out.print(" checked='true'");}%>><span id='type_oth'>Other : </span>
-<%if((a&&diff)&&((v1==5)||(v2==5))){%><span class='highlight'>***</span><%}%>
+<%if((a&&diff)&&((v1==5)||(v2==5))){%><span class='highlight'>*</span><%}%>
 <%
 	String s1 = "";
 	String s2 = "";
@@ -198,10 +198,10 @@ if(pic == null) {
 %>
 <select name='scol' >
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 		</td>
 		<td id='scol_os'>
@@ -240,10 +240,10 @@ if(pic == null) {
 %>
 <select name='scol_os'> 
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 		</td>
 	</tr>
@@ -288,10 +288,10 @@ if(pic == null) {
 %>
 <select name='ncol'>
 	<option value='0'></option>
-	<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-	<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-	<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-	<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+	<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+	<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+	<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+	<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 <%
@@ -331,10 +331,10 @@ if(pic == null) {
 %>
 <select name='ncol_os'>
 	<option value='0'></option>
-	<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-	<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-	<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-	<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+	<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+	<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+	<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+	<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 	</tr>
@@ -378,10 +378,10 @@ if(pic == null) {
 %>
 <select name='icol'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 <%
@@ -420,10 +420,10 @@ if(pic == null) {
 %>
 <select name='icol_os'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 
@@ -468,10 +468,10 @@ if(pic == null) {
 %>
 <select name='tcol'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 <%
@@ -511,10 +511,10 @@ if(pic == null) {
 %>
 <select name='tcol_os'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 
@@ -560,10 +560,10 @@ if(pic == null) {
 %>
 <select name='iscol'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 <td id='iscol_os'>
@@ -603,10 +603,10 @@ if(pic == null) {
 %>
 <select name='iscol_os'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 	<tr>
@@ -650,10 +650,10 @@ if(pic == null) {
 %>
 <select name='sicol'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 <%
@@ -693,10 +693,10 @@ if(pic == null) {
 %>
 <select name='sicol_os'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 	</tr>
@@ -741,10 +741,10 @@ if(pic == null) {
 %>
 <select name='stcol'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 <%
@@ -784,10 +784,10 @@ if(pic == null) {
 %>
 <select name='stcol_os'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 	</tr>
@@ -833,10 +833,10 @@ if(pic == null) {
 %>
 <select name='itcol'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 <%
@@ -876,10 +876,10 @@ if(pic == null) {
 %>
 <select name='itcol_os'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 
@@ -925,10 +925,10 @@ if(pic == null) {
 %>
 <select name='sncol'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 <%
@@ -968,10 +968,10 @@ if(pic == null) {
 %>
 <select name='sncol_os'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 
@@ -1018,10 +1018,10 @@ if(pic == null) {
 %>
 <select name='mmcol'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 <%
@@ -1061,10 +1061,10 @@ if(pic == null) {
 %>
 <select name='mmcol_os'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 
@@ -1110,10 +1110,10 @@ if(pic == null) {
 %>
 <select name='smaxcol'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 <%
@@ -1153,10 +1153,10 @@ if(pic == null) {
 %>
 <select name='smaxcol_os'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 
@@ -1203,10 +1203,10 @@ if(pic == null) {
 %>
 <select name='imaxcol'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 <%
@@ -1246,10 +1246,10 @@ if(pic == null) {
 %>
 <select name='imaxcol_os'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 
@@ -1295,10 +1295,10 @@ if(pic == null) {
 %>
 <select name='savgcol'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 <%
@@ -1338,10 +1338,10 @@ if(pic == null) {
 %>
 <select name='savgcol_os'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 
@@ -1387,10 +1387,10 @@ if(pic == null) {
 %>
 <select name='iavgcol'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 <%
@@ -1430,10 +1430,10 @@ if(pic == null) {
 %>
 <select name='iavgcol_os'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 
@@ -1479,10 +1479,10 @@ if(pic == null) {
 %>
 <select name='atcol'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 <%
@@ -1522,14 +1522,20 @@ if(pic == null) {
 %>
 <select name='atcol_os'>
 <option value='0'></option>
-<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%></option>
-<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%></option>
-<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%></option>
-<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%></option>
+<option value="1"<%if(a && !diff && v1==1){out.print(" selected='selected'");}%>>White<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>*</span><%}%></option>
+<option value="2"<%if(a && !diff && v1==2){out.print(" selected='selected'");}%>>Green<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>*</span><%}%></option>
+<option value="3"<%if(a && !diff && v1==3){out.print(" selected='selected'");}%>>Yellow<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>*</span><%}%></option>
+<option value="4"<%if(a && !diff && v1==4){out.print(" selected='selected'");}%>>Red<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>*</span><%}%></option>
 </select>
 </td>
 	</tr>
 </table>
+<br>
+
+<span id='savg_snum' class="error hidden">OD Savg and S numbers must match<br></span>
+<span id='iavg_inum' class="error hidden">OD Iavg and I numbers must match<br></span>
+<span id='savg_snum_os' class="error hidden">OS Savg and S numbers must match<br></span>
+<span id='iavg_inum_os' class="error hidden">OS Iavg and I numbers must match<br></span>
 <br>
 
 <input type="submit" value="Submit" class="btn">

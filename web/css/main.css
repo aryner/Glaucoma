@@ -666,6 +666,12 @@ table{
 	background-color: #efefef;
 	text-align: center;
 }
+td input{
+	float: left;
+}
+td select{
+	float: right;
+}
 
 .red {
 	background-color: red;
