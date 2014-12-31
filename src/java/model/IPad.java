@@ -352,7 +352,7 @@ public class IPad implements BaseTest{
 
 			//add new records
 			query = "INSERT INTO iPad (confirmed, pictureName, userID, adjudicatorID, "+
-				"adjudicatorID, ipad_fp, ipad_fn, ipad_sup_hem, ipad_inf_hem"+
+				"ipad_fp, ipad_fn, ipad_sup_hem, ipad_inf_hem"+
 				") VALUES ";
 			for(int i=0; i<newLines.size(); i++) {
 				if(i > 0) { query += ", "; }
@@ -374,7 +374,7 @@ public class IPad implements BaseTest{
 
 			//insert records to replace the deleted ones
 			query = "INSERT INTO iPad (confirmed, pictureName, userID, adjudicatorID, "+
-				"adjudicatorID, ipad_fp, ipad_fn, ipad_sup_hem, ipad_inf_hem"+
+				"ipad_fp, ipad_fn, ipad_sup_hem, ipad_inf_hem"+
 				") VALUES ";
 			for(int i=0; i<updateLines.size(); i++) {
 				if(i>0) {query += ", ";}

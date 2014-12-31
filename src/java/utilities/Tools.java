@@ -62,7 +62,7 @@ public class Tools {
 				createCSVs(Photos.getStereoCSVLines(), "stereo_grades");
 				break;
 			case BaseTest.NETHRA:
-				createCSVs(Photos.getNethraCSVLines(), "3Nethra_grades");
+				createCSVs(Photos.getNethraCSVLines(), "nethra_grades");
 				break;
 			case BaseTest.IPAD:
 				createCSVs(IPad.getCSVLines(), "iPad_grades");
@@ -234,12 +234,12 @@ public class Tools {
 							Photos.readCSV(fileName, BaseTest.STEREO);
 							file.delete();
 						}
-						else if(type.contains("3Nethra_grades")) {
+						else if(type.contains("nethra_grades")) {
 							path = ".."+slash+"webapps"+slash+"Glaucoma"+slash+"temp"+slash;
 							new File(path).mkdirs();
 							File file = new File(path+fileName);
 							item.write(file);
-
+							
 							Photos.readCSV(fileName,BaseTest.NETHRA);
 							file.delete();
 						}

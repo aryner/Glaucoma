@@ -675,6 +675,7 @@ public class Photos implements BaseTest {
 	}
 
 	private static void reduplicate(int type) {
+		type = (type == BaseTest.STEREO ? STEREO : NETHRA);
 		String query = "SELECT * FROM Photos WHERE confirmed=2 AND type="+type;
 		Vector<Photos> photos = SQLCommands.queryPhotos(query);
 		Vector<Photos> needDuplicate = new Vector<Photos>();
@@ -691,7 +692,7 @@ public class Photos implements BaseTest {
 			}
 			needDuplicate.add(photo);
 		}
-
+System.out.println("dup size = "+needDuplicate.size());
 		if(needDuplicate.size() == 0) return;
 		
 		query = "INSERT INTO Photos (confirmed, pictureName, userID, adjudicatorID, type, "+
