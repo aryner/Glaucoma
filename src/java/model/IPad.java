@@ -425,10 +425,10 @@ public class IPad implements BaseTest{
 		for(int i=0; i<needDuplicate.size(); i++) {
 			if(i>0) {query += ", ";}
 			IPad iPad = needDuplicate.get(i);
-			query += "("+
-				iPad.getConfirmed()+", "+iPad.getPictureName()+", "+iPad.getUserID()+", "+iPad.getAdjudicatorID()+", "+
-				iPad.getFp()+", "+iPad.getFn()+", "+iPad.getSup_hem()+", "+iPad.getInf_hem()+
-				")";
+			query += "('"+
+				iPad.getConfirmed()+"', '"+iPad.getPictureName()+"', '"+iPad.getUserID()+"', '"+iPad.getAdjudicatorID()+"', '"+
+				iPad.getFp()+"', '"+iPad.getFn()+"', '"+iPad.getSup_hem()+"', '"+iPad.getInf_hem()+
+				"')";
 		}
 
 		SQLCommands.update(query);

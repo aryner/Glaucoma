@@ -703,14 +703,14 @@ public class Photos implements BaseTest {
 		for(int i=0; i<needDuplicate.size(); i++) {
 			if(i>0) {query += ", ";}
 			Photos photo = needDuplicate.get(i);
-			query += "("+
-				photo.getConfirmed()+", "+photo.getPictureName()+", "+photo.getUserID()+", "+photo.getAdjudicatorID()+", "+
-				photo.getType()+", "+photo.getQual()+", "+photo.getCdr()+", "+photo.getNotch()+", "+
-				photo.getNotch_hrs_one()+", "+photo.getNotch_hrs_two()+", "+photo.getErosion()+", "+
-				photo.getEros_hrs_one()+", "+photo.getEros_hrs_two()+", "+photo.getDisc()+", "+
-				photo.getDisc_hrs_one()+", "+photo.getDisc_hrs_two()+", "+photo.getRnfl()+", "+
-				photo.getRnfl_hrs_one()+", "+photo.getRnfl_hrs_two()+", "+photo.getGlau()+
-				")";
+			query += "('"+
+				photo.getConfirmed()+"', '"+photo.getPictureName()+"', '"+photo.getUserID()+"', '"+photo.getAdjudicatorID()+"', '"+
+				photo.getType()+"', '"+photo.getQual()+"', '"+photo.getCdr()+"', '"+photo.getNotch()+"', '"+
+				photo.getNotch_hrs_one()+"', '"+photo.getNotch_hrs_two()+"', '"+photo.getErosion()+"', '"+
+				photo.getEros_hrs_one()+"', '"+photo.getEros_hrs_two()+"', '"+photo.getDisc()+"', '"+
+				photo.getDisc_hrs_one()+"', '"+photo.getDisc_hrs_two()+"', '"+photo.getRnfl()+"', '"+
+				photo.getRnfl_hrs_one()+"', '"+photo.getRnfl_hrs_two()+"', '"+photo.getGlau()+
+				"')";
 		}
 
 		SQLCommands.update(query);

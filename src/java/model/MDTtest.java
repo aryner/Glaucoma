@@ -536,12 +536,12 @@ public class MDTtest implements BaseTest {
 		for(int i=0; i<needDuplicate.size(); i++) {
 			if(i>0) {query += ", ";}
 			MDTtest mdt = needDuplicate.get(i);
-			query += "("+
-				mdt.getConfirmed()+", "+mdt.getPictureName()+", "+mdt.getUserID()+", "+mdt.getAdjudicatorID()+", "+
-				mdt.getLate()+", "+mdt.getFp()+", "+mdt.getLens()+", "+mdt.getLens_y()+", "+mdt.getDur()+", "+
-				mdt.getPtd()+", "+mdt.getLu_one()+", "+mdt.getRu_one()+", "+mdt.getLl_one()+", "+
-				mdt.getRl_one()+", "+mdt.getAbnormal()+
-				")";
+			query += "('"+
+				mdt.getConfirmed()+"', '"+mdt.getPictureName()+"', '"+mdt.getUserID()+"', '"+mdt.getAdjudicatorID()+"', '"+
+				mdt.getLate()+"', '"+mdt.getFp()+"', '"+mdt.getLens()+"', '"+mdt.getLens_y()+"', '"+mdt.getDur()+"', '"+
+				mdt.getPtd()+"', '"+mdt.getLu_one()+"', '"+mdt.getRu_one()+"', '"+mdt.getLl_one()+"', '"+
+				mdt.getRl_one()+"', '"+mdt.getAbnormal()+
+				"')";
 		}
 
 		SQLCommands.update(query);
