@@ -861,7 +861,36 @@ public class HVFtest implements BaseTest{
 	public static Vector<String> getCSVLines() {
 		Vector<String> result = new Vector<String>();
 		String query = "SELECT * FROM HVFtest ORDER BY pictureName";
-		Vector<HVFtest> hvf = SQLCommands.queryHVFtestMaster(query);
+		Vector<HVFtest> hvfAll = SQLCommands.queryHVFtestMaster(query);
+		Vector<HVFtest> hvf = new Vector<HVFtest>();
+
+		for(int i=0; i<hvfAll.size(); i++) {
+			if(hvfAll.get(i).getConfirmed() == 2) {
+				if(hvfAll.get(i).getOpthCheck() > 0 && i<hvfAll.size()-1) {
+					hvf.add(hvfAll.get(i));
+					i++;
+					if(i < hvfAll.size()-1) {
+						i++;
+					}
+				}
+				else if(i < hvfAll.size()-1 && hvfAll.get(i+1).getOpthCheck() > 0){
+					hvf.add(hvfAll.get(i));
+					i++;
+					hvf.add(hvfAll.get(i));
+					i++;
+					continue;
+				}
+				else if(i < hvfAll.size()-2 && hvfAll.get(i+2).getOpthCheck()>0 
+					&& hvfAll.get(i).getPictureName().equals(hvfAll.get(i+2).getPictureName())) {
+					hvf.add(hvfAll.get(i));
+					i += 2;
+				}
+				else if(i < hvfAll.size()-1) {
+					i++;
+				}
+			}
+			hvf.add(hvfAll.get(i));
+		}
 
 		String currLine = "id, confirmed, opthCheck, pictureName, userID, vf_loss, vf_defect, glau, vf_loss_oth, vf_defect_oth, "+
 			"mon, mon_oth2_c47, tar, tar_oth, lossnum, lossden, fp, fn, dur, fov, stimintens, stimcol, stimcol_oth, back, "+
