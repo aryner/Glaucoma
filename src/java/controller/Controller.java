@@ -388,15 +388,18 @@ public class Controller extends HttpServlet {
 
 			if (pictureName != null && pictureName.length() > 0) {
 				picture = Picture.getPictureByName(pictureName, BaseTest.HVF);
+				if(picture != null) {
+					request.setAttribute("hvf",HVFtest.getOpHVFreview(picture.getName()));
+				}
 			} 
 			else {
 				User user = (User)session.getAttribute("user");
 				picture = HVFtest.getNext(user);
+				if(picture != null) {
+					request.setAttribute("hvf",HVFtest.getOpHVF(picture.getName()));
+				}
 			}
 
-			if(picture != null) {
-				request.setAttribute("hvf",HVFtest.getOpHVF(picture.getName()));
-			}
 			request.setAttribute("chart",SQLCommands.querySeverityChartName());
 			request.setAttribute("slash",slash);
 			request.setAttribute("picture",picture);

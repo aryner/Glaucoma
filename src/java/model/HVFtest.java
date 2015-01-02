@@ -446,9 +446,21 @@ public class HVFtest implements BaseTest{
 	}
 
 	public static boolean opthAssignHVF(HttpServletRequest request, User user) {
+		String query = null;
 		boolean firstReview = true;
+		if(request.getParameter("reviewedAgain").equals("true")) {
+			firstReview = false;
+		}
+
 		String picName = request.getParameter("pictureName");
-		HVFtest hvf = new HVFtest(picName);
+		HVFtest hvf = null;
+		if(!firstReview) {
+			hvf = new HVFtest(picName);
+		}
+		else {
+			query = "SELECT * FROM HVFtest WHERE pictureName='"+picName+"'";
+			hvf = SQLCommands.queryHVFtestMaster(query).get(0);
+		}
 
 		String attr = request.getParameter("fp");
 		hvf.setFp(Integer.parseInt(attr));
@@ -518,20 +530,41 @@ public class HVFtest implements BaseTest{
 		}
 		hvf.setVf_defect(defect);
 
-		String query = "UPDATE HVFtest SET hvf_fp='"+hvf.getFp()+"', hvf_fn='"+hvf.getFn()+"', hvf_ght='"+hvf.getGht()+"', "+
-				"hvf_psdp='"+hvf.getPsdp()+"', hvf_cluster='"+hvf.getCluster()+"', hvf_glau='"+hvf.getHvf_glau()+"', "+
-				"hvf_mdsign='"+hvf.getMdsign()+"', hvf_mddb='"+hvf.getMddb()+"', hvf_central_15='"+hvf.getCentral_15()+"', "+
-				"hvf_central_0='"+hvf.getCentral_0()+"', hvf_sup_hem='"+hvf.getSup_hem()+"', hvf_inf_hem='"+hvf.getInf_hem()+"', "+
-				"hvf_pts_five_top='"+hvf.getPts_five_top()+"', hvf_pts_five_bot='"+hvf.getPts_five_bot()+"', hvf_pts_one_top='"+hvf.getPts_one_top()+"', "+
-				"hvf_pts_one_bot='"+hvf.getPts_one_bot()+"', hvf_severe='"+hvf.getSevere()+"', hvf_reliable_review='"+hvf.getReliable_review()+"', "+
-				"hvf_vf_loss='"+hvf.getVf_loss()+"', hvf_vf_loss_oth='"+hvf.getVf_loss_oth()+"', hvf_vf_defect='"+hvf.getVf_defect()+"', "+
-				"hvf_vf_defect_oth='"+hvf.getVf_defect_oth()+"', opthCheck='"+user.getID()+"', opthName='"+user.getUserName()+"', "+
-				"hvf_notes='"+hvf.getNotes()+"', hvf_notes_other='"+hvf.getNotes_other()+"' WHERE pictureName='"+picName+"'";
+		if(!firstReview) {
+			query = "UPDATE HVFtest SET hvf_fp='"+hvf.getFp()+"', hvf_fn='"+hvf.getFn()+"', hvf_ght='"+hvf.getGht()+"', "+
+					"hvf_psdp='"+hvf.getPsdp()+"', hvf_cluster='"+hvf.getCluster()+"', hvf_glau='"+hvf.getHvf_glau()+"', "+
+					"hvf_mdsign='"+hvf.getMdsign()+"', hvf_mddb='"+hvf.getMddb()+"', hvf_central_15='"+hvf.getCentral_15()+"', "+
+					"hvf_central_0='"+hvf.getCentral_0()+"', hvf_sup_hem='"+hvf.getSup_hem()+"', hvf_inf_hem='"+hvf.getInf_hem()+"', "+
+					"hvf_pts_five_top='"+hvf.getPts_five_top()+"', hvf_pts_five_bot='"+hvf.getPts_five_bot()+"', hvf_pts_one_top='"+hvf.getPts_one_top()+"', "+
+					"hvf_pts_one_bot='"+hvf.getPts_one_bot()+"', hvf_severe='"+hvf.getSevere()+"', hvf_reliable_review='"+hvf.getReliable_review()+"', "+
+					"hvf_vf_loss='"+hvf.getVf_loss()+"', hvf_vf_loss_oth='"+hvf.getVf_loss_oth()+"', hvf_vf_defect='"+hvf.getVf_defect()+"', "+
+					"hvf_vf_defect_oth='"+hvf.getVf_defect_oth()+"', opthCheck='"+user.getID()+"', opthName='"+user.getUserName()+"', "+
+					"hvf_notes='"+hvf.getNotes()+"', hvf_notes_other='"+hvf.getNotes_other()+"' WHERE pictureName='"+picName+"' AND opthCheck='"+user.getID()+"'";
+		}
+		else {
+			query = "INSERT INTO HVFtest (opthName, adjudicatorID, confirmed, opthCheck, pictureName, userID, hvf_notes, hvf_notes_other, hvf_vf_loss, "+
+				"hvf_vf_defect, hvf_glau, hvf_vf_loss_oth, hvf_vf_defect_oth, hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, hvf_lossnum, hvf_lossden, "+
+				"hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, "+
+				"hvf_vanum, hvf_vaden, hvf_sph_sign, hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
+				"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_central_15, hvf_central_0, hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, hvf_inf_hem2, "+
+				"hvf_pts_five_top, hvf_pts_five_bot, hvf_pts_contig, hvf_pts_one_top, hvf_pts_one_bot, hvf_cluster, hvf_severe, hvf_reliable_review) "+
+				"VALUES ("+
+				"'"+user.getUserName()+"', '"+hvf.getAdjudicatorID()+"', '"+hvf.getConfirmed()+"', '"+user.getID()+"', '"+hvf.getPictureName()+"', "+
+				"'"+hvf.getUserID()+"', '"+hvf.getNotes()+"', '"+hvf.getNotes_other()+"', '"+hvf.getVf_loss()+"', '"+hvf.getVf_defect()+"', "+
+				"'"+hvf.getHvf_glau()+"', '"+hvf.getVf_loss_oth()+"', '"+hvf.getVf_defect_oth()+"', '"+hvf.getMon()+"', '"+hvf.getMon_oth2_c74()+"', "+
+				"'"+hvf.getTar()+"', '"+hvf.getTar_oth()+"', '"+hvf.getLossnum()+"', '"+hvf.getLossden()+"', '"+hvf.getFp()+"', '"+hvf.getFn()+"', "+
+				"'"+hvf.getDur()+"', '"+hvf.getFov()+"', '"+hvf.getStimintens()+"', '"+hvf.getStimcol()+"', '"+hvf.getStimcol_oth()+"', "+
+				"'"+hvf.getBack()+"', '"+hvf.getStrategy()+"', '"+hvf.getStrategy_oth()+"', '"+hvf.getPup()+"', '"+hvf.getVanum()+"', "+
+				"'"+hvf.getVaden()+"', '"+hvf.getSph_sign()+"', '"+hvf.getSph_num()+"', '"+hvf.getCyl_sign()+"', '"+hvf.getCyl_num()+"', '"+hvf.getAxis()+"', "+
+				"'"+hvf.getGht()+"', '"+hvf.getVfi()+"', '"+hvf.getMdsign()+"', '"+hvf.getMddb()+"', '"+hvf.getMdp()+"', '"+hvf.getPsdsign()+"', "+
+				"'"+hvf.getPsddb()+"', '"+hvf.getPsdp()+"', '"+hvf.getCentral_15()+"', '"+hvf.getCentral_0()+"', '"+hvf.getSup_hem()+"', "+
+				"'"+hvf.getInf_hem()+"', '"+hvf.getSup_hem2()+"', '"+hvf.getInf_hem2()+"', '"+hvf.getPts_five_top()+"', '"+hvf.getPts_five_bot()+"', "+
+				"'"+hvf.getPts_contig()+"', '"+hvf.getPts_one_top()+"', '"+hvf.getPts_one_bot()+"', '"+hvf.getCluster()+"', '"+hvf.getSevere()+"', "+
+				"'"+hvf.getReliable_review()+"'"+
+				")";
+		}
 		SQLCommands.update(query);
 
-		if(request.getParameter("reviewedAgain").equals("true")) {
-			firstReview = false;
-		}
 		return firstReview;
 	}
 
@@ -574,6 +607,18 @@ public class HVFtest implements BaseTest{
 		return result;
 	}
 
+	public static HVFtest getOpHVFreview(String picName) {
+		HVFtest result = null;
+		String query = "SELECT * FROM HVFtest WHERE pictureName='"+picName+"' AND opthCheck > 0";
+
+		Vector<HVFtest> hvf = SQLCommands.queryHVFtestMaster(query);
+		if(hvf.size() > 0) {
+			result = hvf.get(0);
+		}
+
+		return result;
+	}
+
 	public static int needInitialCount() {
 		String query = "SELECT * FROM picture WHERE type='HVF'";
 		int picCount = SQLCommands.getCount(query);
@@ -602,7 +647,8 @@ public class HVFtest implements BaseTest{
 		}
 		else if (user.getAccess() == 2) {
 			query = "SELECT * FROM picture WHERE name IN (SELECT pictureName FROM HVFtest WHERE "+
-				"confirmed>=2 && opthCheck=0) AND type='HVF'";
+				"confirmed>=2 && opthCheck=0) AND type='HVF' AND name NOT IN (SELECT pictureName "+
+				"FROM HVFtest WHERE opthCheck>0)";
 		}
 
 		Vector<Picture> pictures = SQLCommands.queryPictures(query); 
@@ -774,7 +820,8 @@ public class HVFtest implements BaseTest{
 
 	public static Vector<String> getNeedsReview() {
 		Vector<String> result = new Vector<String>();
-		String query = "SELECT DISTINCT pictureName FROM HVFtest WHERE confirmed >= 2 AND opthCheck='0'";
+		String query = "SELECT DISTINCT pictureName FROM HVFtest WHERE confirmed >= 2 AND opthCheck='0' AND "+
+				"pictureName NOT IN (SELECT pictureName FROM HVFtest WHERE opthCheck>0)";
 		Vector<HVFtest> hvf = SQLCommands.queryHVFtest(query);
 
 		for(int i=0; i<hvf.size(); i++) {
