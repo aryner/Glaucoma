@@ -18,6 +18,7 @@ public interface BaseTest {
 	public static int NETHRA = 5;
 	public static int HVF = 6;
 	public static int IPAD = 7;
+	public static int NOT_HVF = 8;
 
 	public String getPictureName();
 	public void setPictureName(String pictureName);

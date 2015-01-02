@@ -24,39 +24,8 @@ Vector<String> iPad = (Vector)request.getAttribute("iPad");
 </div>
 <div class='wide-column'>
 <form action="printCSVs" method="POST">
-	<input type='hidden' name='type' value='<%out.print(BaseTest.FDT);%>'>
-	<input type ="submit" value="Print the FDT CSV to your Desktop" class="btn">
-</form>
-</div>
-<div class='wide-column'>
-<form action="printCSVs" method="POST">
-	<input type='hidden' name='type' value='<%out.print(BaseTest.MDT);%>'>
-	<input type ="submit" value="Print the MDT CSV to your Desktop" class="btn">
-</form>
-</div>
-	<div class='spacer'></div>
-<div class='wide-column'>
-<form action="printCSVs" method="POST">
-	<input type='hidden' name='type' value='<%out.print(BaseTest.OCT);%>'>
-	<input type ="submit" value="Print the OCT CSV to your Desktop" class="btn">
-</form>
-</div>
-<div class='wide-column'>
-<form action="printCSVs" method="POST">
-	<input type='hidden' name='type' value='<%out.print(BaseTest.STEREO);%>'>
-	<input type ="submit" value="Print the stereo CSV to your Desktop" class="btn">
-</form>
-</div>
-<div class='wide-column'>
-<form action="printCSVs" method="POST">
-	<input type='hidden' name='type' value='<%out.print(BaseTest.NETHRA);%>'>
-	<input type ="submit" value="Print the 3Nethra CSV to your Desktop" class="btn">
-</form>
-</div>
-<div class='wide-column'>
-<form action="printCSVs" method="POST">
-	<input type='hidden' name='type' value='<%out.print(BaseTest.IPAD);%>'>
-	<input type ="submit" value="Print the iPad CSV to your Desktop" class="btn">
+	<input type='hidden' name='type' value='<%out.print(BaseTest.NOT_HVF);%>'>
+	<input type ="submit" value="Print the CSVs to your Desktop" class="btn">
 </form>
 </div>
 </div>

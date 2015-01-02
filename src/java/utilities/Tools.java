@@ -67,6 +67,14 @@ public class Tools {
 			case BaseTest.IPAD:
 				createCSVs(IPad.getCSVLines(), "iPad_grades");
 				break;
+			case BaseTest.NOT_HVF:
+				createCSVs(FDTtest.getCSVLines(), "fdt_grades");
+				createCSVs(MDTtest.getCSVLines(), "mdt_grades");
+				createCSVs(OCTtest.getCSVLines(), "oct_grades");
+				createCSVs(Photos.getStereoCSVLines(), "stereo_grades");
+				createCSVs(Photos.getNethraCSVLines(), "nethra_grades");
+				createCSVs(IPad.getCSVLines(), "iPad_grades");
+				break;
 		}
 	}
 
