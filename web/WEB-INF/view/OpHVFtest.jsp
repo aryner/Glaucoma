@@ -65,7 +65,7 @@ being significant at p < 1%<br>
 <input type="radio" name="cluster" value="999"<%if(hvf.getCluster()==999) {out.print(" checked");}%>>Blank <br><br> 
 
 <div class="boxed" style="width:40%;">
-<span class="bold">Glaucoma Present</span> <b>
+	<span class="bold">Glaucoma Present</span> <b><br>
 	<input type="radio" name="glau" value="1"<%if(hvf.getHvf_glau()==1) {out.print(" checked");}%>><span style='color:darkorange;'>Yes </span>
 <input type="radio" name="glau" value="2"<%if(hvf.getHvf_glau()==2) {out.print(" checked");}%>>No </b>
 <span id="glauMatch1" class="invis error">Glaucoma present, glaucoma severity, and VF loss answers must be consistent</span>
