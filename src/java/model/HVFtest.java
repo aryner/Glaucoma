@@ -895,8 +895,8 @@ public class HVFtest implements BaseTest{
 		String currLine = "id, confirmed, opthCheck, pictureName, userID, vf_loss, vf_defect, glau, vf_loss_oth, vf_defect_oth, "+
 			"mon, mon_oth2_c47, tar, tar_oth, lossnum, lossden, fp, fn, dur, fov, stimintens, stimcol, stimcol_oth, back, "+
 			"strategy, strategy_oth, pup, vanum, vaden, sph_sign, sph_num, cyl_sign, cyl_num, axis, ght, vfi, mdsign, mddb, "+
-			"mdp, psdsign, psddb, psdp, central_15, central_0, sup_hem, inf_hem, sup_hem2, inf_hem2, pts_five, pts_contig, "+
-			"pts_one, cluster, severe, reliable_review, notes, notes_other, opthName, adjudicatorID";
+			"mdp, psdsign, psddb, psdp, central_15, central_0, sup_hem, inf_hem, sup_hem2, inf_hem2, pts_five_top, pts_five_bot, pts_contig, "+
+			"pts_one_top, pts_one_bot, cluster, severe, reliable_review, notes, notes_other, opthName, adjudicatorID";
 		result.add(currLine);
 		for(int i=0; i<hvf.size(); i++) {
 			currLine = 
@@ -916,8 +916,8 @@ public class HVFtest implements BaseTest{
 				hvf.get(i).getPsdsign()+", "+hvf.get(i).getPsddb()+", "+hvf.get(i).getPsdp()+", "+
 				hvf.get(i).getCentral_15()+", "+hvf.get(i).getCentral_0()+", "+hvf.get(i).getSup_hem()+", "+
 				hvf.get(i).getInf_hem()+", "+hvf.get(i).getSup_hem2()+", "+hvf.get(i).getInf_hem2()+", "+
-				(hvf.get(i).getPts_five_top()+hvf.get(i).getPts_five_bot())+", "+hvf.get(i).getPts_contig()+", "+
-				(hvf.get(i).getPts_one_top()+hvf.get(i).getPts_one_bot())+", "+
+				hvf.get(i).getPts_five_top()+", "+hvf.get(i).getPts_five_bot()+", "+hvf.get(i).getPts_contig()+", "+
+				hvf.get(i).getPts_one_top()+", "+hvf.get(i).getPts_one_bot()+", "+
 				hvf.get(i).getCluster()+", "+hvf.get(i).getSevere()+", "+hvf.get(i).getReliable_review()+", "+
 				hvf.get(i).getNotes()+", "+hvf.get(i).getNotes_other()+", "+
 				hvf.get(i).getOpthName()+", "+hvf.get(i).getAdjudicatorID();
@@ -1036,8 +1036,15 @@ public class HVFtest implements BaseTest{
 				line = fileReader.readLine();
 			}
 
-			Tools.splitCounts(newLines, BaseTest.HVF);
-			Tools.splitCounts(updateLines, BaseTest.HVF);
+			//We expect no old records
+			/*
+			if(newLines.size() > 0){
+				Tools.splitCounts(newLines, BaseTest.HVF);
+			}
+			if(updateLines.size() > 0) {
+				Tools.splitCounts(updateLines, BaseTest.HVF);
+			}
+			*/
 
 			//Add new records
 			query = "INSERT INTO HVFtest (confirmed, opthCheck, pictureName, userID, hvf_vf_loss, "+
@@ -1121,11 +1128,11 @@ public class HVFtest implements BaseTest{
 				"hvf_vanum, hvf_vaden, hvf_sph_sign, hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
 				"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_central_15, hvf_central_0, hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, hvf_inf_hem2, "+
 				"hvf_pts_five_top, hvf_pts_five_bot, hvf_pts_contig, hvf_pts_one_top, hvf_pts_one_bot, hvf_cluster, hvf_severe, hvf_reliable_review) "+
-				"VALUES (";
+				"VALUES ";
 		for(int i=0; i<needDuplicate.size(); i++) {
 			if(i>0) {query += ", ";}
 			HVFtest hvf = needDuplicate.get(i);
-			query += "('"+
+			query += "("+
 				"'"+hvf.getOpthName()+"', '"+hvf.getAdjudicatorID()+"', '"+hvf.getConfirmed()+"', '"+hvf.getOpthCheck()+"', '"+hvf.getPictureName()+"', "+
 				"'"+hvf.getUserID()+"', '"+hvf.getNotes()+"', '"+hvf.getNotes_other()+"', '"+hvf.getVf_loss()+"', '"+hvf.getVf_defect()+"', "+
 				"'"+hvf.getHvf_glau()+"', '"+hvf.getVf_loss_oth()+"', '"+hvf.getVf_defect_oth()+"', '"+hvf.getMon()+"', '"+hvf.getMon_oth2_c74()+"', "+
@@ -1138,7 +1145,7 @@ public class HVFtest implements BaseTest{
 				"'"+hvf.getInf_hem()+"', '"+hvf.getSup_hem2()+"', '"+hvf.getInf_hem2()+"', '"+hvf.getPts_five_top()+"', '"+hvf.getPts_five_bot()+"', "+
 				"'"+hvf.getPts_contig()+"', '"+hvf.getPts_one_top()+"', '"+hvf.getPts_one_bot()+"', '"+hvf.getCluster()+"', '"+hvf.getSevere()+"', "+
 				"'"+hvf.getReliable_review()+"'"+
-				"')";
+				")";
 		}
 
 		SQLCommands.update(query);

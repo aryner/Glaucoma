@@ -343,8 +343,8 @@ if(pic == null) {
 
 <%
 	if(a) {
-		s1 = HVF.get(0).getLossnum()+"";
-		s2 = HVF.get(1).getLossnum()+"";
+		s1 = HVF.get(0).getPup()+"";
+		s2 = HVF.get(1).getPup()+"";
 		if(s1.equals(s2)) {
 			diff = false;
 		}
@@ -372,7 +372,7 @@ if(pic == null) {
 %>
 <span id='vanum'>Visual Acuity </span>
 <input type="text" name="vanum" class="numBox" autocomplete="off"<%if(a&&!diff){out.print(" value='"+HVF.get(0).getVanum()+"'");}%>> 
-/ <input type="text" name="vaden" class="numBox" autocomplete="off"<%if(a&&!diff){out.print(" value='"+HVF.get(0).getVanum()+"'");}%>>
+/ <input type="text" name="vaden" class="numBox" autocomplete="off"<%if(a&&!diff){out.print(" value='"+HVF.get(0).getVaden()+"'");}%>>
 <%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
 <br><br>
 

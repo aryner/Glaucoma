@@ -333,7 +333,8 @@ public class Tools {
 	public static void splitCounts(ArrayList<String> csvLines, int type) {
 		switch (type) {
 			case BaseTest.HVF :
-				String [] fields = csvLines.get(0).split(", ");
+				String [] fields = csvLines.get(0).split("', '");
+				System.out.println(fields.length);
 				if(fields.length == 59) {
 					return;
 				}

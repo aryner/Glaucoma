@@ -217,7 +217,7 @@ Inferior hemfield: # points with sensitivity >=15dB within 5 degrees of fixation
 
 
 False POS Errors (%) <input type="text" name="fp" class="numBox" <%out.print("value='"+hvf.getFp()+"'");%>><br>
-False NEG Errors (%) <input type="text" name="fn" class="numBox" <%out.print("value='"+hvf.getFp()+"'");%>><br><br>
+False NEG Errors (%) <input type="text" name="fn" class="numBox" <%out.print("value='"+hvf.getFn()+"'");%>><br><br>
 
 <span id='reliable_review'>Test Reliability:</span><br>
 <input type="radio" name="reliable_review" value="1"<%if(reviewed && hvf.getReliable_review()==1){out.print(" checked");}%>>Reliable<br>
