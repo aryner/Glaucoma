@@ -1092,6 +1092,56 @@ public class HVFtest implements BaseTest{
 				e.printStackTrace();
 			}
 		}
+		reduplicate();
+	}
+
+	private static void reduplicate() {
+		String query = "SELECT * FROM HVFtest WHERE confirmed=2 && opthCheck <= 0";
+		Vector<HVFtest> hvfs = SQLCommands.queryHVFtestMaster(query);
+		Vector<HVFtest> needDuplicate = new Vector<HVFtest>();
+
+		outerLoop:
+		for(HVFtest hvf : hvfs) {
+			for(HVFtest check : hvfs) {
+				if(check.getId() == hvf.getId()) {
+					continue;
+				}
+				if(check.getPictureName().equals(hvf.getPictureName())) {
+					continue outerLoop;
+				}
+			}
+			needDuplicate.add(hvf);
+		}
+
+		if(needDuplicate.size() == 0) return;
+		
+		query = "INSERT INTO HVFtest (opthName, adjudicatorID, confirmed, opthCheck, pictureName, userID, hvf_notes, hvf_notes_other, hvf_vf_loss, "+
+				"hvf_vf_defect, hvf_glau, hvf_vf_loss_oth, hvf_vf_defect_oth, hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, hvf_lossnum, hvf_lossden, "+
+				"hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, "+
+				"hvf_vanum, hvf_vaden, hvf_sph_sign, hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
+				"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_central_15, hvf_central_0, hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, hvf_inf_hem2, "+
+				"hvf_pts_five_top, hvf_pts_five_bot, hvf_pts_contig, hvf_pts_one_top, hvf_pts_one_bot, hvf_cluster, hvf_severe, hvf_reliable_review) "+
+				"VALUES (";
+		for(int i=0; i<needDuplicate.size(); i++) {
+			if(i>0) {query += ", ";}
+			HVFtest hvf = needDuplicate.get(i);
+			query += "('"+
+				"'"+hvf.getOpthName()+"', '"+hvf.getAdjudicatorID()+"', '"+hvf.getConfirmed()+"', '"+hvf.getOpthCheck()+"', '"+hvf.getPictureName()+"', "+
+				"'"+hvf.getUserID()+"', '"+hvf.getNotes()+"', '"+hvf.getNotes_other()+"', '"+hvf.getVf_loss()+"', '"+hvf.getVf_defect()+"', "+
+				"'"+hvf.getHvf_glau()+"', '"+hvf.getVf_loss_oth()+"', '"+hvf.getVf_defect_oth()+"', '"+hvf.getMon()+"', '"+hvf.getMon_oth2_c74()+"', "+
+				"'"+hvf.getTar()+"', '"+hvf.getTar_oth()+"', '"+hvf.getLossnum()+"', '"+hvf.getLossden()+"', '"+hvf.getFp()+"', '"+hvf.getFn()+"', "+
+				"'"+hvf.getDur()+"', '"+hvf.getFov()+"', '"+hvf.getStimintens()+"', '"+hvf.getStimcol()+"', '"+hvf.getStimcol_oth()+"', "+
+				"'"+hvf.getBack()+"', '"+hvf.getStrategy()+"', '"+hvf.getStrategy_oth()+"', '"+hvf.getPup()+"', '"+hvf.getVanum()+"', "+
+				"'"+hvf.getVaden()+"', '"+hvf.getSph_sign()+"', '"+hvf.getSph_num()+"', '"+hvf.getCyl_sign()+"', '"+hvf.getCyl_num()+"', '"+hvf.getAxis()+"', "+
+				"'"+hvf.getGht()+"', '"+hvf.getVfi()+"', '"+hvf.getMdsign()+"', '"+hvf.getMddb()+"', '"+hvf.getMdp()+"', '"+hvf.getPsdsign()+"', "+
+				"'"+hvf.getPsddb()+"', '"+hvf.getPsdp()+"', '"+hvf.getCentral_15()+"', '"+hvf.getCentral_0()+"', '"+hvf.getSup_hem()+"', "+
+				"'"+hvf.getInf_hem()+"', '"+hvf.getSup_hem2()+"', '"+hvf.getInf_hem2()+"', '"+hvf.getPts_five_top()+"', '"+hvf.getPts_five_bot()+"', "+
+				"'"+hvf.getPts_contig()+"', '"+hvf.getPts_one_top()+"', '"+hvf.getPts_one_bot()+"', '"+hvf.getCluster()+"', '"+hvf.getSevere()+"', "+
+				"'"+hvf.getReliable_review()+"'"+
+				"')";
+		}
+
+		SQLCommands.update(query);
 	}
 
 	public static ArrayList<String> needPictures(){

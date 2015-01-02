@@ -706,7 +706,7 @@ public class FDTtest implements BaseTest {
 				fdt.getRl_one()+"', '"+fdt.getRl_five()+"', '"+fdt.getAbnormal()+
 				"')";
 		}
-System.out.println(query);
+
 		SQLCommands.update(query);
 	}
 
