@@ -43,7 +43,6 @@ if(session.getAttribute("errors") != null) {
 	<div class="thinColumn">
 		<a href="/Glaucoma/OpHVFtest" class="btn menuBtn">HVF test</a>
 	</div>
-
 <%
 	}
 	if(access == 0 || access == 1){
@@ -270,8 +269,8 @@ if(session.getAttribute("errors") != null) {
 				boolean link = false;
 				if(adjudicatedBy != null) {
 					for(int j=0; j<adjudicatedBy.size(); j++) {
-						if(adjudicatedBy.get(j).getPictureName().equals(name)) {
-							out.print("<a class='opthReviewed' href='HVFtest?pictureName="+name+"'>");
+						if(("HVF - "+adjudicatedBy.get(j).getPictureName()).equals(name)) {
+							out.print("<a class='opthReviewed' href='HVFtest?pictureName="+adjudicatedBy.get(j).getPictureName()+"'>");
 							link = true;
 						}
 					}
@@ -303,7 +302,7 @@ if(session.getAttribute("errors") != null) {
 				if(!link && adjudicatedBy != null) {
 					for(int j=0; j<adjudicatedBy.size(); j++) {
 						if(("HVF - "+adjudicatedBy.get(j).getPictureName()).equals(name)) {
-							out.print("<a class='opthReviewed' href='HVFtest?pictureName="+reviewedBy.get(j).getPictureName()+"'>");
+							out.print("<a class='opthReviewed' href='HVFtest?pictureName="+adjudicatedBy.get(j).getPictureName()+"'>");
 							link = true;
 						}
 					}
