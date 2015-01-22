@@ -410,7 +410,8 @@ public class SQLCommands {
 				result.add(new HVFtest(
 					resultSet.getInt("id"), resultSet.getString("opthName"), resultSet.getInt("adjudicatorID"), 
 					resultSet.getInt("confirmed"),resultSet.getInt("opthCheck"), resultSet.getString("pictureName"),
-					resultSet.getInt("userID"),resultSet.getInt("hvf_notes"),resultSet.getString("hvf_notes_other"),
+					resultSet.getInt("userID"),resultSet.getInt("hvf_notes"),resultSet.getInt("hvf_test_type"),
+					resultSet.getString("hvf_test_type_oth"),resultSet.getString("hvf_notes_other"),
 					resultSet.getString("hvf_vf_loss"), resultSet.getString("hvf_vf_defect"),
 					resultSet.getInt("hvf_glau"),resultSet.getString("hvf_vf_loss_oth"),
 					resultSet.getString("hvf_vf_defect_oth"),resultSet.getInt("hvf_mon"),resultSet.getString("hvf_mon_oth2_c47"),

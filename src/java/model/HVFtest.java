@@ -24,6 +24,8 @@ public class HVFtest implements BaseTest{
 	private String pictureName;
 	private int userID;
 	private int notes;
+	private int test_type;
+	private String test_type_oth;
 	private String notes_other;
 	private int hvf_glau;
 	private String vf_loss_oth;
@@ -97,7 +99,7 @@ public class HVFtest implements BaseTest{
 	}
 
 	public HVFtest(int nid, String nopthName, int nadjudicatorID, int nconfirmed, int nopthCheck, 
-		String npictureName, int nuserID, int nnotes, String nnotes_other, String nvf_loss,
+		String npictureName, int nuserID, int nnotes, int test_type, String test_type_oth, String nnotes_other, String nvf_loss,
 		String nvf_defect, int nglau, String nvf_loss_oth, String nvf_defect_oth, int nmon, String nmon_oth2_c47,
 		int ntar, String ntar_oth, int nlossnum, int nlossden, int nfp, int nfn, String ndur, int nfov, 
 		int nstimintens, int nstimcol, String nstimcol_oth, String nback, int nstrategy, String nstrategy_oth,
@@ -115,6 +117,8 @@ public class HVFtest implements BaseTest{
 		pictureName = npictureName;
 		userID = nuserID;
 		notes = nnotes;
+		this.test_type = test_type;
+		this.test_type_oth = test_type_oth;
 		notes_other = nnotes_other;
 		vf_loss = nvf_loss;
 		vf_defect = nvf_defect;
@@ -194,6 +198,10 @@ public class HVFtest implements BaseTest{
 		hvf.setMon(Integer.parseInt(attr));
 		attr = request.getParameter("mon_oth2_c74");
 		hvf.setMon_oth2_c74(attr);
+		attr = request.getParameter("test_type");
+		hvf.setTest_type(Integer.parseInt(attr));
+		attr = request.getParameter("test_type_oth");
+		hvf.setTest_type_oth(attr);
 		attr = request.getParameter("tar");
 		hvf.setTar(Integer.parseInt(attr));
 		attr = request.getParameter("tar_oth");
@@ -371,7 +379,7 @@ public class HVFtest implements BaseTest{
 			"hvf_inf_hem='"+hvf.getInf_hem()+"', hvf_sup_hem2='"+hvf.getSup_hem2()+"', hvf_inf_hem2='"+hvf.getInf_hem2()+"', "+
 			"hvf_pts_five_top='"+hvf.getPts_five_top()+"', hvf_pts_five_bot='"+hvf.getPts_five_bot()+"', hvf_pts_contig='"+hvf.getPts_contig()+"', "+
 			"hvf_pts_one_top='"+hvf.getPts_one_top()+"', hvf_pts_one_bot='"+hvf.getPts_one_bot()+"', hvf_cluster='"+hvf.getCluster()+"', "+
-			"hvf_notes='"+hvf.getNotes()+"', hvf_notes_other='"+hvf.getNotes_other()+"'";
+			"hvf_notes='"+hvf.getNotes()+"', hvf_notes_other='"+hvf.getNotes_other()+"', hvf_test_type='"+hvf.getTest_type()+"', hvf_test_type_oth='"+hvf.getTest_type_oth()+"'";
 
 		if(glaucoma) {
 			query += ", hvf_glau='1'";
@@ -542,16 +550,17 @@ public class HVFtest implements BaseTest{
 					"hvf_notes='"+hvf.getNotes()+"', hvf_notes_other='"+hvf.getNotes_other()+"' WHERE pictureName='"+picName+"' AND opthCheck='"+user.getID()+"'";
 		}
 		else {
-			query = "INSERT INTO HVFtest (opthName, adjudicatorID, confirmed, opthCheck, pictureName, userID, hvf_notes, hvf_notes_other, hvf_vf_loss, "+
-				"hvf_vf_defect, hvf_glau, hvf_vf_loss_oth, hvf_vf_defect_oth, hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, hvf_lossnum, hvf_lossden, "+
-				"hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, "+
-				"hvf_vanum, hvf_vaden, hvf_sph_sign, hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
+			query = "INSERT INTO HVFtest (opthName, adjudicatorID, confirmed, opthCheck, pictureName, userID, hvf_notes, hvf_test_type, hvf_test_type_oth, "+
+				"hvf_notes_other, hvf_vf_loss, hvf_vf_defect, hvf_glau, hvf_vf_loss_oth, hvf_vf_defect_oth, hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, "+
+				"hvf_lossnum, hvf_lossden, hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, hvf_back, hvf_strategy, hvf_strategy_oth, "+
+				"hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
 				"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_central_15, hvf_central_0, hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, hvf_inf_hem2, "+
 				"hvf_pts_five_top, hvf_pts_five_bot, hvf_pts_contig, hvf_pts_one_top, hvf_pts_one_bot, hvf_cluster, hvf_severe, hvf_reliable_review) "+
 				"VALUES ("+
 				"'"+user.getUserName()+"', '"+hvf.getAdjudicatorID()+"', '"+hvf.getConfirmed()+"', '"+user.getID()+"', '"+hvf.getPictureName()+"', "+
-				"'"+hvf.getUserID()+"', '"+hvf.getNotes()+"', '"+hvf.getNotes_other()+"', '"+hvf.getVf_loss()+"', '"+hvf.getVf_defect()+"', "+
-				"'"+hvf.getHvf_glau()+"', '"+hvf.getVf_loss_oth()+"', '"+hvf.getVf_defect_oth()+"', '"+hvf.getMon()+"', '"+hvf.getMon_oth2_c74()+"', "+
+				"'"+hvf.getUserID()+"', '"+hvf.getNotes()+"', '"+hvf.getTest_type()+"', '"+hvf.getTest_type_oth()+"', '"+hvf.getNotes_other()+"', "+
+				"'"+hvf.getVf_loss()+"', '"+hvf.getVf_defect()+"', '"+hvf.getHvf_glau()+"', '"+hvf.getVf_loss_oth()+"', '"+hvf.getVf_defect_oth()+"', "+
+				"'"+hvf.getMon()+"', '"+hvf.getMon_oth2_c74()+"', "+
 				"'"+hvf.getTar()+"', '"+hvf.getTar_oth()+"', '"+hvf.getLossnum()+"', '"+hvf.getLossden()+"', '"+hvf.getFp()+"', '"+hvf.getFn()+"', "+
 				"'"+hvf.getDur()+"', '"+hvf.getFov()+"', '"+hvf.getStimintens()+"', '"+hvf.getStimcol()+"', '"+hvf.getStimcol_oth()+"', "+
 				"'"+hvf.getBack()+"', '"+hvf.getStrategy()+"', '"+hvf.getStrategy_oth()+"', '"+hvf.getPup()+"', '"+hvf.getVanum()+"', "+
@@ -683,7 +692,7 @@ public class HVFtest implements BaseTest{
 		if(hvf.size() > 1) {
 			//get the ones that don't need adjudication
 			query = "SELECT * FROM HVFtest GROUP BY pictureName, "+
-				"hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, hvf_lossnum, hvf_lossden, "+
+				"hvf_test_type, hvf_test_type_oth, hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, hvf_lossnum, hvf_lossden, "+
 				"hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, "+
 				"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
 				"hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
@@ -693,7 +702,7 @@ public class HVFtest implements BaseTest{
 			Vector<HVFtest> set = SQLCommands.queryHVFtestMaster(query);
 			//get the ones that need adjudication
 			query = "SELECT * FROM HVFtest GROUP BY pictureName, "+
-				"hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, hvf_lossnum, hvf_lossden, "+
+				"hvf_test_type, hvf_test_type_oth, hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, hvf_lossnum, hvf_lossden, "+
 				"hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, "+
 				"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
 				"hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
@@ -735,7 +744,7 @@ public class HVFtest implements BaseTest{
 	public static void setAllForAdjudication() {
 		//get the ones that don't need adjudication
 		String query = "SELECT * FROM HVFtest GROUP BY pictureName, "+
-			"hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, hvf_lossnum, hvf_lossden, "+
+			"hvf_test_type, hvf_test_type_oth, hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, hvf_lossnum, hvf_lossden, "+
 			"hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, "+
 			"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
 			"hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
@@ -746,7 +755,7 @@ public class HVFtest implements BaseTest{
 		Vector<HVFtest> set = SQLCommands.queryHVFtest(query);
 		//get the ones that need adjudication
 		query = "SELECT * FROM HVFtest GROUP BY pictureName, "+
-			"hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, hvf_lossnum, hvf_lossden, "+
+			"hvf_test_type, hvf_test_type_oth, hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, hvf_lossnum, hvf_lossden, "+
 			"hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, "+
 			"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
 			"hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
@@ -892,7 +901,7 @@ public class HVFtest implements BaseTest{
 			hvf.add(hvfAll.get(i));
 		}
 
-		String currLine = "id, confirmed, opthCheck, pictureName, userID, vf_loss, vf_defect, glau, vf_loss_oth, vf_defect_oth, "+
+		String currLine = "id, confirmed, opthCheck, pictureName, userID, test_type, test_type_oth, vf_loss, vf_defect, glau, vf_loss_oth, vf_defect_oth, "+
 			"mon, mon_oth2_c47, tar, tar_oth, lossnum, lossden, fp, fn, dur, fov, stimintens, stimcol, stimcol_oth, back, "+
 			"strategy, strategy_oth, pup, vanum, vaden, sph_sign, sph_num, cyl_sign, cyl_num, axis, ght, vfi, mdsign, mddb, "+
 			"mdp, psdsign, psddb, psdp, central_15, central_0, sup_hem, inf_hem, sup_hem2, inf_hem2, pts_five_top, pts_five_bot, pts_contig, "+
@@ -901,7 +910,8 @@ public class HVFtest implements BaseTest{
 		for(int i=0; i<hvf.size(); i++) {
 			currLine = 
 				hvf.get(i).getId()+", "+hvf.get(i).getConfirmed()+", "+hvf.get(i).getOpthCheck()+", "+
-				hvf.get(i).getPictureName()+", "+hvf.get(i).getUserID()+", "+hvf.get(i).getVf_loss()+", "+
+				hvf.get(i).getPictureName()+", "+hvf.get(i).getUserID()+", "+hvf.get(i).getTest_type()+", "+
+				hvf.get(i).getTest_type_oth()+", "+hvf.get(i).getVf_loss()+", "+
 				hvf.get(i).getVf_defect()+", "+hvf.get(i).getHvf_glau()+", "+hvf.get(i).getVf_loss_oth()+", "+
 				hvf.get(i).getVf_defect_oth()+", "+hvf.get(i).getMon()+", "+hvf.get(i).getMon_oth2_c74()+", "+
 				hvf.get(i).getTar()+", "+hvf.get(i).getTar_oth()+", "+hvf.get(i).getLossnum()+", "+
@@ -932,7 +942,7 @@ public class HVFtest implements BaseTest{
 		String query = "SELECT * FROM HVFtest WHERE opthCheck != 0 AND confirmed >=2 GROUP BY pictureName";
 		Vector<HVFtest> hvf = SQLCommands.queryHVFtestMaster(query);
 
-		String currLine = "opthID, adjudicatorID, picture, hvf_mon, hvf_mon_oth2_c74, hvf_tar, hvf_tar_oth, "+
+		String currLine = "opthID, adjudicatorID, picture, hvf_test_type, hvf_test_type_oth, hvf_mon, hvf_mon_oth2_c74, hvf_tar, hvf_tar_oth, "+
 				  "hvf_lossnum, hvf_lossden, hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, "+
 				  "hvf_stimcol_oth, hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, "+
 				  "hvf_sph_sign, hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, "+
@@ -952,8 +962,8 @@ public class HVFtest implements BaseTest{
 			}
 			defects.replace(",", ", ");
 			currLine = 
-				hvf.get(i).getOpthCheck()+", "+hvf.get(i).getAdjudicatorID()+", "+hvf.get(i).getPictureName()+", "+
-				hvf.get(i).getMon()+", "+hvf.get(i).getMon_oth2_c74()+", "+hvf.get(i).getTar()+", "+
+				hvf.get(i).getOpthCheck()+", "+hvf.get(i).getAdjudicatorID()+", "+hvf.get(i).getPictureName()+", "+hvf.get(i).getTest_type()+", "+
+				hvf.get(i).getTest_type_oth()+", "+hvf.get(i).getMon()+", "+hvf.get(i).getMon_oth2_c74()+", "+hvf.get(i).getTar()+", "+
 				hvf.get(i).getTar_oth()+", "+hvf.get(i).getLossnum()+", "+hvf.get(i).getLossden()+", "+
 				hvf.get(i).getFp()+", "+hvf.get(i).getFn()+", "+hvf.get(i).getDur()+", "+hvf.get(i).getFov()+", "+
 				hvf.get(i).getStimintens()+", "+hvf.get(i).getStimcol()+", "+hvf.get(i).getStimcol_oth()+", "+
@@ -1047,7 +1057,7 @@ public class HVFtest implements BaseTest{
 			*/
 
 			//Add new records
-			query = "INSERT INTO HVFtest (confirmed, opthCheck, pictureName, userID, hvf_vf_loss, "+
+			query = "INSERT INTO HVFtest (confirmed, opthCheck, pictureName, userID, hvf_test_type, hvf_test_type_oth, hvf_vf_loss, "+
 				"hvf_vf_defect, hvf_glau, hvf_vf_loss_oth, hvf_vf_defect_oth, hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, "+
 				"hvf_lossnum, hvf_lossden, hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, hvf_back, "+
 				"hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, "+
@@ -1073,7 +1083,7 @@ public class HVFtest implements BaseTest{
 			}
 
 			//insert records to replace the deleted ones
-			query = "INSERT INTO HVFtest (confirmed, opthCheck, pictureName, userID, hvf_vf_loss, "+
+			query = "INSERT INTO HVFtest (confirmed, opthCheck, pictureName, userID, hvf_test_type, hvf_test_type_oth, hvf_vf_loss, "+
 				"hvf_vf_defect, hvf_glau, hvf_vf_loss_oth, hvf_vf_defect_oth, hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, "+
 				"hvf_lossnum, hvf_lossden, hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, hvf_back, "+
 				"hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, "+
@@ -1122,7 +1132,7 @@ public class HVFtest implements BaseTest{
 
 		if(needDuplicate.size() == 0) return;
 		
-		query = "INSERT INTO HVFtest (opthName, adjudicatorID, confirmed, opthCheck, pictureName, userID, hvf_notes, hvf_notes_other, hvf_vf_loss, "+
+		query = "INSERT INTO HVFtest (opthName, adjudicatorID, confirmed, opthCheck, pictureName, userID, hvf_notes, hvf_notes_other, hvf_test_type, hvf_test_type_oth, hvf_vf_loss, "+
 				"hvf_vf_defect, hvf_glau, hvf_vf_loss_oth, hvf_vf_defect_oth, hvf_mon, hvf_mon_oth2_c47, hvf_tar, hvf_tar_oth, hvf_lossnum, hvf_lossden, "+
 				"hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, "+
 				"hvf_vanum, hvf_vaden, hvf_sph_sign, hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
@@ -1134,7 +1144,8 @@ public class HVFtest implements BaseTest{
 			HVFtest hvf = needDuplicate.get(i);
 			query += "("+
 				"'"+hvf.getOpthName()+"', '"+hvf.getAdjudicatorID()+"', '"+hvf.getConfirmed()+"', '"+hvf.getOpthCheck()+"', '"+hvf.getPictureName()+"', "+
-				"'"+hvf.getUserID()+"', '"+hvf.getNotes()+"', '"+hvf.getNotes_other()+"', '"+hvf.getVf_loss()+"', '"+hvf.getVf_defect()+"', "+
+				"'"+hvf.getUserID()+"', '"+hvf.getNotes()+"', '"+hvf.getNotes_other()+"', '"+hvf.getTest_type()+"', '"+hvf.getTest_type_oth()+"', "+
+				"'"+hvf.getVf_loss()+"', '"+hvf.getVf_defect()+"', "+
 				"'"+hvf.getHvf_glau()+"', '"+hvf.getVf_loss_oth()+"', '"+hvf.getVf_defect_oth()+"', '"+hvf.getMon()+"', '"+hvf.getMon_oth2_c74()+"', "+
 				"'"+hvf.getTar()+"', '"+hvf.getTar_oth()+"', '"+hvf.getLossnum()+"', '"+hvf.getLossden()+"', '"+hvf.getFp()+"', '"+hvf.getFn()+"', "+
 				"'"+hvf.getDur()+"', '"+hvf.getFov()+"', '"+hvf.getStimintens()+"', '"+hvf.getStimcol()+"', '"+hvf.getStimcol_oth()+"', "+
@@ -2052,6 +2063,34 @@ public class HVFtest implements BaseTest{
 	 */
 	public void setBaseType(int baseType) {
 		this.baseType = baseType;
+	}
+
+	/**
+	 * @return the test_type
+	 */
+	public int getTest_type() {
+		return test_type;
+	}
+
+	/**
+	 * @param test_type the test_type to set
+	 */
+	public void setTest_type(int test_type) {
+		this.test_type = test_type;
+	}
+
+	/**
+	 * @return the test_type_oth
+	 */
+	public String getTest_type_oth() {
+		return test_type_oth;
+	}
+
+	/**
+	 * @param test_type_oth the test_type_oth to set
+	 */
+	public void setTest_type_oth(String test_type_oth) {
+		this.test_type_oth = test_type_oth;
 	}
 
 }

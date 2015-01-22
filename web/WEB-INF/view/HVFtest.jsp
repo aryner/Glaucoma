@@ -63,6 +63,44 @@ if(pic == null) {
 	int v2 = -1;
 	boolean diff = false;
 	if(a) {
+		v1 = HVF.get(0).getTest_type();
+		v2 = HVF.get(1).getTest_type();
+		if(v1 == v2) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+<span id='test_type'>Test type: </span><br>
+<input type="radio" name="test_type" value="1"<%if(a && !diff && v1==1){out.print(" checked='true'");}%>>24-2<%if((a&&diff)&&((v1==1)||(v2==1))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="test_type" value="2"<%if(a && !diff && v1==2){out.print(" checked='true'");}%>>10-2<%if((a&&diff)&&((v1==2)||(v2==2))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="test_type" value="3"<%if(a && !diff && v1==3){out.print(" checked='true'");}%>>30-2<%if((a&&diff)&&((v1==3)||(v2==3))){%><span class='highlight'>***</span><%}%><br>
+<input type="radio" name="test_type" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>><span id='test_type_oth'>Other : </span>
+<%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%>
+<%
+	String s1 = "";
+	String s2 = "";
+	if(a) {
+		s1 = HVF.get(0).getTest_type_oth()+"";
+		s2 = HVF.get(1).getTest_type_oth()+"";
+		if(s1.equals(s2)) {
+			diff = false;
+		}
+		else {
+			diff = true;
+		}
+	}
+%>
+<input type="text" name="test_type_oth" autocomplete="off"<%if(a&&!diff){out.print(" value='"+s1+"'");}%>>
+<%if(a&&diff){out.print("<span class='highlight'> "+s1+" | "+s2+"</span>");}%>
+<br><br>
+
+<%
+	v1 = -1;
+	v2 = -1;
+	if(a) {
 		v1 = HVF.get(0).getMon();
 		v2 = HVF.get(1).getMon();
 		if(v1 == v2) {
@@ -71,9 +109,12 @@ if(pic == null) {
 		else {
 			diff = true;
 		}
+		//?? it was the first question earlier
+		/*
 		if(diff) {
 
 		}
+			*/
 	}
 %>
 <span id='mon'>Fixation Monitor: </span><br>
@@ -83,8 +124,8 @@ if(pic == null) {
 <input type="radio" name="mon" value="4"<%if(a && !diff && v1==4){out.print(" checked='true'");}%>><span id='mon_oth2_c74'>Other : </span>
 <%if((a&&diff)&&((v1==4)||(v2==4))){%><span class='highlight'>***</span><%}%>
 <%
-	String s1 = "";
-	String s2 = "";
+	s1 = "";
+	s2 = "";
 	if(a) {
 		s1 = HVF.get(0).getMon_oth2_c74()+"";
 		s2 = HVF.get(1).getMon_oth2_c74()+"";

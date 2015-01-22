@@ -202,12 +202,21 @@ $(document).ready(function(){
 	});
 
 	$(':submit[value=Submit]').click(function(e){ 
+		var test_type = $('input[type=radio][name=test_type][value=1]').prop('checked')
+			|| $('input[type=radio][name=test_type][value=2]').prop('checked')
+			|| $('input[type=radio][name=test_type][value=3]').prop('checked')
+			|| $('input[type=radio][name=test_type][value=4]').prop('checked');
+
+		var thing = $('input[type=text][name=test_type_oth]').val();
+		var test_type_oth = !$('input[type=radio][name=test_type][value=4]').prop('checked')
+			|| thing.length > 0;
+
 		var mon = $('input[type=radio][name=mon][value=1]').prop('checked')
 			|| $('input[type=radio][name=mon][value=2]').prop('checked') 
 			|| $('input[type=radio][name=mon][value=3]').prop('checked') 
 			|| $('input[type=radio][name=mon][value=4]').prop('checked');
 		
-		var thing = $('input[type=text][name=mon_oth2_c74]').val(); 
+		thing = $('input[type=text][name=mon_oth2_c74]').val(); 
 		var mon_oth2_c74 = !$('input[type=radio][name=mon][value=4]').prop('checked')  
 			|| thing.length > 0;
 
@@ -356,11 +365,29 @@ $(document).ready(function(){
 		
 		var focused = false;
 
-		if(!mon) {
+		if(!test_type) {
 			focused = true;
 			e.preventDefault(); 
-			$('input[type=radio][name=mon][value=1]').focus();
+			$('input[type=radio][name=test_type][value=1]').focus();
+			$('#test_type').addClass('highlight');
+		} else {
+			$('#test_type').removeClass('highlight');
+		} if(!test_type_oth) {
+			$('#test_type_oth').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=text][name=test_type_oth]').focus();
+			}
+		} else {
+			$('#test_type_oth').removeClass('highlight');
+		} if(!mon) {
 			$('#mon').addClass('highlight');
+			if(!focused) {
+				focused = true;
+				e.preventDefault(); 
+				$('input[type=radio][name=mon][value=1]').focus();
+			}
 		} else {
 			$('#mon').removeClass('highlight');
 		} if(!mon_oth2_c74) {
