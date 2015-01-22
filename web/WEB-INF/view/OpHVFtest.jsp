@@ -30,7 +30,7 @@ if(pic == null) {
 	HVFtest hvf = (HVFtest)request.getAttribute("hvf");
 	boolean reviewed = (hvf.getOpthName() != null && hvf.getOpthName().length() > 0 && !hvf.getOpthName().equals("null")) ? true : false;
 	String slash = ""+request.getAttribute("slash");
-	String src = "http://localhost:8084/HVF/pdf?type=HVF&name="+pic.getName();
+	String src = "http://localhost:8084/Glaucoma/pdf?type=HVF&name="+pic.getName();
 	out.print("<h3 class='picName'>"+pic.getType()+" "+pic.getName()+"</h3>");
 %>
 <!--pdf of HVFfile -->

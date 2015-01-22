@@ -278,7 +278,8 @@ $(document).ready(function() {
 		var glau = $('input[type=radio][name=glau][value=1]').prop('checked')
 			|| $('input[type=radio][name=glau][value=2]').prop('checked')
 			|| $('input[type=radio][name=glau][value=3]').prop('checked')
-			|| $('input[type=radio][name=glau][value=4]').prop('checked');
+			|| $('input[type=radio][name=glau][value=4]').prop('checked')
+			|| $('input[type=radio][name=glau][value=5]').prop('checked');
 
 		var focused = false;
 
