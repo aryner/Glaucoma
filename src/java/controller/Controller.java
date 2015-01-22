@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author aryner
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload", "/uploadPictures", "/img", "/pdf", "/assignHVF", "/OpHVFtest", "/OpReviewHVF", "/printCSV", "/printCSVs", "/uploadData", "/dataUpload", "/assignFDT", "/assignMDT", "/assignOCT", "/assign3Nethra", "/assignStereo", "/printFinishedCSVs", "/FDTReview", "/updateFDT", "/MDTReview", "/updateMDT", "/OCTReview", "/updateOCT", "/stereoReview", "/updateStereo", "/nethraReview", "/updateNethra", "/ipad", "/assignIPad", "/updateIPad", "/ipadReview"})
+@WebServlet(name = "Controller", urlPatterns = {"/Controller","/login","/home","/logout","/register","/createUser","/FDTtest","/HVFtest","/MDTtest","/OCTtest","/nethra","/stereo", "/upload", "/uploadPictures", "/img", "/pdf", "/assignHVF", "/OpHVFtest", "/OpReviewHVF", "/printCSV", "/printCSVs", "/uploadData", "/dataUpload", "/assignFDT", "/assignMDT", "/assignOCT", "/assign3Nethra", "/assignStereo", "/printFinishedCSVs", "/FDTReview", "/updateFDT", "/MDTReview", "/updateMDT", "/OCTReview", "/updateOCT", "/stereoReview", "/updateStereo", "/nethraReview", "/updateNethra", "/ipad", "/assignIPad", "/updateIPad", "/ipadReview", "/deleteRecords", "/removeRecords"})
 public class Controller extends HttpServlet {
 	private final String slash = System.getProperty("file.separator");
 	/**
@@ -84,6 +84,22 @@ public class Controller extends HttpServlet {
 
 		else if (userPath.equals("/upload")) {
 			request.setAttribute("hvfNeedPictures", HVFtest.needPictures());
+		}
+
+		else if (userPath.equals("/deleteRecords")) {
+			Vector<String> ungraded = Tools.getUngradedNames();
+			Vector<String> onceGraded = Tools.getGradedOnceNames();
+			Vector<String> needsAdj = Tools.getNeedsAdjudication();
+			Vector<String> needsReview = HVFtest.getNeedsReview();
+			Vector<String> reviewed = HVFtest.getReviewed();
+			Vector<String> adjudicated = Tools.getAdjudicated();
+
+			request.setAttribute("ungraded",ungraded);
+			request.setAttribute("gradedOnce",onceGraded);
+			request.setAttribute("adjudicated", adjudicated);
+			request.setAttribute("needsAdj",needsAdj);
+			request.setAttribute("needsReview",needsReview);
+			request.setAttribute("reviewed",reviewed);
 		}
 
 		else if(userPath.equals("/FDTtest")) {
@@ -512,6 +528,12 @@ public class Controller extends HttpServlet {
 			if(errors.size()>0) {
 				session.setAttribute("errors", errors);
 			}
+			response.sendRedirect("/Glaucoma/home"); 
+			return;
+		}
+
+		else if(userPath.equals("/removeRecords")) {
+
 			response.sendRedirect("/Glaucoma/home"); 
 			return;
 		}
