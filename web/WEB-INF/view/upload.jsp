@@ -28,16 +28,18 @@
 
 <div class="container">
 	<h3>Missing Images</h3>
-	<!--
 	<div class="fifth-column">
-		<h4>HVF</h4>
 <%
 		ArrayList<String> needPics = (ArrayList)request.getAttribute("hvfNeedPictures");
+		ArrayList<String> needOtherPics = (ArrayList)request.getAttribute("neededPictures");
 
 		for(int i=0; i<needPics.size(); i++) {
-			out.print(needPics.get(i)+"<br>");
+			out.print("HFV: " +needPics.get(i)+"<br>");
 		}
+		for(int i=0; i<needOtherPics.size(); i++) {
+			out.print(needOtherPics.get(i)+"<br>");
+		}
+
 %>
 	</div>
- 	-->
 </div>

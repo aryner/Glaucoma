@@ -83,6 +83,7 @@ public class Controller extends HttpServlet {
 		}
 
 		else if (userPath.equals("/upload")) {
+			request.setAttribute("neededPictures", Tools.needPictures());
 			request.setAttribute("hvfNeedPictures", HVFtest.needPictures());
 		}
 

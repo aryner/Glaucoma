@@ -46,7 +46,6 @@ if(session.getAttribute("errors") != null) {
 <%
 	}
 %>
-	<!---->
 <%
 	if(access == 0 || access == 1){
 %>
@@ -56,7 +55,6 @@ if(session.getAttribute("errors") != null) {
 <%
 	}
 %>
- 	<!---->
 <%
 	if (access == 0 || (access == 1)) {
 %>
@@ -66,7 +64,6 @@ if(session.getAttribute("errors") != null) {
 <%
 	}
 %>
-	<!---->
 <%
 	if (access == 0|| access == 1) {
 %>
@@ -104,7 +101,6 @@ if(session.getAttribute("errors") != null) {
 <%
 	} 
 %>
- 	<!---->
 </div>
 <br>
 <div class='container'>
