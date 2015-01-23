@@ -45,6 +45,9 @@ if(session.getAttribute("errors") != null) {
 	</div>
 <%
 	}
+%>
+	<!---->
+<%
 	if(access == 0 || access == 1){
 %>
 	<div class="thinColumn">
@@ -52,6 +55,9 @@ if(session.getAttribute("errors") != null) {
 	</div>
 <%
 	}
+%>
+ 	<!---->
+<%
 	if (access == 0 || (access == 1)) {
 %>
 	<div class="thinColumn">
@@ -59,6 +65,9 @@ if(session.getAttribute("errors") != null) {
 	</div>
 <%
 	}
+%>
+	<!---->
+<%
 	if (access == 0|| access == 1) {
 %>
 	<div class="thinColumn">
@@ -95,6 +104,7 @@ if(session.getAttribute("errors") != null) {
 <%
 	} 
 %>
+ 	<!---->
 </div>
 <br>
 <div class='container'>

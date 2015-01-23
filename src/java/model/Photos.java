@@ -168,9 +168,10 @@ public class Photos implements BaseTest {
 		return SQLCommands.queryPhotos(query);
 	}
 
-	public static ArrayList<String> needPictures(){
+	public static ArrayList<String> needPictures(int type){
+		String stringType = (type == NETHRA)? "3Nethra" : "stereo";
 		ArrayList<String> needPics = new ArrayList<String>();
-		String query = "SELECT * FROM Photos WHERE pictureName NOT IN (SELECT name FROM picture)";
+		String query = "SELECT * FROM Photos WHERE pictureName NOT IN (SELECT name FROM picture WHERE type='"+stringType+"') AND type='"+type+"'";
 		Vector<Photos> photos = SQLCommands.queryPhotos(query);
 
 		for(int i=0; i<photos.size(); i++) {
@@ -183,7 +184,7 @@ public class Photos implements BaseTest {
 		for(int i=0; i<needPics.size(); i++) {
 			ext = needPics.get(i).substring(needPics.get(i).indexOf(".")+1, needPics.get(i).length());
 			if(ext.equals("pdf")) {
-				needPics.set(i, "Photos: "+needPics.get(i).substring(0,needPics.get(i).indexOf("."))+".jpg");
+				needPics.set(i, stringType + ": " +needPics.get(i).substring(0,needPics.get(i).indexOf("."))+".jpg");
 			}
 		}
 
@@ -610,7 +611,7 @@ public class Photos implements BaseTest {
 					newLines.add(line);
 				}
 				else {
-					int confirmed = Integer.parseInt(processedLine.get(Tools.CSVCONFIRMED));
+					int confirmed = Integer.parseInt(processedLine.get(Tools.CSVCONFIRMED).replace("'", ""));
 					if(confirmed > oldTest.getConfirmed()) {
 						updateLines.add(line);
 						toBeReplaced.add(oldTest.getPictureName());

@@ -168,7 +168,7 @@ public class FDTtest implements BaseTest {
 
 	public static ArrayList<String> needPictures(){
 		ArrayList<String> needPics = new ArrayList<String>();
-		String query = "SELECT * FROM FDTtest WHERE pictureName NOT IN (SELECT name FROM picture)";
+		String query = "SELECT * FROM FDTtest WHERE pictureName NOT IN (SELECT name FROM picture WHERE type='FDT')";
 		Vector<FDTtest> fdt = SQLCommands.queryFDTtest(query);
 
 		for(int i=0; i<fdt.size(); i++) {
@@ -601,7 +601,7 @@ public class FDTtest implements BaseTest {
 					newLines.add(line);
 				}
 				else {
-					int confirmed = Integer.parseInt(processedLine.get(Tools.CSVCONFIRMED));
+					int confirmed = Integer.parseInt(processedLine.get(Tools.CSVCONFIRMED).replace("'", ""));
 					if(confirmed > oldTest.getConfirmed()) {
 						updateLines.add(line);
 						toBeReplaced.add(oldTest.getPictureName());

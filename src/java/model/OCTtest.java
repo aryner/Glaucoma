@@ -238,8 +238,8 @@ public class OCTtest implements BaseTest {
 
 	public static ArrayList<String> needPictures(){
 		ArrayList<String> needPics = new ArrayList<String>();
-		String query = "SELECT * FROM OCTtest WHERE pictureName NOT IN (SELECT name FROM picture)";
-		Vector<FDTtest> oct = SQLCommands.queryFDTtest(query);
+		String query = "SELECT * FROM OCTtest WHERE pictureName NOT IN (SELECT name FROM picture WHERE type='OCT')";
+		Vector<OCTtest> oct = SQLCommands.queryOCTtest(query);
 
 		for(int i=0; i<oct.size(); i++) {
 			if(!needPics.contains(oct.get(i).getPictureName())) {
@@ -853,7 +853,7 @@ public class OCTtest implements BaseTest {
 					newLines.add(line);
 				}
 				else {
-					int confirmed = Integer.parseInt(processedLine.get(Tools.CSVCONFIRMED));
+					int confirmed = Integer.parseInt(processedLine.get(Tools.CSVCONFIRMED).replace("'", ""));
 					if(confirmed > oldTest.getConfirmed()) {
 						updateLines.add(line);
 						toBeReplaced.add(oldTest.getPictureName());

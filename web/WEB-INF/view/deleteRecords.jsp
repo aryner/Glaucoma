@@ -18,6 +18,8 @@ Vector<String> adjudicated = (Vector)request.getAttribute("adjudicated");
 reviewed.addAll(adjudicated);
 %>
 <form action="removeRecords" method="POST">
+	<input type="submit" value="Delete selected records" class="btn">
+	<div class="wideContainer">
 	<div class="fifth-column"><h3>Ungraded</h3>
 	<%
 		for(String record : ungraded) {
@@ -53,7 +55,7 @@ reviewed.addAll(adjudicated);
 		}
 	%>
 	</div>
-
-	<input type="submit" value="Delete selected records" class="btn">
+	</div>
+	<br>
 </form>
 </div>

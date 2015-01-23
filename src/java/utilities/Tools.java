@@ -365,6 +365,9 @@ public class Tools {
 		ArrayList<String> result = FDTtest.needPictures();
 		result.addAll(MDTtest.needPictures());
 		result.addAll(OCTtest.needPictures());
+		result.addAll(Photos.needPictures(Photos.NETHRA));
+		result.addAll(Photos.needPictures(Photos.STEREO));
+		result.addAll(IPad.needPictures());
 		return result;
 	}
 

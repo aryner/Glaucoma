@@ -1164,7 +1164,7 @@ public class HVFtest implements BaseTest{
 
 	public static ArrayList<String> needPictures(){
 		ArrayList<String> needPics = new ArrayList<String>();
-		String query = "SELECT * FROM HVFtest WHERE pictureName NOT IN (SELECT name FROM picture)";
+		String query = "SELECT * FROM HVFtest WHERE pictureName NOT IN (SELECT name FROM picture WHERE type='HVF')";
 		Vector<HVFtest> hvf = SQLCommands.queryHVFtestMaster(query);
 
 		for(int i=0; i<hvf.size(); i++) {

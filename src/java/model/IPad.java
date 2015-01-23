@@ -341,7 +341,7 @@ public class IPad implements BaseTest{
 					newLines.add(line);
 				}
 				else {
-					int confirmed = Integer.parseInt(processedLine.get(Tools.CSVCONFIRMED));
+					int confirmed = Integer.parseInt(processedLine.get(Tools.CSVCONFIRMED).replace("'",""));
 					if(confirmed > oldTest.getConfirmed()) {
 						updateLines.add(line);
 						toBeReplaced.add(oldTest.getPictureName());
@@ -432,6 +432,28 @@ public class IPad implements BaseTest{
 		}
 
 		SQLCommands.update(query);
+	}
+
+	public static ArrayList<String> needPictures(){
+		ArrayList<String> needPics = new ArrayList<String>();
+		String query = "SELECT * FROM iPad WHERE pictureName NOT IN (SELECT name FROM picture WHERE type='iPad')";
+		Vector<IPad> iPad = SQLCommands.queryIPad(query);
+
+		for(int i=0; i<iPad.size(); i++) {
+			if(!needPics.contains(iPad.get(i).getPictureName())) {
+				needPics.add(iPad.get(i).getPictureName());
+			}
+		}
+
+		String ext;
+		for(int i=0; i<needPics.size(); i++) {
+			ext = needPics.get(i).substring(needPics.get(i).indexOf(".")+1, needPics.get(i).length());
+			if(ext.equals("pdf")) {
+				needPics.set(i, "iPad: "+needPics.get(i).substring(0,needPics.get(i).indexOf("."))+".jpg");
+			}
+		}
+
+		return needPics;
 	}
 
 	public static void remove(Vector<String> records) {

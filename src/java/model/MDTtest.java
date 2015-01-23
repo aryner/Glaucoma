@@ -123,8 +123,8 @@ public class MDTtest implements BaseTest {
 
 	public static ArrayList<String> needPictures(){
 		ArrayList<String> needPics = new ArrayList<String>();
-		String query = "SELECT * FROM MDTtest WHERE pictureName NOT IN (SELECT name FROM picture)";
-		Vector<FDTtest> mdt = SQLCommands.queryFDTtest(query);
+		String query = "SELECT * FROM MDTtest WHERE pictureName NOT IN (SELECT name FROM picture WHERE type='MDT')";
+		Vector<MDTtest> mdt = SQLCommands.queryMDTtest(query);
 
 		for(int i=0; i<mdt.size(); i++) {
 			if(!needPics.contains(mdt.get(i).getPictureName())) {
@@ -449,7 +449,7 @@ public class MDTtest implements BaseTest {
 					newLines.add(line);
 				}
 				else {
-					int confirmed = Integer.parseInt(processedLine.get(Tools.CSVCONFIRMED));
+					int confirmed = Integer.parseInt(processedLine.get(Tools.CSVCONFIRMED).replace("'",""));
 					if(confirmed > oldTest.getConfirmed()) {
 						updateLines.add(line);
 						toBeReplaced.add(oldTest.getPictureName());
