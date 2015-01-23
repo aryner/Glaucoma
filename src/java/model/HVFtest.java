@@ -1088,7 +1088,7 @@ public class HVFtest implements BaseTest{
 				"hvf_lossnum, hvf_lossden, hvf_fp, hvf_fn, hvf_dur, hvf_fov, hvf_stimintens, hvf_stimcol, hvf_stimcol_oth, hvf_back, "+
 				"hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, "+
 				"hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_central_15, hvf_central_0, "+
-				"hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, hvf_inf_hem2, hvf_pts_five_top, hvf_pst_five_bot, hvf_pts_contig, hvf_pts_one, "+
+				"hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, hvf_inf_hem2, hvf_pts_five_top, hvf_pts_five_bot, hvf_pts_contig, hvf_pts_one_top, "+
 				"hvf_pts_one_bot, hvf_cluster, hvf_severe, hvf_reliable_review, hvf_notes, hvf_notes_other, opthName, adjudicatorID) VALUES ";
 			for(int i=0; i<updateLines.size(); i++) {
 				if(i>0) { query += ", "; }

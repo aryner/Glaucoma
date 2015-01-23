@@ -104,7 +104,7 @@ if(session.getAttribute("errors") != null) {
 </div>
 <br>
 <div class='container'>
-	<div class='column'>
+	<div class='thinColumn'>
 		<a href='/Glaucoma/upload' class='btn menuBtn'>Upload Pictures</a>
 	</div>
 	<div class="thinColumn">

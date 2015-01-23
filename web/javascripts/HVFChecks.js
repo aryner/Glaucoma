@@ -183,7 +183,7 @@ $(document).ready(function(){
 			e.preventDefault();
 			var focus = document.activeElement;
 
-			if (focus.name === 'cluster') {
+			if (focus.name === 'notes_other') {
 				$(':submit[value=Submit]').click();
 			}
 			else {
