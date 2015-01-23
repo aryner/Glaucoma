@@ -717,6 +717,21 @@ System.out.println("dup size = "+needDuplicate.size());
 		SQLCommands.update(query);
 	}
 
+	public static void remove(Vector<String> records, int type) {
+		Picture.remove(records, type);
+		int photoType = (type == BaseTest.NETHRA) ? NETHRA : STEREO;
+
+		String query = "DELETE FROM Photos WHERE ";
+		for(int i=0; i<records.size(); i++) {
+			if (i > 0) { query += " OR "; }
+			query += "(PictureName='"+records.get(i)+"' AND type='"+photoType+"')";
+		}
+
+		if(records.size() > 0) {
+			SQLCommands.update(query);
+		}
+	}
+
 	public int getBaseType() {
 		return (type == STEREO ? BaseTest.STEREO : BaseTest.NETHRA);
 	}

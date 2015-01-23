@@ -1197,6 +1197,20 @@ public class HVFtest implements BaseTest{
 		return result;
 	}
 
+	public static void remove(Vector<String> records) {
+		Picture.remove(records, BaseTest.HVF);
+
+		String query = "DELETE FROM HVFtest WHERE ";
+		for(int i=0; i<records.size(); i++) {
+			if (i > 0) { query += " OR "; }
+			query += "PictureName='"+records.get(i)+"'";
+		}
+
+		if(records.size() > 0) {
+			SQLCommands.update(query);
+		}
+	}
+
 	/**
 	 * @return the id
 	 */

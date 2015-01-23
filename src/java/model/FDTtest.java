@@ -710,6 +710,20 @@ public class FDTtest implements BaseTest {
 		SQLCommands.update(query);
 	}
 
+	public static void remove(Vector<String> records) {
+		Picture.remove(records, BaseTest.FDT);
+
+		String query = "DELETE FROM FDTtest WHERE ";
+		for(int i=0; i<records.size(); i++) {
+			if (i > 0) { query += " OR "; }
+			query += "PictureName='"+records.get(i)+"'";
+		}
+
+		if(records.size() > 0) {
+			SQLCommands.update(query);
+		}
+	}
+
 	public int getBaseType() {
 		return BaseTest.FDT;
 	}

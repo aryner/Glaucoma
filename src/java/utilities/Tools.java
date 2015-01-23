@@ -158,6 +158,94 @@ public class Tools {
 		return result;
 	}
 
+	public static void deleteRecords(HttpServletRequest request) {
+		Vector<String> toDelete = new Vector<String>();
+		Vector<String> records = Tools.getUngradedNames();
+		records.addAll(Tools.getGradedOnceNames());
+		records.addAll(Tools.getNeedsAdjudication());
+		records.addAll(HVFtest.getNeedsReview());
+		records.addAll(HVFtest.getReviewed());
+		records.addAll(Tools.getAdjudicated());
+
+		for(String record : records) {
+			if(request.getParameter(record) != null) {
+				toDelete.add(record);
+			}
+		}
+
+		removeRecords(toDelete);
+	}
+
+	private static void removeRecords(Vector<String> toDelete) {
+		Vector<String> fdt = new Vector<String>();
+		Vector<String> hvf = new Vector<String>();
+		Vector<String> iPad = new Vector<String>();
+		Vector<String> mdt = new Vector<String>();
+		Vector<String> oct = new Vector<String>();
+		Vector<String> nethra = new Vector<String>();
+		Vector<String> stereo = new Vector<String>();
+
+		for(String record : toDelete) {
+			String type = record.substring(0, record.indexOf(" "));
+			String name = record.substring(record.lastIndexOf(" ")+1, record.length());
+//			System.out.println("type='"+type+"', name='"+name+"'");
+
+			if(type.equals("FDT")) {
+				fdt.add(name);
+			} else if(type.equals("HVF")) {
+				hvf.add(name);
+			} else if(type.equals("iPad")) {
+				iPad.add(name);
+			} else if(type.equals("MDT")) {
+				mdt.add(name);
+			} else if(type.equals("OCT")) {
+				oct.add(name);
+			} else if(type.equals("3Nethra")) {
+				nethra.add(name);
+			} else if(type.equals("Stereo")) {
+				stereo.add(name);
+			} else {
+				System.out.println("This record failed to be boxed: (type='"+type+"', name='"+name+"')");
+			}
+		}
+		
+		FDTtest.remove(fdt);
+		HVFtest.remove(hvf);
+		IPad.remove(iPad);
+		MDTtest.remove(mdt);
+		OCTtest.remove(oct);
+		Photos.remove(nethra, BaseTest.NETHRA);
+		Photos.remove(stereo, BaseTest.STEREO);
+	}
+
+	public static String typeIntToString(int baseType) {
+		String type = null;
+		switch(baseType) {
+			case BaseTest.FDT :
+				type = "FDT";
+				break;
+			case BaseTest.HVF :
+				type = "HVF";
+				break;
+			case BaseTest.IPAD :
+				type = "iPad";
+				break;
+			case BaseTest.MDT :
+				type = "MDT";
+				break;
+			case BaseTest.OCT :
+				type = "OCT";
+				break;
+			case BaseTest.NETHRA :
+				type = "3Nethra";
+				break;
+			case BaseTest.STEREO :
+				type = "stereo";
+				break;
+		}
+		return type;
+	}
+
 	public static Vector<String> readCSVs(HttpServletRequest request) {
 		Vector<String> errors = new Vector<String>();
 		Vector<String> names = new Vector<String>();

@@ -983,6 +983,20 @@ public class OCTtest implements BaseTest {
 		SQLCommands.update(query);
 	}
 
+	public static void remove(Vector<String> records) {
+		Picture.remove(records, BaseTest.OCT);
+
+		String query = "DELETE FROM OCTtest WHERE ";
+		for(int i=0; i<records.size(); i++) {
+			if (i > 0) { query += " OR "; }
+			query += "PictureName='"+records.get(i)+"'";
+		}
+
+		if(records.size() > 0) {
+			SQLCommands.update(query);
+		}
+	}
+
 	public int getBaseType() {
 		return baseType;
 	}

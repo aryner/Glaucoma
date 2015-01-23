@@ -19,6 +19,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload; 
 import utilities.SQLCommands;
+import utilities.Tools;
 
 /**
  *
@@ -213,6 +214,20 @@ public class Picture {
 			}
 		}
 		return errors;
+	}
+
+	public static void remove(Vector<String> names, int baseType) {
+		String type = Tools.typeIntToString(baseType);
+
+		String query = "DELETE FROM Picture WHERE ";
+		for(int i=0; i<names.size(); i++) {
+			if(i > 0) { query += " OR "; }
+			query += "(type='"+type+"' AND name='"+names.get(i)+"')";
+		}
+
+		if(names.size() > 0) {
+			SQLCommands.update(query);
+		}
 	}
 
 	public static Vector<String> getCSVLines() {

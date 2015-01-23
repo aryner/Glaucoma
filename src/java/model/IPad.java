@@ -434,6 +434,20 @@ public class IPad implements BaseTest{
 		SQLCommands.update(query);
 	}
 
+	public static void remove(Vector<String> records) {
+		Picture.remove(records, BaseTest.IPAD);
+
+		String query = "DELETE FROM iPad WHERE ";
+		for(int i=0; i<records.size(); i++) {
+			if (i > 0) { query += " OR "; }
+			query += "PictureName='"+records.get(i)+"'";
+		}
+
+		if(records.size() > 0) {
+			SQLCommands.update(query);
+		}
+	}
+
 	/**
 	 * @return the id
 	 */

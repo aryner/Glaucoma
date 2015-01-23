@@ -533,6 +533,7 @@ public class Controller extends HttpServlet {
 		}
 
 		else if(userPath.equals("/removeRecords")) {
+			Tools.deleteRecords(request);
 
 			response.sendRedirect("/Glaucoma/home"); 
 			return;
