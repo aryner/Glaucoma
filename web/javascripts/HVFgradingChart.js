@@ -11,7 +11,7 @@ $(document).ready(function (e){
 		var name = $('.gradingChart')[0].name;
 
 		if(name.length > 0) {
-			$('body').append("<iframe class='examineImg' src='http://localhost:8084/HVF/pdf?type=grading&name="+name+"' type='application/pdf'></iframe>")
+			$('body').append("<iframe class='examineImg' src='http://localhost:8084/Glaucoma/pdf?type=grading&name="+name+"' type='application/pdf'></iframe>")
 				.fadeIn("fast"); 
 		}
 	});

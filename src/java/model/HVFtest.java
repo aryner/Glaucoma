@@ -749,7 +749,7 @@ public class HVFtest implements BaseTest{
 			"hvf_back, hvf_strategy, hvf_strategy_oth, hvf_pup, hvf_vanum, hvf_vaden, hvf_sph_sign, "+
 			"hvf_sph_num, hvf_cyl_sign, hvf_cyl_num, hvf_axis, hvf_ght, hvf_vfi, hvf_mdsign, hvf_mddb, "+
 			"hvf_mdp, hvf_psdsign, hvf_psddb, hvf_psdp, hvf_sup_hem, hvf_inf_hem, hvf_sup_hem2, "+
-			"hvf_inf_hem2, hvf_pts_five_top, hvf_pts_five_bot, hvf_pts_contig, hvf_pts_one_top, hvf_pts_bot, "+
+			"hvf_inf_hem2, hvf_pts_five_top, hvf_pts_five_bot, hvf_pts_contig, hvf_pts_one_top, hvf_pts_one_bot, "+
 			"hvf_cluster, hvf_notes, hvf_notes_other "+
 			"HAVING COUNT(*)=2";
 		Vector<HVFtest> set = SQLCommands.queryHVFtest(query);

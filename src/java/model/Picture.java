@@ -104,7 +104,7 @@ public class Picture {
 						extension.equals("gif") || extension.equals("GIF") ||
 						extension.equals("png") || extension.equals("PNG")) {
 
-						Document document = (path.equals("stereo")? new Document(PageSize.LEDGER) : new Document(PageSize.ARCH_A));
+						Document document = (path.equals("stereo")||path.equals("severity")? new Document(PageSize.LEDGER) : new Document(PageSize.ARCH_A));
 						String tempPath = ".."+slash+"webapps"+slash+"Glaucoma"+slash+"tempImg"+slash;
 						String finalPath = ".."+slash+"webapps"+slash+"Glaucoma"+slash + path + slash;
 						new File(finalPath).mkdirs();
